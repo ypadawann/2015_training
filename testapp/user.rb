@@ -11,6 +11,7 @@ ActiveRecord::Base.establish_connection(
   database: "test",
 )
 
+# id: integer, name: varchar
 class User < ActiveRecord::Base
   self.table_name = 'test'
 end

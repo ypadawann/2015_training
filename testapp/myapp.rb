@@ -1,11 +1,14 @@
 
 require 'rubygems'
-require 'sinatra'
-require 'sinatra/reloader'
-
-set :bind, '0.0.0.0'
+require 'sinatra/base'
+# require 'sinatra/reloader'
 
 require_relative 'users'
+
+class Myapp < Sinatra::Base
+set :bind, '0.0.0.0'
+
+@@err_msg = ""
 
 get '/' do
   erb :index
@@ -16,27 +19,29 @@ post '/list' do
 end
 
 post '/attend' do
-  id = params[:id]
+  id = params[:id].to_i
   if Userslist.include?(id)
-    @msg = "出勤を確認しました。"
+    @id = id
+    @name = Userslist.access(id)
+    @exists = true
   else
-    @msg = "登録されていません。"
+    @exists = false
   end
   erb :attend
 end
 
 get '/register' do
-  @title = 'User registration'
   erb :reg
 end
 
 post '/reg_finish' do 
-  @newid = params[:id]
+  @newid = params[:id].to_i
   @newname = params[:name]
   if Userslist.add(@newid, @newname)
-    @who = @newid + ": " + @newname
     erb :reg_finish
   else
     erb :reg_error
   end
+end
+  run! if app_file == $0
 end
