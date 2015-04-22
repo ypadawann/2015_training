@@ -13,6 +13,4 @@ ActiveRecord::Base.establish_connection(
 
 class User < ActiveRecord::Base
   self.table_name = 'test'
-  validates :num, uniqueness: true
 end
-

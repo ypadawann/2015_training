@@ -8,7 +8,6 @@ set :bind, '0.0.0.0'
 require_relative 'users'
 
 get '/' do
-  @title = 'Top Page'
   erb :index
 end
 
@@ -16,13 +15,14 @@ post '/list' do
   erb :list
 end
 
-post '/login' do
-  name = params[:name]
-  if Userslist.include(name)
-    @title = "出勤を確認しました。"
+post '/attend' do
+  id = params[:id]
+  if Userslist.include?(id)
+    @msg = "出勤を確認しました。"
   else
-    @title = "登録されていません。"
+    @msg = "登録されていません。"
   end
+  erb :attend
 end
 
 get '/register' do
