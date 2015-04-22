@@ -1,0 +1,18 @@
+[2015-04-21 11:14:28] INFO  WEBrick 1.3.1
+[2015-04-21 11:14:28] INFO  ruby 2.2.2 (2015-04-13) [x86_64-linux]
+== Someone is already performing on port 4567!
+/home/ko/.rbenv/versions/2.2.2/lib/ruby/2.2.0/socket.rb:206:in `bind': Address already in use - bind(2) for 127.0.0.1:4567 (Errno::EADDRINUSE)
+	from /home/ko/.rbenv/versions/2.2.2/lib/ruby/2.2.0/socket.rb:206:in `listen'
+	from /home/ko/.rbenv/versions/2.2.2/lib/ruby/2.2.0/socket.rb:461:in `block in tcp_server_sockets'
+	from /home/ko/.rbenv/versions/2.2.2/lib/ruby/2.2.0/socket.rb:232:in `each'
+	from /home/ko/.rbenv/versions/2.2.2/lib/ruby/2.2.0/socket.rb:232:in `foreach'
+	from /home/ko/.rbenv/versions/2.2.2/lib/ruby/2.2.0/socket.rb:459:in `tcp_server_sockets'
+	from /home/ko/.rbenv/versions/2.2.2/lib/ruby/2.2.0/webrick/utils.rb:70:in `create_listeners'
+	from /home/ko/.rbenv/versions/2.2.2/lib/ruby/2.2.0/webrick/server.rb:133:in `listen'
+	from /home/ko/.rbenv/versions/2.2.2/lib/ruby/2.2.0/webrick/server.rb:114:in `initialize'
+	from /home/ko/.rbenv/versions/2.2.2/lib/ruby/2.2.0/webrick/httpserver.rb:45:in `initialize'
+	from /home/ko/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/rack-1.6.0/lib/rack/handler/webrick.rb:32:in `new'
+	from /home/ko/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/rack-1.6.0/lib/rack/handler/webrick.rb:32:in `run'
+	from /home/ko/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/sinatra-1.4.6/lib/sinatra/base.rb:1505:in `start_server'
+	from /home/ko/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/sinatra-1.4.6/lib/sinatra/base.rb:1443:in `run!'
+	from /home/ko/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/sinatra-1.4.6/lib/sinatra/main.rb:25:in `block in <module:Sinatra>'

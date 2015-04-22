@@ -1,0 +1,18 @@
+
+require 'rubygems'
+require 'active_record'
+require 'mysql2'
+
+ActiveRecord::Base.establish_connection(
+  adapter: "mysql2",
+  host:    "localhost",
+  username: "ko",
+  password: "hemmi",
+  database: "test",
+)
+
+class User < ActiveRecord::Base
+  self.table_name = 'test'
+  validates :num, uniqueness: true
+end
+
