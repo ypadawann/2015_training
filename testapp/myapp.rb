@@ -1,6 +1,8 @@
 
 require 'rubygems'
 require 'sinatra/base'
+require 'sinatra/reloader'
+
 # require 'sinatra/reloader'
 
 require_relative 'users'
@@ -19,6 +21,9 @@ post '/list' do
 end
 
 post '/attend' do
+    @id = params[:id].to_i
+    erb :attend
+=begin
   id = params[:id].to_i
   if Userslist.include?(id)
     @id = id
@@ -27,7 +32,7 @@ post '/attend' do
   else
     @exists = false
   end
-  erb :attend
+=end
 end
 
 get '/register' do
