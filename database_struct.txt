@@ -2,7 +2,7 @@ users
  no int (PK)
  name varchar(30)
  depno int
- pass binary
+ pass varchar(100)
 
 deps
  depno int (FK) (PK)
