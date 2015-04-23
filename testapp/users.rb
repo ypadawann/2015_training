@@ -1,16 +1,29 @@
 
-require_relative 'department'
 require_relative 'user'
 
 class Userslist
-  @@last_id = 0
-  @@last_name = ""
+  DEPS = [0, 1, 2]
+  @@last_user = nil
 
+  def self.this_id()
+    @@last_user.id
+  end
+  def self.this_name()
+    @@last_user.name
+  end
+  def self.this_depno()
+    @@last_user.depno
+  end
+  def self.this_dep()
+    dtos(@@last_user.depno)
+  end
+  def self.this_pass()
+    @@last_user.path
+  end
   def self.access(id)
     u = User.find_by id: id
-    @@last_id = u.id
-    @@last_name = u.name
-    u.name
+    @@last_user = u
+    u != nil
   end
   def self.get_ids()
     User.pluck(:id)
@@ -25,14 +38,28 @@ class Userslist
   def self.include?(id)
     get_ids.include?(id)
   end
-  def self.add(id, name)
-    if include?(id)
-      false
-    else
-      user = User.new(:id => id, :name => name)
+  def self.add(id, name, depno, pass)
+    begin
+      user = User.new(id, name, depno, pass)
       user.save
       access(id)
       true
+    rescue
+      false
+    end
+  end
+
+  def self.list_depno()
+    DEPS
+  end
+  def self.dtos(d)
+    case d
+    when 0
+      "ITセキュリティ事業本部"
+    when 1
+      "総務部"
+    else
+      "その他"
     end
   end
 end
