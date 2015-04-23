@@ -7,6 +7,8 @@ require 'sinatra/reloader'
 require_relative 'users'
 require_relative 'timecards'
 
+set :bind, '0.0.0.0'
+
 get '/' do
  erb :index
 end
