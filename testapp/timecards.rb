@@ -17,7 +17,7 @@ class Timecard_operation
 
   def self.testgettime()
    timecards = Timecard.all
-   p timecards[4].a_time.to_s
+   p timecards[4].a_time.strftime("%X")
     #p 'hello'
 #    return Timecard.where("day like ?", "%" + "2015-04")
   end
