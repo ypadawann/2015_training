@@ -4,9 +4,9 @@ require_relative 'database_information'
 
 class UsersAccessError < RuntimeError; end
 
-class Ams_operation 
+class Timecard_operation 
 
-  def attend()
+  def self.attend()
     return "ok!"
   end
 

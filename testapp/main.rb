@@ -5,7 +5,7 @@ require 'sinatra'
 require 'sinatra/reloader'
 
 require_relative 'users'
-require_relative 'timecards'
+# require_relative 'timecards'
 
 get '/' do
  erb :index
@@ -39,7 +39,7 @@ post '/attend' do
  # @time = Time.now
 # date = Date.today.to_s
   if @status == "出勤"
-    @message = Ams_operation.attend()
+    @message = Timecard_operation.attend()
     # @message = "good morning"
   else
     # 帰宅データを
@@ -48,3 +48,6 @@ post '/attend' do
 
     erb :attend
 end
+
+
+load 'timecards.rb'
