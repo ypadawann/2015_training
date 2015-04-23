@@ -6,7 +6,11 @@ class UsersAccessError < RuntimeError; end
 
 class Timecard_operation 
 
-  def self.attend()
+  def self.attend(date,time)
+    timecards = Timecard.new
+    timecards.day = date
+    timecards.a_time = time
+    timecards.save
     return "ok!"
   end
 

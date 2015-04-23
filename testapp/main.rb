@@ -36,10 +36,10 @@ post '/attend' do
   @id = params[:id].to_i
   @pass = params[:pass].to_s
   @status = params[:status]
- # @time = Time.now
-# date = Date.today.to_s
+  @time = (Time.now).strftime("%X")
+  @date = Date.today
   if @status == "出勤"
-    @message = Timecard_operation.attend()
+    @message = Timecard_operation.attend(@date,@time)
     # @message = "good morning"
   else
     # 帰宅データを
