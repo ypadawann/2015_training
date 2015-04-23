@@ -13,5 +13,10 @@ ActiveRecord::Base.establish_connection(
 
 # id: integer, name: varchar
 class User < ActiveRecord::Base
-  self.table_name = 'test'
+end
+
+class Dep < ActiveRecord::Base
+end
+
+class Oms < ActiveRecord::Base
 end
