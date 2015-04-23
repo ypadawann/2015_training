@@ -14,6 +14,9 @@ class Userslist
   def self.this_depno()
     @@last_user.depno
   end
+  def self.this_dep()
+    dtos(@@last_user.depno)
+  end
   def self.this_pass()
     @@last_user.path
   end
