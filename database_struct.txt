@@ -1,0 +1,14 @@
+users
+ no int (PK)
+ name varchar(30)
+ depno int
+
+deps
+ depno int (FK) (PK)
+ dep varchar(50)
+
+amss
+ day date (PK1)
+ no int (FK)(PK2)
+ a_time time
+ l_time time
