@@ -22,9 +22,10 @@ get '/register' do
 end
 
 post '/reg_finish' do 
-  @new_id = params[:id]
-  @new_name = params[:name]
-  if Userslist.add(@new_id, @new_name, params[:depno], params[:pass])
+  @new_no = params[:no].to_i
+  @new_name = params[:name].to_s
+  if Userslist.add(@new_no, @new_name, 
+                   params[:department], params[:pass])
     erb :reg_finish
   else
     erb :reg_error
@@ -35,8 +36,8 @@ end
 
 
 post '/attend' do
-  @id = params[:id].to_i
-  @pass = params[:pass].to_s
+  @no = params[:no].to_i
+  @pass = params[:password].to_s
   @status = params[:status]
  # @time = Time.now
 # date = Date.today.to_s

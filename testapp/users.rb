@@ -8,36 +8,33 @@ class Userslist
   DEPS = [0, 1, 2]
   @@last_user = nil
 
-  def self.this_id()
-    @@last_user.id
+  def self.this_no()
+    @@last_user.no
   end
   def self.this_name()
     @@last_user.name
   end
-  def self.this_depno()
-    @@last_user.depno
+  def self.this_department()
+    @@last_user.department
   end
-  def self.this_dep()
-    dtos(@@last_user.depno)
-  end
-  def self.this_pass()
+  def self.this_password()
     @@last_user.path
   end
-  def self.is_wrong_pass(db_pass, this_pass)
-    db_pass != this_pass
+  def self.is_wrong_password(db_password, this_password)
+    db_password != this_password
   end
-  def self.access(id, pass)
-    u = User.find_by id: id
+  def self.access(no, password)
+    u = User.find_by no: no
     if u == nil
-      raise UsersAccessError.new("ID:#{id}は登録されていません。")
-    elsif is_wrong_pass(u.pass, pass)
+      raise UsersAccessError.new("ID:#{no}は登録されていません。")
+    elsif is_wrong_password(u.password, password)
       raise UsersAccessError.new("パスワードが間違っています。")
     else
       @@last_user = u
     end
   end
-  def self.get_ids()
-    User.pluck(:id)
+  def self.get_nos()
+    User.pluck(:no)
   end
   def self.get_names()
     User.pluck(:name)
@@ -46,21 +43,20 @@ class Userslist
     User.destroy_all
     true
   end
-  def self.include?(id)
-    get_ids.include?(id)
+  def self.include?(no)
+    get_nos.include?(no)
   end
-  def self.add(id, name, depno, pass)
-    # u = User.new(id, name, depno, pass)
+  def self.add(no, name, department, password)
     u = User.new()
-    u.id = id
+    u.no = no
     u.name = name
-    u.depno = depno
-    u.pass = pass
+    u.department = department
+    u.password = password
     @@last_user = u
     u.save
   end
 
-  def self.list_depno()
+  def self.list_department()
     DEPS
   end
   def self.dtos(d)
