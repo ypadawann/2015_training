@@ -1,6 +1,8 @@
 
 require_relative 'user'
 
+class UsersAccessError < RuntimeError; end
+
 class Userslist
   DEPS = [0, 1, 2]
   @@last_user = nil
@@ -20,10 +22,18 @@ class Userslist
   def self.this_pass()
     @@last_user.path
   end
-  def self.access(id)
+  def self.is_wrong_pass(db_pass, this_pass)
+    db_pass != this_pass
+  end
+  def self.access(id, pass)
     u = User.find_by id: id
-    @@last_user = u
-    u != nil
+    if u == nil
+      raise UsersAccessError.new("ID:#{id}は登録されていません。")
+    elsif is_wrong_pass(u.pass, pass)
+      raise UsersAccessError.new("パスワードが間違っています。")
+    else
+      @@last_user = u
+    end
   end
   def self.get_ids()
     User.pluck(:id)
@@ -39,14 +49,14 @@ class Userslist
     get_ids.include?(id)
   end
   def self.add(id, name, depno, pass)
-    begin
-      user = User.new(id, name, depno, pass)
-      user.save
-      access(id)
-      true
-    rescue
-      false
-    end
+    # u = User.new(id, name, depno, pass)
+    u = User.new()
+    u.id = id
+    u.name = name
+    u.depno = depno
+    u.pass = pass
+    @@last_user = u
+    u.save
   end
 
   def self.list_depno()
