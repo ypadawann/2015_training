@@ -16,9 +16,13 @@ class Timecard_operation
   end
 
   def self.testgettime()
-   timecards = Timecard.all
-   p timecards[4].a_time.strftime("%X")
-    #p 'hello'
+    timecards = Timecard.where(:no => 123)
+    p timecards.all[0].a_time.to_s
+   # timecards = Timecard.first
+   # p timecards.day.to_s
+   # timecards = Timecard.all
+   # p timecards[4].a_time.strftime("%X")
+   # p 'hello'
 #    return Timecard.where("day like ?", "%" + "2015-04")
   end
 
