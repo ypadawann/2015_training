@@ -2,14 +2,12 @@
 
 require_relative 'user'
 
-require 'date'
-
 class UsersAccessError < RuntimeError; end
 
 class Ams_operation 
 
-  def attend(number)
-    # return "ok!"
+  def attend()
+    return "ok!"
   end
 
 end

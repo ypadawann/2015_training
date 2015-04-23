@@ -4,6 +4,15 @@ require_relative 'database_information'
 
 class UsersAccessError < RuntimeError; end
 
+class Ams_operation 
+
+  def attend()
+    return "ok!"
+  end
+
+end
+
+=begin
 class Userslist
   DEPS = [0, 1, 2]
   @@last_user = nil
@@ -74,3 +83,5 @@ class Userslist
     end
   end
 end
+
+=end
