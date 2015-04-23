@@ -7,6 +7,10 @@ require 'sinatra/reloader'
 require_relative 'users'
 require_relative 'timecards'
 
+get '/' do
+ erb :index
+end
+
 post '/list' do
   erb :list
 end
