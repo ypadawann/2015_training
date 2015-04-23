@@ -39,7 +39,7 @@ post '/attend' do
   @time = (Time.now).strftime("%X")
   @date = Date.today
   if @status == "出勤"
-    @message = Timecard_operation.attend(@date,@time)
+    @message = Timecard_operation.attend(@date,@time,@id)
     # @message = "good morning"
   else
     # 帰宅データを
@@ -49,5 +49,9 @@ post '/attend' do
     erb :attend
 end
 
+get '/test-get-time' do
+  Timecard_operation.testgettime()
+  # p timecards.all[0].day
+end
 
 load 'timecards.rb'

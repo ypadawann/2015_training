@@ -6,12 +6,20 @@ class UsersAccessError < RuntimeError; end
 
 class Timecard_operation 
 
-  def self.attend(date,time)
+  def self.attend(date,time,no)
     timecards = Timecard.new
+    timecards.no = no
     timecards.day = date
     timecards.a_time = time
     timecards.save
     return "ok!"
+  end
+
+  def self.testgettime()
+   timecards = Timecard.all
+   p timecards[4].a_time.to_s
+    #p 'hello'
+#    return Timecard.where("day like ?", "%" + "2015-04")
   end
 
 end
