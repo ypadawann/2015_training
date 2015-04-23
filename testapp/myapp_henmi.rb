@@ -21,18 +21,13 @@ post '/list' do
 end
 
 post '/attend' do
-    @id = params[:id].to_i
+  begin
+    Userslist.access(params[:id], params[:pass])
     erb :attend
-=begin
-  id = params[:id].to_i
-  if Userslist.include?(id)
-    @id = id
-    @name = Userslist.access(id)
-    @exists = true
-  else
-    @exists = false
+  rescue UsersAccessError => exp
+    @err_msg = exp.message
+    erb :attend_fail
   end
-=end
 end
 
 get '/register' do
@@ -40,11 +35,11 @@ get '/register' do
 end
 
 post '/reg_finish' do 
-  @newid = params[:id].to_i
-  @newname = params[:name]
-  if Userslist.add(@newid, @newname)
+  if Userslist.add(params[:id], params[:name], 
+                   params[:depno], params[:pass])
     erb :reg_finish
   else
+    @new_id = params[:id]
     erb :reg_error
   end
 end
