@@ -18,5 +18,5 @@ end
 class Dep < ActiveRecord::Base
 end
 
-class Oms < ActiveRecord::Base
+class Ams < ActiveRecord::Base
 end
