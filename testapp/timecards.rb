@@ -17,7 +17,7 @@ class Timecard_operation
 
   def self.testgettime()
     timecards = Timecard.where(:no => 123)
-    p timecards.all[0].a_time.to_s
+    p timecards.all[1].a_time.to_s
    # timecards = Timecard.first
    # p timecards.day.to_s
    # timecards = Timecard.all
