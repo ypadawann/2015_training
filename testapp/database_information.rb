@@ -15,7 +15,8 @@ ActiveRecord::Base.establish_connection(
 class User < ActiveRecord::Base
 end
 
-class Depertment < ActiveRecord::Base
+class Department < ActiveRecord::Base
+  validates :no, uniqueness: true 
 end
 
 class Timecard < ActiveRecord::Base

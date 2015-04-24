@@ -5,7 +5,6 @@ require_relative 'database_information'
 class UsersAccessError < RuntimeError; end
 
 class Userslist
-  DEPS = [0, 1, 2]
   @@last_user = nil
 
   def self.this_no()
@@ -54,19 +53,5 @@ class Userslist
     u.password = password
     @@last_user = u
     u.save
-  end
-
-  def self.list_department()
-    DEPS
-  end
-  def self.dtos(d)
-    case d
-    when 0
-      "ITセキュリティ事業本部"
-    when 1
-      "総務部"
-    else
-      "その他"
-    end
   end
 end
