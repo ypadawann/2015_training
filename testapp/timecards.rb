@@ -21,25 +21,16 @@ class Timecard_operation
   end
 
   def self.returnhome(day,no,time)
-#=begin
     timecards = Timecard.where(:day => day,:no => no).first
-    timecards.leaving = time
-    p timecards
-    timecards.save
-#=end
-
-=begin
-    timecards = Timecard.where(:name => 'maki').first
-    timecards.address = 'maki'
-    timecards.save
-=end
-
-=begin
-    timecards = Timecard.find('maki')
-    timecards.address = 'otonoki'
-    timecards.save
-=end
-
+    if timecards==nil # まだ出勤していない
+      p 'no attend'
+    elsif timecards.leaving==nil
+      timecards.leaving = time
+      timecards.save
+      p 'leave'
+    else
+      p 'already leave'
+    end
   end
 
   def self.testgettime()
