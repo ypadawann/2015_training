@@ -34,13 +34,16 @@ end
 
 post '/attend' do
   @no = params[:id].to_i
-  @pass = params[:pass].to_s
-  @status = params[:status]
-  @time = (Time.now).strftime("%X")
-  @day = Date.today
-  if @status == "出勤"
-    @message = Timecard_operation.attend(@day,@no,@time)
-    # @message = "good morning"
+  pass = params[:pass].to_s
+  status = params[:status]
+  time = (Time.now).strftime("%X")
+  day = Date.today
+  if status == "出勤"
+    if Timecard_operation.attend(day,@no,time)
+      @message = "#{day}は#{time}に出勤しました"
+    else
+      @message = "今日はすでに出勤しています"
+    end
   else
     # 帰宅データを
     @message = "Bye"

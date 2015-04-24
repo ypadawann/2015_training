@@ -11,7 +11,11 @@ class Timecard_operation
     timecards.no = no
     timecards.day = date
     timecards.attendance = time
-    timecards.save
+    begin
+      timecards.save
+    rescue
+      return false
+    end
     return true
   end
 
