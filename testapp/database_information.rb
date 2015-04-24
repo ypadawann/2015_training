@@ -15,7 +15,7 @@ ActiveRecord::Base.establish_connection(
 class User < ActiveRecord::Base
 end
 
-class Depertment < ActiveRecord::Base
+class Department < ActiveRecord::Base
 end
 
 class Timecard < ActiveRecord::Base

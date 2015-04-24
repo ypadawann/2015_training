@@ -1,4 +1,4 @@
 <h1><%= "登録しました。" %></h1>
-<p><%= "ID:#{Userslist.this_no}" %></p>
-<p><%= "名前:#{Userslist.this_name}" %></p>
-<p><%= "所属:#{Userslist.dtos(Userslist.this_department)}" %></p>
+<p><%= "ID:#{@new_no}" %></p>
+<p><%= "名前:#{@new_name}" %></p>
+<p><%= "所属:#{Departments.name_of(@new_department)}" %></p>

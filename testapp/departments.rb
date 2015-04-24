@@ -1,5 +1,5 @@
 
-require 'database_information'
+require_relative 'database_information'
 
 class Departments
   def self.add(no, name)
@@ -14,11 +14,13 @@ class Departments
     end
   end
   def self.remove(no)
-    department = Department.find_by(no: no)
-    department.destroy
+    Department.destroy(no)
   end
   def self.name_of(no)
-    department = Department.find_by(no: no)
+    department = Department.find(no)
     department.name
+  end
+  def self.get_nos()
+    Department.pluck(:no)
   end
 end
