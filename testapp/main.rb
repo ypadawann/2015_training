@@ -44,7 +44,7 @@ post '/attend' do
   else
     # 帰宅データを
     @message = "Bye"
-  end
+  end  
 
     erb :attend
 end

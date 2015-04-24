@@ -16,17 +16,17 @@ class Timecard_operation
   end
 
   def self.testgettime()
-   # timecards = Timecard.where(:no => 5622)
-    # day = Date::new(2015,4,23)
-    
-    # timecards = Timecard.where(:day => '2015-04-23' )
-    
-   timecards = Timecard.where("day LIKE ?", '2015-04-%').where(:no => 123)
-    #timecards123 = timecards.where(:no => 5622)
+    # dayカラムから'2015-04'で前方一致検索してから、no=123で完全一致検索
+    timecards = Timecard.where("day LIKE ?", '2015-04-%').where(:no => 123)
     p timecards.all[1].a_time.to_s
+   
+
+# timecards = Timecard.where(:no => 5622)
+    # day = Date::new(2015,4,23)
+   
+    # timecards = Timecard.where(:day => '2015-04-23' )
+    #timecards123 = timecards.where(:no => 5622)
               
-
-
    # timecards = Timecard.first
    # p timecards.day.to_s
    # timecards = Timecard.all
