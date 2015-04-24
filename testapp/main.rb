@@ -5,6 +5,7 @@ require 'sinatra'
 require 'sinatra/reloader'
 
 require_relative 'users'
+require_relative 'departments'
 require_relative 'timecards'
 
 set :bind, '0.0.0.0'
@@ -24,16 +25,38 @@ end
 post '/reg_finish' do 
   @new_no = params[:no].to_i
   @new_name = params[:name].to_s
-  if Userslist.add(@new_no, @new_name, 
-                   params[:department], params[:pass])
+  @new_department = params[:department].to_i
+  if Userslist.add(@new_no, @new_name,
+                   @new_department, params[:pass])
     erb :reg_finish
   else
     erb :reg_error
   end
 end
 
+get '/admin' do
+  erb :admin
+end
 
-
+post '/register_department' do
+  @no = params[:no].to_i
+  @name = params[:name]
+  if params[:button_action] == '登録'
+    if Departments.add(@no, @name)
+      @msg = "部署#{@name}を登録しました。"
+    else
+      p "add failed"
+      @msg = "登録に失敗しました。"
+    end
+  else
+    if Departments.remove(@name)
+      @msg = "部署#{@name}を削除しました。"
+    else
+      @msg = "削除に失敗しました。"
+    end
+  end
+  erb :admin
+end
 
 post '/attend' do
   @no = params[:no].to_i

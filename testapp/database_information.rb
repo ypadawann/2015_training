@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
 end
 
 class Department < ActiveRecord::Base
+  validates :no, uniqueness: true 
 end
 
 class Timecard < ActiveRecord::Base

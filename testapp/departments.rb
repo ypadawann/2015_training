@@ -1,4 +1,6 @@
 
+require 'active_record'
+
 require_relative 'database_information'
 
 class Departments
@@ -6,15 +8,16 @@ class Departments
     new_department = Department.new()
     new_department.no = no
     new_department.name = name
+    new_department.save
+  end
+  def self.remove(name)
     begin
-      new_department.save
+      department = Department.find_by(name: name)
+      department.destroy
       true
     rescue
       false
     end
-  end
-  def self.remove(no)
-    Department.destroy(no)
   end
   def self.name_of(no)
     department = Department.find(no)
