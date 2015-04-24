@@ -4,12 +4,13 @@ require_relative 'database_information'
 
 class UsersAccessError < RuntimeError; end
 
-class Timecard_operation 
+class Timecard_operation
 
   def self.attend(date,no,time)
     timecards = Timecard.new
     timecards.no = no
     timecards.day = date
+    # timecards.attendance = time
     timecards.attendance = time
     begin
       timecards.save
@@ -17,6 +18,28 @@ class Timecard_operation
       return false
     end
     return true
+  end
+
+  def self.returnhome(day,no,time)
+#=begin
+    timecards = Timecard.where(:day => day,:no => no).first
+    timecards.leaving = time
+    p timecards
+    timecards.save
+#=end
+
+=begin
+    timecards = Timecard.where(:name => 'maki').first
+    timecards.address = 'maki'
+    timecards.save
+=end
+
+=begin
+    timecards = Timecard.find('maki')
+    timecards.address = 'otonoki'
+    timecards.save
+=end
+
   end
 
   def self.testgettime()

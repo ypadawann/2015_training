@@ -3,8 +3,10 @@
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
+require 'composite_primary_keys'
 
 require_relative 'users'
+require_relative 'timecards'
 # require_relative 'timecards'
 
 get '/' do
@@ -37,6 +39,7 @@ post '/attend' do
   pass = params[:pass].to_s
   status = params[:status]
   time = (Time.now).strftime("%X")
+  # time = Time.now
   day = Date.today
   if status == "出勤"
     if Timecard_operation.attend(day,@no,time)
@@ -44,17 +47,15 @@ post '/attend' do
     else
       @message = "今日はすでに出勤しています"
     end
-  else
+  elsif status == "退勤"
+    Timecard_operation.returnhome(day,@no,time)
     # 帰宅データを
-    @message = "Bye"
   end  
 
-    erb :attend
+ #   erb :attend
 end
 
 get '/test-get-time' do
   Timecard_operation.testgettime()
   # p timecards.all[0].day
 end
-
-load 'timecards.rb'
