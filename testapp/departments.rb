@@ -2,11 +2,17 @@
 require 'active_record'
 
 require_relative 'database_information'
+require_relative 'users'
 
 class Departments
-  def self.add(no, name)
+  def self.add(name)
     new_department = Department.new()
-    new_department.no = no
+    max_no = Department.maximum(:no)
+    if max_no == nil
+      new_department.no = 1
+    else
+      new_department.no = max_no + 1
+    end
     new_department.name = name
     new_department.save
   end

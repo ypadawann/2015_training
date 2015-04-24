@@ -39,17 +39,16 @@ get '/admin' do
 end
 
 post '/register_department' do
-  @no = params[:no].to_i
   @name = params[:name]
   if params[:button_action] == '登録'
-    if Departments.add(@no, @name)
-      @msg = "部署#{@name}を登録しました。"
+    if Departments.add(@name)
+      @msg = "部署:#{@name}を登録しました。"
     else
       @msg = "登録に失敗しました。"
     end
   else
     if Departments.remove(@name)
-      @msg = "部署#{@name}を削除しました。"
+      @msg = "部署:#{@name}を削除しました。"
     else
       @msg = "削除に失敗しました。"
     end
