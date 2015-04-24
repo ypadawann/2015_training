@@ -17,9 +17,16 @@ class Timecard_operation
 
   def self.testgettime()
    # timecards = Timecard.where(:no => 5622)
-    day = Date::new(2015,4,23)
-    timecards = Timecard.where(:day => '2015-04-23')
-    p timecards.all[4].a_time.to_s
+    # day = Date::new(2015,4,23)
+    
+    # timecards = Timecard.where(:day => '2015-04-23' )
+    
+   timecards = Timecard.where("day LIKE ?", '2015-04-%').where(:no => 123)
+    #timecards123 = timecards.where(:no => 5622)
+    p timecards.all[1].a_time.to_s
+              
+
+
    # timecards = Timecard.first
    # p timecards.day.to_s
    # timecards = Timecard.all
