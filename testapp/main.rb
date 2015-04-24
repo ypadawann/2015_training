@@ -40,22 +40,34 @@ get '/admin' do
   erb :admin
 end
 
-post '/register_department' do
+post '/admin/department_registered' do
   @name = params[:name]
-  if params[:button_action] == '登録'
-    if Departments.add(@name)
-      @msg = "部署:#{@name}を登録しました。"
-    else
-      @msg = "登録に失敗しました。"
-    end
+  if Departments.add(@name)
+    @msg = "#{@name}を登録しました。"
   else
-    if Departments.remove(@name)
-      @msg = "部署:#{@name}を削除しました。"
-    else
-      @msg = "削除に失敗しました。"
-    end
+    @msg = "登録に失敗しました。"
   end
   erb :admin
+end
+post '/admin/department_changed' do
+  @no = params[:no] 
+  @new_name = params[:name]
+  @old_name = Departments.name_of(@no)
+  Departments.update(@no, @new_name)
+  @msg = "#{@old_name}の名前を#{@new_name}に変更しました。"
+  erb :admin
+  #erb :admin_department_changed
+end
+post '/admin/department_deleted' do
+  @no = params[:no]
+  @name = Departments.name_of(@no)
+  if Departments.remove(@no)
+    @msg = "#{@name}を削除しました。"
+  else
+    @msg = "その部署に所属している人がいます。"
+  end
+  erb :admin
+  #erb :admin_department_changed
 end
 
 post '/attend' do

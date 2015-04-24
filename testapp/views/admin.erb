@@ -1,7 +1,29 @@
 <p><%= @msg %></p>
-<form action="/register_department" method="post">
-<p>部署名:<input type="text" name="name" size="40"></p>
-<p><input type="submit" value="登録" name="button_action">
-   <input type="submit" value="削除" name="button_action">
+<form action="/admin/department_registered" method="post">
+<p>部署の登録
+  <input type="text" name="name" size="40">
+  <input type="submit" value="登録">
+</p>
+</form>
+<form action="/admin/department_changed" method="post">
+<p>部署の変更
+  <select name="no"><%=
+    nos = Departments.get_nos
+    nos.map { |d|
+      "<option value=#{d}>#{Departments.name_of(d)}</option>"
+    }.join
+  %></select>
+  ⇒<input type="text" name="name" size="40">
+  <input type="submit" value="変更">
+</form>
+<form action="/admin/department_deleted" method="post">
+<p>部署の削除
+  <select name="no"><%=
+    nos = Departments.get_nos
+    nos.map { |d|
+      "<option value=#{d}>#{Departments.name_of(d)}</option>"
+    }.join
+  %></select>
+  <input type="submit" value="削除">
 </p>
 </form>

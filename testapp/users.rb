@@ -55,6 +55,9 @@ class Userslist
     user.department = department
     user.save
   end
+  def self.update_department_all(from, to)
+    User.where(department: from).update_all(department: to)
+  end
   def self.update_password(no, password)
     user = User.find(no)
     user.password = password
