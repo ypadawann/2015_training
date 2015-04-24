@@ -5,20 +5,6 @@ require_relative 'database_information'
 class UsersAccessError < RuntimeError; end
 
 class Userslist
-  @@last_user = nil
-
-  def self.this_no()
-    @@last_user.no
-  end
-  def self.this_name()
-    @@last_user.name
-  end
-  def self.this_department()
-    @@last_user.department
-  end
-  def self.this_password()
-    @@last_user.path
-  end
   def self.is_wrong_password(db_password, this_password)
     db_password != this_password
   end
@@ -28,8 +14,6 @@ class Userslist
       raise UsersAccessError.new("ID:#{no}は登録されていません。")
     elsif is_wrong_password(u.password, password)
       raise UsersAccessError.new("パスワードが間違っています。")
-    else
-      @@last_user = u
     end
   end
   def self.get_nos()
@@ -39,19 +23,41 @@ class Userslist
     User.pluck(:name)
   end
   def self.clear()
-    User.destroy_all
+    User.delete_all
     true
   end
   def self.include?(no)
     get_nos.include?(no)
   end
   def self.add(no, name, department, password)
-    u = User.new()
-    u.no = no
-    u.name = name
-    u.department = department
-    u.password = password
-    @@last_user = u
-    u.save
+    user = User.new()
+    user.no = no
+    user.name = name
+    user.department = department
+    user.password = password
+    user.save
+  end
+  def self.remove(no)
+    begin
+      User.delete(no)
+      true
+    rescue
+      false
+    end
+  end
+  def self.update_name(no, name)
+    user = User.find(no)
+    user.name = name
+    user.save
+  end
+  def self.update_department(no, department)
+    user = User.find(no)
+    user.department = department
+    user.save
+  end
+  def self.update_password(no, password)
+    user = User.find(no)
+    user.password = password
+    user.save
   end
 end

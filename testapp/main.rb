@@ -45,7 +45,6 @@ post '/register_department' do
     if Departments.add(@no, @name)
       @msg = "部署#{@name}を登録しました。"
     else
-      p "add failed"
       @msg = "登録に失敗しました。"
     end
   else

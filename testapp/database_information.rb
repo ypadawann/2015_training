@@ -13,6 +13,7 @@ ActiveRecord::Base.establish_connection(
 
 # id: integer, name: varchar
 class User < ActiveRecord::Base
+  validates :no, uniqueness: true 
 end
 
 class Department < ActiveRecord::Base
