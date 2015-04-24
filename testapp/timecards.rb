@@ -6,13 +6,13 @@ class UsersAccessError < RuntimeError; end
 
 class Timecard_operation 
 
-  def self.attend(date,time,no)
+  def self.attend(date,no,time)
     timecards = Timecard.new
     timecards.no = no
     timecards.day = date
-    timecards.a_time = time
+    timecards.attendance = time
     timecards.save
-    return "ok!"
+    return true
   end
 
   def self.testgettime()
