@@ -16,8 +16,10 @@ class Timecard_operation
   end
 
   def self.testgettime()
-    timecards = Timecard.where(:no => 123)
-    p timecards.all[1].a_time.to_s
+   # timecards = Timecard.where(:no => 5622)
+    day = Date::new(2015,4,23)
+    timecards = Timecard.where(:day => '2015-04-23')
+    p timecards.all[4].a_time.to_s
    # timecards = Timecard.first
    # p timecards.day.to_s
    # timecards = Timecard.all
