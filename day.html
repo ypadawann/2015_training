@@ -1,0 +1,56 @@
+<html>
+<link rel="stylesheet" type="text/css" href="./day.css" />
+<body>
+<script type="text/javascript">
+var counter = 0;
+function AddTableRows(){
+	// カウンタを回す
+	counter++;
+
+	var table1 = document.getElementById("table1");
+	var row1 = table1.insertRow(counter);
+	var cell1 = row1.insertCell(0);
+	var cell2 = row1.insertCell(1);
+	var cell3 = row1.insertCell(2);
+
+	// class の付与は UserAgent によって
+	// 挙動が違うっぽいので念のため両方の方法で
+//	cell1.setAttribute("class","name");
+//	cell2.setAttribute("class","address");
+//	cell3.setAttribute("class","tel");
+//	cell1.className = 'name';
+//	cell2.className = 'address';
+//	cell3.className = 'tel';
+	var tableData = <% data %>;
+
+	var HTML1 = '<input type="text" name="name' + counter + '" style="width:25; height:20; border:none; background:none; text-align:center; vertical-align:middle;" />';
+	var HTML2 = '<input type="text" name="address' + counter + '"style="width:25; height:20; border:none; background:none; text-align:center; vertical-align:middle;" />';
+	var HTML3 = '<input type="text" name="tel' + counter + '" style="width:60; height:20; border:none; background:none; text-align:center;vertical-align:middle;" />';
+	cell1.innerHTML = HTML1;
+	cell2.innerHTML = HTML2;
+	cell3.innerHTML = HTML3;
+}
+</script>
+
+<table border="1" cellspacing="0" cellpadding="0" id="table1">
+  <tr>
+    <td class="ex1">日付</td>
+    <td class="ex1">曜日</td>
+    <td class="ex2">入室時刻</td>
+    <td class="ex2">退出時刻</td>
+    <td class="ex2">上司<br>承認印</td>
+    <td class="ex2">深夜勤務<br>22時~翌5時</td>
+    <td class="ex2">休日<br>勤務時間</td>
+    <td class="ex2">振替休暇<br>予定日</td>
+    <td class="ex2">有休<br>休暇</td>
+    <td class="ex2">振替休暇<br>取得日</td>
+    <td class="ex2">時間外業務は必ず上司による指示を<br>受けてください。</td>
+  </tr><tr>
+    <td><input type="text" name="name0" style="width:25px; height:20px; border:none; background:none; text-align:center; vertical-align:middle;"></td>
+    <td><input type="text" name="address0" style="width:25px; height:20px; border:none; background:none; text-align:center; vertical-align:middle;" /></td>
+    <td><input type="text" name="tel0" style="width:60px; height:20px; border:none; background:none; text-align:center; vertical-align:middle;" /></td>
+  </tr>
+</table>
+  <input type="button" value="テーブルに行を追加" onClick="AddTableRows();" />
+  </body>
+</html>
