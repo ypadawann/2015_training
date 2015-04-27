@@ -61,7 +61,7 @@ end
 post '/attend' do
   @no = params[:no].to_i
   pass = params[:password].to_s
-  accessresult = Userlist.access(@no,pass)
+  accessresult = Userslist.access(@no,pass)
   if accessresult != true
     @message = accessresult
   else
