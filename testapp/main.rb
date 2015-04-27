@@ -35,7 +35,7 @@ end
 
 
 post '/attend' do
-  @no = params[:id].to_i
+  @no = params[:no].to_i
   pass = params[:pass].to_s
   status = params[:status]
   time = (Time.now).strftime("%X")
