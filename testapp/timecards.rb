@@ -33,10 +33,10 @@ class Timecard_operation
     end
   end
 
-  def self.testgettime()
+  def self.read_monthly_data(no,month)
     # dayカラムから'2015-04'で前方一致検索してから、no=123で完全一致検索
-    timecards = Timecard.where("day LIKE ?", '2015-04-%').where(:no => 123)
-    p timecards.all[1].a_time.to_s
+    timecards = Timecard.where("day LIKE ?", "#{month}-%").where(:no => no)
+    p timecards.all[0].attendance.to_s
    
 
 # timecards = Timecard.where(:no => 5622)

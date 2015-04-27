@@ -105,7 +105,10 @@ post '/attend' do
 end
 
 get '/read-data' do
-  
+  no = 5622
+  pass = 'password'
+  this_month = (Date.today).strftime("%Y-%m")
+  Timecard_operation.read_monthly_data(no,this_month)
 end
 
 get '/test-get-time' do
