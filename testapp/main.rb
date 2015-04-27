@@ -94,7 +94,7 @@ post '/attend' do
         when 'no attend'
           '本日はまだ出勤していません'
         when 'leave'
-          '#{day}は#{time}に退勤しました'
+          "#{day}は#{time}に退勤しました"
         when 'already leave'
           '本日はすでに退勤しました'
         end
