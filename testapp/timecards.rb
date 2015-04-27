@@ -23,13 +23,13 @@ class Timecard_operation
   def self.returnhome(day,no,time)
     timecards = Timecard.where(:day => day,:no => no).first
     if timecards==nil # まだ出勤していない
-      p 'no attend'
-    elsif timecards.leaving==nil
+      return 'no attend'
+    elsif timecards.leaving==nil #退勤処理
       timecards.leaving = time
       timecards.save
-      p 'leave'
-    else
-      p 'already leave'
+      return 'leave'
+    else #退勤済み
+      return 'already leave'
     end
   end
 

@@ -45,14 +45,20 @@ post '/attend' do
     if Timecard_operation.attend(day,@no,time)
       @message = "#{day}は#{time}に出勤しました"
     else
-      @message = "今日はすでに出勤しています"
+      @message = "本日はすでに出勤しています"
     end
   elsif status == "退勤"
-    Timecard_operation.returnhome(day,@no,time)
-    # 帰宅データを
+    leavingstatus = Timecard_operation.returnhome(day,@no,time)
+    if leavingstatus == 'no attend'
+      @message = "本日はまだ出勤していません"
+    elsif leavingstatus == 'leave'
+      @message = "#{day}は#{time}に退勤しました"
+    elsif leavingstatus == 'already leave'
+      @message = "本日はすでに退勤しました"
+    end
   end  
 
- #   erb :attend
+  erb :attend
 end
 
 get '/test-get-time' do
