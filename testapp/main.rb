@@ -104,6 +104,10 @@ post '/attend' do
   erb :attend
 end
 
+get '/read-data' do
+  
+end
+
 get '/test-get-time' do
   Timecard_operation.testgettime()
   # p timecards.all[0].day
