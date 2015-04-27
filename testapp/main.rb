@@ -3,10 +3,12 @@
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
+require 'composite_primary_keys'
 
 require_relative 'users'
 require_relative 'departments'
 require_relative 'timecards'
+# require_relative 'timecards'
 
 set :bind, '0.0.0.0'
 
@@ -58,17 +60,32 @@ end
 
 post '/attend' do
   @no = params[:no].to_i
-  @pass = params[:password].to_s
-  @status = params[:status]
- # @time = Time.now
-# date = Date.today.to_s
-  if @status == "出勤"
-    @message = Ams_operation.attend()
-    # @message = "good morning"
-  else
-    # 帰宅データを
-    @message = "Bye"
-  end
+  pass = params[:pass].to_s
+  status = params[:status]
+  time = (Time.now).strftime("%X")
+  # time = Time.now
+  day = Date.today
+  if status == "出勤"
+    if Timecard_operation.attend(day,@no,time)
+      @message = "#{day}は#{time}に出勤しました"
+    else
+      @message = "本日はすでに出勤しています"
+    end
+  elsif status == "退勤"
+    leavingstatus = Timecard_operation.returnhome(day,@no,time)
+    if leavingstatus == 'no attend'
+      @message = "本日はまだ出勤していません"
+    elsif leavingstatus == 'leave'
+      @message = "#{day}は#{time}に退勤しました"
+    elsif leavingstatus == 'already leave'
+      @message = "本日はすでに退勤しました"
+    end
+  end  
 
-    erb :attend
+  erb :attend
+end
+
+get '/test-get-time' do
+  Timecard_operation.testgettime()
+  # p timecards.all[0].day
 end

@@ -4,10 +4,53 @@ require_relative 'database_information'
 
 class UsersAccessError < RuntimeError; end
 
-class Ams_operation 
+class Timecard_operation
 
-  def attend()
-    return "ok!"
+  def self.attend(date,no,time)
+    timecards = Timecard.new
+    timecards.no = no
+    timecards.day = date
+    # timecards.attendance = time
+    timecards.attendance = time
+    begin
+      timecards.save
+    rescue
+      return false
+    end
+    return true
+  end
+
+  def self.returnhome(day,no,time)
+    timecards = Timecard.where(:day => day,:no => no).first
+    if timecards==nil # まだ出勤していない
+      return 'no attend'
+    elsif timecards.leaving==nil #退勤処理
+      timecards.leaving = time
+      timecards.save
+      return 'leave'
+    else #退勤済み
+      return 'already leave'
+    end
+  end
+
+  def self.testgettime()
+    # dayカラムから'2015-04'で前方一致検索してから、no=123で完全一致検索
+    timecards = Timecard.where("day LIKE ?", '2015-04-%').where(:no => 123)
+    p timecards.all[1].a_time.to_s
+   
+
+# timecards = Timecard.where(:no => 5622)
+    # day = Date::new(2015,4,23)
+   
+    # timecards = Timecard.where(:day => '2015-04-23' )
+    #timecards123 = timecards.where(:no => 5622)
+              
+   # timecards = Timecard.first
+   # p timecards.day.to_s
+   # timecards = Timecard.all
+   # p timecards[4].a_time.strftime("%X")
+   # p 'hello'
+#    return Timecard.where("day like ?", "%" + "2015-04")
   end
 
 end

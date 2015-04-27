@@ -21,4 +21,5 @@ class Department < ActiveRecord::Base
 end
 
 class Timecard < ActiveRecord::Base
+  self.primary_keys = :day, :no
 end
