@@ -2,13 +2,12 @@
 <form action="/reg_finish" method="post">
 <p>ID:<input type="number" name="no" size="40"></p>
 <p>名前:<input type="text" name="name" size="40"></p>
-<p>所属：<select name="department">
-  <%=
+<p>所属：
+  <select name="department"><%=
     Departments.get_nos.map { |d|
       "<option value=#{d}>#{Departments.name_of(d)}</option>"
     }.join
-  %>
-</select>
+  %></select>
 </p>
 <p>pass:<input type="password" name="pass" size="40"></p>
 <p>
