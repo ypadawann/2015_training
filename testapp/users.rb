@@ -30,12 +30,12 @@ class Userslist
     get_nos.include?(no)
   end
   def self.add(no, name, department, password)
-    user = User.new()
-    user.no = no
-    user.name = name
-    user.department = department
-    user.password = password
-    user.save
+    if Department.count > 0
+      user = User.new(no: no.to_i, name: name, department: department, password: password)
+      user.save
+    else
+      false
+    end
   end
   def self.remove(no)
     begin

@@ -12,7 +12,11 @@ class Departments
 
   def self.add(name)
     new_department = Department.new()
-    new_department.no = Department.maximum(:no) + 1
+    if Department.count > 0
+      new_department.no = Department.maximum(:no) + 1
+    else
+      new_department.no = DEFAULT_DEPARTMENT_NO
+    end
     new_department.name = name
     new_department.save
   end

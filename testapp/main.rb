@@ -25,9 +25,9 @@ get '/register' do
 end
 
 post '/reg_finish' do 
-  @new_no = params[:no].to_i
-  @new_name = params[:name].to_s
-  @new_department = params[:department].to_i
+  @new_no = params[:no]
+  @new_name = params[:name]
+  @new_department = params[:department]
   if Userslist.add(@new_no, @new_name,
                    @new_department, params[:pass])
     erb :reg_finish
