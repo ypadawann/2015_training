@@ -1,18 +1,27 @@
 # -*- coding: utf-8 -*-
 
+require 'digest/sha2'
+
 require_relative 'database_information'
 
 class UsersAccessError < RuntimeError; end
 
 class Userslist
-  def self.is_wrong_password(db_password, this_password)
-    db_password != this_password
+  def self.hash(no, password)
+    v = no + password
+    16.times do
+      v = Digest::SHA256.hexdigest(v)
+    end
+    v.to_s.byteslice(0..99)
+  end
+  def self.is_wrong_password(stored_hash, no, password)
+    stored_hash != hash(no, password)
   end
   def self.access(no, password)
     u = User.find_by no: no
     if u == nil
       raise UsersAccessError.new("ID:#{no}は登録されていません。")
-    elsif is_wrong_password(u.password, password)
+    elsif is_wrong_password(u.password, no, password)
       raise UsersAccessError.new("パスワードが間違っています。")
     end
   end
@@ -26,12 +35,12 @@ class Userslist
     User.delete_all
     true
   end
-  def self.include?(no)
-    get_nos.include?(no)
-  end
   def self.add(no, name, department, password)
     if Department.count > 0
-      user = User.new(no: no.to_i, name: name, department: department, password: password)
+      user = User.new(no: no.to_i,
+                      name: name, 
+                      department: department,
+                      password: hash(no, password))
       user.save
     else
       false
