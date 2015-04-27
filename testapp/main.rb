@@ -74,30 +74,33 @@ post '/attend' do
   @no = params[:no].to_i
   pass = params[:password].to_s
   accessresult = Userslist.access(@no,pass)
-  if accessresult != 'true'
-    @message = accessresult
-  else
-#    status = params[:status]
-    time = (Time.now).strftime("%X")
-    # time = Time.now
-    day = Date.today
-    if params[:attend] != nil
-      if Timecard_operation.attend(day,@no,time)
-        @message = "#{day}は#{time}に出勤しました"
-      else
-        @message = "本日はすでに出勤しています"
-      end
-    elsif params[:leave] != nil
-      leavingstatus = Timecard_operation.returnhome(day,@no,time)
-      if leavingstatus == 'no attend'
-        @message = "本日はまだ出勤していません"
-      elsif leavingstatus == 'leave'
-        @message = "#{day}は#{time}に退勤しました"
-      elsif leavingstatus == 'already leave'
-        @message = "本日はすでに退勤しました"
-      end
-    end  
-  end
+
+  @message = 
+    if accessresult != 'true'
+      accessresult
+    else
+      #    status = params[:status]
+      time = (Time.now).strftime("%X")
+      day = Date.today
+      if params[:attend] != nil
+        if Timecard_operation.attend(day,@no,time)
+          "#{day}は#{time}に出勤しました"
+        else
+          "本日はすでに出勤しています"
+        end
+      elsif params[:leave] != nil
+        leavingstatus = Timecard_operation.returnhome(day,@no,time)
+        case leavingstatus
+        when 'no attend'
+          '本日はまだ出勤していません'
+        when 'leave'
+          '#{day}は#{time}に退勤しました'
+        when 'already leave'
+          '本日はすでに退勤しました'
+        end
+      end  
+    end
+  
   erb :attend
 end
 
