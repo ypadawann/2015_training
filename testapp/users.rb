@@ -4,11 +4,9 @@ require 'digest/sha2'
 
 require_relative 'database_information'
 
-class UsersAccessError < RuntimeError; end
-
 class Userslist
   def self.hash(no, password)
-    v = no + password
+    v = no.to_s + password
     16.times do
       v = Digest::SHA256.hexdigest(v)
     end
@@ -18,11 +16,13 @@ class Userslist
     stored_hash != hash(no, password)
   end
   def self.access(no, password)
-    u = User.find_by no: no
-    if u == nil
-      raise UsersAccessError.new("ID:#{no}は登録されていません。")
-    elsif is_wrong_password(u.password, no, password)
-      raise UsersAccessError.new("パスワードが間違っています。")
+    user = User.find(no)
+    if user == nil
+      return "ID:#{no}は登録されていません。"
+    elsif is_wrong_password(user.password, no, password)
+      return "パスワードが間違っています。"
+    else
+      return "true"
     end
   end
   def self.get_nos()
