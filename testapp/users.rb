@@ -16,7 +16,9 @@ class Userslist
     stored_hash != hash(no, password)
   end
   def self.access(no, password)
-    user = User.find(no)
+    user = User.find_by_no(no)
+    p no
+    p user
     if user == nil
       return "ID:#{no}は登録されていません。"
     elsif is_wrong_password(user.password, no, password)
