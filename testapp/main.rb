@@ -121,39 +121,44 @@ get '/read-data' do
   @msg = "#{no} <br>#{name} <br>#{department}<br><br>"
   n = 0
 
-  CSV.open("#{no}_#{year}#{month}timecards.csv","w") do |csv|
+  day_array = []
+  attendance_array = []
+  leaving_array = []
     
-    for i in 1..30 do
-      if timecards[n].day == Date::new(year.to_i,month.to_i,i)
-        attend_time = (timecards[n].attendance).strftime("%X")
-        if timecards[n].leaving != nil
-          leave_time =  (timecards[n].leaving).strftime("%X")
-        else
-          leave_time = nil
-        end
-        @msg = @msg + "#{timecards[n].day} : #{attend_time} - #{leave_time} <br>"
-        csv << ["#{timecards[n].day}", "#{attend_time}" ,"#{leave_time}"]
-        if n < timecards.length-1
-          n = n+1
-        end
+  for i in 1..30 do
+    if timecards[n].day == Date::new(year.to_i,month.to_i,i)
+      attend_time = (timecards[n].attendance).strftime("%X")
+      if timecards[n].leaving != nil
+        leave_time =  (timecards[n].leaving).strftime("%X")
       else
-        @msg = @msg + "#{Date::new(year.to_i,month.to_i,i).to_s} : 出勤なし<br>"
-        csv << ["#{Date::new(year.to_i,month.to_i,i).to_s}",nil,nil] 
+        leave_time = nil
       end
+      @msg = @msg + "#{timecards[n].day} : #{attend_time} - #{leave_time} <br>"
+      if n < timecards.length-1
+        n = n+1
+      end
+    else
+      @msg = @msg + "#{Date::new(year.to_i,month.to_i,i).to_s} : 出勤なし<br>"
     end
-    @message = @msg
-    
   end
+  @message = @msg
 
+ 
   open("#{no}_#{year}#{month}timecards.json","w") do |io|
     JSON.dump(timecards.to_json,io)
   end
-  p timecards
     
   erb :attend
     
 end
 
+
+get '/array-test' do
+  arr = []
+  arr.push("6")
+  p arr[0]
+
+end
 
 get '/test-csv' do
   CSV.open("test.csv","w") do |csv|
