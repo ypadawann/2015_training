@@ -37,7 +37,7 @@ class Timecard_operation
     # dayカラムから'2015-04'で前方一致検索してから、no=123で完全一致検索
     timecards = Timecard.where("day LIKE ?", "#{month}-%").where(:no => no)
 #    p timecards.all[0].attendance.to_s
-    timecards.all
+    return timecards.all
   end
 
 end

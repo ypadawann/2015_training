@@ -4,6 +4,7 @@ require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
 require 'composite_primary_keys'
+require 'date'
 
 require_relative 'users'
 require_relative 'departments'
@@ -107,8 +108,37 @@ end
 get '/read-data' do
   no = 5622
   pass = 'password'
-  this_month = (Date.today).strftime("%Y-%m")
-  Timecard_operation.read_monthly_data(no,this_month)
+  year = (Date.today).strftime("%Y")
+  month = (Date.today).strftime("%m")
+  timecards = Timecard_operation.read_monthly_data(no,"#{year}-#{month}")
+  p timecards[0]
+  p timecards.length
+  @msg = ""
+  p timecards[0].day
+  p day = Date::new(year.to_i,month.to_i,1)
+  n = 0
+
+  for i in 1..30 do
+    if timecards[n].day == Date::new(year.to_i,month.to_i,i)
+       @msg = @msg + "#{timecards[n].day} : #{timecards[n].attendance} - #{timecards[n].leaving} <br>"
+      if n < timecards.length-1
+        n = n+1
+      end
+    else
+      @msg = @msg + "#{Date::new(year.to_i,month.to_i,i).to_s} : 出勤なし<br>"
+    end
+  end
+  @message = @msg
+  erb :attend
+
+
+=begin
+  for i in 0..(timecards.length-1) do
+    @msg = @msg + "#{timecards[i].day} : #{timecards[i].attendance} - #{timecards[i].leaving} <br>"
+  end
+  @message = @msg
+  erb :attend
+=end
 end
 
 get '/test-get-time' do
