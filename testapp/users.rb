@@ -21,24 +21,21 @@ class Userslist
     hashed = hash(password, salt)
     hashed + DELIMITER + salt
   end
-  def self.is_wrong_password(stored, password)
+  def self.verify_password(stored, password)
     correct_hash, salt = stored.split(DELIMITER)
-    p correct_hash
-    p hash(password, salt)
-    correct_hash != hash(password, salt)
+    correct_hash == hash(password, salt)
   end
-  def self.invalid_password(password)
-    /^\w+$/.match(password) == nil
+  def self.valid_password(password)
+    /^\w+$/.match(password) != nil
   end
   def self.access(no, password)
     user = User.find_by_no(no)
-    if user == nil
-      return "ID:#{no}は登録されていません。"
-    elsif invalid_password(password) or
-          is_wrong_password(user.password, password)
-      return "パスワードが間違っています。"
+    if user != nil and
+         valid_password(password) and
+         verify_password(user.password, password)
+       true
     else
-      return "true"
+       false
     end
   end
   def self.get_nos()
@@ -52,7 +49,7 @@ class Userslist
     true
   end
   def self.add(no, name, department, password)
-    if Department.count > 0 and !invalid_password(password)
+    if Department.count > 0 and valid_password(password)
       user = User.new(no: no.to_i,
                       name: name, 
                       department: department,
@@ -89,12 +86,12 @@ class Userslist
     user.save
   end
 
-  def self.get_username(no)
+  def self.get_name(no)
     user = User.find_by_no(no)
     return user.name
   end
 
-  def self.get_departmentid(no)
+  def self.get_department(no)
     user = User.find_by_no(no)
     return user.department
   end

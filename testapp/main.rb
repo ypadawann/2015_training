@@ -81,8 +81,9 @@ post '/attend' do
   accessresult = Userslist.access(@no,pass)
 
   @message = 
-    if accessresult != 'true'
-      accessresult
+    if accessresult != true
+    #  accessresult
+      "認証に失敗しました。"
     else
       time = (Time.now).strftime("%X")
       day = Date.today
@@ -99,8 +100,8 @@ end
 get '/read-data' do
   no = 5622
   pass = 'password'
-  name = Userslist.get_username(no)
-  department = Departments.name_of(Userslist.get_departmentid(no))
+  name = Userslist.get_name(no)
+  department = Departments.name_of(Userslist.get_department(no))
   year = (Date.today).strftime("%Y")
   month = (Date.today).strftime("%m")
   timecards = Timecard_operation.read_monthly_data(no,"#{year}-#{month}")
