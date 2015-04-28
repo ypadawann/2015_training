@@ -74,4 +74,9 @@ class Userslist
     user.password = password
     user.save
   end
+
+  def get_username(no)
+    user = User.find_by_no(no)
+    return user.name
+  end
 end
