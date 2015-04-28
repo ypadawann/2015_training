@@ -33,7 +33,7 @@ post '/reg_finish' do
   @new_no = params[:no]
   @new_name = params[:name]
   @new_department = params[:department]
-  if Userslist.add(@new_no, @new_name,
+  if Users.add(@new_no, @new_name,
                    @new_department, params[:pass])
     erb :reg_finish
   else
@@ -78,7 +78,7 @@ end
 post '/attend' do
   @no = params[:no].to_i
   pass = params[:password].to_s
-  accessresult = Userslist.access(@no,pass)
+  accessresult = Users.access(@no,pass)
 
   @message = 
     if accessresult != true
@@ -100,8 +100,8 @@ end
 get '/read-data' do
   no = 5622
   pass = 'password'
-  name = Userslist.get_name(no)
-  department = Departments.name_of(Userslist.get_department(no))
+  name = Users.get_name(no)
+  department = Departments.name_of(Users.get_department(no))
   year = (Date.today).strftime("%Y")
   month = (Date.today).strftime("%m")
   timecards = Timecard_operation.read_monthly_data(no,"#{year}-#{month}")

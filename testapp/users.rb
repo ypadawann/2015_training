@@ -5,7 +5,7 @@ require 'securerandom'
 
 require_relative 'database_information'
 
-class Userslist
+class Users
   DELIMITER = '$'
   HASH_ITERATIONS = 1000
 
