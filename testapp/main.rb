@@ -120,10 +120,6 @@ get '/read-data' do
 
   @msg = "#{no} <br>#{name} <br>#{department}<br><br>"
   n = 0
-
-  day_array = []
-  attendance_array = []
-  leaving_array = []
     
   for i in 1..30 do
     if timecards[n].day == Date::new(year.to_i,month.to_i,i)
