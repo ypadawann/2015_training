@@ -136,6 +136,11 @@ get '/read-data' do
 end
 
 
+
+get '/test' do
+  Testclass.test_method()
+end
+
 get '/array-test' do
   arr = []
   arr.push("6")
@@ -153,4 +158,10 @@ end
 get '/test-get-time' do
   Timecard_operation.testgettime()
   # p timecards.all[0].day
+end
+
+class Testclass
+  def test_method()
+    p 'test clear'
+  end
 end
