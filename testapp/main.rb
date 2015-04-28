@@ -84,23 +84,12 @@ post '/attend' do
     if accessresult != 'true'
       accessresult
     else
-      #    status = params[:status]
       time = (Time.now).strftime("%X")
       day = Date.today
       if params[:attend] != nil
         Timecard_operation.attend(day,@no,time)
       elsif params[:leave] != nil
         Timecard_operation.returnhome(day,@no,time)
-=begin
-        case leavingstatus
-        when 'no attend'
-          '本日はまだ出勤していません'
-        when 'leave'
-          "#{day}は#{time}に退勤しました"
-        when 'already leave'
-          '本日はすでに退勤しました'
-        end
-=end
       end  
     end
   
