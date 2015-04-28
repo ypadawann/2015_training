@@ -108,12 +108,14 @@ end
 get '/read-data' do
   no = 5622
   pass = 'password'
+  name = Userslist.get_username(no)
+  department = Departments.name_of(Userslist.get_departmentid(no))
   year = (Date.today).strftime("%Y")
   month = (Date.today).strftime("%m")
   timecards = Timecard_operation.read_monthly_data(no,"#{year}-#{month}")
   p timecards[0]
   p timecards.length
-  @msg = ""
+  @msg = "#{no} <br>#{name} <br>#{department}<br><br>"
   p timecards[0].day
   p day = Date::new(year.to_i,month.to_i,1)
   n = 0
