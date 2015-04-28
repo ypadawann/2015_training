@@ -79,4 +79,9 @@ class Userslist
     user = User.find_by_no(no)
     return user.name
   end
+
+  def get_departmentid(no)
+    user = User.find_by_no(no)
+    return user.department
+  end
 end
