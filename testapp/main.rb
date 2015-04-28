@@ -6,6 +6,8 @@ require 'sinatra/reloader'
 require 'composite_primary_keys'
 require 'date'
 
+require 'csv'
+
 require_relative 'users'
 require_relative 'departments'
 require_relative 'timecards'
@@ -139,14 +141,16 @@ get '/read-data' do
   @message = @msg
   erb :attend
 
+end
 
-=begin
-  for i in 0..(timecards.length-1) do
-    @msg = @msg + "#{timecards[i].day} : #{timecards[i].attendance} - #{timecards[i].leaving} <br>"
+def write_csv do
+end
+
+get '/test-csv' do
+  CSV.open("test.csv","w") do |csv|
+    csv << ["a","b","c"]
+    csv << ["d","f","g"]
   end
-  @message = @msg
-  erb :attend
-=end
 end
 
 get '/test-get-time' do
