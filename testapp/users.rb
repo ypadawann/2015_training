@@ -27,11 +27,15 @@ class Userslist
     p hash(password, salt)
     correct_hash != hash(password, salt)
   end
+  def self.invalid_password(password)
+    /^\w+$/.match(password) == nil
+  end
   def self.access(no, password)
     user = User.find_by_no(no)
     if user == nil
       return "ID:#{no}は登録されていません。"
-    elsif is_wrong_password(user.password, password)
+    elsif invalid_password(password) or
+          is_wrong_password(user.password, password)
       return "パスワードが間違っています。"
     else
       return "true"
@@ -48,7 +52,7 @@ class Userslist
     true
   end
   def self.add(no, name, department, password)
-    if Department.count > 0
+    if Department.count > 0 and !invalid_password(password)
       user = User.new(no: no.to_i,
                       name: name, 
                       department: department,
