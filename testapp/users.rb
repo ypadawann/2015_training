@@ -88,4 +88,14 @@ class Userslist
     user.password = password
     user.save
   end
+
+  def self.get_username(no)
+    user = User.find_by_no(no)
+    return user.name
+  end
+
+  def self.get_departmentid(no)
+    user = User.find_by_no(no)
+    return user.department
+  end
 end

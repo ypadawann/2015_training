@@ -4,6 +4,11 @@ require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
 require 'composite_primary_keys'
+require 'date'
+
+require 'csv'
+require 'json'
+#require 'spreadsheet'
 
 require_relative 'users'
 require_relative 'departments'
@@ -102,6 +107,60 @@ post '/attend' do
     end
   
   erb :attend
+end
+
+get '/read-data' do
+  no = 5622
+  pass = 'password'
+  name = Userslist.get_username(no)
+  department = Departments.name_of(Userslist.get_departmentid(no))
+  year = (Date.today).strftime("%Y")
+  month = (Date.today).strftime("%m")
+  timecards = Timecard_operation.read_monthly_data(no,"#{year}-#{month}")
+
+  @msg = "#{no} <br>#{name} <br>#{department}<br><br>"
+  n = 0
+    
+  for i in 1..30 do
+    if timecards[n].day == Date::new(year.to_i,month.to_i,i)
+      attend_time = (timecards[n].attendance).strftime("%X")
+      if timecards[n].leaving != nil
+        leave_time =  (timecards[n].leaving).strftime("%X")
+      else
+        leave_time = nil
+      end
+      @msg = @msg + "#{timecards[n].day} : #{attend_time} - #{leave_time} <br>"
+      if n < timecards.length-1
+        n = n+1
+      end
+    else
+      @msg = @msg + "#{Date::new(year.to_i,month.to_i,i).to_s} : 出勤なし<br>"
+    end
+  end
+  @message = @msg
+
+ 
+  open("#{no}_#{year}#{month}timecards.json","w") do |io|
+    JSON.dump(timecards.to_json,io)
+  end
+    
+  erb :attend
+    
+end
+
+
+get '/array-test' do
+  arr = []
+  arr.push("6")
+  p arr[0]
+
+end
+
+get '/test-csv' do
+  CSV.open("test.csv","w") do |csv|
+    csv << ["a","b","c"]
+    csv << ["d","f","g"]
+  end
 end
 
 get '/test-get-time' do
