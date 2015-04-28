@@ -21,10 +21,6 @@ get '/' do
  erb :index
 end
 
-post '/list' do
-  erb :list
-end
-
 get '/register' do
   erb :reg
 end

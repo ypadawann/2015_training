@@ -42,16 +42,6 @@ class Users
          false
       end
     end
-    def get_nos()
-      User.pluck(:no)
-    end
-    def get_names()
-      User.pluck(:name)
-    end
-    def clear()
-      User.delete_all
-      true
-    end
     def add(no, name, department, password)
       if Department.count > 0 and valid_password(password)
         user = User.new(no: no.to_i,
@@ -80,9 +70,6 @@ class Users
       user = User.find(no)
       user.department = department
       user.save
-    end
-    def update_department_all(from, to)
-      User.where(department: from).update_all(department: to)
     end
     def update_password(no, password)
       user = User.find(no)
