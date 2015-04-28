@@ -84,25 +84,12 @@ post '/attend' do
     if accessresult != 'true'
       accessresult
     else
-      #    status = params[:status]
       time = (Time.now).strftime("%X")
       day = Date.today
       if params[:attend] != nil
-        if Timecard_operation.attend(day,@no,time)
-          "#{day}は#{time}に出勤しました"
-        else
-          "本日はすでに出勤しています"
-        end
+        Timecard_operation.attend(day,@no,time)
       elsif params[:leave] != nil
-        leavingstatus = Timecard_operation.returnhome(day,@no,time)
-        case leavingstatus
-        when 'no attend'
-          '本日はまだ出勤していません'
-        when 'leave'
-          "#{day}は#{time}に退勤しました"
-        when 'already leave'
-          '本日はすでに退勤しました'
-        end
+        Timecard_operation.returnhome(day,@no,time)
       end  
     end
   
@@ -149,6 +136,11 @@ get '/read-data' do
 end
 
 
+
+get '/test' do
+  Testclass.test_method()
+end
+
 get '/array-test' do
   arr = []
   arr.push("6")
@@ -166,4 +158,10 @@ end
 get '/test-get-time' do
   Timecard_operation.testgettime()
   # p timecards.all[0].day
+end
+
+class Testclass
+  def test_method()
+    p 'test clear'
+  end
 end

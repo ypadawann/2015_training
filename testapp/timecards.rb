@@ -15,21 +15,21 @@ class Timecard_operation
     begin
       timecards.save
     rescue
-      return false
+      return "本日はすでに出勤しています"
     end
-    return true
+    return "#{date}は#{time}に出勤しました"
   end
 
   def self.returnhome(day,no,time)
     timecards = Timecard.where(:day => day,:no => no).first
     if timecards==nil # まだ出勤していない
-      return 'no attend'
+      return '本日はまだ出勤していません'
     elsif timecards.leaving==nil #退勤処理
       timecards.leaving = time
       timecards.save
-      return 'leave'
+      return '#{day}は#{time}に退勤しました'
     else #退勤済み
-      return 'already leave'
+      return '本日はすでに退勤しました'
     end
   end
 
