@@ -7,6 +7,7 @@ require 'composite_primary_keys'
 require 'date'
 
 require 'csv'
+require 'json'
 #require 'spreadsheet'
 
 require_relative 'users'
@@ -116,14 +117,11 @@ get '/read-data' do
   year = (Date.today).strftime("%Y")
   month = (Date.today).strftime("%m")
   timecards = Timecard_operation.read_monthly_data(no,"#{year}-#{month}")
-  p timecards[0]
-  p timecards.length
+
   @msg = "#{no} <br>#{name} <br>#{department}<br><br>"
-  p timecards[0].day
-  p day = Date::new(year.to_i,month.to_i,1)
   n = 0
 
-  CSV.open("timecards.csv","w") do |csv|
+  CSV.open("#{no}_#{year}#{month}timecards.csv","w") do |csv|
     
     for i in 1..30 do
       if timecards[n].day == Date::new(year.to_i,month.to_i,i)
@@ -146,11 +144,15 @@ get '/read-data' do
     @message = @msg
     
   end
+
+  open("#{no}_#{year}#{month}timecards.json","w") do |io|
+    JSON.dump(timecards.to_json,io)
+  end
+  p timecards
     
-    erb :attend
+  erb :attend
     
 end
-
 
 
 get '/test-csv' do
