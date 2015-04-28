@@ -1,27 +1,41 @@
 # -*- coding: utf-8 -*-
 
 require 'digest/sha2'
+require 'securerandom'
 
 require_relative 'database_information'
 
 class Userslist
-  def self.hash(no, password)
-    v = no.to_s + password
-    16.times do
-      v = Digest::SHA256.hexdigest(v)
+  DELIMITER = '$'
+  HASH_ITERATIONS = 1000
+
+  def self.hash(password, salt)
+    password += salt
+    HASH_ITERATIONS.times do
+      password = Digest::SHA256.hexdigest(password)
     end
-    v.to_s.byteslice(0..99)
+    password
   end
-  def self.is_wrong_password(stored_hash, no, password)
-    stored_hash != hash(no, password)
+  def self.salt_and_hash(password)
+    salt = SecureRandom.base64(24).to_s
+    hashed = hash(password, salt)
+    hashed + DELIMITER + salt
+  end
+  def self.is_wrong_password(stored, password)
+    correct_hash, salt = stored.split(DELIMITER)
+    p correct_hash
+    p hash(password, salt)
+    correct_hash != hash(password, salt)
+  end
+  def self.invalid_password(password)
+    /^\w+$/.match(password) == nil
   end
   def self.access(no, password)
     user = User.find_by_no(no)
-    p no
-    p user
     if user == nil
       return "ID:#{no}は登録されていません。"
-    elsif is_wrong_password(user.password, no, password)
+    elsif invalid_password(password) or
+          is_wrong_password(user.password, password)
       return "パスワードが間違っています。"
     else
       return "true"
@@ -38,11 +52,11 @@ class Userslist
     true
   end
   def self.add(no, name, department, password)
-    if Department.count > 0
+    if Department.count > 0 and !invalid_password(password)
       user = User.new(no: no.to_i,
                       name: name, 
                       department: department,
-                      password: hash(no, password))
+                      password: salt_and_hash(password))
       user.save
     else
       false
