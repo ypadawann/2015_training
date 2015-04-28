@@ -120,7 +120,13 @@ get '/read-data' do
 
   for i in 1..30 do
     if timecards[n].day == Date::new(year.to_i,month.to_i,i)
-       @msg = @msg + "#{timecards[n].day} : #{timecards[n].attendance} - #{timecards[n].leaving} <br>"
+      attend_time = (timecards[n].attendance).strftime("%X")
+      if timecards[n].leaving != nil
+        leave_time =  (timecards[n].leaving).strftime("%X")
+      else
+        leave_time = nil
+      end
+      @msg = @msg + "#{timecards[n].day} : #{attend_time} - #{leave_time} <br>"
       if n < timecards.length-1
         n = n+1
       end
