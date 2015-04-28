@@ -75,12 +75,12 @@ class Userslist
     user.save
   end
 
-  def get_username(no)
+  def self.get_username(no)
     user = User.find_by_no(no)
     return user.name
   end
 
-  def get_departmentid(no)
+  def self.get_departmentid(no)
     user = User.find_by_no(no)
     return user.department
   end
