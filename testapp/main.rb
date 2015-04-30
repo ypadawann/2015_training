@@ -100,12 +100,13 @@ post '/admin/department_deleted' do
 end
 
 post '/attend' do
-  @no = cookies[:no]
-  pass = cookies[:password]
-  accessresult = Users.access(@no,pass)
+#  @no = cookies[:no]
+ # pass = cookies[:password]
+  #accessresult = Users.access(@no,pass)
+  @no = session[:no]
 
   @message = 
-    if accessresult != true
+    if Users.get_name(@no.to_i) == nil
     #  accessresult
       "認証に失敗しました。"
     else
@@ -122,9 +123,10 @@ post '/attend' do
 end
 
 post '/read-data' do
-  no = cookies[:no]
-  pass = cookies[:password]
-  if Users.access(no,pass)
+#  no = cookies[:no]
+#  pass = cookies[:password]
+  no = session[:no]
+  if Users.get_name(no.to_i) != nil
     name = Users.get_name(no)
     department = Departments.name_of(Users.get_department(no))
     year = (Date.today).strftime("%Y")
