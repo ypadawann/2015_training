@@ -78,7 +78,11 @@ class Users
     end
     def get_name(id)
       user = User.find_by_id(id)
-      return user.name
+      if user == nil
+        return nil
+      else
+        return user.name
+      end
     end
     def get_department(no)
       user = User.find_by_id(no)
