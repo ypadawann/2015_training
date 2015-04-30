@@ -8,6 +8,7 @@ require 'date'
 
 require 'csv'
 require 'json'
+require 'sinatra/contrib'
 #require 'spreadsheet'
 
 require_relative 'users'
@@ -18,11 +19,31 @@ require_relative 'timecards'
 set :bind, '0.0.0.0'
 
 get '/' do
- erb :index
+  no = cookies[:no]
+  pass = cookies[:pass]
+  if Users.access(no,pass) == 'true'
+    erb :userpage
+  else
+    erb :login
+  end
 end
 
 get '/register' do
   erb :reg
+end
+
+get '/login' do
+  no = params[:no]
+  pass = params[:pass]
+  if Users.access(no,pass) == 'true'
+    p 'ok'
+    cookies[:no] = no
+    cookies[:pass] = pass
+    erb :userpage
+  else
+    p 'miss'
+    erb :login
+  end
 end
 
 post '/reg_finish' do 
@@ -72,8 +93,8 @@ post '/admin/department_deleted' do
 end
 
 post '/attend' do
-  @no = params[:no].to_i
-  pass = params[:password].to_s
+  @no = cookies[:no]
+  pass = cookies[:pass]
   accessresult = Users.access(@no,pass)
 
   @message = 
