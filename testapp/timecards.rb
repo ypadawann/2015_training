@@ -6,9 +6,9 @@ class UsersAccessError < RuntimeError; end
 
 class Timecard_operation
 
-  def self.attend(date,no,time)
+  def self.attend(date,user_id,time)
     timecards = Timecard.new
-    timecards.no = no
+    timecards.user_id = user_id
     timecards.day = date
     # timecards.attendance = time
     timecards.attendance = time
@@ -20,8 +20,8 @@ class Timecard_operation
     return "#{date}は#{time}に出勤しました"
   end
 
-  def self.returnhome(day,no,time)
-    timecards = Timecard.where(:day => day,:no => no).first
+  def self.returnhome(day,user_id,time)
+    timecards = Timecard.where(:day => day,:user_id => user_id).first
     if timecards==nil # まだ出勤していない
       return '本日はまだ出勤していません'
     elsif timecards.leaving==nil #退勤処理
@@ -33,9 +33,9 @@ class Timecard_operation
     end
   end
 
-  def self.read_monthly_data(no,month)
-    # dayカラムから'2015-04'で前方一致検索してから、no=123で完全一致検索
-    timecards = Timecard.where("day LIKE ?", "#{month}-%").where(:no => no)
+  def self.read_monthly_data(user_id,month)
+    # dayカラムから'2015-04'で前方一致検索してから、user_id=123で完全一致検索
+    timecards = Timecard.where("day LIKE ?", "#{month}-%").where(:user_id => user_id)
 #    p timecards.all[0].attendance.to_s
     return timecards.all
   end

@@ -32,8 +32,8 @@ class Users
     end
   
     public
-    def access(no, password)
-      user = User.find_by_no(no)
+    def access(id, password)
+      user = User.find_by_id(id)
       if user != nil and
            valid_password(password) and
            verify_password(user.password, password)
@@ -42,9 +42,9 @@ class Users
          false
       end
     end
-    def add(no, name, department, password)
+    def add(id, name, department, password)
       if Department.count > 0 and valid_password(password)
-        user = User.new(no: no.to_i,
+        user = User.new(id: id.to_i,
                         name: name, 
                         department: department,
                         password: salt_and_hash(password))
@@ -53,35 +53,35 @@ class Users
         false
       end
     end
-    def remove(no)
+    def remove(id)
       begin
-        User.delete(no)
+        User.delete(id)
         true
       rescue
         false
       end
     end
-    def update_name(no, name)
-      user = User.find(no)
+    def update_name(id, name)
+      user = User.find(id)
       user.name = name
       user.save
     end
-    def update_department(no, department)
-      user = User.find(no)
+    def update_department(id, department)
+      user = User.find(id)
       user.department = department
       user.save
     end
-    def update_password(no, password)
-      user = User.find(no)
+    def update_password(id, password)
+      user = User.find(id)
       user.password = password
       user.save
     end
-    def get_name(no)
-      user = User.find_by_no(no)
+    def get_name(id)
+      user = User.find_by_id(id)
       return user.name
     end
     def get_department(no)
-      user = User.find_by_no(no)
+      user = User.find_by_id(no)
       return user.department
     end
   end

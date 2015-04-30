@@ -1,5 +1,4 @@
 
-require 'rubygems'
 require 'active_record'
 require 'mysql2'
 
@@ -11,16 +10,12 @@ ActiveRecord::Base.establish_connection(
   database: "test_db",
 )
 
-# id: integer, name: varchar
 class User < ActiveRecord::Base
-  validates :no, uniqueness: true 
 end
 
 class Department < ActiveRecord::Base
-  validates :no, uniqueness: true 
   validates :name, uniqueness: true 
 end
 
 class Timecard < ActiveRecord::Base
-  self.primary_keys = :day, :no
 end
