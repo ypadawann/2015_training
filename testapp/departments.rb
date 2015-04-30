@@ -2,7 +2,6 @@
 require 'active_record'
 
 require_relative 'database_information'
-require_relative 'users'
 
 class DepartmentAccessError < RuntimeError; end
 

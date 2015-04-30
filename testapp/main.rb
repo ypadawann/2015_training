@@ -21,10 +21,6 @@ get '/' do
  erb :index
 end
 
-post '/list' do
-  erb :list
-end
-
 get '/register' do
   erb :reg
 end
@@ -33,7 +29,7 @@ post '/reg_finish' do
   @new_no = params[:no]
   @new_name = params[:name]
   @new_department = params[:department]
-  if Userslist.add(@new_no, @new_name,
+  if Users.add(@new_no, @new_name,
                    @new_department, params[:pass])
     erb :reg_finish
   else
@@ -78,11 +74,12 @@ end
 post '/attend' do
   @no = params[:no].to_i
   pass = params[:password].to_s
-  accessresult = Userslist.access(@no,pass)
+  accessresult = Users.access(@no,pass)
 
   @message = 
-    if accessresult != 'true'
-      accessresult
+    if accessresult != true
+    #  accessresult
+      "認証に失敗しました。"
     else
       time = (Time.now).strftime("%X")
       day = Date.today
@@ -99,8 +96,8 @@ end
 get '/read-data' do
   no = 5622
   pass = 'password'
-  name = Userslist.get_username(no)
-  department = Departments.name_of(Userslist.get_departmentid(no))
+  name = Users.get_name(no)
+  department = Departments.name_of(Users.get_department(no))
   year = (Date.today).strftime("%Y")
   month = (Date.today).strftime("%m")
   timecards = Timecard_operation.read_monthly_data(no,"#{year}-#{month}")
