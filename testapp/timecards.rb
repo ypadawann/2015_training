@@ -27,7 +27,7 @@ class Timecard_operation
     elsif timecards.leaving==nil #退勤処理
       timecards.leaving = time
       timecards.save
-      return '#{day}は#{time}に退勤しました'
+      return "#{day}は#{time}に退勤しました"
     else #退勤済み
       return '本日はすでに退勤しました'
     end
