@@ -6,18 +6,18 @@ class UsersAccessError < RuntimeError; end
 
 class Timecard_operation
 
-  def self.attend(date,user_id,time)
-    timecards = Timecard.new
-    timecards.user_id = user_id
-    timecards.day = date
-    # timecards.attendance = time
-    timecards.attendance = time
-    begin
+  def self.attend(day,user_id,time)
+    timecards = Timecard.where(:day => day,:user_id => user_id).first
+    if timecards == nil
+      timecards = Timecard.new
+      timecards.user_id = user_id
+      timecards.day = day
+      timecards.attendance = time
       timecards.save
-    rescue
+      return "#{day}は#{time}に出勤しました"
+    else
       return "本日はすでに出勤しています"
     end
-    return "#{date}は#{time}に出勤しました"
   end
 
   def self.returnhome(day,user_id,time)
@@ -26,10 +26,11 @@ class Timecard_operation
       return '本日はまだ出勤していません'
     elsif timecards.leaving==nil #退勤処理
       timecards.leaving = time
+      p timecards
       timecards.save
       return "#{day}は#{time}に退勤しました"
     else #退勤済み
-      return '本日はすでに退勤しました'
+      return '本日はすでに退勤しています'
     end
   end
 
