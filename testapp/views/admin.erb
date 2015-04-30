@@ -8,7 +8,7 @@
 <form action="/admin/department_changed" method="post">
 <p>部署の変更
   <select name="no"><%=
-    nos = Departments.get_nos
+    nos = Departments.get_ids
     nos.map { |d|
       "<option value=#{d}>#{Departments.name_of(d)}</option>"
     }.join
@@ -19,7 +19,7 @@
 <form action="/admin/department_deleted" method="post">
 <p>部署の削除
   <select name="no"><%=
-    nos = Departments.get_nos
+    nos = Departments.get_ids
     nos.map { |d|
       "<option value=#{d}>#{Departments.name_of(d)}</option>"
     }.join
