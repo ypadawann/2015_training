@@ -174,7 +174,7 @@ post '/read-data' do
     
     @json_str = timecards.to_json
     
-    erb :attend
+    erb :attend_leave
   end
 end
 
