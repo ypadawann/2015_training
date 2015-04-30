@@ -16,14 +16,14 @@ require_relative 'departments'
 require_relative 'timecards'
 # require_relative 'timecards'
 
+use Rack::Session::Cookie, :key => 'ams_session',
+                          :expire_after => 86400
+
 set :bind, '0.0.0.0'
 
 get '/' do
-  no = cookies[:no]
-  pass = cookies[:password]
-  p no
-  p pass
-  if Users.access(no,pass) == true
+  no = session[:no]
+  if Users.get_name(no.to_i) != nil
     erb :userpage
   else
     erb :login
@@ -38,19 +38,19 @@ post '/login' do
   p 'login session'
   no = params[:no]
   pass = params[:password]
-  p no
-  p pass
-
   if Users.access(no,pass) == true
     p 'ok'
-    cookies[:no] = no
-    cookies[:password] = pass
+    session[:no] = no
     erb :userpage
   else
     p 'miss'
     erb :login
   end
+end
 
+post '/logout' do
+  session[:no]=nil
+  erb :login
 end
 
 post '/reg_finish' do 
@@ -156,6 +156,8 @@ post '/read-data' do
     open("#{no}_#{year}#{month}timecards.json","w") do |io|
       JSON.dump(timecards.to_json,io)
     end
+    
+    @json_str = timecards.to_json
     
     erb :attend
   end
