@@ -161,33 +161,3 @@ post '/read-data' do
   end
 end
 
-
-
-get '/test' do
-  Testclass.test_method()
-end
-
-get '/array-test' do
-  arr = []
-  arr.push("6")
-  p arr[0]
-
-end
-
-get '/test-csv' do
-  CSV.open("test.csv","w") do |csv|
-    csv << ["a","b","c"]
-    csv << ["d","f","g"]
-  end
-end
-
-get '/test-get-time' do
-  Timecard_operation.testgettime()
-  # p timecards.all[0].day
-end
-
-class Testclass
-  def test_method()
-    p 'test clear'
-  end
-end
