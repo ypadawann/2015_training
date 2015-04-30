@@ -16,14 +16,14 @@ require_relative 'departments'
 require_relative 'timecards'
 # require_relative 'timecards'
 
+use Rack::Session::Cookie, :key => 'ams_session',
+                          :expire_after => 86400
+
 set :bind, '0.0.0.0'
 
 get '/' do
-  no = cookies[:no]
-  pass = cookies[:password]
-  p no
-  p pass
-  if Users.access(no,pass) == true
+  no = session[:no]
+  if Users.get_name(no.to_i) != nil
     erb :userpage
   else
     erb :login
@@ -38,19 +38,19 @@ post '/login' do
   p 'login session'
   no = params[:no]
   pass = params[:password]
-  p no
-  p pass
-
   if Users.access(no,pass) == true
     p 'ok'
-    cookies[:no] = no
-    cookies[:password] = pass
+    session[:no] = no
     erb :userpage
   else
     p 'miss'
     erb :login
   end
+end
 
+post '/logout' do
+  session[:no]=nil
+  erb :login
 end
 
 post '/reg_finish' do 
@@ -100,12 +100,13 @@ post '/admin/department_deleted' do
 end
 
 post '/attend' do
-  @no = cookies[:no]
-  pass = cookies[:password]
-  accessresult = Users.access(@no,pass)
+#  @no = cookies[:no]
+ # pass = cookies[:password]
+  #accessresult = Users.access(@no,pass)
+  @no = session[:no]
 
   @message = 
-    if accessresult != true
+    if Users.get_name(@no.to_i) == nil
     #  accessresult
       "認証に失敗しました。"
     else
@@ -122,9 +123,10 @@ post '/attend' do
 end
 
 post '/read-data' do
-  no = cookies[:no]
-  pass = cookies[:password]
-  if Users.access(no,pass)
+#  no = cookies[:no]
+#  pass = cookies[:password]
+  no = session[:no]
+  if Users.get_name(no.to_i) != nil
     name = Users.get_name(no)
     department = Departments.name_of(Users.get_department(no))
     year = (Date.today).strftime("%Y")
@@ -156,6 +158,8 @@ post '/read-data' do
     open("#{no}_#{year}#{month}timecards.json","w") do |io|
       JSON.dump(timecards.to_json,io)
     end
+    
+    @json_str = timecards.to_json
     
     erb :attend
   end
