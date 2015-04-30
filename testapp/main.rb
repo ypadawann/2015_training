@@ -105,22 +105,35 @@ post '/attend' do
   #accessresult = Users.access(@no,pass)
   @no = session[:no]
 
-  @message = 
-    if Users.get_name(@no.to_i) == nil
-    #  accessresult
-      "認証に失敗しました。"
-    else
-      time = (Time.now).strftime("%X")
-      day = Date.today
-      if params[:attend] != nil
-        Timecard_operation.attend(day,@no,time)
-      elsif params[:leave] != nil
-        Timecard_operation.returnhome(day,@no,time)
-      end  
-    end
-  
-  erb :attend
+  if Users.get_name(@no.to_i) == nil
+    @message = "認証に失敗しました。"
+    erb :login
+  else
+    time = (Time.now).strftime("%X")
+    day = Date.today
+    @message = Timecard_operation.attend(day,@no,time)
+    erb :attend_leave
+  end
 end
+
+
+post '/leave' do
+#  @no = cookies[:no]
+ # pass = cookies[:password]
+  #accessresult = Users.access(@no,pass)
+  @no = session[:no]
+  
+  if Users.get_name(@no.to_i) == nil
+    @message = "認証に失敗しました。"
+    erb :login
+  else
+    time = (Time.now).strftime("%X")
+    day = Date.today
+    @message = Timecard_operation.returnhome(day,@no,time)
+    erb :attend_leave
+  end
+end
+
 
 post '/read-data' do
 #  no = cookies[:no]
