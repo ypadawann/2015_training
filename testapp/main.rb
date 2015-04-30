@@ -8,6 +8,7 @@ require 'date'
 
 require 'csv'
 require 'json'
+require 'sinatra/contrib'
 #require 'spreadsheet'
 
 require_relative 'users'
@@ -18,11 +19,38 @@ require_relative 'timecards'
 set :bind, '0.0.0.0'
 
 get '/' do
- erb :index
+  no = cookies[:no]
+  pass = cookies[:password]
+  p no
+  p pass
+  if Users.access(no,pass) == true
+    erb :userpage
+  else
+    erb :login
+  end
 end
 
 get '/register' do
   erb :reg
+end
+
+post '/login' do
+  p 'login session'
+  no = params[:no]
+  pass = params[:password]
+  p no
+  p pass
+
+  if Users.access(no,pass) == true
+    p 'ok'
+    cookies[:no] = no
+    cookies[:password] = pass
+    erb :userpage
+  else
+    p 'miss'
+    erb :login
+  end
+
 end
 
 post '/reg_finish' do 
@@ -72,8 +100,8 @@ post '/admin/department_deleted' do
 end
 
 post '/attend' do
-  @no = params[:no].to_i
-  pass = params[:password].to_s
+  @no = cookies[:no]
+  pass = cookies[:password]
   accessresult = Users.access(@no,pass)
 
   @message = 
@@ -93,43 +121,44 @@ post '/attend' do
   erb :attend
 end
 
-get '/read-data' do
-  no = 5622
-  pass = 'password'
-  name = Users.get_name(no)
-  department = Departments.name_of(Users.get_department(no))
-  year = (Date.today).strftime("%Y")
-  month = (Date.today).strftime("%m")
-  timecards = Timecard_operation.read_monthly_data(no,"#{year}-#{month}")
-
-  @msg = "#{no} <br>#{name} <br>#{department}<br><br>"
-  n = 0
+post '/read-data' do
+  no = cookies[:no]
+  pass = cookies[:password]
+  if Users.access(no,pass)
+    name = Users.get_name(no)
+    department = Departments.name_of(Users.get_department(no))
+    year = (Date.today).strftime("%Y")
+    month = (Date.today).strftime("%m")
+    timecards = Timecard_operation.read_monthly_data(no,"#{year}-#{month}")
     
-  for i in 1..30 do
-    if timecards[n].day == Date::new(year.to_i,month.to_i,i)
-      attend_time = (timecards[n].attendance).strftime("%X")
-      if timecards[n].leaving != nil
-        leave_time =  (timecards[n].leaving).strftime("%X")
+    @msg = "#{no} <br>#{name} <br>#{department}<br><br>"
+    n = 0
+    
+    for i in 1..30 do
+      if timecards[n].day == Date::new(year.to_i,month.to_i,i)
+        attend_time = (timecards[n].attendance).strftime("%X")
+        if timecards[n].leaving != nil
+          leave_time =  (timecards[n].leaving).strftime("%X")
+        else
+          leave_time = nil
+        end
+        @msg = @msg + "#{timecards[n].day} : #{attend_time} - #{leave_time} <br>"
+        if n < timecards.length-1
+          n = n+1
+        end
       else
-        leave_time = nil
+        @msg = @msg + "#{Date::new(year.to_i,month.to_i,i).to_s} : 出勤なし<br>"
       end
-      @msg = @msg + "#{timecards[n].day} : #{attend_time} - #{leave_time} <br>"
-      if n < timecards.length-1
-        n = n+1
-      end
-    else
-      @msg = @msg + "#{Date::new(year.to_i,month.to_i,i).to_s} : 出勤なし<br>"
     end
-  end
-  @message = @msg
-
+    @message = @msg
+    
  
-  open("#{no}_#{year}#{month}timecards.json","w") do |io|
-    JSON.dump(timecards.to_json,io)
+    open("#{no}_#{year}#{month}timecards.json","w") do |io|
+      JSON.dump(timecards.to_json,io)
+    end
+    
+    erb :attend
   end
-    
-  erb :attend
-    
 end
 
 
