@@ -70,34 +70,25 @@ get '/admin' do
   erb :admin
 end
 
-post '/admin/department_registered' do
+post '/admin/register_department' do
   @name = params[:name]
-  if Departments.add(@name)
-    @msg = "#{@name}を登録しました。"
-  else
-    @msg = "登録に失敗しました。"
-  end
-  erb :admin
+  @succeed = Departments.add(@name)
+  erb :register_department
 end
-post '/admin/department_changed' do
-  @no = params[:no] 
+
+post '/admin/change_department' do
+  no = params[:no] 
   @new_name = params[:name]
-  @old_name = Departments.name_of(@no)
-  Departments.update(@no, @new_name)
-  @msg = "#{@old_name}の名前を#{@new_name}に変更しました。"
-  erb :admin
-  #erb :admin_department_changed
+  @old_name = Departments.name_of(no)
+  @succeed = Departments.update(no, @new_name)
+  erb :change_department
 end
-post '/admin/department_deleted' do
-  @no = params[:no]
-  @name = Departments.name_of(@no)
-  if Departments.remove(@no)
-    @msg = "#{@name}を削除しました。"
-  else
-    @msg = "その部署に所属している人がいます。"
-  end
-  erb :admin
-  #erb :admin_department_changed
+
+post '/admin/delete_department' do
+  no = params[:no]
+  @name = Departments.name_of(no)
+  @succeed = Departments.remove(no)
+  erb :delete_department
 end
 
 post '/attend' do
