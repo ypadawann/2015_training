@@ -15,6 +15,7 @@ require_relative 'users'
 require_relative 'departments'
 require_relative 'timecards'
 # require_relative 'timecards'
+require_relative 'views/helpers/formutils'
 
 use Rack::Session::Cookie, :key => 'ams_session',
                           :expire_after => 86400
