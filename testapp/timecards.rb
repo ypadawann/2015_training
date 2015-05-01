@@ -34,11 +34,43 @@ class Timecard_operation
     end
   end
 
-  def self.read_monthly_data(user_id,month)
-    # dayカラムから'2015-04'で前方一致検索してから、user_id=123で完全一致検索
-    timecards = Timecard.where("day LIKE ?", "#{month}-%").where(:user_id => user_id)
-#    p timecards.all[0].attendance.to_s
-    return timecards.all
+  def self.read_monthly_data(user_id, year, month)
+    # dayカラムから年月の前方一致検索してから、user_idで完全一致検索
+    timecards = (Timecard.where("day LIKE ?", "#{year}-#{month}-%").where(:user_id => user_id)).all    
+    max_day = (Date::new(year.to_i,month.to_i+1)-1).day
+    timecard_json = []
+
+    if timecards.length == 0
+      # まだ当月の出退勤データが無いとき
+      p "timecards == nil"
+      for i in 1..max_day do
+        date = Date::new(year.to_i,month.to_i,i)
+        t = {:day => date, :user_id => user_id, :attendance => nil, :leaving => nil}
+        timecard_json.push(t)
+      end
+    else
+      #当月の出退勤データがある
+      timecards_num = 0
+      for i in 1..max_day do
+        date = Date::new(year.to_i,month.to_i,i)
+        if timecards[timecards_num].day == date
+          if timecards[timecards_num].leaving == nil
+            t = {:attendance => timecards[timecards_num].attendance.strftime("%X"), :leaving => nil}
+          else
+            t = {:attendance => timecards[timecards_num].attendance.strftime("%X"), :leaving => timecards[timecards_num].leaving.strftime("%X")}
+          end
+          timecard_json.push(t)
+          if timecards_num < timecards.length-1
+            timecards_num = timecards_num + 1
+          end
+        else
+          t = {:attendance => nil, :leaving => nil}
+          timecard_json.push(t)
+        end
+      end
+    end
+    
+    return timecard_json.to_json
   end
 
 end

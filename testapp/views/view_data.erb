@@ -1,0 +1,12 @@
+<div class="json_data">
+  <%= @json_str %>
+</div>
+
+<script>
+  json_text = document.querySelector(".json_data").textContent;
+  json_obj = JSON.parse(json_text);
+
+  for(var i=0;i<json_obj.length;i++){
+    console.log(i +" : "+ json_obj[i].attendance +"-"+ json_obj[i].leaving)
+  }
+</script>
