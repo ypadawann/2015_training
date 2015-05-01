@@ -148,6 +148,8 @@ post '/read-data' do
     
     @msg = "#{no} <br>#{name} <br>#{department}<br><br>"
     n = 0
+
+    max_day = (Date::new(year.to_i,month.to_i+1)-1).day
     
     for i in 1..30 do
       if timecards[n].day == Date::new(year.to_i,month.to_i,i)
