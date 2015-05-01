@@ -37,12 +37,11 @@ post '/login' do
   @user_id = params[:no]
   pass = params[:password]
   if Users.access(@user_id,pass) == true
-    p 'ok'
     session[:no] = @user_id
     @name = Users.get_name(@user_id.to_i)
     erb :userpage
   else
-    p 'miss'
+    @msg = 'ログインに失敗しました<br>'
     erb :login
   end
 end
