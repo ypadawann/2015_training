@@ -143,8 +143,7 @@ post '/read-data' do
     name = Users.get_name(user_id)
     department = Departments.name_of(Users.get_department(user_id))
     year = (Date.today).strftime("%Y")
-#    month = (Date.today).strftime("%m")
-    month = "04"
+    month = (Date.today).strftime("%m")
     @json_str = Timecard_operation.read_monthly_data(user_id, year, month)
 
 
