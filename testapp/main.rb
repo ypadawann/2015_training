@@ -23,25 +23,23 @@ use Rack::Session::Cookie, :key => 'ams_session',
 set :bind, '0.0.0.0'
 
 get '/' do
-  no = session[:no]
-  if Users.get_name(no.to_i) != nil
+  @user_id = session[:no]
+  @name = Users.get_name(@user_id.to_i)
+  if @name != nil
     erb :userpage
   else
     erb :login
   end
 end
 
-get '/register' do
-  erb :reg
-end
-
 post '/login' do
   p 'login session'
-  no = params[:no]
+  @user_id = params[:no]
   pass = params[:password]
-  if Users.access(no,pass) == true
+  if Users.access(@user_id,pass) == true
     p 'ok'
-    session[:no] = no
+    session[:no] = @user_id
+    @name = Users.get_name(@user_id.to_i)
     erb :userpage
   else
     p 'miss'
@@ -52,6 +50,11 @@ end
 post '/logout' do
   session[:no]=nil
   erb :login
+end
+
+
+get '/register' do
+  erb :reg
 end
 
 post '/reg_finish' do 
@@ -95,15 +98,16 @@ post '/attend' do
 #  @no = cookies[:no]
  # pass = cookies[:password]
   #accessresult = Users.access(@no,pass)
-  @no = session[:no]
+  @user_id = session[:no]
+  @name = Users.get_name(@user_id.to_i)
 
-  if Users.get_name(@no.to_i) == nil
+  if @name == nil
     @message = "認証に失敗しました。"
     erb :login
   else
     time = (Time.now).strftime("%X")
     day = Date.today
-    @message = Timecard_operation.attend(day,@no,time)
+    @message = Timecard_operation.attend(day,@user_id,time)
     erb :attend_leave
   end
 end
@@ -113,15 +117,16 @@ post '/leave' do
 #  @no = cookies[:no]
  # pass = cookies[:password]
   #accessresult = Users.access(@no,pass)
-  @no = session[:no]
+  @user_id = session[:no]
+  @name = Users.get_name(@user_id.to_i)
   
-  if Users.get_name(@no.to_i) == nil
+  if @name == nil
     @message = "認証に失敗しました。"
     erb :login
   else
     time = (Time.now).strftime("%X")
     day = Date.today
-    @message = Timecard_operation.returnhome(day,@no,time)
+    @message = Timecard_operation.returnhome(day,@user_id,time)
     erb :attend_leave
   end
 end
