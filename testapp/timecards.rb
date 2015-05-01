@@ -34,11 +34,37 @@ class Timecard_operation
     end
   end
 
-  def self.read_monthly_data(user_id,month)
-    # dayカラムから'2015-04'で前方一致検索してから、user_id=123で完全一致検索
-    timecards = Timecard.where("day LIKE ?", "#{month}-%").where(:user_id => user_id)
+  def self.read_monthly_data(user_id, year, month)
+    # dayカラムから年月の前方一致検索してから、user_idで完全一致検索
+    timecards = (Timecard.where("day LIKE ?", "#{year}-#{month}-%").where(:user_id => user_id)).all
 #    p timecards.all[0].attendance.to_s
-    return timecards.all
+    
+    max_day = (Date::new(year.to_i,month.to_i+1)-1).day
+
+    if timecards.length == 0
+      p "timecards == nil"
+      for i in 1..max_day do
+        date = Date::new(year.to_i,month.to_i,i)
+        t = {:day => date, :user_id => user_id, :attendance => nil, :leaving =>\
+          nil}
+        timecards.push(t)
+      end
+    else
+      timecards_num = 0
+      for i in 1..max_day do
+        date = Date::new(year.to_i,month.to_i,i)
+        if timecards[timecards_num].day == date
+          timecards_num = timecards_num + 1
+        else
+          t = {:day => date, :user_id => user_id, :attendance => nil, :leaving \
+            => nil}
+          timecards.push(t)
+        end
+      end
+    end
+    
+    return timecards.to_json
+  
   end
 
 end

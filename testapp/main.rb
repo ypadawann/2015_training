@@ -138,20 +138,48 @@ end
 post '/read-data' do
 #  no = cookies[:no]
 #  pass = cookies[:password]
-  no = session[:no]
-  if Users.get_name(no.to_i) != nil
-    name = Users.get_name(no)
-    department = Departments.name_of(Users.get_department(no))
+  user_id = session[:no]
+  if Users.get_name(user_id) != nil
+    name = Users.get_name(user_id)
+    department = Departments.name_of(Users.get_department(user_id))
     year = (Date.today).strftime("%Y")
-    month = (Date.today).strftime("%m")
-    timecards = Timecard_operation.read_monthly_data(no,"#{year}-#{month}")
-    
-    @msg = "#{no} <br>#{name} <br>#{department}<br><br>"
+#    month = (Date.today).strftime("%m")
+    month = "04"
+    @json_str = Timecard_operation.read_monthly_data(user_id, year, month)
+
+
+=begin    
+    @msg = "#{user_id} <br>#{name} <br>#{department}<br><br>"
     n = 0
 
     max_day = (Date::new(year.to_i,month.to_i+1)-1).day
+
+    p "timecards.length :#{timecards.length}"
+
+    if timecards.length == 0
+      p "timecards == nil"
+      for i in 1..max_day do
+        date = Date::new(year.to_i,month.to_i,i)
+        t = {:day => date, :user_id => user_id, :attendance => nil, :leaving => nil}
+        timecards.push(t)
+      end
+    else
+      timecards_num = 0
+      for i in 1..max_day do
+        date = Date::new(year.to_i,month.to_i,i)
+        if timecards[timecards_num].day == date
+          timecards_num = timecards_num + 1
+        else
+          t = {:day => date, :user_id => user_id, :attendance => nil, :leaving => nil}
+          timecards.push(t)
+        end
+      end
+    end
+=end
     
-    for i in 1..30 do
+=begin
+    
+    for i in 1..max_day do
       if timecards[n].day == Date::new(year.to_i,month.to_i,i)
         attend_time = (timecards[n].attendance).strftime("%X")
         if timecards[n].leaving != nil
@@ -169,14 +197,19 @@ post '/read-data' do
     end
     @message = @msg
     
- 
-    open("#{no}_#{year}#{month}timecards.json","w") do |io|
+=end
+=begin
+    open("#{user_id}_#{year}#{month}timecards.json","w") do |io|
       JSON.dump(timecards.to_json,io)
     end
+=end
+
+#    t = {:day => "2015-05-22", :user_id => 5622, :attendance => "2001-01-01 08:00:00", :leaving => "2001-01-01 17:30:00"}
+
+   # timecards.push(t)
     
-    @json_str = timecards.to_json
-    
-    erb :attend_leave
+    p @json_str
+   
+    erb :view_data
   end
 end
-
