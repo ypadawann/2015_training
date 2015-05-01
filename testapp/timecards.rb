@@ -54,12 +54,11 @@ class Timecard_operation
       for i in 1..max_day do
         date = Date::new(year.to_i,month.to_i,i)
         if timecards[timecards_num].day == date
-          t = {:day => date, :user_id => user_id, :attendance => timecards[timecards_num].attendance.strftime("%X"), :leaving =>  timecards[timecards_num].leaving.strftime("%X")}
+          t = {:attendance => timecards[timecards_num].attendance.strftime("%X"), :leaving =>  timecards[timecards_num].leaving.strftime("%X")}
           timecard_json.push(t)
-          #timecard_json.push(timecards[timecards_num])
           timecards_num = timecards_num + 1
         else
-          t = {:day => date, :user_id => user_id, :attendance => nil, :leaving => nil}
+          t = {:attendance => nil, :leaving => nil}
           timecard_json.push(t)
         end
       end

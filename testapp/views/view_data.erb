@@ -1,4 +1,4 @@
-<div hidden class="json_data">
+<div class="json_data">
   <%= @json_str %>
 </div>
 
@@ -7,6 +7,6 @@
   json_obj = JSON.parse(json_text);
 
   for(var i=0;i<json_obj.length;i++){
-    console.log(json_obj[i].day +" : "+ json_obj[i].attendance +"-"+ json_obj[i].leaving)
+    console.log(i +" : "+ json_obj[i].attendance +"-"+ json_obj[i].leaving)
   }
 </script>
