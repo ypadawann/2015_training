@@ -1,20 +1,26 @@
 <html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <head>
 <link rel="stylesheet" type="text/css" href="./day.css" />
+<link rel="stylesheet" type="text/css" href="./print.css" media="print"/>
+</head>
 <body>
-勤務管理表
-<p>
-<table rules="all"  border="1" cellspacing="0" cellpadding="0" id="table1" style="border-collapse: collapse;">
+<b style="font-size:18px;">
+勤　務　管　理　表
+</b>
+<p class="ex1" style="border-style: solid; border-width: 1px; padding: 23px 53px 23px 53px;"><b style="font-size:18px;">専門職用</b></p>
+<p></p>
+<table  border="1" cellspacing="0" cellpadding="0" id="table1" style="border-collapse: collapse;">
   <tr>
     <td class="ex3" colspan="2">年月</td>
-    <td class="ex3" colspan="2"><h id="year"></h></td>
-    <td class="ex3" style="border-style:none;"></td>
+    <td class="ex3" colspan="2"><input type="text" id="YearsAndMonths" readonly="readonly" style="width:150px; border:none; background:none; text-align:center; vertical-align:middle; font-size: 8px"></td>
+    <td class="ex3" style="border-style:none; border-top-style: hidden;"></td>
     <td class="ex3" colspan="3">承認</td>
     <td class="ex3">申請</td>
   </tr>
   <tr>
     <td class="ex3" colspan="2">所属</td>
-    <td class="ex3" colspan="2">　</td>
+    <td class="ex3" colspan="2"><input type="text" id="YearsAndMonths" style="width:150px; height:28px; border:none; background:none; text-align:center; vertical-align:middle; font-size: 8px"></td>
     <td class="ex3" style="border-style:none;"></td>
     <td class="ex3" rowspan="2">　</td>
     <td class="ex3" rowspan="2">　</td>
@@ -23,121 +29,49 @@
   </tr>
   <tr>
     <td class="ex3" colspan="2">No.</td>
-    <td class="ex3" colspan="2">　</td>
+    <td class="ex3" colspan="2"><input type="text" id="YearsAndMonths" style="width:150px; height:28px; border:none; background:none; text-align:center; vertical-align:middle; font-size: 8px"></td>
   </tr>
   <tr>
     <td class="ex3" colspan="2">氏名</td>
-    <td class="ex3" colspan="2">　</td>
+    <td class="ex3" colspan="2"><input type="text" id="YearsAndMonths" style="width:150px; height:28px; border:none; background:none; text-align:center; vertical-align:middle; font-size: 8px"></td>
   </tr>
 
-  <tr>
+  <tr bgcolor="#BFBFBF">
     <td class="ex1">日付</td>
     <td class="ex1">曜日</td>
-    <td class="ex2">入室時刻</td>
-    <td class="ex2">退出時刻</td>
-    <td class="ex2">上司<br>承認印</td>
-    <td class="ex2">深夜勤務<br>22時~翌5時</td>
-    <td class="ex2">休日<br>勤務時間</td>
-    <td class="ex2">振替休暇<br>予定日</td>
+    <td class="ex5">入室時刻</td>
+    <td class="ex6">退出時刻</td>
+    <td class="ex2" style="width:64; font-size:11px;"><b>上司<br>承認印</b></td>
+    <td class="ex2" style="width:68;">深夜勤務<br>22時-翌5時</td>
+    <td class="ex2" style="width:68;" >休日<br>勤務時間</td>
+    <td class="ex2" style="width:68;">振替休暇<br>予定日</td>
     <td class="ex2">有給<br>休暇</td>
     <td class="ex2">振替休暇<br>取得日</td>
     <td class="ex4">時間外業務は必ず上司による指示を<br>受けてください。</td>
   </tr>
   <tr>
-    <td><input type="text" id="day0" readonly="readonly" style="width:25px; height:20px; border:none; background:none; text-align:center; vertical-align:middle;"></td>
-    <td><input type="text" id="week0" readonly="readonly" style="width:25px; height:20px; border:none; background:none; text-align:center; vertical-align:middle;" /></td>
-    <td><input type="text" id="attendance0" style="width:60px; height:20px; border:none; background:none; text-align:center; vertical-align:middle;" /></td>
-    <td><input type="text" id="leaving0" style="width:60px; height:20px; border:none; background:none; text-align:center; vertical-align:middle;" /></td>
-    <td>　</td>
-    <td>　</td>
-    <td>　</td>
-    <td>　</td>
-    <td>　</td>
-    <td>　</td>
-    <td>　</td>
+    <td class="ex9" style="font-size:6px; text-align:center; vertical-align:middle; height:21;">合計</td>
+    <td class="ex9"></td>
+    <td class="ex9"></td>
+    <td class="ex9"></td>
+    <td class="ex9"></td>
+    <td class="ex9"></td>
+    <td class="ex9"></td>
+    <td class="ex9"></td>
+    <td class="ex9"></td>
+    <td class="ex9"></td>
+    <td class="ex9"></td>
   </tr>
   <tr>
-    <td style="font-size:11px; text-align:center; vertical-align:middle; height:25;">合計</td>
-    <td>　</td>
-    <td>　</td>
-    <td>　</td>
-    <td>　</td>
-    <td>　</td>
-    <td>　</td>
-    <td>　</td>
-    <td>　</td>
-    <td>　</td>
-    <td>　</td>
-  </tr>
-  <tr>
-    <td colspan="2" style="font-size:11px; text-align:center; vertical-align:middle; height:22;">当月消化<br>有休日数</td>
-    <td>　</td>
-    <td colspan="2">　</td>
-    <td>　</td>
+    <td class="ex9" colspan="2" style="font-size:6px; text-align:center; vertical-align:middle; height:28;">当月消化<br>有休日数</td>
+    <td class="ex9"></td>
+    <td class="ex9" colspan="2"></td>
+    <td class="ex9"></td>
   </tr>
 
 </table>
 
-<script type="text/javascript">
-
-var now=new Date();
-var year=now.getFullYear();
-var month=now.getMonth()+1;
-var week0=new Date(year,month-1,1);
-var week1=week0.getDay();
-var week2=new Array("日","月","火","水","木","金","土");
-var date=new Date(year,month,0).getDate();
-for(var counter=1;counter<date;counter++){
-
-	var table1 = document.getElementById("table1");
-        var row1 = table1.insertRow(counter+4);
-        var cell1 = row1.insertCell(0);
-        var cell2 = row1.insertCell(1);
-        var cell3 = row1.insertCell(2);
-        var cell4 = row1.insertCell(3);
-	var cell5 = row1.insertCell(4);
-	var cell6 = row1.insertCell(5);
-	var cell7 = row1.insertCell(6);
-	var cell8 = row1.insertCell(7);
-	var cell9 = row1.insertCell(8);
-	var cell10 = row1.insertCell(9);
-	var cell11 = row1.insertCell(10);
-
-        var HTML1 = '<input type="text" id="day' + counter + '" readonly="readonly" style="width:25; height:20; border:none; background:none; text-align:center; vertical-align:middle;" />';
-        var HTML2 = '<input type="text" id="week' + counter + '" readonly="readonly" style="width:25; height:20; border:none; background:none; text-align:center; vertical-align:middle;" />';
-        var HTML3 = '<input type="text" id="attendance' + counter + '" style="width:60; height:20; border:none; background:none; text-align:center; vertical-align:middle;" />';
-        var HTML4 = '<input type="text" id="leaving'+counter+'" style="width:60; height:20; border:none; background:nonr; text-align:center; vertical-align:middle;" />';
-	var HTML5 = '';
-	var HTML6 = '';
-	var HTML7 = '';
-	var HTML8 = '';
-	var HTML9 = '';
-	var HTML10 = '';
-	var HTML11 = '';
-
-        cell1.innerHTML = HTML1;
-        cell2.innerHTML = HTML2;
-        cell3.innerHTML = HTML3;
-        cell4.innerHTML = HTML4;
-	cell5.innerHTML = HTML5;
-	cell6.innerHTML = HTML6;
-	cell7.innerHTML = HTML7;
-	cell8.innerHTML = HTML8;
-	cell9.innerHTML = HTML9;
-	cell10.innerHTML = HTML10;
-	cell11.innerHTML = HTML11;
-
-	document.getElementById("day"+counter).value=counter;
-	document.getElementById("week"+counter).value=week2[week1];
-	
-	if(week1==6){
-		week1=-1;
-	}
-	week1++;
-}
-
-document.getElementById("day0").value=date;
-document.getElementById("week0").value=week2[week1];
+<script type="text/javascript" src="./js/day.js" charset="UTF-8">
 </script>
 
 </body>

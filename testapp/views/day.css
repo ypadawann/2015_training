@@ -1,31 +1,104 @@
+/*日付・曜日*/
 td.ex1{
-  font-size:11px;
+  padding:4px 0px 0px 0px;
+  font-size:6px;
+  border-style:solid;
+  border-width:1px;
+  border-color:#000000;
   text-align:center;
   vertical-align:top;
-  width:25;
-  height:45;
+  width:27;
+  height:50;
 }
 
+/*上司承認印・深夜勤務.....*/
 td.ex2{
-  font-size:11px;
+  font-size:6px;
+  border-style:solid;
+  border-width:1px;
+  border-color:#000000;
   text-align:center;
   vertical-align:middle;
   width:60;
-  height:45;
+  height:50;
 }
 
+/*年月・所属・No.・氏名*/
 td.ex3{
-  font-size:12px;
+  font-size:9px;
+  border-style:solid;
+  border-width:1px;
+  border-color:#000000;
   text-align:center;
   vertical-align:middle;
-  height:25;
+  height:28;
 }
 
+/*時間外業務*/
 td.ex4{
-  font-size:11px;
+  font-size:6px;
+  border-style:solid;
+  border-width:1px;
+  border-color:#000000;
   text-align:center;
   vertical-align:middle;
   vertical-align;middle;
-  width:180;
-  height:45;
+  width:230;
+  height:50;
+}
+
+/*入室時刻*/
+td.ex5{
+  font-size:6px;
+  border-style:solid;
+  border-width:1px;
+  border-color:#000000;
+  text-align:center;
+  vertical-align:middle;
+  width:75;
+  height:50;
+  border-right-style:dotted;
+}
+
+/*退出時刻*/
+td.ex6{
+  font-size:6px;
+  border-style:solid;
+  border-width:1px;
+  border-color:#000000;
+  text-align:center;
+  vertical-align:middle;
+  width:75;
+  height:50;
+  border-left-style:none;
+}
+
+/*入室時刻の点線の表示*/
+td.ex7{
+  border-style:solid;
+  border-width:1px;
+  border-color:#000000;
+  border-right-style:dotted;
+}
+
+/*退出時刻の線の削除*/
+td.ex8{
+  border-style:solid;
+  border-width:1px;
+  border-color:#000000;
+  border-left-style:none;
+}
+
+/*線のサイズ*/
+td.ex9{
+  border-style:solid;
+  border-width:1px;
+  border-color:#000000;
+  font-size:6px;
+}
+/*勤務管理票*/
+p.ex1{
+  position: absolute;
+  top: 0px;
+  left: 580px;
 }
