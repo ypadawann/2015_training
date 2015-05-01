@@ -42,22 +42,22 @@ class Timecard_operation
     max_day = (Date::new(year.to_i,month.to_i+1)-1).day
 
     if timecards.length == 0
+      # まだ当月の出退勤データが無いとき
       p "timecards == nil"
       for i in 1..max_day do
         date = Date::new(year.to_i,month.to_i,i)
-        t = {:day => date, :user_id => user_id, :attendance => nil, :leaving =>\
-          nil}
+        t = {:day => date, :user_id => user_id, :attendance => nil, :leaving => nil}
         timecards.push(t)
       end
     else
+      #当月の出退勤データがある
       timecards_num = 0
       for i in 1..max_day do
         date = Date::new(year.to_i,month.to_i,i)
         if timecards[timecards_num].day == date
           timecards_num = timecards_num + 1
         else
-          t = {:day => date, :user_id => user_id, :attendance => nil, :leaving \
-            => nil}
+          t = {:day => date, :user_id => user_id, :attendance => nil, :leaving => nil}
           timecards.push(t)
         end
       end
