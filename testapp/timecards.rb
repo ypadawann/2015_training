@@ -45,7 +45,7 @@ class Timecard_operation
       p "timecards == nil"
       for i in 1..max_day do
         date = Date::new(year.to_i,month.to_i,i)
-        t = {:day => date, :user_id => user_id, :attendance => nil, :leaving => nil}
+        t = {:attendance => nil, :leaving => nil}
         timecard_json.push(t)
       end
     else
