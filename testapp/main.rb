@@ -58,9 +58,9 @@ get '/register' do
 end
 
 post '/reg_finish' do 
-  @new_no = params[:no]
+  @new_no = params[:no].to_i
   @new_name = params[:name]
-  @new_department = params[:department]
+  @new_department = params[:department].to_i
   if Users.add(@new_no, @new_name,
                    @new_department, params[:pass])
     erb :reg_finish
@@ -80,7 +80,7 @@ post '/admin/register_department' do
 end
 
 post '/admin/change_department' do
-  no = params[:no] 
+  no = params[:no].to_i 
   @new_name = params[:name]
   @old_name = Departments.name_of(no)
   @succeed = Departments.update(no, @new_name)
@@ -88,7 +88,7 @@ post '/admin/change_department' do
 end
 
 post '/admin/delete_department' do
-  no = params[:no]
+  no = params[:no].to_i
   @name = Departments.name_of(no)
   @succeed = Departments.remove(no)
   erb :delete_department
