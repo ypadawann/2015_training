@@ -42,7 +42,7 @@ post '/login' do
     @name = Users.get_name(@user_id.to_i)
     erb :userpage
   else
-    @msg = 'ログインに失敗しました<br>'
+    @msg = 'ログインに失敗しました'
     erb :login
   end
 end
