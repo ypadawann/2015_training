@@ -47,7 +47,8 @@ post '/login' do
 end
 
 post '/logout' do
-  session[:no]=nil
+#  session[:no]=nil
+  session.clear
   erb :login
 end
 
@@ -205,6 +206,7 @@ post '/read-data' do
     
     p @json_str
    
-    erb :view_data
+#    erb :view_data
+    erb :test_check
   end
 end
