@@ -53,7 +53,7 @@ class Timecard_operation
         end
       timecard_json.push(timecard)
     end
-    return timecard_json
+    return timecard_json.to_json
   end
 
 
