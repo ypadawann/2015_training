@@ -3,12 +3,12 @@
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
-require 'composite_primary_keys'
 require 'date'
 
 require 'csv'
 require 'json'
 require 'sinatra/contrib'
+require 'erubis'
 #require 'spreadsheet'
 
 require_relative 'users'
@@ -21,6 +21,7 @@ use Rack::Session::Cookie, :key => 'ams_session',
                           :expire_after => 86400
 
 set :bind, '0.0.0.0'
+set :erb, :escape_html => true
 
 get '/' do
   @user_id = session[:no]
