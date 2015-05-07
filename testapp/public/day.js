@@ -195,19 +195,19 @@ for (var counter=1; counter<=date; counter++) {
   document.getElementById("day" + counter).value = counter;
   document.getElementById("week" + counter).value = DATE_OF_WEEKS[weekDayOfFirstDay];
 
-/*  if (isWeekEnds(weekDayOfFirstDay)) {
+  if (isWeekEnds(weekDayOfFirstDay)) {
     // TODO: 後でクラスを使って色を変える
-    row.style.backgroundColor = "D9D9D9";
+    row.style.backgroundColor = "#D9D9D9";
   }
   if(isHolidays(year,month,counter,weekDayOfFirstDay)){
-    row.style.backgroundColor = "D9D9D9";
+    row.style.backgroundColor = "#D9D9D9";
     if(weekDayOfFirstDay === 0){
       makeHoliday ++;
     }
   }else if(makeHoliday === 1){
-    row.style.backgroundColor = "D9D9D9";
+    row.style.backgroundColor = "#D9D9D9";
     makeHoliday --;
-  }*/
+  }
   // 曜日の循環をリセットしている
   if (weekDayOfFirstDay === 6) {
     weekDayOfFirstDay =- 1;
