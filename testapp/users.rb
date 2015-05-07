@@ -27,24 +27,22 @@ class Users
       correct_hash, salt = stored.split(DELIMITER)
       correct_hash == hash(password, salt)
     end
-    def valid_password(password)
-      /^\w+$/.match(password) != nil
+    def valid_id(id)
+      0 < id and id < 10_000
     end
   
     public
     def access(id, password)
       user = User.find_by_id(id)
-      if user != nil and
-           valid_password(password) and
-           verify_password(user.password, password)
-         true
+      if user != nil and verify_password(user.password, password)
+        true
       else
-         false
+        false
       end
     end
     def add(id, name, department, password)
-      if Department.count > 0 and valid_password(password)
-        user = User.new(id: id.to_i,
+      if valid_id(id) and Departments.valid_department(department)
+        user = User.new(id: id,
                         name: name, 
                         department: department,
                         password: salt_and_hash(password))
@@ -79,14 +77,14 @@ class Users
     def get_name(id)
       user = User.find_by_id(id)
       if user == nil
-        return nil
+        nil
       else
-        return user.name
+        user.name
       end
     end
     def get_department(no)
       user = User.find_by_id(no)
-      return user.department
+      user.department
     end
   end
 end

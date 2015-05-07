@@ -9,11 +9,6 @@ class Departments
 
   def self.add(name)
     new_department = Department.new()
-    if Department.count > 0
-      new_department.id = Department.maximum(:id) + 1
-    else
-      new_department.id = DEFAULT_DEPARTMENT_ID
-    end
     new_department.name = name
     new_department.save
   end
@@ -36,5 +31,8 @@ class Departments
   end
   def self.get_ids()
     Department.pluck(:id)
+  end
+  def self.valid_department(id)
+    get_ids.include?(id)
   end
 end

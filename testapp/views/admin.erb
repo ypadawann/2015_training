@@ -7,14 +7,14 @@
 </form>
 <form action="/admin/change_department" method="post">
 <p>部署の変更
-  <select name="no"><%= department_options %></select>
+  <select name="no"><%== department_options %></select>
   ⇒<input type="text" name="name" size="40">
   <input type="submit" value="変更">
 </form>
 </p>
 <form action="/admin/delete_department" method="post">
 <p>部署の削除
-  <select name="no"><%= department_options %></select>
+  <select name="no"><%== department_options %></select>
   <input type="submit" value="削除">
 </p>
 </form>
