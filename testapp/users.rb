@@ -39,7 +39,7 @@ class Users
 
     def access(id, password)
       user = User.find_by_id(id)
-      if user.nil? && verify_password(user.password, password)
+      if !user.nil? && verify_password(user.password, password)
         true
       else
         false
