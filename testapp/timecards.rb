@@ -51,7 +51,7 @@ class Timecard_operation
       end
     else
       for day in 1..max_day do
-        t = get_timecrd_data(timecards,year,month,day)
+        t = get_timecard_data(timecards, year, month, day)
         timecard_json.push(t)
       end
     end
@@ -76,13 +76,19 @@ class Timecard_operation
 =end
     return timecard_json.to_json
   end
-
-  def get_timecard_data(timecards,year,month,day)
+  
+  def self.get_timecard_data(timecards, year, month, day)
+    date = Date::new(year.to_i,month.to_i,day)
     for i in 0..timecards.length-1 do
-      if timecards[i].day == Date::new(year.to_i,month.to_i,i)
+      if timecards[i].day == date
+        attendance = time_to_string(timecards[i].attendance)
+        leaving = time_to_string(timecards[i].leaving)
+        return { attendance: attendance, leaving: leaving }
+      end
     end
+    return { attendance: nil, leaving: nil}
   end
-
+  
   # time型をstring型に変換
   def self.time_to_string(time)
     p 'time'
