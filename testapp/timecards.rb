@@ -6,6 +6,7 @@ class UsersAccessError < RuntimeError; end
 
 class Timecard_operation
 
+  # 出勤時処理
   def self.attend(day,user_id,time)
     timecards = Timecard.where(:day => day,:user_id => user_id).first
     if timecards == nil
@@ -20,6 +21,8 @@ class Timecard_operation
     end
   end
 
+
+  #退勤時処理
   def self.returnhome(day,user_id,time)
     timecards = Timecard.where(:day => day,:user_id => user_id).first
     if timecards==nil # まだ出勤していない
@@ -34,9 +37,9 @@ class Timecard_operation
     end
   end
 
+
+  # 月の出退勤データを取得
   def self.read_monthly_data(user_id, year, month)
-    # dayカラムから年月の前方一致検索してから、user_idで完全一致検索
-    #timecards = (Timecard.where("day LIKE ?", "#{year}-#{month}-%").where(:user_id => user_id)).all
     max_day = (Date::new(year.to_i,month.to_i+1)-1).day
     timecard_json = []
     for i in 1..max_day do
@@ -57,6 +60,7 @@ class Timecard_operation
   end
 
 
+  # time型をstring型に変換
   def self.time_to_string(time)
     p 'time'
     p time
