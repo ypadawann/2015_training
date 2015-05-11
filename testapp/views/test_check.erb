@@ -1,10 +1,14 @@
-<div class='test'>
+<div hidden class='test'>
      <%= @json_str %>
 </div>
 
 <script>
   var txt = document.querySelector(".test").textContent;
   console.log(txt);
-  json_obj = JSON.parse(txt);
+  var json_obj = JSON.parse(txt);
   console.log(json_obj);
+
+  document.write(json_obj[0].attendance);
+
+
 </script>
