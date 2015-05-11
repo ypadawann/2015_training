@@ -40,8 +40,24 @@ class Timecard_operation
 
   # 月の出退勤データを取得
   def self.read_monthly_data(user_id, year, month)
+    timecards = (Timecard.where("day LIKE ?", "#{year}-#{month}-%").where(:user_id => user_id)).all
     max_day = (Date::new(year.to_i,month.to_i+1)-1).day
     timecard_json = []
+
+    if timecards.length == 0
+      for i in 1..max_day do
+        t = { attendance: nil, leaving: nil }
+        timecard_json.push(t)
+      end
+    else
+      for day in 1..max_day do
+        t = get_timecrd_data(timecards,year,month,day)
+        timecard_json.push(t)
+      end
+    end
+
+
+=begin
     for i in 1..max_day do
       day = Date::new(year.to_i,month.to_i,i)
       timecard_db = Timecard.where(:day => day, :user_id => user_id).first
@@ -56,9 +72,16 @@ class Timecard_operation
         end
       timecard_json.push(timecard)
     end
+
+=end
     return timecard_json.to_json
   end
 
+  def get_timecard_data(timecards,year,month,day)
+    for i in 0..timecards.length-1 do
+      if timecards[i].day == Date::new(year.to_i,month.to_i,i)
+    end
+  end
 
   # time型をstring型に変換
   def self.time_to_string(time)
