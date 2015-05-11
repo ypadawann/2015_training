@@ -11,10 +11,18 @@ ActiveRecord::Base.establish_connection(
 )
 
 class User < ActiveRecord::Base
+  validates :id, presence: true
+  validates :id, uniqueness: true
+  validates :id, numericality: {
+    only_integer: true, greater_than: 0, less_than: 10_000 }
+  validates :name, presence: true
+  validates :name, length: { maximum: 50 }
 end
 
 class Department < ActiveRecord::Base
+  validates :name, presence: true
   validates :name, uniqueness: true
+  validates :name, length: { maximum: 50 }
 end
 
 class Timecard < ActiveRecord::Base

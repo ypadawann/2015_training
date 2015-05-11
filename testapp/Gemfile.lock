@@ -55,6 +55,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
+  activesupport
   erubis
   foreigner
   mysql2
