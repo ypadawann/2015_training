@@ -43,7 +43,6 @@ class Timecard_operation
     timecards = (Timecard.where("day LIKE ?", "#{year}-#{month}-%").where(:user_id => user_id)).all
     max_day = (Date::new(year.to_i,month.to_i+1)-1).day
     timecard_json = []
-
     if timecards.length == 0
       for i in 1..max_day do
         t = { attendance: nil, leaving: nil }
@@ -55,28 +54,10 @@ class Timecard_operation
         timecard_json.push(t)
       end
     end
-
-
-=begin
-    for i in 1..max_day do
-      day = Date::new(year.to_i,month.to_i,i)
-      timecard_db = Timecard.where(:day => day, :user_id => user_id).first
-      p timecard_db
-      timecard = 
-        if timecard_db == nil
-          t = {:attendance => nil, :leaving => nil}
-        else
-          attendance = time_to_string(timecard_db.attendance)
-          leaving = time_to_string(timecard_db.leaving)
-          t = {:attendance => attendance, :leaving => leaving}
-        end
-      timecard_json.push(timecard)
-    end
-
-=end
     return timecard_json.to_json
   end
   
+
   def self.get_timecard_data(timecards, year, month, day)
     date = Date::new(year.to_i,month.to_i,day)
     for i in 0..timecards.length-1 do
