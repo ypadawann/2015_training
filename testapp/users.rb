@@ -2,6 +2,7 @@
 
 require 'digest/sha2'
 require 'securerandom'
+require 'active_support/all'
 
 require_relative 'database_information'
 
@@ -31,31 +32,19 @@ class Users
       correct_hash == hash(password, salt)
     end
 
-    def valid_id(id)
-      0 < id && id < 10_000
-    end
-
     public
 
     def access(id, password)
-      user = User.find_by_id(id)
-      if !user.nil? && verify_password(user.password, password)
-        true
-      else
-        false
-      end
+      (user = User.find_by_id(id)) &&
+        verify_password(user.password, password)
     end
 
     def add(id, name, department, password)
-      if valid_id(id) && Departments.valid_department(department)
-        user = User.new(id: id,
-                        name: name,
-                        department: department,
-                        password: salt_and_hash(password))
-        user.save
-      else
-        false
-      end
+      user = User.new(id: id,
+                      name: name,
+                      department: department,
+                      password: salt_and_hash(password))
+      Departments.valid_department(department) && user.save
     end
 
     def update_name(id, name)
@@ -70,24 +59,12 @@ class Users
       user.save
     end
 
-    def update_password(id, password)
-      user = User.find(id)
-      user.password = password
-      user.save
-    end
-
     def get_name(id)
-      user = User.find_by_id(id)
-      if user.nil?
-        nil
-      else
-        user.name
-      end
+      User.find_by_id(id).try(:name)
     end
 
-    def get_department(no)
-      user = User.find_by_id(no)
-      user.department
+    def get_department(id)
+      User.find_by_id(id).try(:department)
     end
   end
 end
