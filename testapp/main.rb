@@ -140,7 +140,6 @@ post '/read-data' do
 
     p @json_str
    
-#    erb :view_data
-    erb :test_check
+    erb :view_data
   end
 end
