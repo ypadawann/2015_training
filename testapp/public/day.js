@@ -26,8 +26,9 @@ var makeRow = function(table, rowNumber) {
 
   var HTML1 = '<input type="text" id="day' + rowNumber + '" readonly="readonly" style="width:27px; height:21px; border:none; background:none; text-align:center; vertical-align:middle; font-size:6px;" />';
   var HTML2 = '<input type="text" id="week' + rowNumber + '" readonly="readonly" style="width:27px; height:21px; border:none; background:none; text-align:center; vertical-align:middle; font-size:6px;" />';
-  var HTML3 = '<input type="text" id="attendance' + rowNumber + '" style="width:75px; height:21px; border:none; background:none; text-align:center; vertical-align:middle; font-size:6px;" />';
-  var HTML4 = '<input type="text" id="leaving' + rowNumber + '" style="width:75px; height:21px; border:none; background:none; text-align:center; vertical-align:middle; font-size:6px;" />';
+
+  var HTML3 = '<input type="text" id="attendance' + rowNumber + '" value="' + json_obj[rowNumber - 1].attendance + '" style="width:75px; height:21px; border:none; background:none; text-align:center; vertical-align:middle; font-size:6px;" />';
+  var HTML4 = '<input type="text" id="leaving' + rowNumber + '" value="' + json_obj[rowNumber - 1].leaving + '" style="width:75px; height:21px; border:none; background:none; text-align:center; vertical-align:middle; font-size:6px;" />';
   var HTML5 = '<input type="text" id="mark' + rowNumber + '" style="width:64px; height:21px; border:none; background:none; text-align:center; vertical-align:middle; font-size:6px;" />';
   var HTML6 = '';
   var HTML7 = '';
@@ -55,24 +56,28 @@ var isWeekEnds = function(weekDay) {
 };
 
 var isHolidays = function(year, month, day){
-  var GetHoliday = new Array();
-  GetHoliday[1] = {1 : "元旦", 12 : "成人の日"};
-  GetHoliday[2] = {11 : "建国記念の日"};
-  GetHoliday[3] = {21 : "春分の日"};
-  GetHoliday[4] = {29 : "昭和の日"};
-  GetHoliday[5] = {3 : "憲法記念日", 4 : "みどりの日", 5 : "こどもの日"};
-  GetHoliday[7] = {20 : "海の日"};
+  var getHoliday = new Array();
+  getHoliday[1] = {1 : "元旦", 12 : "成人の日"};
+  getHoliday[2] = {11 : "建国記念の日"};
+  getHoliday[3] = {21 : "春分の日"};
+  getHoliday[4] = {29 : "昭和の日"};
+  getHoliday[5] = {3 : "憲法記念日", 4 : "みどりの日", 5 : "こどもの日"};
+  getHoliday[7] = {20 : "海の日"};
 //GetHoliday[8] = {11 : "山の日"}; 2016年から
-  GetHoliday[9] = {21 : "敬老の日", 9 : "国民の休日", 23 : "秋分の日"};
-  GetHoliday[10] = {12 : "体育の日"};
-  GetHoliday[11] = {3 : "文化の日", 23 :"勤労感謝の日"};
-  GetHoliday[12] = {23 : "天皇誕生日"};
+  getHoliday[9] = {21 : "敬老の日", 9 : "国民の休日", 23 : "秋分の日"};
+  getHoliday[10] = {12 : "体育の日"};
+  getHoliday[11] = {3 : "文化の日", 23 :"勤労感謝の日"};
+  getHoliday[12] = {23 : "天皇誕生日"};
 
-  if(GetHoliday[month][day] != null){
+  if(getHoliday[month][day] != null){
     return true;
   }
   return false;
 };
+
+
+var text = document.querySelector(".text").textContent;
+var json_obj = JSON.parse(text);
 
 
 var ROW_NUMBER_OF_HEADER = 5;
@@ -96,6 +101,7 @@ for (var counter=1; counter<=date; counter++) {
   }
   if(isHolidays(year,month,counter)){
     row.style.backgroundColor = "#D9D9D9";
+    //振替休日
     if(weekDayOfFirstDay === 0){
       makeHoliday ++;
     }
@@ -109,5 +115,4 @@ for (var counter=1; counter<=date; counter++) {
   }
   weekDayOfFirstDay++;
 }
-
 document.getElementById("YearsAndMonths").value = year+"年"+month+"月";
