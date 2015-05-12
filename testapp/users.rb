@@ -39,12 +39,12 @@ class Users
         verify_password(user.password, password)
     end
 
-    def add(id, name, department, password)
+    def add(id, name, department_id, password)
       user = User.new(id: id,
                       name: name,
-                      department: department,
+                      department_id: department_id,
                       password: salt_and_hash(password))
-      Departments.valid_department(department) && user.save
+      Departments.valid_department(department_id) && user.save
     end
 
     def update_name(id, name)
