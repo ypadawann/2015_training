@@ -26,7 +26,6 @@ var makeRow = function(table, rowNumber) {
 
   var HTML1 = '<input type="text" id="day' + rowNumber + '" readonly="readonly" style="width:27px; height:21px; border:none; background:none; text-align:center; vertical-align:middle; font-size:6px;" />';
   var HTML2 = '<input type="text" id="week' + rowNumber + '" readonly="readonly" style="width:27px; height:21px; border:none; background:none; text-align:center; vertical-align:middle; font-size:6px;" />';
-
   var HTML3 = '<input type="text" id="attendance' + rowNumber + '" value="' + json_obj[rowNumber - 1].attendance + '" style="width:75px; height:21px; border:none; background:none; text-align:center; vertical-align:middle; font-size:6px;" />';
   var HTML4 = '<input type="text" id="leaving' + rowNumber + '" value="' + json_obj[rowNumber - 1].leaving + '" style="width:75px; height:21px; border:none; background:none; text-align:center; vertical-align:middle; font-size:6px;" />';
   var HTML5 = '<input type="text" id="mark' + rowNumber + '" style="width:64px; height:21px; border:none; background:none; text-align:center; vertical-align:middle; font-size:6px;" />';
