@@ -78,6 +78,7 @@ td.ex7{
   border-width:1px;
   border-color:#000000;
   border-right-style:dotted;
+  height:21px;
 }
 
 /*退出時刻の線の削除*/
@@ -86,6 +87,7 @@ td.ex8{
   border-width:1px;
   border-color:#000000;
   border-left-style:none;
+  height:21px;
 }
 
 /*線のサイズ*/
@@ -94,6 +96,7 @@ td.ex9{
   border-width:1px;
   border-color:#000000;
   font-size:6px;
+  height:21px;
 }
 /*勤務管理票*/
 p.ex1{
