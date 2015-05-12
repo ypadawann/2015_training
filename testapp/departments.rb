@@ -31,8 +31,4 @@ class Departments
   def self.list_ids
     Department.pluck(:id)
   end
-
-  def self.valid_department(id)
-    list_ids.include?(id)
-  end
 end
