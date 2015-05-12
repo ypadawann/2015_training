@@ -40,10 +40,11 @@ class Users
     end
 
     def add(id, name, department_id, password)
-      User.create(id: id,
-                  name: name,
-                  department_id: department_id,
-                  password: salt_and_hash(password))
+      user = User.new(id: id,
+                      name: name,
+                      department_id: department_id,
+                      password: salt_and_hash(password))
+      user.save
     end
 
     def update_name(id, name)
