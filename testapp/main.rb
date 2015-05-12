@@ -130,17 +130,16 @@ end
 
 
 post '/read-data' do
-  user_id = session[:no]
+  @user_id = session[:no]
   if Users.get_name(user_id) != nil
-    name = Users.get_name(user_id)
-    department = Departments.name_of(Users.get_department(user_id))
+    @name = Users.get_name(user_id)
+    @department = Departments.name_of(Users.get_department(user_id))
     year = (Date.today).strftime("%Y")
     month = (Date.today).strftime("%m")
     @json_str = Timecard_operation.read_monthly_data(user_id, year, month)
 
     p @json_str
    
-#    erb :view_data
-    erb :test_check
+    erb :view_data
   end
 end

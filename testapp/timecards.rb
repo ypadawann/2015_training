@@ -40,34 +40,44 @@ class Timecard_operation
 
   # 月の出退勤データを取得
   def self.read_monthly_data(user_id, year, month)
+    timecards = (Timecard.where("day LIKE ?", "#{year}-#{month}-%").where(:user_id => user_id)).order("day")
     max_day = (Date::new(year.to_i,month.to_i+1)-1).day
     timecard_json = []
-    for i in 1..max_day do
-      day = Date::new(year.to_i,month.to_i,i)
-      timecard_db = Timecard.where(:day => day, :user_id => user_id).first
-      p timecard_db
-      timecard = 
-        if timecard_db == nil
-          t = {:attendance => nil, :leaving => nil}
-        else
-          attendance = time_to_string(timecard_db.attendance)
-          leaving = time_to_string(timecard_db.leaving)
-          t = {:attendance => attendance, :leaving => leaving}
-        end
-      timecard_json.push(timecard)
+    if timecards.length == 0
+      for i in 1..max_day do
+        t = { attendance: "", leaving: "" }
+        timecard_json.push(t)
+      end
+    else
+      timecards_num = 0
+      for day in 1..max_day do
+        date = Date::new(year.to_i,month.to_i,day)
+        t = 
+          if timecards[timecards_num].day == date
+            attendance = time_to_string(timecards[timecards_num].attendance)
+            leaving = time_to_string(timecards[timecards_num].leaving)
+            if timecards_num < timecards.length-1
+              timecards_num = timecards_num + 1
+            end
+            { attendance: attendance, leaving: leaving }
+          else
+            { attendance: "", leaving: ""}
+          end
+        timecard_json.push(t)
+      end
     end
     return timecard_json.to_json
   end
 
-
+  
   # time型をstring型に変換
   def self.time_to_string(time)
     p 'time'
     p time
     if time == nil
-      return nil
+      return ""
     else
-      return time.strftime("%X")
+      return time.strftime("%H:%M")
     end
   end
 
