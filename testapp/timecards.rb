@@ -63,31 +63,19 @@ class Timecard_operation
           else
             { attendance: "", leaving: ""}
           end
-        # t = get_timecard_data(timecards, timecards_num, year, month, day)
         timecard_json.push(t)
       end
     end
     return timecard_json.to_json
   end
-  
 
-  def self.get_timecard_data(timecards, timecards_num, year, month, day)
-    date = Date::new(year.to_i,month.to_i,day)
-    if timecards[timecards_num].day == date
-      attendance = time_to_string(timecards[i].attendance)
-      leaving = time_to_string(timecards[i].leaving)
-      return { attendance: attendance, leaving: leaving }
-    else
-      return { attendance: "", leaving: ""}
-    end
-  end
   
   # time型をstring型に変換
   def self.time_to_string(time)
     p 'time'
     p time
     if time == nil
-      return nil
+      return ""
     else
       return time.strftime("%X")
     end
