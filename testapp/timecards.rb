@@ -77,7 +77,7 @@ class Timecard_operation
     if time == nil
       return ""
     else
-      return time.strftime("%X")
+      return time.strftime("%H:%M")
     end
   end
 
