@@ -40,17 +40,30 @@ class Timecard_operation
 
   # 月の出退勤データを取得
   def self.read_monthly_data(user_id, year, month)
-    timecards = (Timecard.where("day LIKE ?", "#{year}-#{month}-%").where(:user_id => user_id)).all
+    timecards = (Timecard.where("day LIKE ?", "#{year}-#{month}-%").where(:user_id => user_id)).order("day")
     max_day = (Date::new(year.to_i,month.to_i+1)-1).day
     timecard_json = []
     if timecards.length == 0
       for i in 1..max_day do
-        t = { attendance: nil, leaving: nil }
+        t = { attendance: "", leaving: "" }
         timecard_json.push(t)
       end
     else
+      timecards_num = 0
       for day in 1..max_day do
-        t = get_timecard_data(timecards, year, month, day)
+        date = Date::new(year.to_i,month.to_i,day)
+        t = 
+          if timecards[timecards_num].day == date
+            attendance = time_to_string(timecards[timecards_num].attendance)
+            leaving = time_to_string(timecards[timecards_num].leaving)
+            if timecards_num < timecards.length-1
+              timecards_num = timecards_num + 1
+            end
+            { attendance: attendance, leaving: leaving }
+          else
+            { attendance: "", leaving: ""}
+          end
+        # t = get_timecard_data(timecards, timecards_num, year, month, day)
         timecard_json.push(t)
       end
     end
@@ -58,16 +71,15 @@ class Timecard_operation
   end
   
 
-  def self.get_timecard_data(timecards, year, month, day)
+  def self.get_timecard_data(timecards, timecards_num, year, month, day)
     date = Date::new(year.to_i,month.to_i,day)
-    for i in 0..timecards.length-1 do
-      if timecards[i].day == date
-        attendance = time_to_string(timecards[i].attendance)
-        leaving = time_to_string(timecards[i].leaving)
-        return { attendance: attendance, leaving: leaving }
-      end
+    if timecards[timecards_num].day == date
+      attendance = time_to_string(timecards[i].attendance)
+      leaving = time_to_string(timecards[i].leaving)
+      return { attendance: attendance, leaving: leaving }
+    else
+      return { attendance: "", leaving: ""}
     end
-    return { attendance: nil, leaving: nil}
   end
   
   # time型をstring型に変換
