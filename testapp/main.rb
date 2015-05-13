@@ -11,10 +11,9 @@ require 'sinatra/contrib'
 require 'erubis'
 #require 'spreadsheet'
 
-require_relative 'users'
-require_relative 'departments'
-require_relative 'timecards'
-require_relative 'views/helpers/formutils'
+require_relative 'model/users'
+require_relative 'model/departments'
+require_relative 'model/timecards'
 
 use Rack::Session::Cookie, key: 'ams_session', expire_after: 86_400
 

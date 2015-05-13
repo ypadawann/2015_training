@@ -1,7 +1,7 @@
 
 require 'active_record'
 
-require_relative 'database_information'
+require_relative '_entity/database_information'
 
 class Departments
   def self.add(name)

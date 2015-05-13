@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-require_relative 'database_information'
+require_relative '_entity/database_information'
 
 class UsersAccessError < RuntimeError; end
 
