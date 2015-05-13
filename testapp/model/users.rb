@@ -4,7 +4,7 @@ require 'digest/sha2'
 require 'securerandom'
 require 'active_support/all'
 
-require_relative 'database_information'
+require_relative '_entity/database_information'
 
 class Users
   DELIMITER = '$'

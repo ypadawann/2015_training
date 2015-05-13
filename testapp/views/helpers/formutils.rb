@@ -1,7 +1,7 @@
 
 require 'sinatra'
 
-require_relative '../../departments'
+require_relative '../../model/departments'
 
 module FormUtils
   def department_options
