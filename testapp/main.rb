@@ -14,7 +14,6 @@ require 'erubis'
 require_relative 'model/users'
 require_relative 'model/departments'
 require_relative 'model/timecards'
-require_relative 'views/helpers/formutils'
 
 use Rack::Session::Cookie, key: 'ams_session', expire_after: 86_400
 
