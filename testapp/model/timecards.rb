@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+require 'active_support'
+
 require_relative '_entity/database_information'
 
 class UsersAccessError < RuntimeError; end
@@ -38,24 +40,23 @@ class Timecard_operation
   end
 
   def self.read_monthly_data(user_id, year, month)
-    timecards =
-      (Timecard.where('day LIKE ?', "#{year}-#{month}-%")
-         .where(user_id: user_id)).order('day')
-    max_day = (Date.new(year.to_i, month.to_i + 1) - 1).day
+    timecards = Timecard.where('day LIKE ?', "#{year}-#{month}-%")
+                .where(user_id: user_id).order('day')
+    empty_data = { attendance: '', leaving: '' }
+    i = 1
     timecard_json = []
-    timecards_num = 0
-    for day in 1..max_day do
-      date = Date.new(year.to_i, month.to_i, day)
-      t =
-        if timecards[timecards_num].try(:day) == date
-          attendance = time_to_string(timecards[timecards_num].attendance)
-          leaving = time_to_string(timecards[timecards_num].leaving)
-          timecards_num += 1
-          { attendance: attendance, leaving: leaving }
-        else
-          { attendance: '', leaving: '' }
-        end
-      timecard_json.push(t)
+    timecards.each do |t|
+      i.upto(t.day.day - 1) do
+        timecard_json.push(empty_data)
+      end
+      attendance = time_to_string(t.attendance)
+      leaving = time_to_string(t.leaving)
+      timecard_json.push(attendance: attendance, leaving: leaving)
+      i = t.day.day + 1
+    end
+    max_day = (Date.new(year.to_i, month.to_i + 1) - 1).day
+    i.upto(max_day) do
+      timecard_json.push(empty_data)
     end
     timecard_json.to_json
   end
