@@ -2,8 +2,7 @@ body{
   font-family:"MS ゴシック","Hiragino Kaku Gothic ProN",sans-serif;
 }
 
-/*日付・曜日*/
-td.ex1{
+td.dayAndweek{
   padding:4px 0px 0px 0px;
   font-size:6px;
   border-style:solid;
@@ -15,8 +14,7 @@ td.ex1{
   height:50px;
 }
 
-/*上司承認印・深夜勤務.....*/
-td.ex2{
+td.column{
   font-size:6px;
   border-style:solid;
   border-width:1px;
@@ -27,8 +25,7 @@ td.ex2{
   height:50px;
 }
 
-/*年月・所属・No.・氏名*/
-td.ex3{
+td.menu{
   font-size:9px;
   border-style:solid;
   border-width:1px;
@@ -38,8 +35,7 @@ td.ex3{
   height:28px;
 }
 
-/*時間外業務*/
-td.ex4{
+td.etc{
   font-size:6px;
   border-style:solid;
   border-width:1px;
@@ -50,8 +46,7 @@ td.ex4{
   height:50px;
 }
 
-/*入室時刻*/
-td.ex5{
+td.attendance{
   font-size:6px;
   border-style:solid;
   border-width:1px;
@@ -63,8 +58,7 @@ td.ex5{
   border-right-style:dotted;
 }
 
-/*退出時刻*/
-td.ex6{
+td.leaving{
   font-size:6px;
   border-style:solid;
   border-width:1px;
@@ -76,8 +70,7 @@ td.ex6{
   border-left-style:none;
 }
 
-/*入室時刻の点線の表示*/
-td.ex7{
+td.attendanceLine{
   border-style:solid;
   border-width:1px;
   border-color:#000000;
@@ -85,8 +78,7 @@ td.ex7{
   height:21px;
 }
 
-/*退出時刻の線の削除*/
-td.ex8{
+td.leavingLine{
   border-style:solid;
   border-width:1px;
   border-color:#000000;
@@ -94,17 +86,19 @@ td.ex8{
   height:21px;
 }
 
-/*線のサイズ*/
-td.ex9{
+td.line{
   border-style:solid;
   border-width:1px;
   border-color:#000000;
   font-size:6px;
   height:21px;
 }
-/*勤務管理票*/
-p.ex1{
+
+p.profession{
   position: absolute;
   top: 0px;
   left: 590px;
+  border-style: solid;
+  border-width: 1px;
+  padding: 23px 63px 23px 63px;
 }
