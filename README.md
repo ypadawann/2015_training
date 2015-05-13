@@ -1,7 +1,7 @@
 # 2015_training
 
-traning application
-URL : <10.30.139.205:4567>
+traning application  
+URL : <http://10.30.139.205:4567/>
 
 ## Usage
 
