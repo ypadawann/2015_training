@@ -14,11 +14,9 @@ require 'erubis'
 require_relative 'users'
 require_relative 'departments'
 require_relative 'timecards'
-# require_relative 'timecards'
 require_relative 'views/helpers/formutils'
 
-use Rack::Session::Cookie, :key => 'ams_session',
-                          :expire_after => 86400
+use Rack::Session::Cookie, key: 'ams_session', expire_after: 86_400
 
 set :bind, '0.0.0.0'
 set :erb, :escape_html => true
@@ -26,7 +24,7 @@ set :erb, :escape_html => true
 get '/' do
   @user_id = session[:no]
   @name = Users.get_name(@user_id.to_i)
-  if @name != nil
+  if @name.nil?
     erb :userpage
   else
     erb :login
@@ -37,7 +35,7 @@ post '/login' do
   p 'login session'
   @user_id = params[:no]
   pass = params[:password]
-  if Users.access(@user_id,pass) == true
+  if Users.access(@user_id, pass) == true
     session[:no] = @user_id
     @name = Users.get_name(@user_id.to_i)
     erb :userpage
@@ -48,11 +46,9 @@ post '/login' do
 end
 
 post '/logout' do
-#  session[:no]=nil
   session.clear
   erb :login
 end
-
 
 get '/register' do
   erb :reg
@@ -101,45 +97,40 @@ post '/attend' do
   @user_id = session[:no]
   @name = Users.get_name(@user_id.to_i)
 
-  if @name == nil
-    @message = "認証に失敗しました。"
+  if @name.nil?
+    @message = '認証に失敗しました。'
     erb :login
   else
-    time = (Time.now).strftime("%X")
+    time = (Time.now).strftime('%X')
     day = Date.today
-    @message = Timecard_operation.attend(day,@user_id,time)
+    @message = Timecard_operation.attend(day, @user_id, time)
     erb :attend_leave
   end
 end
-
 
 post '/leave' do
   @user_id = session[:no]
   @name = Users.get_name(@user_id.to_i)
-  
-  if @name == nil
-    @message = "認証に失敗しました。"
+  if @name.nil?
+    @message = '認証に失敗しました。'
     erb :login
   else
-    time = (Time.now).strftime("%X")
+    time = (Time.now).strftime('%X')
     day = Date.today
-    @message = Timecard_operation.returnhome(day,@user_id,time)
+    @message = Timecard_operation.returnhome(day, @user_id, time)
     erb :attend_leave
   end
 end
 
-
 post '/read-data' do
   @user_id = session[:no]
-  if Users.get_name(@user_id) != nil
+  if Users.get_name(@user_id)
     @name = Users.get_name(@user_id)
     @department = Departments.name_of(Users.get_department(@user_id))
-    year = (Date.today).strftime("%Y")
-    month = (Date.today).strftime("%m")
+    year = (Date.today).strftime('%Y')
+    month = (Date.today).strftime('%m')
     @json_str = Timecard_operation.read_monthly_data(@user_id, year, month)
-
     p @json_str
-   
     erb :view_data
   end
 end
