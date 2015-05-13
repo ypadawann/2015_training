@@ -1,3 +1,7 @@
+body{
+  font-family:"MS ゴシック","Hiragino Kaku Gothic ProN",sans-serif;
+}
+
 /*日付・曜日*/
 td.ex1{
   padding:4px 0px 0px 0px;
@@ -102,5 +106,5 @@ td.ex9{
 p.ex1{
   position: absolute;
   top: 0px;
-  left: 580px;
+  left: 590px;
 }
