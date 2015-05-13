@@ -24,7 +24,7 @@ set :erb, :escape_html => true
 get '/' do
   @user_id = session[:no]
   @name = Users.get_name(@user_id.to_i)
-  if @name.nil?
+  if @name
     erb :userpage
   else
     erb :login
