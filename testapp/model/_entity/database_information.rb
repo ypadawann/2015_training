@@ -2,13 +2,14 @@
 require 'active_record'
 require 'mysql2'
 
-ActiveRecord::Base.establish_connection(
-  adapter: 'mysql2',
-  host:    'localhost',
-  username: 'root',
-  password: 'password',
-  database: 'test_db'
-)
+config = YAML.load_file('./config/database.yml')
+db_using =
+  if ENV['RACK_ENV'] == 'development'
+    'development'
+  else
+    'test'
+  end
+ActiveRecord::Base.establish_connection(config['db'][db_using])
 
 class User < ActiveRecord::Base
   validates :id, presence: true
