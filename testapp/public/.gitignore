@@ -1,4 +1,9 @@
 
+*.js
+*.css
+*.css.map
+.sass-cache
+
 temp/
 dist/
 
