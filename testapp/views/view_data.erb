@@ -1,80 +1,80 @@
 <html>
-<meta http-equiv="Content-Type" content = "text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <head>
-<link rel = "stylesheet" type = "text/css" href="day.css" />
-<link rel = "stylesheet" type = "text/css" href="print.css" media = "print"/>
+<link rel="stylesheet" type="text/css" href="src/style/day.css" />
+<link rel="stylesheet" type="text/css" href="src/style/print.css" media = "print"/>
 </head>
 <body>
-<div style = "font-size:20px;">
+<div style="font-size:20px;">
 勤　務　管　理　表
 </div>
-<p class = "profession"><b style = "font-size:20px;">専門職用</b></p>
+<p class="profession"><b style="font-size:20px;">専門職用</b></p>
 <p></p>
-<table  border = "1" cellspacing = "0" cellpadding = "0" id = "table1" style = "border-collapse: collapse;">
+<table  border="1" cellspacing="0" cellpadding="0" id="table1" style="border-collapse: collapse;">
   <tr>
-    <td class = "menu" colspan = "2">年月</td>
-    <td class = "menu" colspan = "2"><input type = "text" id = "YearsAndMonths" readonly = "readonly" style = "width:150px; border:none; background:none; text-align:center; vertical-align:middle; font-size: 8px"></td>
-    <td class = "menu" style = "border-style:none; border-top-style: hidden;"></td>
-    <td class = "menu" colspan = "3">承認</td>
-    <td class = "menu">申請</td>
+    <td class="menu" colspan="2">年月</td>
+    <td class="menu" colspan="2"><input type="text" id="YearsAndMonths" readonly="readonly" style="width:150px; border:none; background:none; text-align:center; vertical-align:middle; font-size: 8px"></td>
+    <td class="menu" style="border-style:none; border-top-style: hidden;"></td>
+    <td class="menu" colspan="3">承認</td>
+    <td class="menu">申請</td>
   </tr>
   <tr>
-    <td class = "menu" colspan = "2">所属</td>
-    <td class = "menu" colspan = "2"><input type = "text" value = "<%= @department %>" style="width:150px; height:28px; border:none; background:none; text-align:center; vertical-align:middle; font-size: 8px"></td>
-    <td class = "menu" style = "border-style:none;"></td>
-    <td class = "menu" rowspan = "2">　</td>
-    <td class = "menu" rowspan = "2">　</td>
-    <td class = "menu" rowspan = "2">　</td>
-    <td class = "menu" rowspan = "2">　</td>
+    <td class="menu" colspan="2">所属</td>
+    <td class="menu" colspan="2"><input type="text" value="<%= @department %>" style="width:150px; height:28px; border:none; background:none; text-align:center; vertical-align:middle; font-size: 8px"></td>
+    <td class="menu" style="border-style:none;"></td>
+    <td class="menu" rowspan="2">　</td>
+    <td class="menu" rowspan="2">　</td>
+    <td class="menu" rowspan="2">　</td>
+    <td class="menu" rowspan="2">　</td>
   </tr>
   <tr>
-    <td class = "menu" colspan = "2">No.</td>
-    <td class = "menu" colspan = "2"><input type = "text" value = <%= @user_id %> style = "width:150px; height:28px; border:none; background:none; text-align:center; vertical-align:middle; font-size: 8px"></td>
+    <td class="menu" colspan="2">No.</td>
+    <td class="menu" colspan="2"><input type="text" value=<%= @user_id %> style="width:150px; height:28px; border:none; background:none; text-align:center; vertical-align:middle; font-size: 8px"></td>
   </tr>
   <tr>
-    <td class = "menu" colspan = "2">氏名</td>
-    <td class = "menu" colspan = "2"><input type = "text" value = <%= @name %> style = "width:150px; height:28px; border:none; background:none; text-align:center; vertical-align:middle; font-size: 8px"></td>
+    <td class="menu" colspan="2">氏名</td>
+    <td class="menu" colspan="2"><input type="text" value=<%= @name %> style="width:150px; height:28px; border:none; background:none; text-align:center; vertical-align:middle; font-size: 8px"></td>
   </tr>
 
-  <tr bgcolor = "#BFBFBF">
-    <td class = "dayAndweek">日付</td>
-    <td class = "dayAndweek">曜日</td>
-    <td class = "attendance">入室時刻</td>
-    <td class = "leaving">退出時刻</td>
-    <td class = "column" style = "width:64px; font-size:11px;"><b>上司<br>承認印</b></td>
-    <td class = "column" style = "width:77px;">深夜勤務<br>22時-翌5時</td>
-    <td class = "column" style = "width:77px;" >休日<br>勤務時間</td>
-    <td class = "column" style = "width:77px;">振替休暇<br>予定日</td>
-    <td class = "column">有給<br>休暇</td>
-    <td class = "column">振替休暇<br>取得日</td>
-    <td class = "etc">時間外業務は必ず上司による指示を受けてください。</td>
+  <tr bgcolor="#BFBFBF">
+    <td class="dayAndweek">日付</td>
+    <td class="dayAndweek">曜日</td>
+    <td class="attendance">入室時刻</td>
+    <td class="leaving">退出時刻</td>
+    <td class="column" style="width:64px; font-size:11px;"><b>上司<br>承認印</b></td>
+    <td class="column" style="width:77px;">深夜勤務<br>22時-翌5時</td>
+    <td class="column" style="width:77px;" >休日<br>勤務時間</td>
+    <td class="column" style="width:77px;">振替休暇<br>予定日</td>
+    <td class="column">有給<br>休暇</td>
+    <td class="column">振替休暇<br>取得日</td>
+    <td class="etc">時間外業務は必ず上司による指示を受けてください。</td>
   </tr>
   <tr>
-    <td class = "line" style = "font-size:6px; text-align:center; vertical-align:middle; height:21px;">合計</td>
-    <td class = "line"></td>
-    <td class = "line"></td>
-    <td class = "line"></td>
-    <td class = "line"></td>
-    <td class = "line"></td>
-    <td class = "line"></td>
-    <td class = "line"></td>
-    <td class = "line"></td>
-    <td class = "line"></td>
-    <td class = "line"></td>
+    <td class="line" style="font-size:6px; text-align:center; vertical-align:middle; height:21px;">合計</td>
+    <td class="line"></td>
+    <td class="line"></td>
+    <td class="line"></td>
+    <td class="line"></td>
+    <td class="line"></td>
+    <td class="line"></td>
+    <td class="line"></td>
+    <td class="line"></td>
+    <td class="line"></td>
+    <td class="line"></td>
   </tr>
   <tr>
-    <td class = "line" colspan = "2" style = "font-size:6px; text-align:center; vertical-align:middle; height:28px;">当月消化<br>有休日数</td>
-    <td class = "line"></td>
-    <td class = "line" colspan = "2"></td>
-    <td class = "line"></td>
+    <td class="line" colspan="2" style="font-size:6px; text-align:center; vertical-align:middle; height:28px;">当月消化<br>有休日数</td>
+    <td class="line"></td>
+    <td class="line" colspan="2"></td>
+    <td class="line"></td>
   </tr>
 
 </table>
-<div style="display:none;" class = "text">
+<div style="display:none;" class="text">
   <%= @json_str %>
 </div>
-<script type = "text/javascript" src = "day.js" charset = "UTF-8">
-</script>
+<script type="text/coffeescript" src="src/js/day.coffee" charset="UTF-8"></script>
+<script type="text/javascript" src="src/js/day.js" charset="UTF-8"></script>
 
 </body>
 </html>
