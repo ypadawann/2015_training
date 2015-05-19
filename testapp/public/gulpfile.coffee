@@ -24,10 +24,10 @@ gulpWebpack = require('gulp-webpack')
 
 gulp.task('build:bundle', ['build:coffee'], () ->
   gulp
-    .src './temp/entry.js'
+    .src './temp/*.js'
     .pipe gulpWebpack({
        entry: {
-         entry: './temp/entry.js',
+         day: './temp/day.js',
        },
        output: {
          filename: '[name].js',
