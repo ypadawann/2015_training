@@ -53,6 +53,7 @@ module Model
       end
 
       def remove(id)
+        Model::Timecard.delete_all(user_id: id)
         Model::User.destroy(id)
         true
       rescue ActiveRecord::RecordNotFound,
