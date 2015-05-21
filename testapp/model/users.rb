@@ -41,11 +41,14 @@ module Model
           verify_password(user.password, password)
       end
 
-      def add(id, name, department_id, password)
-        user = Model::User.new(id: id,
-                        name: name,
-                        department_id: department_id,
-                        password: salt_and_hash(password))
+      def add(id, name, department, password)
+        user =
+          Model::User.new(
+            id: id,
+            name: name,
+            department_id: Model::Departments.id_of(department),
+            password: salt_and_hash(password)
+          )
         user.save
       end
 

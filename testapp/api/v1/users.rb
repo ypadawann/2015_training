@@ -8,12 +8,12 @@ module API
         params do
           requires :id, type: Integer, desc: '社員番号'
           requires :name, type: String, desc: 'ユーザ名'
-          requires :department, type: Integer, desc: '部署名'
+          requires :department, type: String, desc: '部署名'
           requires :password, type: String, desc: 'パスワード'
         end
         post do
           if Model::Users.add(params[:id], params[:name],
-                       params[:department], params[:password])
+                              params[:department], params[:password])
             { user_id:    params[:id],
               name:       params[:name],
               department: params[:department] }
