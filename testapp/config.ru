@@ -1,9 +1,6 @@
 
-#require './api/timecard_api'
 require './main'
-run Main
 
-#use Rack::Session::Cookie, key: 'ams_session', expire_after: 86_400
+require './api/base.rb'
 
-#use Rack::Session::Cookie
-#run Rack::Cascade.new [API, Web]
+run Rack::Cascade.new [API::Base, Main]
