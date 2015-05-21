@@ -4,8 +4,8 @@
 <p>名前:<input type="text" name="name" size="40"></p>
 <p>所属：
   <select name="department"><%==
-    Model::Departments.list_ids.map { |d|
-      "<option value=#{d}>#{Model::Departments.name_of(d)}</option>"
+    Model::Departments.list_names.map { |d|
+      "<option value=#{d}>#{d}</option>"
     }.join
   %></select>
 </p>

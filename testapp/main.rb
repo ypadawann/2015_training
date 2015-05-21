@@ -55,11 +55,11 @@ class Main < Sinatra::Base
   post '/reg_finish' do
     @new_no = params[:no].to_i
     @new_name = params[:name]
-    @new_department = params[:department].to_i
+    @new_department = params[:department]
     if Model::Users.add(@new_no,
-                 @new_name,
-                 @new_department,
-                 params[:pass])
+                        @new_name,
+                        @new_department,
+                        params[:pass])
       erb :reg_finish
     else
       erb :reg_error
