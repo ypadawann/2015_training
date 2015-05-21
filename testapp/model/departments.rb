@@ -1,5 +1,6 @@
 
 require 'active_record'
+require 'active_support/all'
 
 require_relative '_entity/database_information'
 
@@ -13,13 +14,17 @@ class Departments
   def self.remove(id)
     Department.destroy(id)
     true
-  rescue ActiveRecord::StatementInvalid
+  rescue ActiveRecord::RecordNotFound,
+         ActiveRecord::StatementInvalid
     false
   end
 
   def self.name_of(id)
-    department = Department.find(id)
-    department.name
+    Department.find_by_id(id).try(:name)
+  end
+
+  def self.id_of(name)
+    Department.find_by_name(name).try(:id)
   end
 
   def self.update(id, name)
@@ -28,7 +33,17 @@ class Departments
     department.save
   end
 
+  def self.list_names
+    Department.pluck(:name)
+  end
+
   def self.list_ids
     Department.pluck(:id)
+  end
+
+  def self.users(id)
+    Users.list_all.select { |user|
+      user.department_id == id
+    }
   end
 end
