@@ -10,9 +10,11 @@ module Model
       timecards = Model::Timecard.where(day: day, user_id: user_id).first
       if timecards.nil?
         new_timecard_add(user_id, day, time, nil)
-        return "#{day}は#{time}に出勤しました"
+#        return "#{day}は#{time}に出勤しました"
+        return true
       else
-        return '本日はすでに出勤しています'
+#        return '本日はすでに出勤しています'
+        return 400
       end
     end
 
@@ -25,19 +27,45 @@ module Model
       timecards.save
     end
 
+    def self.update_attend(date, user_id, time)
+      p 'update attend'
+      timecard = Timecard.where(day: date, user_id: user_id).first
+      if timecard.nil?
+        p 'new'
+        new_timecard_add(user_id, date, time, nil)
+      else
+        p 'update'
+        timecard.attendance = time
+        timecard.save
+      end
+    end
+    
     def self.returnhome(day, user_id, time)
       timecards = Model::Timecard.where(day: day, user_id: user_id).first
       if timecards.nil?
-        return '本日はまだ出勤していません'
+      #  return '本日はまだ出勤していません'
+        return 400
       elsif timecards.leaving.nil?
         timecards.leaving = time
         timecards.save
-        return "#{day}は#{time}に退勤しました"
+        #return "#{day}は#{time}に退勤しました"
+        return true
       else
-        return '本日はすでに退勤しています'
+#        return '本日はすでに退勤しています'
+        return 400
       end
     end
 
+    def self.update_leave(date, user_id, time)
+      timecard = Timecard.where(day: date, user_id: user_id).first
+      if timecard.nil?
+        new_timecard_add(user_id, date, nil, time)
+      else
+        timecard.leaving = time
+        timecard.save
+      end
+    end
+    
     def self.read_monthly_data(user_id, year, month)
       timecards = Model::Timecard.where('day LIKE ?', "#{year}-#{month}-%")
                   .where(user_id: user_id).order('day')
