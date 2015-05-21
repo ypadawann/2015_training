@@ -4,46 +4,59 @@ api/v1/..
 
 parametersを受け取り、resultsをJSONで返す。
 
+* GET users
+    * ユーザ一覧の取得
+    * headers
+    * parameters
+    * results
+        * users: array of
+           * user_id: integer
+           * name: string
+           * department: string
+    * errors
+
 * POST users
     * ユーザ登録
+    * headers
     * parameters
         * user_id: integer
         * name: string
-        * department_id: integer
+        * department: string
         * password: string
     * results
         * user_id: integer
         * name: string
-        * department_id: integer
-        * password: string
+        * department: string
     * errors
         * 400: 登録に失敗した
 
 * PUT users/:user_id
     * ユーザ情報の変更
+    * headers
     * parameters
         * name: string
-        * department_id: integer
+        * department: string
         * password: string
     * results
         * user_id: integer
         * name: string
-        * department_id: integer
-        * password: string 
+        * department: string
     * errors
         * 403: 認証に失敗した
 
 * GET users/:user_id
     * ユーザ情報の取得
+    * headers
     * results
         * user_id: integer
         * name: string
-        * department_id: integer
+        * department: string
     * errors
         * 403: 認証に失敗した
 
 * DELETE users/:user_id
     * ユーザ削除
+    * headers
     * parameters
     * results
     * errors
@@ -51,6 +64,7 @@ parametersを受け取り、resultsをJSONで返す。
 
 * PUT users/:user_id/login
     * ログイン
+    * headers
     * parameters
         * password: string
     * results
@@ -59,6 +73,7 @@ parametersを受け取り、resultsをJSONで返す。
 
 * PUT users/:user_id/logout
     * ログアウト
+    * headers
     * parameters
     * results
     * errors
@@ -66,21 +81,24 @@ parametersを受け取り、resultsをJSONで返す。
 
 * POST users/:user_id/attend
     * 出勤
+    * headers
     * results
         * user_id: integer
         * name: string
-        * department_id: integer
+        * department: string
         * date: date
         * attendance: time
     * errors
+        * 400: すでに出勤している
         * 403: 認証に失敗した
 
 * POST users/:user_id/leave
     * 退勤
+    * headers
     * results
         * user_id: integer
         * name: string
-        * department_id: integer
+        * department: string
         * date: date
         * leaving: time
     * errors
@@ -89,42 +107,56 @@ parametersを受け取り、resultsをJSONで返す。
 
 * PUT users/:user_id/attend/:date
     * 出勤の更新
+    * headers
     * parameters
         * attendance: time
     * results
         * user_id: integer
         * name: string
-        * department_id: integer
+        * department: string
     * errors
         * 403: 認証に失敗した
 
 * PUT users/:user_id/leave/:date
     * 退勤の更新
+    * headers
     * parameters
         * leaving: time
     * results
         * user_id: integer
         * name: string
-        * department_id: integer
+        * department: string
     * errors
         * 403: 認証に失敗した
 
 * PUT users/:user_id/attend-leave/:year-month
     * 月の出退勤の一括更新
+    * headers
     * parameters
-        * array of
+        * data: array of
             * day: integer
             * attendace: time
             * leaving: time
     * results
         * user_id: integer
         * name: string
-        * department_id: integer
+        * department: string
     * errors
         * 403: 認証に失敗した
 
+* GET departments
+    * 部署一覧の取得
+    * headers
+    * parameters
+    * results
+        * departments: array of
+            * department_id: integer
+            * name: string
+    * results
+
 * POST departments
     * 部署登録
+    * headers
     * parameters
         * name: string
     * results
@@ -132,8 +164,18 @@ parametersを受け取り、resultsをJSONで返す。
     * errors
         * 400: すでに登録されている
 
-* PUT departments/:name
+* GET departments/:department_id
+    * 部署情報の取得
+    * headers
+    * parameters
+    * results
+        * name: string
+    * errors
+        * 404: 部署が見つからない
+
+* PUT departments/:department_id
     * 部署情報の更新
+    * headers
     * parameters
         * name: string
     * results
@@ -141,8 +183,9 @@ parametersを受け取り、resultsをJSONで返す。
     * errors
         * 404: 部署が見つからない
 
-* DELETE departments/:name
+* DELETE departments/:department_id
     * 部署削除
+    * headers
     * parameters
     * results
     * errors
