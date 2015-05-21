@@ -5,6 +5,7 @@ require 'securerandom'
 require 'active_support/all'
 
 require_relative '_entity/database_information'
+require_relative './departments'
 
 class Users
   DELIMITER = '$'
@@ -47,6 +48,14 @@ class Users
       user.save
     end
 
+    def remove(id)
+      User.destroy(id)
+      true
+    rescue ActiveRecord::RecordNotFound,
+           ActiveRecord::StatementInvalid
+      false
+    end
+
     def update_name(id, name)
       user = User.find(id)
       user.name = name
@@ -65,6 +74,21 @@ class Users
 
     def get_department(id)
       User.find_by_id(id).try(:department)
+    end
+
+    def list_all
+      User.all
+    end
+
+    def status(id)
+      user = User.find_by_id(id)
+      if user.nil?
+        nil
+      else
+        { user_id: user.id,
+          name: user.name,
+          department: Departments.name_of(user.department_id) }
+      end
     end
   end
 end
