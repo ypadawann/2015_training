@@ -1,5 +1,6 @@
 
 require './api/v1/users'
+require './api/v1/timecard_api'
 
 module API
   module V1
@@ -8,6 +9,7 @@ module API
       format :json
 
       mount Users
+      mount Timecards
     end
   end
 end
