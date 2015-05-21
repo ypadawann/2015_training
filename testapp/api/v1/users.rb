@@ -1,11 +1,9 @@
 
-require 'grape'
-
 require './model/users'
 
 module API
   module V1
-    class APIUsers < Grape::API
+    class Users < Grape::API
       resource :users do
         params do
           requires :id, type: Integer, desc: '社員番号'
@@ -14,7 +12,7 @@ module API
           requires :password, type: String, desc: 'パスワード'
         end
         post do
-          if Users.add(params[:id], params[:name],
+          if Model::Users.add(params[:id], params[:name],
                        params[:department], params[:password])
             { user_id:    params[:id],
               name:       params[:name],
@@ -29,7 +27,7 @@ module API
         end
         route_param :id do
           get do
-            Users.status(params[:id]) || error!('403 Forbidden', 403)
+            Model::Users.status(params[:id]) || error!('403 Forbidden', 403)
           end
         end
       end

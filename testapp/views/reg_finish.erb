@@ -1,4 +1,4 @@
 <h1><%= "登録しました。" %></h1>
 <p><%= "ID:#{@new_no}" %></p>
 <p><%= "名前:#{@new_name}" %></p>
-<p><%= "所属:#{Departments.name_of(@new_department)}" %></p>
+<p><%= "所属:#{Model::Departments.name_of(@new_department)}" %></p>

@@ -1,6 +1,4 @@
 
-require 'grape'
-
 require './api/v1/users'
 
 module API
@@ -9,7 +7,7 @@ module API
       version 'v1', using: :path
       format :json
 
-      mount APIUsers
+      mount Users
     end
   end
 end
