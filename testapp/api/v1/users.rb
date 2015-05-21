@@ -5,6 +5,12 @@ module API
   module V1
     class Users < Grape::API
       resource :users do
+        desc 'ユーザ一覧の取得'
+        get do
+          Model::Users.list_all.to_json(except: :password)
+        end
+
+        desc '新規ユーザ登録'
         params do
           requires :id, type: Integer, desc: '社員番号'
           requires :name, type: String, desc: 'ユーザ名'
@@ -26,8 +32,13 @@ module API
           requires :id, type: Integer, desc: '社員番号'
         end
         route_param :id do
+          desc 'ユーザ情報の取得'
           get do
             Model::Users.status(params[:id]) || error!('403 Forbidden', 403)
+          end
+          desc 'ユーザ削除'
+          delete do
+            Model::Users.remove(params[:id])
           end
         end
       end
