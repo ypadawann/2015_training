@@ -2,7 +2,7 @@ $ ->
   $('#register').click ->
     id = $('#no').val()
     name = $('#name').val()
-    department = $('#department option:selected').val()
+    department = $('#department option:selected').text()
     password = $('#pass').val()
     request = $.ajax(
       type: 'post'
