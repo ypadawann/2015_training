@@ -1,7 +1,5 @@
 # 2015_training
 
-traning application  
-
 ## Usage
 
 ### 依存パッケージの導入
@@ -20,13 +18,38 @@ $ bundle install --path vendor/bundle
 ```
 
 
-### Database migration
+### Database
+
+アプリケーションが使うデータベース名は環境変数RACK_ENVで決まります。
+
+RACK_ENV=development なら development_db, RACK_ENV=test なら test_db を使います。
+
+Sinatraを起動したときはデフォルトでは test に設定されます。
+
+デフォルトの値がいやならば、コマンドの頭で環境変数を指定することもできます。
+
+```bash
+$ RACK_ENV=development rackup
+```
+
+とすれば development_db を使えます。
+
+## Database migration
 
 Migration機能でテーブル管理できるようになりました。
 
 この機能を使うためには、事前に`依存パッケージの導入`の項を済ませている必要があります。
 
-まず、事前にmysqlのコマンドラインツールでテーブルを削除しておきます。
+まず、事前にmysqlのコマンドラインツールでデータベースを作成しておきます。
+
+```bash
+$ mysql -u hoge -p
+
+mysql> CREATE DATABASE test_db;
+mysql> quit
+```
+
+もしtest_dbにテーブルが存在する場合は削除しておきます。
 
 ```bash
 $ mysql -u hoge -p
@@ -44,9 +67,9 @@ $ cd testapp
 $ bundle exec rake db:migrate
 ```
 
-### Database definitions
+## Database definitions
 
-データベース名 test_db
+データベース名 development_db または test_db
 
 **Departmentsテーブル**
 

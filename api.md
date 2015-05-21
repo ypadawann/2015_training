@@ -1,6 +1,6 @@
-# API仕様
+## API仕様
 
-api/v1/..
+URIは api/v1/[リソース名]
 
 parametersを受け取り、resultsをJSONで返す。
 
@@ -191,3 +191,24 @@ parametersを受け取り、resultsをJSONで返す。
     * errors
         * 400: 所属している人がいる
         * 404: 部署が見つからない
+
+## APIを追加するには
+
+api/v1/myclass.rb に
+
+```
+module API
+  module V1
+    class MyClass
+    ..
+    end
+  end
+end
+```
+
+のようにAPIを書いたあと、api/v1/base.rbに以下の2行を追記する。
+
+```ruby:api/v1/base.rb
+require './api/v1/myclass.rb'
+mount MyClass
+```
