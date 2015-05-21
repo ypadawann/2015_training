@@ -1,0 +1,13 @@
+default: &default
+  adapter: mysql2
+  host: localhost
+  username: root
+  password: password
+
+development:
+  <<: *default
+  database: development_db
+
+test:
+  <<: *default
+  database: test_db
