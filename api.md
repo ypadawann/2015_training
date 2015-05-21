@@ -9,13 +9,12 @@ parametersを受け取り、resultsをJSONで返す。
     * parameters
         * user_id: integer
         * name: string
-        * department_id: integer
+        * department: string
         * password: string
     * results
         * user_id: integer
         * name: string
-        * department_id: integer
-        * password: string
+        * department: string
     * errors
         * 400: 登録に失敗した
 
@@ -23,13 +22,12 @@ parametersを受け取り、resultsをJSONで返す。
     * ユーザ情報の変更
     * parameters
         * name: string
-        * department_id: integer
+        * department: string
         * password: string
     * results
         * user_id: integer
         * name: string
-        * department_id: integer
-        * password: string 
+        * department: string
     * errors
         * 403: 認証に失敗した
 
@@ -38,7 +36,7 @@ parametersを受け取り、resultsをJSONで返す。
     * results
         * user_id: integer
         * name: string
-        * department_id: integer
+        * department: string
     * errors
         * 403: 認証に失敗した
 
@@ -69,7 +67,7 @@ parametersを受け取り、resultsをJSONで返す。
     * results
         * user_id: integer
         * name: string
-        * department_id: integer
+        * department: string
         * date: date
         * attendance: time
     * errors
@@ -80,7 +78,7 @@ parametersを受け取り、resultsをJSONで返す。
     * results
         * user_id: integer
         * name: string
-        * department_id: integer
+        * department: string
         * date: date
         * leaving: time
     * errors
@@ -94,7 +92,7 @@ parametersを受け取り、resultsをJSONで返す。
     * results
         * user_id: integer
         * name: string
-        * department_id: integer
+        * department: string
     * errors
         * 403: 認証に失敗した
 
@@ -105,7 +103,7 @@ parametersを受け取り、resultsをJSONで返す。
     * results
         * user_id: integer
         * name: string
-        * department_id: integer
+        * department: string
     * errors
         * 403: 認証に失敗した
 
@@ -119,7 +117,7 @@ parametersを受け取り、resultsをJSONで返す。
     * results
         * user_id: integer
         * name: string
-        * department_id: integer
+        * department: string
     * errors
         * 403: 認証に失敗した
 
@@ -132,7 +130,7 @@ parametersを受け取り、resultsをJSONで返す。
     * errors
         * 400: すでに登録されている
 
-* PUT departments/:name
+* PUT departments/:department_id
     * 部署情報の更新
     * parameters
         * name: string
@@ -141,7 +139,7 @@ parametersを受け取り、resultsをJSONで返す。
     * errors
         * 404: 部署が見つからない
 
-* DELETE departments/:name
+* DELETE departments/:department_id
     * 部署削除
     * parameters
     * results
