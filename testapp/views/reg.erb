@@ -1,16 +1,17 @@
 <h1><%= "ユーザ登録" %></h1>
-<form action="/reg_finish" method="post">
-<p>ID:<input type="number" name="no" size="40"></p>
-<p>名前:<input type="text" name="name" size="40"></p>
+<p>ID:<input type="number" id="no" size="40"></p>
+<p>名前:<input type="text" id="name" size="40"></p>
 <p>所属：
-  <select name="department"><%==
+  <select id="department"><%==
     Model::Departments.list_ids.map { |d|
       "<option value=#{d}>#{Model::Departments.name_of(d)}</option>"
     }.join
   %></select>
 </p>
-<p>pass:<input type="password" name="pass" size="40"></p>
+<p>pass:<input type="password" id="pass" size="40"></p>
 <p>
-  <input type="submit" value="送信">
+  <input type="button" id="register" value="送信">
 </p>
-</form>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="dist/login.js"></script>
