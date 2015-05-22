@@ -2,6 +2,27 @@
 
 ## Usage
 
+### ファイルの保存場所
+
+/home/trainingams/AMS/
+
+### 起動
+
+jsファイルやcssファイルが生成されていないならgulpを実行する
+
+```bash
+$ pwd
+/home/trainingams/AMS/2015_training/testapp/public
+$ gulp
+```
+Unicornの実行
+
+```bash
+$ pwd
+/home/trainingams/AMS/2015_training/testapp
+$ bundle exec unicorn -c unicorn.rb -E "環境名" -D
+```
+
 ### 依存パッケージの導入
 
 bundlerの導入が済んでいない場合は導入しておく必要があります。
@@ -17,22 +38,21 @@ $ cd testapp
 $ bundle install --path vendor/bundle
 ```
 
-
 ### Database
 
 アプリケーションが使うデータベース名は環境変数RACK_ENVで決まります。
 
 RACK_ENV=development なら development_db, RACK_ENV=test なら test_db を使います。
 
-Sinatraを起動したときはデフォルトでは test に設定されます。
+Sinatraを起動したときはデフォルトでは development に設定されます。
 
-デフォルトの値がいやならば、コマンドの頭で環境変数を指定することもできます。
+デフォルトの値がいやならば、実行時に -E オプションで環境変数を指定することもできます。
 
 ```bash
-$ RACK_ENV=development rackup
+$ bundle exec unicorn -c unicorn.rb -E test -D
 ```
 
-とすれば development_db を使えます。
+とすれば test_db を使えます。
 
 ## Database migration
 
