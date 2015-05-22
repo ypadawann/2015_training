@@ -66,11 +66,26 @@ module API
         put 'leave/:date' do
           user_id = params[:user_id]
           if user_id == env['rack.session'][:no]
-            p date = params[:date]
-            p time = params[:leaving]
+            date = params[:date]
+            time = params[:leaving]
             Model::Timecard_operation.update_leave(date, user_id, time)
-            p name = Model::Users.get_name(user_id)
-            p department = Model::Departments.name_of(Model::Users.get_department(user_id))
+            name = Model::Users.get_name(user_id)
+            department = Model::Departments.name_of(Model::Users.get_department(user_id))
+            {user_id: user_id, name: name, department: department}
+          else
+            error!('failed authentication', 403)
+          end
+        end
+               
+        put '/attend-leave/:year_month' do
+          user_id = params[:user_id]
+          if user_id == env['rack.session'][:no]
+            year_month = params[:year_month]
+            timecard_data = params[:data]
+            timecard_data[0].day
+            Model::Timecard_operation.update_all(year_month, timecard_data, user_id)
+            name = Model::Users.get_name(user_id)
+            department = Model::Departments.name_of(Model::Users.get_department(user_id)) 
             {user_id: user_id, name: name, department: department}
           else
             error!('failed authentication', 403)
