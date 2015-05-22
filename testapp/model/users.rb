@@ -36,9 +36,9 @@ module Model
 
       public
 
-      def access(id, password)
-        (user = Model::User.find_by_id(id)) &&
-          verify_password(user.password, password)
+      def verify(id, password)
+        user = Model::User.find_by_id(id)
+        user && verify_password(user.password, password)
       end
 
       def add(id, name, department, password)
