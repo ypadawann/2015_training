@@ -14,17 +14,8 @@ module Model
         return true
       else
 #        return '本日はすでに出勤しています'
-        return 400
+        return false
       end
-    end
-
-    def self.new_timecard_add(user_id, day, attendance, leaving)
-      timecards = Model::Timecard.new
-      timecards.user_id = user_id
-      timecards.day = day
-      timecards.attendance = attendance
-      timecards.leaving = leaving
-      timecards.save
     end
 
     def self.update_attend(date, user_id, time)
@@ -44,7 +35,7 @@ module Model
       timecards = Model::Timecard.where(day: day, user_id: user_id).first
       if timecards.nil?
       #  return '本日はまだ出勤していません'
-        return 400
+        return false
       elsif timecards.leaving.nil?
         timecards.leaving = time
         timecards.save
@@ -52,7 +43,7 @@ module Model
         return true
       else
 #        return '本日はすでに退勤しています'
-        return 400
+        return false
       end
     end
 
@@ -100,6 +91,15 @@ module Model
         timecard_json.push(empty_data)
       end
       timecard_json.to_json
+    end
+
+    def self.new_timecard_add(user_id, day, attendance, leaving)
+      timecards = Model::Timecard.new
+      timecards.user_id = user_id
+      timecards.day = day
+      timecards.attendance = attendance
+      timecards.leaving = leaving
+      timecards.save
     end
 
     def self.time_to_string(time)
