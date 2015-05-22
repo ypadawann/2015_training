@@ -19,7 +19,7 @@ module API
               p name = Model::Users.get_name(user_id)
               p department = Model::Departments.name_of(Model::Users.get_department(user_id))
               {user_id: user_id, name: name, 
-                department: department, date: date, time: time}.to_json
+                department: department, date: date, attendance: time}
             else
               error!('already attend', 400)
             end
