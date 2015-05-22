@@ -24,7 +24,7 @@ module API
               name:       params[:name],
               department: params[:department] }
           else
-            error!('ユーザの登録に失敗しました。', 400)
+            error!('Failed to Register', 400)
           end
         end
 
@@ -34,11 +34,14 @@ module API
         route_param :user_id do
           desc 'ユーザ情報の取得'
           get do
-            Model::Users.status(params[:user_id]) || error!('403 Forbidden', 403)
+            authenticate!(params[:user_id])
+            Model::Users.status(params[:user_id])
           end
           desc 'ユーザ削除'
           delete do
-            Model::Users.remove(params[:user_id])
+            authenticate!(params[:user_id])
+            Model::Users.remove(params[:user_id]) ||
+              error!('Not Found', 404)
           end
         end
       end
