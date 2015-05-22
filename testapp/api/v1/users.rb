@@ -19,7 +19,7 @@ module API
       resource '/users' do
         desc 'ユーザ一覧の取得'
         get do
-          Model::Users.list_all.to_json(except: :password)
+          { users: Model::Users.list_all }
         end
 
         desc '新規ユーザ登録'
