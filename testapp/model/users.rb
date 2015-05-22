@@ -69,7 +69,13 @@ module Model
 
       def update_department(id, department)
         user = Model::User.find(id)
-        user.department = department
+        user.department = Model::Departments.id_of(department)
+        user.save
+      end
+
+      def update_password(id, password)
+        user = Model::User.find(id)
+        user.password = salt_and_hash(password)
         user.save
       end
 
