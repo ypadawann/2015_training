@@ -4,7 +4,14 @@ require './model/users'
 module API
   module V1
     class Users < Grape::API
-      resource ':users' do
+      helpers do
+        def verify_password!(user_id, password)
+          error!('Access Denied', 403) unless
+            Model::Users.verify(user_id, password)
+        end
+      end
+
+      resource '/users' do
         desc 'ユーザ一覧の取得'
         get do
           Model::Users.list_all.to_json(except: :password)
@@ -32,7 +39,7 @@ module API
       params do
         requires :user_id, type: Integer, desc: '社員番号'
       end
-      resource ':users/:user_id' do
+      resource '/users/:user_id' do
         desc 'ユーザ情報の取得'
         get do
           authenticate!(params[:user_id])
@@ -56,8 +63,7 @@ module API
         put do
           user_id = params[:user_id]
           authenticate!(user_id)
-          error!('Access Denied', 403) unless
-            Model::Users.verify(user_id, params[:password])
+          verify_password!(user_id, params[:password])
 
           Model::Users.update_name(user_id, params[:name]) \
             if params[:name].present?
@@ -67,6 +73,26 @@ module API
             if params[:new_password].present?
 
           Model::Users.status(user_id)
+        end
+
+        desc 'ログイン'
+        params do
+          requires :password, type: String, desc: 'パスワード'
+        end
+        put '/login' do
+          verify_password!(params[:user_id], params[:password])
+          env['rack.session'][:no] = params[:user_id]
+          Model::Users.status(params[:user_id])
+        end
+
+        desc 'ログアウト'
+        params do
+          requires :password, type: String, desc: 'パスワード'
+        end
+        put '/logout' do
+          verify_password!(params[:user_id], params[:password])
+          env['rack.session'].destroy
+          Model::Users.status(params[:user_id])
         end
       end
     end
