@@ -34,6 +34,12 @@ module Model
         correct_hash == hash(password, salt)
       end
 
+      def to_hash(user)
+        { user_id: user.id,
+          name: user.name,
+          department: Model:: Departments.name_of(user.department_id) }
+      end
+
       public
 
       def verify(id, password)
@@ -87,8 +93,12 @@ module Model
         Model::User.find_by_id(id).try(:department)
       end
 
+      def exists?(id)
+        User.exists?(id)
+      end
+
       def list_all
-        Model::User.all
+        Model::User.all.map { |user| to_hash(user) }
       end
 
       def status(id)
@@ -96,9 +106,7 @@ module Model
         if user.nil?
           nil
         else
-          { user_id: user.id,
-            name: user.name,
-            department: Model:: Departments.name_of(user.department_id) }
+          to_hash(user)
         end
       end
     end
