@@ -43,8 +43,9 @@ module Model
     end
 
     def self.users(id)
+      name = name_of(id)
       Model::Users.list_all.select { |user|
-        user.department_id == id
+        user[:department] == name
       }
     end
   end

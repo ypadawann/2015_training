@@ -49,7 +49,7 @@ Sinatraを起動したときはデフォルトでは development に設定され
 デフォルトの値がいやならば、実行時に -E オプションで環境変数を指定することもできます。
 
 ```bash
-$ bundle exec unicorn -c unicorn.rb -E test -D
+$ RACK_ENV=test rackup
 ```
 
 とすれば test_db を使えます。

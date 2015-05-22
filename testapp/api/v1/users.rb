@@ -9,12 +9,17 @@ module API
           error!('Access Denied', 403) unless
             Model::Users.verify(user_id, password)
         end
+
+        def find_user!(user_id)
+          error!('Not Found', 404) unless
+            Model::Users.exists?(user_id)
+        end
       end
 
       resource '/users' do
         desc 'ユーザ一覧の取得'
         get do
-          Model::Users.list_all.to_json(except: :password)
+          { users: Model::Users.list_all }
         end
 
         desc '新規ユーザ登録'
@@ -43,14 +48,16 @@ module API
         desc 'ユーザ情報の取得'
         get do
           authenticate!(params[:user_id])
+          find_user!(params[:user_id])
           Model::Users.status(params[:user_id])
         end
 
         desc 'ユーザ削除'
         delete do
           authenticate!(params[:user_id])
-          Model::Users.remove(params[:user_id]) ||
-            error!('Not Found', 404)
+          find_user!(params[:user_id])
+          Model::Users.remove(params[:user_id])
+          Model::Users.status(params[:user_id])
         end
 
         desc 'ユーザ情報の変更'
@@ -86,12 +93,9 @@ module API
         end
 
         desc 'ログアウト'
-        params do
-          requires :password, type: String, desc: 'パスワード'
-        end
         put '/logout' do
-          verify_password!(params[:user_id], params[:password])
           env['rack.session'].destroy
+          find_user!(params[:user_id])
           Model::Users.status(params[:user_id])
         end
       end
