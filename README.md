@@ -24,15 +24,15 @@ $ bundle install --path vendor/bundle
 
 RACK_ENV=development なら development_db, RACK_ENV=test なら test_db を使います。
 
-Sinatraを起動したときはデフォルトでは test に設定されます。
+Sinatraを起動したときはデフォルトでは development に設定されます。
 
 デフォルトの値がいやならば、コマンドの頭で環境変数を指定することもできます。
 
 ```bash
-$ RACK_ENV=development rackup
+$ RACK_ENV=test rackup
 ```
 
-とすれば development_db を使えます。
+とすれば test_db を使えます。
 
 ## Database migration
 
@@ -64,12 +64,12 @@ mysql> quit
 
 ```bash
 $ cd testapp
-$ bundle exec rake db:migrate
+$ RACK_ENV=test bundle exec rake db:migrate
 ```
 
 ## Database definitions
 
-データベース名 development_db または test_db
+データベース名: development_db または test_db
 
 **Departmentsテーブル**
 
@@ -87,7 +87,7 @@ $ bundle exec rake db:migrate
 所属部署コード|department_id|int(11)|no|FK(departments.id)|NULL
 パスワード|password|varchar(255)|no||NULL
 
-**Timecards**
+**Timecardsテーブル**
 
 説明|Field|Type|Null|Key|Default
 --:|:--|:--|:--|:--|:--

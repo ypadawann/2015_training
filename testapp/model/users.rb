@@ -36,9 +36,9 @@ module Model
 
       public
 
-      def access(id, password)
-        (user = Model::User.find_by_id(id)) &&
-          verify_password(user.password, password)
+      def verify(id, password)
+        user = Model::User.find_by_id(id)
+        user && verify_password(user.password, password)
       end
 
       def add(id, name, department, password)
@@ -69,7 +69,13 @@ module Model
 
       def update_department(id, department)
         user = Model::User.find(id)
-        user.department = department
+        user.department = Model::Departments.id_of(department)
+        user.save
+      end
+
+      def update_password(id, password)
+        user = Model::User.find(id)
+        user.password = salt_and_hash(password)
         user.save
       end
 

@@ -33,7 +33,7 @@ class Main < Sinatra::Base
     p 'login session'
     @user_id = params[:no]
     pass = params[:password]
-    if Model::Users.access(@user_id, pass) == true
+    if Model::Users.verify(@user_id, pass)
       session[:no] = @user_id
       @name = Model::Users.get_name(@user_id.to_i)
       erb :userpage
