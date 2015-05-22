@@ -65,6 +65,20 @@ module Model
         timecard.save
       end
     end
+
+    def self.update_all(year_month, timecard_data, user_id)
+      timecard_data.each do |tc_data|
+        date = year_month + '-' + tc_data[1].day
+        timecard = Timecard.where(day: date, user_id: user_id).first
+        if timecard.nil?
+          new_timecard_add(user_id, date, tc_data[1].attendance, tc_data[1].leaving)
+        else
+          timecard.attendance = tc_data[1].attendance
+          timecard.leaving = tc_data[1].leaving
+          timecard.save
+        end
+      end
+    end
     
     def self.read_monthly_data(user_id, year, month)
       timecards = Model::Timecard.where('day LIKE ?', "#{year}-#{month}-%")
