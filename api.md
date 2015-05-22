@@ -34,8 +34,9 @@ parametersを受け取り、resultsをJSONで返す。
     * ユーザ情報の変更
     * headers
     * parameters
-        * name: string
-        * department: string
+        * (optional) name: string
+        * (optional) department: string
+        * (optional) new_password: string
         * password: string
     * results
         * user_id: integer
