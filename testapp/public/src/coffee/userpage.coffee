@@ -25,28 +25,24 @@ logout = ->
     data: 'user_id': user_id)
   request.promise()
 
-$ ->
-  $('#attend').bind 'click', ->
-    attend().done (msg) ->
+$('#attend').bind 'click', ->
+  attend()
+    .done (msg) ->
       $('#attend_message').text msg.attendance + 'に出勤しました'
-      return
     .fail (msg) ->
       $('#attend_message').text '本日は既に出勤しています'
-      return
-    return
-  $('#leave').bind 'click', ->
-    leave().done (msg) ->
+$('#leave').bind 'click', ->
+  leave()
+    .done (msg) ->
       $('#leave_message').text msg.leaving + 'に退勤しました'
-      return
     .fail (msg) ->
       $('#leave_message').text '本日は既に退勤しています'
-      return
-    return
-  $('#logout').bind 'click', ->
-    logout().done (msg) ->
+$('#logout').bind 'click', ->
+  logout()
+    .done (msg) ->
       document.location = '/'
-      return
     .fail (msg) ->
       alert('エラーが発生しました')
-　　　return
-  return
+$('#modify').bind 'click', ->
+  console.log 'modify'
+  document.location = '/userdata_modify'
