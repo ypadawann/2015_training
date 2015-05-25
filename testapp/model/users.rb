@@ -75,7 +75,7 @@ module Model
 
       def update_department(id, department)
         user = Model::User.find(id)
-        user.department = Model::Departments.id_of(department)
+        user.department_id = Model::Departments.id_of(department)
         user.save
       end
 
@@ -104,8 +104,10 @@ module Model
       def status(id)
         user = Model::User.find_by_id(id)
         if user.nil?
+          p 'nil'
           nil
         else
+          p 'not nil'
           to_hash(user)
         end
       end
