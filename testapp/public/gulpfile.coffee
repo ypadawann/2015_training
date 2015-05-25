@@ -31,6 +31,7 @@ gulp.task('build:bundle', ['build:coffee'], () ->
          register: './temp/register.js',
          userpage: './temp/userpage.js',
          login: './temp/login.js',
+         userdata_modify: './temp/userdata_modify.js'
        },
        output: {
          filename: '[name].js',
