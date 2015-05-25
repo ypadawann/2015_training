@@ -1,29 +1,23 @@
 <h1>ユーザページ</h1>
-<%= @user_id %><br>
-<%= @name %>さん<br>
-
-<form action="/attend" method="post">
+<p id="user_id"><%= @user_id %></p>
+<p id="name"><%= @name %>さん</p>
+<div id="attend_time"></div>
+<div id="leave_time"></div>
 <p>
-  <input type="submit"  name="attend" value="出勤">
+  <input type="button" id="attend" value="出勤">
 </p>
-</form>
 
- 
-<form action="/leave" method="post">
 <p>
-  <input type="submit"  name="leave" value="退勤">
+  <input type="button" id="leave" value="退勤">
 </p>
-</form>
 
- 
-<form action="/read-data" method="post">
 <p>
   <input type="submit"  name="readdata" value="出退勤状況">
 </p>
-</form>
 
-<form action="/logout" method="post">
 <p>
-  <input type="submit"  name="logout" value="ログアウト">
+  <input type="button" id="logout" value="ログアウト">
 </p>
-</form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="dist/userpage.js"></script>
