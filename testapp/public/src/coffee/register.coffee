@@ -1,6 +1,6 @@
 $ ->
   $('#register').click ->
-    id = $('#no').val()
+    user_id = $('#no').val()
     name = $('#name').val()
     department = $('#department option:selected').text()
     password = $('#pass').val()
@@ -8,7 +8,7 @@ $ ->
       type: 'post'
       url: 'api/v1/users'
       data:
-        'id': id
+        'user_id': user_id
         'name': name
         'department': department
         'password': password
@@ -18,7 +18,7 @@ $ ->
           type: 'post'
           url: '/login'
           data:
-            'no': id
+            'no': user_id
             'password': password
           success: (msg) ->
             document.location = '/'
