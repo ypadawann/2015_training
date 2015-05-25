@@ -30,6 +30,7 @@ gulp.task('build:bundle', ['build:coffee'], () ->
          day: './temp/day.js',
          register: './temp/register.js',
          userpage: './temp/userpage.js',
+         login: './temp/login.js',
        },
        output: {
          filename: '[name].js',
