@@ -10,14 +10,18 @@ module Model
       timecards = Model::Timecard.where(day: day, user_id: user_id).first
       if timecards.nil?
         new_timecard_add(user_id, day, time, nil)
-#        return "#{day}は#{time}に出勤しました"
+        p "#{day}は#{time}に出勤しました"
         return true
-      else
-#        return '本日はすでに出勤しています'
-        return false
       end
+      if timecards.attendance.nil?
+        timecards.attendance = time
+        timecards.save
+        return true
+      end
+      p '本日はすでに出勤しています'
+      return false
     end
-
+    
     def self.update_attend(date, user_id, time)
       p 'update attend'
       timecard = Timecard.where(day: date, user_id: user_id).first
@@ -34,17 +38,17 @@ module Model
     def self.returnhome(day, user_id, time)
       timecards = Model::Timecard.where(day: day, user_id: user_id).first
       if timecards.nil?
-      #  return '本日はまだ出勤していません'
-        return false
-      elsif timecards.leaving.nil?
-        timecards.leaving = time
-        timecards.save
-        #return "#{day}は#{time}に退勤しました"
+        new_timecard_add(user_id, day, nil, time)
         return true
-      else
-#        return '本日はすでに退勤しています'
+      end
+      if !timecards.leaving.nil?
+        p ' 退勤済み'
         return false
       end
+      timecards.leaving = time
+      timecards.save
+      p "#{day}は#{time}に退勤しました"
+      return true
     end
 
     def self.update_leave(date, user_id, time)
