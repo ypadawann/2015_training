@@ -28,23 +28,25 @@ logout = ->
 $ ->
   $('#attend').bind 'click', ->
     attend().done (msg) ->
-      $('#attend_time').text msg.attendance + 'に出勤しました'
+      $('#attend_message').text msg.attendance + 'に出勤しました'
       return
     .fail (msg) ->
-      console.log('エラーが発生しました')
+      $('#attend_message').text '本日は既に出勤しています'
       return
     return
   $('#leave').bind 'click', ->
     leave().done (msg) ->
-      $('#leave_time').text msg.leaving + 'に退勤しました'
+      $('#leave_message').text msg.leaving + 'に退勤しました'
       return
     .fail (msg) ->
-      console.log('エラーが発生しました')
+      $('#leave_message').text '本日は既に退勤しています'
       return
     return
   $('#logout').bind 'click', ->
     logout().done (msg) ->
       document.location = '/'
-      console.log('成功？')
-    return
+      return
+    .fail (msg) ->
+      alert('エラーが発生しました')
+　　　return
   return
