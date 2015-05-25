@@ -75,7 +75,7 @@ module Model
 
       def update_department(id, department)
         user = Model::User.find(id)
-        user.department = Model::Departments.id_of(department)
+        user.department_id = Model::Departments.id_of(department)
         user.save
       end
 
