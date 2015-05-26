@@ -67,27 +67,28 @@ module Model
         end
       end
     end
-    
+
+    def self.push_empty_data(t, day_from, day_to)
+      day_from.upto(day_to) do |d|
+        t.push(day: d, attendance: '', leaving: '')
+      end
+    end
+
     def self.read_monthly_data(user_id, year, month)
-      timecards = Model::Timecard.where('day LIKE ?', "#{year}-#{month}-%")
+      timecards = Model::Timecard.where('day LIKE ?', "#{year + '_' + month}-%")
                   .where(user_id: user_id).order('day')
-      empty_data = { attendance: '', leaving: '' }
       i = 1
       timecard_json = []
       timecards.each do |t|
-        i.upto(t.day.day - 1) do
-          timecard_json.push(empty_data)
-        end
+        push_empty_data(timecard_json, i, t.day.day - 1)
         attendance = time_to_string(t.attendance)
         leaving = time_to_string(t.leaving)
-        timecard_json.push(attendance: attendance, leaving: leaving)
+        timecard_json.push(day: i, attendance: attendance, leaving: leaving)
         i = t.day.day + 1
       end
       max_day = (Date.new(year.to_i, month.to_i + 1) - 1).day
-      i.upto(max_day) do
-        timecard_json.push(empty_data)
-      end
-      timecard_json.to_json
+      push_empty_data(timecard_json, i, max_day)
+      timecard_json
     end
 
     def self.new_timecard_add(user_id, day, attendance, leaving)

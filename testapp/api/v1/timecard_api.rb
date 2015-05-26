@@ -63,8 +63,8 @@ module API
             Model::Departments.name_of(Model::Users.get_department(user_id))
           { user_id: user_id, name: name, department: department }
         end
-               
-        put '/attend-leave/:year_month' do
+
+        put '/attend-leave/:year/:month' do
           user_id = params[:user_id].to_i
           authenticate!(user_id)
           year_month = params[:year_month]
@@ -77,8 +77,17 @@ module API
           { user_id: user_id, name: name, department: department }
         end
 
+        get '/attend-leave/:year/:month' do
+        p  user_id = params[:user_id].to_i
+        p  year = params[:year]
+        p  month = params[:month]
+        p  data = Model::Timecard_operation.read_monthly_data(user_id, year, month)
+        p  name = Model::Users.get_name(user_id)
+        p  department =
+            Model::Departments.name_of(Model::Users.get_department(user_id))
+          { data: data ,user_id: user_id, name: name, department: department }
+        end
       end
     end
-  end    
+  end
 end
-
