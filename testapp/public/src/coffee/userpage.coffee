@@ -44,5 +44,4 @@ $('#logout').bind 'click', ->
     .fail (msg) ->
       alert('エラーが発生しました')
 $('#modify').bind 'click', ->
-  console.log 'modify'
   document.location = '/userdata_modify'
