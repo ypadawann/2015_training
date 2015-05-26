@@ -20,7 +20,7 @@
   </tr>
   <tr>
     <td class="menu" colspan="2">所属</td>
-    <td class="menu" colspan="2"><input type="text" value="<%= @department %>" style="width:150px; height:28px; border:none; background:none; text-align:center; vertical-align:middle; font-size: 8px"></td>
+    <td class="menu" colspan="2"><input type="text" id="department" value="" style="width:150px; height:28px; border:none; background:none; text-align:center; vertical-align:middle; font-size: 8px"></td>
     <td class="menu" style="border-style:none;"></td>
     <td class="menu" rowspan="2">　</td>
     <td class="menu" rowspan="2">　</td>
@@ -29,11 +29,11 @@
   </tr>
   <tr>
     <td class="menu" colspan="2">No.</td>
-    <td class="menu" colspan="2"><input type="text" value=<%= @user_id %> style="width:150px; height:28px; border:none; background:none; text-align:center; vertical-align:middle; font-size: 8px"></td>
+    <td class="menu" colspan="2"><input type="text" id="user_id" value="<%= @user_id %>" style="width:150px; height:28px; border:none; background:none; text-align:center; vertical-align:middle; font-size: 8px"></td>
   </tr>
   <tr>
     <td class="menu" colspan="2">氏名</td>
-    <td class="menu" colspan="2"><input type="text" value=<%= @name %> style="width:150px; height:28px; border:none; background:none; text-align:center; vertical-align:middle; font-size: 8px"></td>
+    <td class="menu" colspan="2"><input type="text" id="name" value="" style="width:150px; height:28px; border:none; background:none; text-align:center; vertical-align:middle; font-size: 8px"></td>
   </tr>
 
   <tr bgcolor="#BFBFBF">
@@ -70,10 +70,8 @@
   </tr>
 
 </table>
-<div style="display:none;" class="text">
-  <%= @json_str %>
-</div>
-<script type="text/javascript" src="dist/day.js" charset="UTF-8"></script>
 
+<script type="text/javascript" src="dist/day.js" charset="UTF-8"></script>
+<script type="text/javascript" src="dist/attendance_record.js"></script>
 </body>
 </html>
