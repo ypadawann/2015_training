@@ -18,10 +18,24 @@ class Main < Sinatra::Base
   set :bind, '0.0.0.0'
   set :erb, :escape_html => true
 
-
-  get '/' do
+  before do
     @user_id = session[:no]
     @name = Model::Users.get_name(@user_id.to_i)
+  end
+
+  helpers do
+    def show_erb
+      path = request.path
+      path.slice!(0, 1)
+      if File.exist?("#{settings.views}/#{path}.erb")
+        erb "#{path}".to_sym
+      else
+        raise Sinatra::NotFound.new
+      end
+    end
+  end
+
+  get '/' do
     if @name
       erb :userpage
     else
@@ -29,18 +43,14 @@ class Main < Sinatra::Base
     end
   end
 
-  get '/register' do
-    erb :reg
-  end
-
-  get '/admin' do
-    erb :admin
+  get %r{\/[\w\/]+} do
+    show_erb
   end
 
   post '/admin/register_department' do
     @name = params[:name]
     @succeed = Model::Departments.add(@name)
-    erb :register_department
+    show_erb
   end
 
   post '/admin/change_department' do
@@ -48,22 +58,13 @@ class Main < Sinatra::Base
     @new_name = params[:name]
     @old_name = Model::Departments.name_of(no)
     @succeed = Model::Departments.update(no, @new_name)
-    erb :change_department
+    show_erb
   end
 
   post '/admin/delete_department' do
     no = params[:no].to_i
     @name = Model::Departments.name_of(no)
     @succeed = Model::Departments.remove(no)
-    erb :delete_department
-  end
-
-  get '/read-data' do
-    erb :view_data
-  end
-
-  get '/userdata_modify' do
-    p @user_id = session[:no]
-    erb :userdata_modify
+    show_erb
   end
 end
