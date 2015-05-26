@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 
 require './model/users'
 
@@ -58,6 +59,7 @@ module API
           find_user!(params[:user_id])
           Model::Users.remove(params[:user_id])
           Model::Users.status(params[:user_id])
+          session_destroy()
         end
 
         desc 'ユーザ情報の変更'
@@ -88,13 +90,13 @@ module API
         end
         put '/login' do
           verify_password!(params[:user_id], params[:password])
-          env['rack.session'][:no] = params[:user_id]
+          session_create(params[:user_id])
           Model::Users.status(params[:user_id])
         end
 
         desc 'ログアウト'
         put '/logout' do
-          env['rack.session'].destroy
+          session_destroy()
           find_user!(params[:user_id])
           Model::Users.status(params[:user_id])
         end
