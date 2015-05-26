@@ -1,0 +1,27 @@
+<h1>ユーザ情報管理</h1>
+<p><div id="message"></div></p>
+<p>
+  ID:<input type="number" id="user_id" size="40">
+  <input type="button" id="user-select" value="選択">
+</p>
+<p>名前:<input type="text" id="name" size="40"></p>
+<p>所属：
+  <select id="department">
+    <option value="0" id="default_department"></option>
+    <%==
+       Model::Departments.list_ids.map { |d|
+       "<option value=#{d}>#{Model::Departments.name_of(d)}</option>"
+       }.join
+       %>
+  </select>
+</p>
+<p>new pass:<input type="password" id="new_password" size="40"></p>
+
+<p>
+  <input type="button" id="modify" value="変更">
+</p>
+<p>
+  <input type="button" id="delete" value="削除">
+</p>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="dist/admin_user.js"></script>
