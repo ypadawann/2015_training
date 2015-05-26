@@ -61,7 +61,7 @@ $('#logout').bind 'click', ->
 $('#readdata').bind 'click', ->
   readdata()
     .done (msg) ->
-      document.location = '/read-data'
+      document.location = '/view_data'
 
 $('#modify').bind 'click', ->
   document.location = '/userdata_modify'
