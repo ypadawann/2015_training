@@ -130,7 +130,7 @@ parametersを受け取り、resultsをJSONで返す。
     * errors
         * 403: 認証に失敗した
 
-* PUT users/:user_id/attend-leave/:year-month
+* PUT users/:user_id/attend-leave/:year/:month
     * 月の出退勤の一括更新
     * headers
     * parameters
@@ -145,7 +145,7 @@ parametersを受け取り、resultsをJSONで返す。
     * errors
         * 403: 認証に失敗した
 
-* GET users/:user_id/attend-leave/:year-month
+* GET users/:user_id/attend-leave/:year/:month
     * 月の出退勤情報一括取得
     * headers
     * parameters
