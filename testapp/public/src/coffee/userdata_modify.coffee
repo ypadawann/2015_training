@@ -1,5 +1,5 @@
 user_select = ->
-  console.log user_id = $("#user_id").text()
+  user_id = $("#user_id").text()
   deferred = $.ajax
     async:     true
     type:      "GET"
@@ -34,71 +34,38 @@ user_delete = ->
   deferred.promise()
 
 
-$('#user_select').bind 'click', ->
-  console.log 'user select'
-  user_select()
-    .done (data) ->
-      console.log('ok')
-      console.log(data.user_id)
-      console.log(data.name)
-      console.log(data.department)
-      document.querySelector("#name").value = data.name
-      ($('#department option').filter ->
-        return $(this).text() is data.department).prop 'selected', true
-    .fail (xhr,  status, error) ->
-      console.log('ng')
-      console.log(xhr)
-      console.log(xhr.status)
-      console.log(xhr.responseText)
-      console.log(status)
-      console.log(error)
-
-
 $('#modify').bind 'click', ->
-  console.log 'modifymodify'
   user_modify()
     .done (data)   ->
-      console.log 'ok'
-      console.log data.user_id
-      console.log data.name
-      console.log data.department
-      $("#message").text 'Modify succeeded'
+      $("#message").text 'ユーザ情報を変更しました'
     .fail (xhr,  status, error) ->
-      console.log('ng')
-      console.log(xhr)
-      console.log(xhr.status)
-      console.log(xhr.responseText)
-      console.log(status)
-      console.log(error)
+      if xhr.status is 403
+        $("#message").text '認証に失敗しました'
+      else
+        $("#message").text 'エラーが発生しました'
 
 
 $('#delete').click ->
-  console.log 'delete'
-  user_delete()
-    .done (data) ->
-      console.log 'ok'
-    .fail (xhr,  status, error) ->
-      console.log('ng')
-      console.log(xhr)
-      console.log(xhr.status)
-      console.log(xhr.responseText)
-      console.log(status)
-      console.log(error)
+  if !window.confirm '本当にアカウントを削除しますか？'
+    $("#message").text 'アカウント削除をキャンセルしました'
+  else
+    user_delete()
+      .done (data) ->
+        alert 'アカウントを削除しました'
+        document.location = '/'
+      .fail (xhr,  status, error) ->
+        $("#message").text 'エラーが発生しました'
+
 do ->    
 user_select()
     .done (data) ->
-      console.log('ok')
-      console.log(data.user_id)
-      console.log(data.name)
-      console.log(data.department)
       document.querySelector("#name").value = data.name
       ($('#department option').filter ->
         return $(this).text() is data.department).prop 'selected', true
     .fail (xhr,  status, error) ->
-      console.log('ng')
-      console.log(xhr)
-      console.log(xhr.status)
-      console.log(xhr.responseText)
-      console.log(status)
-      console.log(error)
+      if xhr.status is 403
+        $("#message").text '認証に失敗しました'
+      else
+        $("#message").text 'エラーが発生しました'
+      
 
