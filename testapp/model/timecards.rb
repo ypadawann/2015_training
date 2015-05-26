@@ -74,8 +74,8 @@ module Model
       end
     end
 
-    def self.read_monthly_data(user_id, year_month)
-      timecards = Model::Timecard.where('day LIKE ?', "#{year_month}-%")
+    def self.read_monthly_data(user_id, year, month)
+      timecards = Model::Timecard.where('day LIKE ?', "#{year + '_' + month}-%")
                   .where(user_id: user_id).order('day')
       i = 1
       timecard_json = []
