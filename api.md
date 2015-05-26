@@ -101,7 +101,7 @@ parametersを受け取り、resultsをJSONで返す。
         * name: string
         * department: string
         * date: date
-        * leaving: time
+       * leaving: time
     * errors
         * 403: 認証に失敗した
         * 404: 出勤していない
@@ -207,6 +207,31 @@ parametersを受け取り、resultsをJSONで返す。
     * errors
         * 400: 所属している人がいる
         * 404: 部署が見つからない
+
+
+* PUT admin/:user_id
+    * 管理者によるユーザ情報変更
+    * headers
+    * parameters
+        * (optional) name: string
+        * (optional) department: string
+	* (optional) new_password: string
+    * results
+        * user_id: integer
+        * name: string
+        * department: string
+    * errors
+
+* DELETE admin/:user_id
+    * 管理者によるユーザ削除
+    * headers
+    * parameters
+    * results
+    * errors
+        * 404: ユーザが見つからない
+
+
+
 
 ## APIを追加するには
 
