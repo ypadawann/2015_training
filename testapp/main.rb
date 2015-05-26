@@ -135,6 +135,10 @@ class Main < Sinatra::Base
     end
   end
 
+  get '/read-data' do
+    erb :view_data
+  end
+
   get '/userdata_modify' do
     p @user_id = session[:no]
     erb :userdata_modify
