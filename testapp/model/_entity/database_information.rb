@@ -30,4 +30,10 @@ module Model
 
   class Timecard < ActiveRecord::Base
   end
+
+  class Admin < ActiveRecord::Base
+    validates :admin_name, presence: true
+    validates :admin_name, uniqueness: true
+    validates :password, uniqueness: true
+  end
 end
