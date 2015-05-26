@@ -59,6 +59,7 @@ module API
           find_user!(params[:user_id])
           Model::Users.remove(params[:user_id])
           Model::Users.status(params[:user_id])
+          session_destroy()
         end
 
         desc 'ユーザ情報の変更'
