@@ -25,28 +25,43 @@ logout = ->
     data: 'user_id': user_id)
   request.promise()
 
-$ ->
-  $('#attend').bind 'click', ->
-    attend().done (msg) ->
+readdata = ->
+  user_id = document.getElementById('user_id').textContent
+  year = getFullYear()
+  month = getMonth() + 1
+  request = $.ajax(
+    type: 'get'
+    url: 'api/v1/users/' + user_id + '/attend-leave/' + year + '/' + month
+    dataType: 'json'
+    data:
+          'user_id': user_id
+          'year': year
+          'month': month)
+  request.promise()
+
+$('#attend').bind 'click', ->
+  attend()
+    .done (msg) ->
       $('#attend_message').text msg.attendance + 'に出勤しました'
-      return
     .fail (msg) ->
+      console.log(msg.status)
       $('#attend_message').text '本日は既に出勤しています'
-      return
-    return
-  $('#leave').bind 'click', ->
-    leave().done (msg) ->
-      $('#leave_message').text msg.leaving + 'に退勤しました'
-      return
-    .fail (msg) ->
+$('#leave').bind 'click', ->
+  leave().done (msg) ->
+    $('#leave_message').text msg.leaving + 'に退勤しました'
+  .fail (msg) ->
       $('#leave_message').text '本日は既に退勤しています'
-      return
-    return
-  $('#logout').bind 'click', ->
-    logout().done (msg) ->
-      document.location = '/'
-      return
-    .fail (msg) ->
+      console.log(msg.status)
+$('#logout').bind 'click', ->
+  logout().done (msg) ->
+    document.location = '/'
+  .fail (msg) ->
       alert('エラーが発生しました')
-　　　return
-  return
+
+$('#readdata').bind 'click', ->
+  readdata()
+    .done (msg) ->
+      document.location = '/read-data'
+
+$('#modify').bind 'click', ->
+  document.location = '/userdata_modify'
