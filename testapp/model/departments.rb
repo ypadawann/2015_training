@@ -48,5 +48,9 @@ module Model
         user[:department] == name
       }
     end
+
+    def self.exists?(id)
+      Model::Department.exists?(id)
+    end
   end
 end

@@ -1,34 +1,32 @@
+
 $ ->
-  $('#register').click ->
-    user_id = $('#no').val()
-    name = $('#name').val()
-    department = $('#department option:selected').text()
-    password = $('#pass').val()
-    request = $.ajax(
+  $('#register').bind 'click', ->
+    register()
+    .done ->
+      login()
+      .done ->
+        document.location = '/'
+      .fail (xhr) ->
+        alert ("#{xhr.status} #{xhr.statusText}")
+    .fail (xhr) ->
+      alert ("#{xhr.status} #{xhr.statusText}")
+
+  register = ->
+    $.ajax(
       type: 'post'
       url: 'api/v1/users'
       data:
-        'user_id': user_id
-        'name': name
-        'department': department
-        'password': password
-      success: (msg) ->
-        `var request`
-        request = $.ajax(
-          type: 'post'
-          url: '/login'
-          data:
-            'no': user_id
-            'password': password
-          success: (msg) ->
-            document.location = '/'
-            return
-        )
-        return
-      error: ->
-        alert 'エラー'
-        document.location = '/register'
-        return
+        'user_id'   : $('#no').val()
+        'name'      : $('#name').val()
+        'department': $('#department').text()
+        'password'  : $('#pass').val()
     )
-    return
-  return
+
+  login = ->
+    $.ajax(
+      type: 'put'
+      url: "api/v1/users/#{$('#no').val()}/login"
+      data:
+        'user_id' : $('#no').val()
+        'password': $('#pass').val()
+    )
