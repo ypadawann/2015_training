@@ -45,6 +45,10 @@ class Main < Sinatra::Base
     def js_path
       "#{app_path}/dist/js"
     end
+
+    def css_path
+      "#{app_path}/dist/style"
+    end
   end
 
   get '/' do
