@@ -64,7 +64,7 @@ $('#delete').click ->
     user_delete()
       .done (data) ->
         alert 'アカウントを削除しました'
-        document.location = '/'
+        location.reload()
       .fail (xhr,  status, error) ->
         $("#message").text 'エラーが発生しました'
 
