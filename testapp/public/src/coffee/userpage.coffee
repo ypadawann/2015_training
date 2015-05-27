@@ -24,22 +24,24 @@ logout = ->
 
 $('#attend').bind 'click', ->
   attend()
-    .done (msg) ->
-      $('#attend_message').text msg.attendance + 'に出勤しました'
-    .fail (msg) ->
-      console.log(msg.status)
-      $('#attend_message').text '本日は既に出勤しています'
+  .done (msg) ->
+    $('#attend_message').text msg.attendance + 'に出勤しました'
+  .fail (msg) ->
+    console.log(msg.status)
+    $('#attend_message').text '本日は既に出勤しています'
 $('#leave').bind 'click', ->
-  leave().done (msg) ->
+  leave()
+  .done (msg) ->
     $('#leave_message').text msg.leaving + 'に退勤しました'
   .fail (msg) ->
-      $('#leave_message').text '本日は既に退勤しています'
-      console.log(msg.status)
+    $('#leave_message').text '本日は既に退勤しています'
+    console.log(msg.status)
 $('#logout').bind 'click', ->
-  logout().done (msg) ->
+  logout()
+  .done (msg) ->
     document.location = '/'
   .fail (msg) ->
-      alert('エラーが発生しました')
+    alert('エラーが発生しました')
 $('#readdata').bind 'click', ->
   document.location = '/read_data'
 $('#modify').bind 'click', ->
