@@ -78,14 +78,14 @@ module API
         end
 
         get '/attend-leave/:year/:month' do
-        p  user_id = params[:user_id].to_i
-        p  year = params[:year]
-        p  month = params[:month]
-        p  data = Model::Timecard_operation.read_monthly_data(user_id, year, month)
-        p  name = Model::Users.get_name(user_id)
-        p  department =
+          user_id = params[:user_id].to_i
+          year = params[:year]
+          month = params[:month]
+          data = Model::Timecard_operation.read_monthly_data(user_id, year, month)
+          name = Model::Users.get_name(user_id)
+          department =
             Model::Departments.name_of(Model::Users.get_department(user_id))
-          { data: data ,user_id: user_id, name: name, department: department }
+         { data: data ,user_id: user_id, name: name, department: department }
         end
       end
     end

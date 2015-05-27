@@ -28,6 +28,7 @@ gulp.task('build:bundle', ['build:coffee'], () ->
     .pipe gulpWebpack({
        entry: {
          day: './temp/day.js',
+         attendance_record: './temp/attendance_record.js',
          register: './temp/register.js',
          userpage: './temp/userpage.js',
          login: './temp/login.js',

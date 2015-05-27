@@ -27,8 +27,9 @@ logout = ->
 
 readdata = ->
   user_id = document.getElementById('user_id').textContent
-  year = getFullYear()
-  month = getMonth() + 1
+  now_day = new Date()
+  year = now_day.getFullYear()
+  month = now_day.getMonth() + 1
   request = $.ajax(
     type: 'get'
     url: 'api/v1/users/' + user_id + '/attend-leave/' + year + '/' + month
@@ -57,11 +58,10 @@ $('#logout').bind 'click', ->
     document.location = '/'
   .fail (msg) ->
       alert('エラーが発生しました')
-
 $('#readdata').bind 'click', ->
+<<<<<<< HEAD
   readdata()
     .done (msg) ->
       document.location = '/view_data'
-
 $('#modify').bind 'click', ->
   document.location = '/userdata_modify'
