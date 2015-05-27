@@ -43,7 +43,7 @@ class Main < Sinatra::Base
     end
 
     def js_path
-      "#{app_path}/dist"
+      "#{app_path}/dist/js"
     end
   end
 

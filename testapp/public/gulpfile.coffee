@@ -40,7 +40,7 @@ gulp.task('build:bundle', ['build:coffee'], () ->
          filename: '[name].js',
        },
      })
-    .pipe gulp.dest('dist/')
+    .pipe gulp.dest('dist/js/')
 )
 
 
