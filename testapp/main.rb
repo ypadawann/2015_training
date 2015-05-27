@@ -12,6 +12,8 @@ require 'erubis'
 require_relative 'model/users'
 require_relative 'model/departments'
 require_relative 'model/timecards'
+require_relative 'model/admins'
+
 
 class Main < Sinatra::Base
   use Rack::Session::Cookie, key: 'ams_session', expire_after: 86_400
@@ -66,5 +68,17 @@ class Main < Sinatra::Base
     @name = Model::Departments.name_of(no)
     @succeed = Model::Departments.remove(no)
     show_erb
+  end
+
+  get '/admin-add' do
+    Model::Admins.add('root', 'password')
+  end
+
+  get '/admin-auth' do
+    if Model::Admins.verify('root', 'password')
+      p 'true'
+    else
+      p 'false'
+    end
   end
 end

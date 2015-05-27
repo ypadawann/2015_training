@@ -33,6 +33,7 @@ gulp.task('build:bundle', ['build:coffee'], () ->
          userpage: './temp/userpage.js',
          login: './temp/login.js',
          userdata_modify: './temp/userdata_modify.js'
+         admin_user: './temp/admin_user.js'
        },
        output: {
          filename: '[name].js',
