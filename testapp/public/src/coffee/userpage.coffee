@@ -59,7 +59,6 @@ $('#logout').bind 'click', ->
   .fail (msg) ->
       alert('エラーが発生しました')
 $('#readdata').bind 'click', ->
-<<<<<<< HEAD
   readdata()
     .done (msg) ->
       document.location = '/view_data'
