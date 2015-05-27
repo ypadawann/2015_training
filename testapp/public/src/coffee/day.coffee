@@ -24,8 +24,8 @@ makeRow = (table, rowNumber) ->
   cell11.setAttribute 'class', 'line'
   data1 = '<input type="text" id="day' + rowNumber + '" readonly="readonly" style="width:27px; height:21px; border:none; background:none; text-align:center; vertical-align:middle; font-size:6px;" />'
   data2 = '<input type="text" id="week' + rowNumber + '" readonly="readonly" style="width:27px; height:21px; border:none; background:none; text-align:center; vertical-align:middle; font-size:6px;" />'
-  data3 = '<input type="text" id="attendance' + rowNumber + '" value="' + json_obj[rowNumber - 1].attendance + '" style="width:75px; height:21px; border:none; background:none; text-align:center; vertical-align:middle; font-size:6px;" />'
-  data4 = '<input type="text" id="leaving' + rowNumber + '" value="' + json_obj[rowNumber - 1].leaving + '" style="width:75px; height:21px; border:none; background:none; text-align:center; vertical-align:middle; font-size:6px;" />'
+  data3 = '<input type="text" id="attendance' + rowNumber + '" value="  " style="width:75px; height:21px; border:none; background:none; text-align:center; vertical-align:middle; font-size:6px;" />'
+  data4 = '<input type="text" id="leaving' + rowNumber + '" value="  " style="width:75px; height:21px; border:none; background:none; text-align:center; vertical-align:middle; font-size:6px;" />'
   data5 = '<input type="text" id="mark' + rowNumber + '" style="width:64px; height:21px; border:none; background:none; text-align:center; vertical-align:middle; font-size:6px;" />'
   data6 = ''
   data7 = ''
@@ -76,8 +76,6 @@ isHolidays = (year, month, day) ->
     return true
   false
 
-text = document.querySelector('.text').textContent
-json_obj = JSON.parse(text)
 ROW_NUMBER_OF_HEADER = 5
 DATE_OF_WEEKS = [
   '日'
@@ -108,8 +106,8 @@ while counter <= date
     #振替休日
     if weekDayOfFirstDay == 0
       makeHoliday++
-  else if makeHoliday == 1
-    row.style.backgroundColor = '#D9D9D9'
+    else if makeHoliday == 1
+      row.style.backgroundColor = '#D9D9D9'
     makeHoliday--
   # 曜日の循環をリセットしている
   if weekDayOfFirstDay == 6
