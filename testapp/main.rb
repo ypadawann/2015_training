@@ -20,6 +20,8 @@ class Main < Sinatra::Base
   set :bind, '0.0.0.0'
   set :erb, :escape_html => true
 
+  register Sinatra::Reloader
+
   before do
     @user_id = session[:no]
     @name = Model::Users.get_name(@user_id.to_i)
@@ -38,11 +40,8 @@ class Main < Sinatra::Base
   end
 
   get '/' do
-    if @name
-      erb :userpage
-    else
-      erb :login
-    end
+    redirect to('/userpage') if @name
+    erb :index
   end
 
   get %r{admin\/*} do
