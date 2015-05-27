@@ -208,6 +208,31 @@ parametersを受け取り、resultsをJSONで返す。
         * 400: 所属している人がいる
         * 404: 部署が見つからない
 
+
+* PUT admin/:user_id
+    * 管理者によるユーザ情報変更
+    * headers
+    * parameters
+        * (optional) name: string
+        * (optional) department: string
+	* (optional) new_password: string
+    * results
+        * user_id: integer
+        * name: string
+        * department: string
+    * errors
+
+* DELETE admin/:user_id
+    * 管理者によるユーザ削除
+    * headers
+    * parameters
+    * results
+    * errors
+        * 404: ユーザが見つからない
+
+
+
+
 ## APIを追加するには
 
 api/v1/myclass.rb に
