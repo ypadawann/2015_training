@@ -27,8 +27,7 @@ gulp.task('build:bundle', ['build:coffee'], () ->
     .src './temp/*.js'
     .pipe gulpWebpack({
        entry: {
-         day: './temp/day.js',
-         attendance_record: './temp/attendance_record.js',
+         read_data: ['./temp/attendance_record.js', './temp/read_data.js'],
          register: './temp/register.js',
          userpage: './temp/userpage.js',
          login: './temp/login.js',
@@ -41,7 +40,7 @@ gulp.task('build:bundle', ['build:coffee'], () ->
          filename: '[name].js',
        },
      })
-    .pipe gulp.dest('dist/')
+    .pipe gulp.dest('dist/js/')
 )
 
 

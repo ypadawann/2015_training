@@ -37,6 +37,14 @@ class Main < Sinatra::Base
         raise Sinatra::NotFound.new
       end
     end
+
+    def app_path
+      "#{request.scheme}://#{request.host}:#{request.port}#{request.script_name}"
+    end
+
+    def js_path
+      "#{app_path}/dist/js"
+    end
   end
 
   get '/' do
