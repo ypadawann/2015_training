@@ -40,11 +40,8 @@ class Main < Sinatra::Base
   end
 
   get '/' do
-    if @name
-      erb :userpage
-    else
-      erb :login
-    end
+    redirect to('/userpage') if @name
+    erb :index
   end
 
   get %r{admin\/*} do
