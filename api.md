@@ -101,7 +101,7 @@ parametersを受け取り、resultsをJSONで返す。
         * name: string
         * department: string
         * date: date
-       * leaving: time
+        * leaving: time
     * errors
         * 403: 認証に失敗した
         * 404: 出勤していない
