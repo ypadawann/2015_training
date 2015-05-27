@@ -2,7 +2,7 @@ logout = ->
   deferred = $.ajax
     async:     true
     type:      "PUT"
-    url:       '/api/v1/admin/logout'
+    url:       './api/v1/admin/logout'
 
 
 
