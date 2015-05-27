@@ -18,7 +18,7 @@ $ ->
       data:
         'user_id'   : $('#no').val()
         'name'      : $('#name').val()
-        'department': $('#department').text()
+        'department': $('#department option:selected').text()
         'password'  : $('#pass').val()
     )
 
