@@ -230,6 +230,26 @@ parametersを受け取り、resultsをJSONで返す。
     * errors
         * 404: ユーザが見つからない
 
+* PUT admin/login
+    * 管理者ログイン
+    * headers
+    * parameters
+	* admin_name: string
+        * password: string
+    * results
+    * errors
+        * 403: 認証に失敗した
+
+* PUT admin/logout
+    * 管理者ログアウト
+    * headers
+    * parameters
+    * results
+    * errors
+        * 403: 認証に失敗した
+
+
+
 
 
 
