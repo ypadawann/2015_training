@@ -44,14 +44,6 @@ class Main < Sinatra::Base
     erb :index
   end
 
-  get %r{admin\/*} do
-    if session[:admin_login_status]
-      show_erb
-    else
-      erb 'admin/login'.to_sym
-    end
-  end
-
   get %r{\/[\w\/]+} do
     show_erb
   end

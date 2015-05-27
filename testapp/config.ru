@@ -1,7 +1,22 @@
 
 require './main'
+require './admin'
 
 require './api/base.rb'
 
-use Rack::Session::Cookie, key: 'ams_session', expire_after: 86_400
-run Rack::Cascade.new [API::Base, Main]
+
+map '/admin' do
+  use Rack::Session::Cookie, 
+    key: 'admin_session',
+    expire_after: 3_600
+
+  run Rack::Cascade.new [API::Base, Admin]
+end
+
+map '/' do
+  use Rack::Session::Cookie,
+    key: 'ams_session',
+    expire_after: 86_400
+
+  run Rack::Cascade.new [API::Base, Main]
+end
