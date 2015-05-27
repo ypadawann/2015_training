@@ -20,6 +20,8 @@ class Main < Sinatra::Base
   set :bind, '0.0.0.0'
   set :erb, :escape_html => true
 
+  register Sinatra::Reloader
+
   before do
     @user_id = session[:no]
     @name = Model::Users.get_name(@user_id.to_i)
