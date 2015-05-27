@@ -1,0 +1,27 @@
+<h1>ユーザページ</h1>
+<p id="user_id"><%= @user_id %></p>
+<p id="name"><%= @name %>さん</p>
+<div id="attend_message"></div>
+<div id="leave_message"></div>
+<p>
+  <input type="button" id="attend" value="出勤">
+</p>
+
+<p>
+  <input type="button" id="leave" value="退勤">
+</p>
+
+<p>
+  <input type="button" id="readdata" value="出退勤状況">
+</p>
+
+<p>
+  <input type="button" id="modify" value="ユーザ情報変更">
+</p>
+
+<p>
+  <input type="button" id="logout" value="ログアウト">
+</p>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="dist/userpage.js"></script>
