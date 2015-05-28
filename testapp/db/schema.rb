@@ -11,7 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150430040917) do
+ActiveRecord::Schema.define(version: 4) do
+
+  create_table "admins", force: :cascade do |t|
+    t.string "name",     limit: 50,  null: false
+    t.string "password", limit: 255, null: false
+  end
 
   create_table "departments", force: :cascade do |t|
     t.string "name", limit: 50, null: false
