@@ -208,34 +208,41 @@ parametersを受け取り、resultsをJSONで返す。
         * 400: 所属している人がいる
         * 404: 部署が見つからない
 
-
-* PUT admin/:user_id
-    * 管理者によるユーザ情報変更
-    * headers
+* POST admin
+    * 管理者登録
+    * header
     * parameters
-        * (optional) name: string
-        * (optional) department: string
-	* (optional) new_password: string
+        * admin_id
+	* admin_name
+	* admin_password
     * results
-        * user_id: integer
-        * name: string
-        * department: string
-    * errors
+    * error
 
-* DELETE admin/:user_id
-    * 管理者によるユーザ削除
+* DELETE admin/:admin_id/
+    * 管理者削除
     * headers
     * parameters
     * results
     * errors
-        * 404: ユーザが見つからない
+        * 403: 認証に失敗した
+
+* PUT admin/:admin_id/
+    * 管理者情報更新
+    * headers
+    * parameters
+        * admin_name
+	* admin_new_password
+	* admin_password
+    * results
+    * errors
+        * 403: 認証に失敗した
 
 * PUT admin/login
     * 管理者ログイン
     * headers
     * parameters
-	* admin_name: string
-        * password: string
+	* admin_id
+        * admin_password
     * results
     * errors
         * 403: 認証に失敗した
@@ -248,6 +255,39 @@ parametersを受け取り、resultsをJSONで返す。
     * errors
         * 403: 認証に失敗した
 
+* GET admin/users/:user_id
+    * 管理者によるユーザ情報取得
+    * headers
+    * parameters
+    * results
+        * user_id: integer
+        * user_name: string
+        * department: string
+    * errors
+
+
+
+* PUT admin/users/:user_id
+    * 管理者によるユーザ情報変更
+    * headers
+    * parameters
+        * (optional) user_name: string
+        * (optional) department: string
+	* (optional) user_new_password: string
+    * results
+        * user_id: integer
+        * user_name: string
+        * department: string
+    * errors
+
+
+* DELETE admin/users/:user_id
+    * 管理者によるユーザ削除
+    * headers
+    * parameters
+    * results
+    * errors
+        * 404: ユーザが見つからない
 
 
 
