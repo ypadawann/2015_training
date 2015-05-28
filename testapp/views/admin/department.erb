@@ -1,0 +1,27 @@
+<h1>部署管理</h1>
+
+<p>部署の登録
+  <input type="text" id="register-name" size="40">
+  <input type="button" id="department-register" value="登録">
+</p>
+
+<p>部署の変更
+  <select id="department-rename-id"><%==
+    Model::Departments.list_ids.map { |d|
+      "<option value=#{d}>#{Model::Departments.name_of(d)}</option>"
+    }.join
+  %></select>
+  ⇒<input type="text" id="new-department-name" size="40">
+  <input type="button" id="department-rename" value="変更">
+</p>
+
+<p>部署の削除
+  <select id="department-delete-id"><%==
+    Model::Departments.list_ids.map { |d|
+      "<option value=#{d}>#{Model::Departments.name_of(d)}</option>"
+    }.join
+  %></select>
+  <input type="button" id="department-delete" value="削除">
+</p>
+
+<script type="text/javascript" src=<%= "#{js_path}/admin_department.js"%>></script>

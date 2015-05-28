@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+require './model/departments'
 
 module API
   module V1
@@ -5,7 +7,7 @@ module API
       helpers do
         def find!(department_id)
           error!('Not Found', 404) unless
-            Departments.exists?(department_id)
+            Model::Departments.exists?(department_id)
         end
       end
 
@@ -20,8 +22,8 @@ module API
           requires :name, type: String, desc: '部署名'
         end
         post do
-          if Departments.add(params[:name])
-            { department_id: Departments.id_of(params[:name]),
+          if Model::Departments.add(params[:name])
+            { department_id: Model::Departments.id_of(params[:name]),
               name: params[:name] }
           else
             error!('Failed to Register', 400)
@@ -45,7 +47,7 @@ module API
           end
           put do
             find!(params[:department_id])
-            Departments.update(params[:department_id], params[:name])
+            Model::Departments.update(params[:department_id], params[:name])
             { department_id: params[:department_id], name: params[:name] }
           end
 
@@ -53,7 +55,7 @@ module API
           delete do
             find!(params[:department_id])
             name = Model::Departments.name_of(params[:department_id])
-            if Departments.remove(params[:department_id])
+            if Model::Departments.remove(params[:department_id])
               { department_id: params[:department_id], name: name }
             else
               error!('Failed to Delete', 400)

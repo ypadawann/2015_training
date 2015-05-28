@@ -1,5 +1,6 @@
 
 require './api/v1/users'
+require './api/v1/departments'
 require './api/v1/timecard_api'
 require './api/v1/utils'
 require './api/v1/admin'
@@ -13,6 +14,7 @@ module API
       helpers Utils
 
       mount Users
+      mount Departments
       mount Timecards
       mount Admin
     end
