@@ -26,6 +26,7 @@ $ ->
     $.ajax(
       type: 'put'
       url: "api/v1/users/#{$('#no').val()}/login"
+      url: "#{location.protocol}//#{location.host}/api/v1/users/#{$('#no').val()}/login"
       data:
         'user_id' : $('#no').val()
         'password': $('#pass').val()

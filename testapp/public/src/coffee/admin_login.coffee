@@ -8,7 +8,7 @@ login = ->
   deferred = $.ajax
     async: false
     type: 'PUT'
-    url: './api/v1/admin/login'
+    url: "#{location.protocol}//#{location.host}/api/v1/admin/login"
     data: {
             admin_id: parseInt(admin_id),
             admin_password: password

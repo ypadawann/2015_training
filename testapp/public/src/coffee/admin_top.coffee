@@ -2,9 +2,10 @@ logout = ->
   deferred = $.ajax
     async:     true
     type:      "PUT"
-    url:       './api/v1/admin/logout'
+    url: "#{location.protocol}//#{location.host}/api/v1/admin/logout"
 
-
+console.log (location.host)
+console.log location.protocol
 
 $('#admin-user').bind 'click', ->
   document.location = '/admin/user'
