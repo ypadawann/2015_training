@@ -2,6 +2,7 @@ login = ->
   user_id = $('#user_id').val()
   password = $('#password').val()
   request = $.ajax(
+    async: false
     type: 'put'
     url: 'api/v1/users/' + user_id + '/login'
     dataType: 'json'
