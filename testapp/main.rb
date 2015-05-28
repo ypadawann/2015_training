@@ -39,7 +39,7 @@ class Main < Sinatra::Base
     end
 
     def app_path
-      "#{request.scheme}://#{request.host}:#{request.port}#{request.script_name}"
+      "#{request.scheme}://#{request.host_with_port}"
     end
 
     def js_path
