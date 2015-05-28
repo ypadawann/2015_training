@@ -6,34 +6,13 @@ require 'active_support/all'
 
 require_relative '_entity/database_information'
 require_relative './departments'
+require_relative './helpers'
 
 module Model
   class Users
-    DELIMITER = '$'
-    HASH_ITERATIONS = 1000
 
     class <<self
       private
-
-      def hash(password, salt)
-        password += salt
-        HASH_ITERATIONS.times do
-          password = Digest::SHA256.hexdigest(password)
-        end
-        password
-      end
-
-      def salt_and_hash(password)
-        salt = SecureRandom.base64(24).to_s
-        hashed = hash(password, salt)
-        "#{hashed}#{DELIMITER}#{salt}"
-      end
-
-      def verify_password(stored, password)
-        correct_hash, salt = stored.split(DELIMITER)
-        correct_hash == hash(password, salt)
-      end
-
       def to_hash(user)
         { user_id: user.id,
           name: user.name,
@@ -44,7 +23,7 @@ module Model
 
       def verify(id, password)
         user = Model::User.find_by_id(id)
-        user && verify_password(user.password, password)
+        user && Model::Helper.start_verify(user.password, password)
       end
 
       def add(id, name, department, password)
@@ -53,7 +32,7 @@ module Model
             id: id,
             name: name,
             department_id: Model::Departments.id_of(department),
-            password: salt_and_hash(password)
+            password: Model::Helper.start_hash(password)
           )
         user.save
       end
@@ -81,7 +60,7 @@ module Model
 
       def update_password(id, password)
         user = Model::User.find(id)
-        user.password = salt_and_hash(password)
+        user.password = Model::Helper.start_hash(password)
         user.save
       end
 

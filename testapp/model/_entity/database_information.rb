@@ -32,8 +32,9 @@ module Model
   end
 
   class Admin < ActiveRecord::Base
-    validates :admin_name, presence: true
-    validates :admin_name, uniqueness: true
-    validates :password, uniqueness: true
+    validates :id, presence: true
+    validates :id, uniqueness: true
+    validates :name, presence: true
+    validates :password, presence: true
   end
 end
