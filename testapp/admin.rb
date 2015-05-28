@@ -20,11 +20,6 @@ class Admin < Sinatra::Base
   set :bind, '0.0.0.0'
   set :erb, :escape_html => true
 
-  before do
-    @user_id = session[:no]
-    @name = Model::Users.get_name(@user_id.to_i)
-  end
-
   helpers do
     def show_erb
       path = request.path
@@ -36,13 +31,13 @@ class Admin < Sinatra::Base
       end
     end
     def app_path
-      "#{request.scheme}://#{request.host}:#{request.port}#{request.script_name}"
+      "#{request.scheme}://#{request.host_with_port}"
     end
-    
+
     def js_path
       "#{app_path}/dist/js"
     end
-    
+
     def css_path
       "#{app_path}/dist/style"
     end
@@ -56,5 +51,5 @@ class Admin < Sinatra::Base
       erb 'admin/login'.to_sym
     end
   end
-  
+
 end
