@@ -118,7 +118,8 @@ $ RACK_ENV=test bundle exec rake db:migrate
 退出時刻|leaving|time|yes
 
 
-**Adminsテーブル***
+**Adminsテーブル**
+
 説明|Field|Type|Null|Key|Default
 --:|:--|:--|:--|:--|:--
 ユーザID|id|int(11)|no|PRI, AUTOINC|NULL
