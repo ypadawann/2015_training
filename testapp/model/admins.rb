@@ -11,30 +11,31 @@ module Model
     class <<self
       public
 
-      def verify(name, password)
-        admin = Model::Admin.find_by(admin_name: name)
+      def verify(id, password)
+        admin = Model::Admin.find_by_id(id)
         admin && Model::Helper.start_verify(admin.password, password)
       end
 
-      def add(name, password)
+      def add(id, name, password)
         admin =
           Model::Admin.new(
-            admin_name: name,
+            id: id,
+            name: name,
             password: Model::Helper.start_hash(password)
           )
         admin.save
       end
 
-      def remove(name)
-        Model::Admin.destroy(name)
+      def remove(id)
+        Model::Admin.destroy(id)
         true
       rescue ActiveRecord::RecordNotFound,
              ActiveRecord::StatementInvalid
         false
       end
 
-      def update_password(name, password)
-        admin = Model::Admin.find_by(admin_name: name)
+      def update_password(id, password)
+        admin = Model::Admin.find_by_id(id)
         admin.password = Model::Helper.start_hash(password)
         admin.save
       end

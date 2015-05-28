@@ -50,7 +50,7 @@ class Admin < Sinatra::Base
 
   get '/*' do
     p 'admin'
-    if session[:admin_login_status]
+    if session[:login_status]
       show_erb
     else
       erb 'admin/login'.to_sym
