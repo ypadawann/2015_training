@@ -116,3 +116,11 @@ $ RACK_ENV=test bundle exec rake db:migrate
 社員番号|user_id|int(11)|no|FK(users.id)|NULL
 入室時刻|attendance|time|yes||NULL
 退出時刻|leaving|time|yes
+
+
+**Adminsテーブル***
+説明|Field|Type|Null|Key|Default
+--:|:--|:--|:--|:--|:--
+ユーザID|id|int(11)|no|PRI, AUTOINC|NULL
+ユーザ名|name|varchar(50)|no||NULL
+パスワード|user_id|int(11)|no|FK(users.id)|NULL
