@@ -1,6 +1,6 @@
 login = ->
-  admin_id = prompt('IDを入力してください',"");
-  password = prompt('パスワードを入力してください',"");
+  admin_id = prompt('IDを入力してください', '')
+  password = prompt('パスワードを入力してください', '')
   console.log typeof parseInt(admin_id)
   console.log typeof password
   console.log parseInt(admin_id)
