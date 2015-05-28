@@ -60,27 +60,6 @@ class Main < Sinatra::Base
     show_erb
   end
 
-  post '/admin/register_department' do
-    @name = params[:name]
-    @succeed = Model::Departments.add(@name)
-    show_erb
-  end
-
-  post '/admin/change_department' do
-    no = params[:no].to_i
-    @new_name = params[:name]
-    @old_name = Model::Departments.name_of(no)
-    @succeed = Model::Departments.update(no, @new_name)
-    show_erb
-  end
-
-  post '/admin/delete_department' do
-    no = params[:no].to_i
-    @name = Model::Departments.name_of(no)
-    @succeed = Model::Departments.remove(no)
-    show_erb
-  end
-
   get '/admin-add' do
     Model::Admins.add('root', 'password')
   end
