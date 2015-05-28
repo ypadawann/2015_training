@@ -1,8 +1,8 @@
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <head>
-<link rel="stylesheet" type="text/css" href="dist/style/day.css" />
-<link rel="stylesheet" type="text/css" href="dist/style/print.css" media = "print"/>
+<link rel="stylesheet" type="text/css" href=<%= "#{css_path}/day.css" %>/>
+<link rel="stylesheet" type="text/css" href=<%= "#{css_path}/print.css"%> media="print"/>
 </head>
 <body>
 <div style="font-size:20px;">
@@ -71,7 +71,6 @@
 
 </table>
 
-<script type="text/javascript" src="dist/day.js" charset="UTF-8"></script>
-<script type="text/javascript" src="dist/attendance_record.js"></script>
+<script type="text/javascript" src=<%= "#{js_path}/read_data.js" %>></script>
 </body>
 </html>
