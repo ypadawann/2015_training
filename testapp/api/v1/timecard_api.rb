@@ -67,10 +67,10 @@ module API
         put '/attend-leave/:year/:month' do
           user_id = params[:user_id].to_i
           authenticate!(user_id)
-          year_month = params[:year_month]
+          year = params[:year]
+          month = params[:month]
           timecard_data = params[:data]
-          timecard_data[0].day
-          Model::Timecard_operation.update_all(year_month, timecard_data, user_id)
+          Model::Timecard_operation.update_all(year, month, timecard_data, user_id)
           name = Model::Users.get_name(user_id)
           department =
             Model::Departments.name_of(Model::Users.get_department(user_id))
