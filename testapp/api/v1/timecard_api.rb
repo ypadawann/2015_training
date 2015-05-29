@@ -7,6 +7,9 @@ module API
     class Timecards < Grape::API
       # prefix 'users'
       # resource '/:user_id' do
+      use Rack::Session::Cookie,
+        key: 'ams_session',
+        expire_after: 86_400
 
       resource 'users/:user_id' do
 

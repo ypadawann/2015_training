@@ -4,6 +4,7 @@ user_select = ->
     async:     true
     type:      "GET"
     url:       "/api/v1/users/#{user_id}"
+    url: "#{location.protocol}//#{location.host}/api/v1/users/#{user_id}"
     dataType:  "json"
     context:    this
   deferred.promise()
@@ -17,7 +18,7 @@ user_modify = ->
   deferred = $.ajax
     async:     true
     type:      "PUT"
-    url:       "/api/v1/users/#{user_id}"
+    url: "#{location.protocol}//#{location.host}/api/v1/users/#{user_id}"
     data: { name: name, department: department, new_password: new_password, password: password }
     dataType:  "json"
     context:    this
@@ -28,7 +29,7 @@ user_delete = ->
   deferred = $.ajax
     async:     true
     type:      "DELETE"
-    url:       "/api/v1/users/#{user_id}"
+    url: "#{location.protocol}//#{location.host}/api/v1/users/#{user_id}"
     dataType:  "json"
     context:    this
   deferred.promise()
@@ -56,7 +57,7 @@ $('#delete').click ->
       .fail (xhr,  status, error) ->
         $("#message").text 'エラーが発生しました'
 
-do ->    
+do ->
 user_select()
     .done (data) ->
       document.querySelector("#name").value = data.name
@@ -67,5 +68,5 @@ user_select()
         $("#message").text '認証に失敗しました'
       else
         $("#message").text 'エラーが発生しました'
-      
+
 

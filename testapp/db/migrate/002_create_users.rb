@@ -5,6 +5,6 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :department_id, null: false
       t.string :password, null: false
     end
-    add_foreign_key(:users, :departments) #, column: 'department')
+    add_foreign_key(:users, :departments)
   end
 end
