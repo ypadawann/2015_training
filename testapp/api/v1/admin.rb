@@ -5,6 +5,9 @@ require './model/users'
 module API
   module V1
     class Admin < Grape::API
+      use Rack::Session::Cookie,
+        key: 'admin_session',
+        expire_after: 3_600
       helpers do
         def verify_password!(user_id, password)
           error!('Access Denied', 403) unless
@@ -20,7 +23,7 @@ module API
           if !env['rack.session'][:login_status]
             error!('Not Found', 404)
           end
-        end  
+        end
       end
 
       resource '/admin' do
@@ -31,7 +34,7 @@ module API
           requires :admin_name, type: String, desc: '管理者名'
         end
         post do
-          if Model::Admins.add(params[:admin_id], 
+          if Model::Admins.add(params[:admin_id],
                               params[:admin_name], params[:admin_password])
           else
             error!('Failed to Register', 400)
@@ -50,7 +53,7 @@ module API
       resource '/admin/login' do
         desc 'ログイン'
         params do
-          requires :admin_id, type: Integer, desc: '管理者ID' 
+          requires :admin_id, type: Integer, desc: '管理者ID'
           requires :admin_password, type: String, desc: 'パスワード'
         end
         put  do
@@ -61,8 +64,8 @@ module API
           env['rack.session'][:login_status] = true
         end
       end
-      
-      
+
+
       resource '/admin/:admin_id' do
         desc '管理者削除'
         params do
@@ -71,28 +74,28 @@ module API
         delete do
         end
 
-        desc '管理者情報更新'                
+        desc '管理者情報更新'
         params do
           requires :admin_name, type: String, desc: '管理者名'
           requires :admin_new_password, type: String, desc: '新しいパスワード'
-          requires :admin_password, type: String, desc: 'パスワード' 
+          requires :admin_password, type: String, desc: 'パスワード'
         end
         put do
         end
       end
-      
+
       resource '/admin/users/:user_id' do
         params do
           requires :user_id, type: Integer, desc: '社員番号'
         end
-        
-        desc 'ユーザ情報の取得' 
+
+        desc 'ユーザ情報の取得'
         get do
           session_check()
           p 'get users'
           Model::Users.status(params[:user_id])
         end
-        
+
         desc 'ユーザ削除'
         delete do
           session_check()
@@ -112,7 +115,7 @@ module API
           user_id = params[:user_id]
 #          authenticate!(user_id)
 #          verify_password!(user_id, params[:password])
-          
+
           if params[:name].present?
             Model::Users.update_name(user_id, params[:name]) \
           end
@@ -121,11 +124,11 @@ module API
           end
           if params[:new_password].present?
             Model::Users.update_password(user_id, params[:new_password]) \
-          end   
+          end
           Model::Users.status(user_id)
         end
       end
     end
   end
 end
-      
+
