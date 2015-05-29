@@ -8,14 +8,12 @@ admin_select = ->
 
 admin_modify = ->
   admin_id = $('#admin_id').val()
-  admin_name = $('#admin_name').val()
   admin_new_password = $('#admin_new_password').val()
   admin_password = $('#admin_password').val()
   deferred = $.ajax
     type:      "PUT"
     url:       "./api/v1/admin/#{admin_id}"
     data:
-      'admin_name': admin_name
       'admin_new_password': admin_new_password
       'admin_password': admin_password
     dataType:  "json"
@@ -29,12 +27,10 @@ admin_delete = ->
     dataType:  "json"
     context:    this
 
-
+###
 $('#admin-select').bind 'click', ->
   admin_select()
     .done (data) ->
-      console.log data
-      document.querySelector("#admin_name").value = data.admin_name
     .fail (xhr,  status, error) ->
       console.log xhr.responseText
       console.log xhr.statusText
@@ -42,6 +38,7 @@ $('#admin-select').bind 'click', ->
         $("#message").text "認証に失敗しました"
       else
         $("#message").text "エラーが発生しました"
+###
       
 $('#admin-modify').bind 'click', ->
   admin_modify()

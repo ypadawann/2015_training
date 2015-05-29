@@ -1,10 +1,9 @@
 <h1>管理者情報管理</h1>
 <p><div id="message"></div></p>
 <p>
-  ID:<input type="number" id="admin_id" size="40">
-  <input type="button" id="admin-select" value="選択">
+  ID:<input type="text" id="admin_id" value=<%= env['rack.session'][:id] %> size="40">
+ <!-- <input type="button" id="admin-select" value="選択"> -->
 </p>
-<p>名前:<input type="text" id="admin_name" size="40"></p>
 
 <p>new pass:<input type="password" id="admin_new_password" size="40"></p>
 
