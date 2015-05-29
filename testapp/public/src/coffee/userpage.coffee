@@ -2,7 +2,7 @@ attend = ->
   user_id = document.getElementById('user_id').textContent
   request = $.ajax(
     type: 'post'
-    url: "api/v1/users/#{user_id}/attend"
+    url: "#{location.protocol}//#{location.host}/api/v1/users/#{user_id}/attend"
     dataType: 'json'
     data: 'user_id': user_id)
 
@@ -10,7 +10,7 @@ leave = ->
   user_id = document.getElementById('user_id').textContent
   request = $.ajax(
     type: 'post'
-    url: "api/v1/users/#{user_id}/leave"
+    url: "#{location.protocol}//#{location.host}/api/v1/users/#{user_id}/leave"
     dataType: 'json'
     data: 'user_id': user_id)
 
@@ -18,7 +18,7 @@ logout = ->
   user_id = document.getElementById('user_id').textContent
   request = $.ajax(
     type: 'put'
-    url: "api/v1/users/#{user_id}/logout"
+    url: "#{location.protocol}//#{location.host}/api/v1/users/#{user_id}/logout"
     dataType: 'json'
     data: 'user_id': user_id)
 

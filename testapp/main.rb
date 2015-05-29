@@ -39,7 +39,7 @@ class Main < Sinatra::Base
     end
 
     def app_path
-      "#{request.scheme}://#{request.host}:#{request.port}#{request.script_name}"
+      "#{request.scheme}://#{request.host_with_port}"
     end
 
     def js_path
@@ -57,27 +57,6 @@ class Main < Sinatra::Base
   end
 
   get %r{\/[\w\/]+} do
-    show_erb
-  end
-
-  post '/admin/register_department' do
-    @name = params[:name]
-    @succeed = Model::Departments.add(@name)
-    show_erb
-  end
-
-  post '/admin/change_department' do
-    no = params[:no].to_i
-    @new_name = params[:name]
-    @old_name = Model::Departments.name_of(no)
-    @succeed = Model::Departments.update(no, @new_name)
-    show_erb
-  end
-
-  post '/admin/delete_department' do
-    no = params[:no].to_i
-    @name = Model::Departments.name_of(no)
-    @succeed = Model::Departments.remove(no)
     show_erb
   end
 

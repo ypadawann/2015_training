@@ -5,6 +5,9 @@ require './model/users'
 module API
   module V1
     class Users < Grape::API
+      use Rack::Session::Cookie,
+        key: 'ams_session',
+        expire_after: 86_400
       helpers do
         def verify_password!(user_id, password)
           error!('Access Denied', 403) unless
