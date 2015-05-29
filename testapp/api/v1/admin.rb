@@ -6,14 +6,19 @@ module API
   module V1
     class Admin < Grape::API
       helpers do
-        def verify_password!(user_id, password)
+        def verify_password!(admin_id, admin_password)
           error!('Access Denied', 403) unless
-            Model::Admins.verify(user_id, password)
+            Model::Admins.verify(admin_id, admin_password)
         end
 
         def find_user!(user_id)
-          error!('Not Found', 404) unless
+          error!('the account is not found', 404) unless
             Model::Users.exists?(user_id)
+        end
+
+        def find_admin!(user_id)
+          error!('the account is not found', 404) unless
+            Model::Admins.exists?(user_id)
         end
 
         def session_check()
@@ -27,10 +32,11 @@ module API
         desc '管理者登録'
         params do
           requires :admin_id, type: Integer , desc: '管理者ID'
-          requires :admin_password, type: String, desc: 'パスワード'
           requires :admin_name, type: String, desc: '管理者名'
+          requires :admin_password, type: String, desc: 'パスワード'
         end
         post do
+          session_check()
           if Model::Admins.add(params[:admin_id], 
                               params[:admin_name], params[:admin_password])
           else
@@ -54,8 +60,6 @@ module API
           requires :admin_password, type: String, desc: 'パスワード'
         end
         put  do
-          p params[:admin_id]
-          p params[:admin_password]
           verify_password!(params[:admin_id], params[:admin_password])
           env['rack.session'][:id] = params[:admin_id]
           env['rack.session'][:login_status] = true
@@ -69,15 +73,36 @@ module API
           requires :admin_id, type: Integer , desc: '管理者ID'
         end
         delete do
+          session_check()
+          if !Model::Admins.remove(params[:admin_id])
+            error!('Fail to Delete', 400)
+          end
+        end
+
+        desc '管理者情報取得'
+        get do
+          session_check()
+          find_admin!(params[:admin_id])
+          Model::Admins.status(params[:admin_id])
         end
 
         desc '管理者情報更新'                
         params do
-          requires :admin_name, type: String, desc: '管理者名'
-          requires :admin_new_password, type: String, desc: '新しいパスワード'
+          optional :admin_name, type: String, desc: '管理者名'
+          optional :admin_new_password, type: String, desc: '新しいパスワード'
           requires :admin_password, type: String, desc: 'パスワード' 
         end
         put do
+          session_check()
+          verify_password!(params[:admin_id], params[:admin_password])
+          if params[:admin_name].present?
+            Model::Admins.update_name(params[:admin_id], params[:admin_name])
+          end
+          
+          if params[:admin_new_password].present?
+            Model::Admins.update_password(
+              params[:admin_id], params[:admin_new_password])
+          end
         end
       end
       
@@ -88,8 +113,8 @@ module API
         
         desc 'ユーザ情報の取得' 
         get do
-          session_check()
           p 'get users'
+          session_check()
           Model::Users.status(params[:user_id])
         end
         
