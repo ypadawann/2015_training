@@ -16,7 +16,7 @@ require_relative 'model/admins'
 
 
 class Admin < Sinatra::Base
-#  use Rack::Session::Cookie, key: 'ams_session', expire_after: 86_400
+  use Rack::Session::Cookie, key: 'admin_session', expire_after: 3_600
   set :bind, '0.0.0.0'
   set :erb, :escape_html => true
 
