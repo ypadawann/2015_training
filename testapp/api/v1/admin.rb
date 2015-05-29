@@ -31,14 +31,12 @@ module API
       resource '/admin' do
         desc '管理者登録'
         params do
-          requires :admin_id, type: Integer , desc: '管理者ID'
-          requires :admin_name, type: String, desc: '管理者名'
+          requires :admin_id, type: String , desc: '管理者ID'
           requires :admin_password, type: String, desc: 'パスワード'
         end
         post do
           session_check()
-          if Model::Admins.add(params[:admin_id], 
-                              params[:admin_name], params[:admin_password])
+          if Model::Admins.add(params[:admin_id], params[:admin_password])
           else
             error!('Failed to Register', 400)
           end
@@ -56,7 +54,7 @@ module API
       resource '/admin/login' do
         desc 'ログイン'
         params do
-          requires :admin_id, type: Integer, desc: '管理者ID' 
+          requires :admin_id, type: String, desc: '管理者ID' 
           requires :admin_password, type: String, desc: 'パスワード'
         end
         put  do
@@ -68,10 +66,10 @@ module API
       
       
       resource '/admin/:admin_id' do
-        desc '管理者削除'
         params do
-          requires :admin_id, type: Integer , desc: '管理者ID'
+          requires :admin_id, type: String , desc: '管理者ID'
         end
+        desc '管理者削除'
         delete do
           session_check()
           if !Model::Admins.remove(params[:admin_id])
@@ -88,17 +86,12 @@ module API
 
         desc '管理者情報更新'                
         params do
-          optional :admin_name, type: String, desc: '管理者名'
           optional :admin_new_password, type: String, desc: '新しいパスワード'
           requires :admin_password, type: String, desc: 'パスワード' 
         end
         put do
           session_check()
           verify_password!(params[:admin_id], params[:admin_password])
-          if params[:admin_name].present?
-            Model::Admins.update_name(params[:admin_id], params[:admin_name])
-          end
-          
           if params[:admin_new_password].present?
             Model::Admins.update_password(
               params[:admin_id], params[:admin_new_password])

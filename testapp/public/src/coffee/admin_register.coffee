@@ -4,7 +4,6 @@ admin_register = ->
     url: 'api/v1/admin'
     data:
       'admin_id'   : $('#admin_id').val()
-      'admin_name'      : $('#admin_name').val()
       'admin_password'  : $('#admin_password').val()
   )
 

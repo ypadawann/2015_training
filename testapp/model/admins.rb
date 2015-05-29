@@ -11,8 +11,7 @@ module Model
     class <<self
       public
       def to_hash(admin)
-        { admin_id: admin.id,
-          admin_name: admin.name,}
+        { admin_id: admin.id }
       end
 
       def verify(id, password)
@@ -20,11 +19,10 @@ module Model
         admin && Model::Helper.start_verify(admin.password, password)
       end
 
-      def add(id, name, password)
+      def add(id, password)
         admin =
           Model::Admin.new(
             id: id,
-            name: name,
             password: Model::Helper.start_hash(password)
           )
         admin.save
