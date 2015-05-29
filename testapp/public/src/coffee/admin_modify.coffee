@@ -2,7 +2,7 @@ admin_select = ->
   admin_id = $("#admin_id").val()
   deferred = $.ajax
     type:      "GET"
-    url:       "./api/v1/admin/#{admin_id}"
+    url:       "http://#{location.host}/admin/api/v1/admin/#{admin_id}"
     dataType:  "json"
     context:    this
 
@@ -12,7 +12,7 @@ admin_modify = ->
   admin_password = $('#admin_password').val()
   deferred = $.ajax
     type:      "PUT"
-    url:       "./api/v1/admin/#{admin_id}"
+    url:       "http://#{location.host}/admin/api/v1/admin/#{admin_id}"
     data:
       'admin_new_password': admin_new_password
       'admin_password': admin_password
@@ -23,22 +23,9 @@ admin_delete = ->
   admin_id = $("#admin_id").val()
   deferred = $.ajax
     type:      "DELETE"
-    url:       "./api/v1/admin/#{admin_id}"
+    url:       "http://#{location.host}/admin/api/v1/admin/#{admin_id}"
     dataType:  "json"
     context:    this
-
-###
-$('#admin-select').bind 'click', ->
-  admin_select()
-    .done (data) ->
-    .fail (xhr,  status, error) ->
-      console.log xhr.responseText
-      console.log xhr.statusText
-      if xhr.status is 403
-        $("#message").text "認証に失敗しました"
-      else
-        $("#message").text "エラーが発生しました"
-###
       
 $('#admin-modify').bind 'click', ->
   admin_modify()

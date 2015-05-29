@@ -10,12 +10,14 @@ module API
     class Base < Grape::API
       version 'v1', using: :path
       format :json
-
       helpers Utils
-
       mount Users
-      mount Departments
       mount Timecards
+    end
+    class AdminBase < Grape::API
+      version 'v1', using: :path
+      format :json
+      mount Departments
       mount Admin
     end
   end

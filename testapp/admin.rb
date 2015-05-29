@@ -20,10 +20,10 @@ class Admin < Sinatra::Base
   set :bind, '0.0.0.0'
   set :erb, :escape_html => true
 
-  before do
-    @user_id = session[:no]
-    @name = Model::Users.get_name(@user_id.to_i)
-  end
+#  before do
+#    @user_id = session[:no]
+#    @name = Model::Users.get_name(@user_id.to_i)
+#  end
 
   helpers do
     def show_erb
@@ -48,7 +48,15 @@ class Admin < Sinatra::Base
     end
   end
 
-  get '/*' do
+  get '/' do
+    if session[:login_status]
+      erb :'admin/top'.to_sym
+    else
+      erb 'admin/login'.to_sym
+    end
+  end
+
+  get %r{\/\w+} do
     p 'admin'
     if session[:login_status]
       show_erb

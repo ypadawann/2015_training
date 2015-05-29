@@ -2,7 +2,7 @@ logout = ->
   deferred = $.ajax
     async:     true
     type:      "PUT"
-    url:       './api/v1/admin/logout'
+    url:       "http://#{location.host}/admin/api/v1/admin/logout"
 
 
 $('#admin-user').bind 'click', ->
@@ -20,6 +20,6 @@ $('#to-admin-register').bind 'click', ->
 $('#admin-logout').bind 'click', ->
   logout()
     .done (data) ->
-      document.location = '/'
+      document.location = '/admin'
     .fail (data) ->
       alert 'エラーが発生しました'

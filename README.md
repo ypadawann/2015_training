@@ -123,4 +123,4 @@ $ RACK_ENV=test bundle exec rake db:migrate
 説明|Field|Type|Null|Key|Default
 --:|:--|:--|:--|:--|:--
 ユーザID|id|varchar(255)|no|PRI|NULL
-パスワード|user_id|varchar(255)|no||NULL
+パスワード|password|varchar(255)|no||NULL
