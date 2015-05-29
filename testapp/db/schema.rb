@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150430040917) do
+ActiveRecord::Schema.define(version: 4) do
+
+  create_table "admins", force: :cascade do |t|
+    t.string "password", limit: 255, null: false
+  end
 
   create_table "departments", force: :cascade do |t|
     t.string "name", limit: 50, null: false
@@ -20,8 +24,8 @@ ActiveRecord::Schema.define(version: 20150430040917) do
   create_table "timecards", force: :cascade do |t|
     t.date    "day"
     t.integer "user_id",    limit: 4
-    t.time    "attendance"
-    t.time    "leaving"
+    t.string  "attendance", limit: 10
+    t.string  "leaving",    limit: 10
   end
 
   add_index "timecards", ["user_id"], name: "fk_rails_72a13e4c12", using: :btree
