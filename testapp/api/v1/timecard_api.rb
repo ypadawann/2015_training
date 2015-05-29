@@ -13,7 +13,7 @@ module API
         post '/attend' do
           user_id = params[:user_id].to_i
           authenticate!(user_id)
-          time = (Time.now).strftime('%X')
+          time = (Time.now).strftime('%H:%M')
           date = Date.today
           if !Model::Timecard_operation.attend(date, user_id, time)
             error!('already attend', 400)
@@ -40,7 +40,7 @@ module API
         post '/leave' do
           user_id = params[:user_id].to_i
           authenticate!(user_id)
-          time = (Time.now).strftime('%X')
+          time = (Time.now).strftime('%H:%M')
           date = Date.today
           if !Model::Timecard_operation.returnhome(date, user_id, time)
             error!('wrong access', 400)
