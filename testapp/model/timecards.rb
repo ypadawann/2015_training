@@ -12,7 +12,7 @@ module Model
         new_timecard_add(user_id, day, time, nil)
         return true
       end
-      if timecards.attendance.nil?
+      if !timecards.attendance.present?
         timecards.attendance = time
         timecards.save
         return true
@@ -36,12 +36,11 @@ module Model
         new_timecard_add(user_id, day, nil, time)
         return true
       end
-      if !timecards.leaving.nil?
-        return false
+      if !timecards.leaving.present?
+        timecards.leaving = time
+        timecards.save
+        return true
       end
-      timecards.leaving = time
-      timecards.save
-      return true
     end
 
     def self.update_leave(date, user_id, time)
@@ -104,7 +103,7 @@ module Model
       if time.nil?
         return ''
       else
-        return time.strftime('%H:%M')
+        return time
       end
     end
   end
