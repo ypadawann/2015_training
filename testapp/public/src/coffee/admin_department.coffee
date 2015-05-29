@@ -2,7 +2,7 @@ department_register = ->
   department_name = $("#register-name").val()
   deferred = $.ajax
     type:      "POST"
-    url:       "./api/v1/departments"
+    url:       "http://#{location.host}/admin/api/v1/departments"
     data: 'name': department_name
     dataType:  "json"
     context:    this
@@ -12,7 +12,7 @@ department_rename = ->
   new_department_name = $("#new-department-name").val()
   deferred = $.ajax
     type:      "PUT"
-    url:       "./api/v1/departments/#{department_id}"
+    url:       "http://#{location.host}/admin/api/v1/departments/#{department_id}"
     data: 'name': new_department_name
     dataType: 'json'
 
@@ -20,7 +20,7 @@ department_delete = ->
   department_id = $("#department-delete-id option:selected").val()
   deferred = $.ajax
     type:      "DELETE"
-    url:       "./api/v1/departments/#{department_id}"
+    url:       "http://#{location.host}/admin/api/v1/departments/#{department_id}"
     dataType: 'json'
 
 $('#department-register').bind 'click', ->

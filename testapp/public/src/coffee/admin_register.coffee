@@ -1,7 +1,7 @@
 admin_register = ->
   $.ajax(
     type: 'post'
-    url: 'api/v1/admin'
+    url: "http://#{location.host}/admin/api/v1/admin"
     data:
       'admin_id'   : $('#admin_id').val()
       'admin_password'  : $('#admin_password').val()

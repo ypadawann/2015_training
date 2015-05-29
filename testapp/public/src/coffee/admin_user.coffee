@@ -3,7 +3,7 @@ user_select = ->
   deferred = $.ajax
     async:     true
     type:      "GET"
-    url:       "./api/v1/admin/users/#{user_id}"
+    url:       "http://#{location.host}/admin/api/v1/admin/users/#{user_id}"
     dataType:  "json"
     context:    this
 
@@ -16,7 +16,7 @@ user_modify = ->
   deferred = $.ajax
     async:     true
     type:      "PUT"
-    url:       "./api/v1/admin/users/#{user_id}"
+    url:       "http://#{location.host}/admin/api/v1/admin/users/#{user_id}"
     data:
       'name': name
       'department': department
@@ -30,7 +30,7 @@ user_delete = ->
   deferred = $.ajax
     async:     true
     type:      "DELETE"
-    url:       "./api/v1/admin/users/#{user_id}"
+    url:       "http://#{location.host}/admin/api/v1/admin/users/#{user_id}"
     dataType:  "json"
     context:    this
 

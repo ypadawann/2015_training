@@ -10,7 +10,7 @@ map '/admin' do
     key: 'admin_session',
     expire_after: 3_600
 
-  run Rack::Cascade.new [API::Base, Admin]
+  run Rack::Cascade.new [API::AdminBase, Admin]
 end
 
 map '/' do
