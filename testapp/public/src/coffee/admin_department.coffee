@@ -17,7 +17,7 @@ department_rename = ->
     dataType: 'json'
 
 department_delete = ->
-  department_id = $("#department-rename-id option:selected").val()
+  department_id = $("#department-delete-id option:selected").val()
   deferred = $.ajax
     type:      "DELETE"
     url:       "./api/v1/departments/#{department_id}"
