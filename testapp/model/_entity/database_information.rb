@@ -34,7 +34,6 @@ module Model
   class Admin < ActiveRecord::Base
     validates :id, presence: true
     validates :id, uniqueness: true
-    validates :name, presence: true
     validates :password, presence: true
   end
 end
