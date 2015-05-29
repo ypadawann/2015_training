@@ -1,24 +1,19 @@
-login = ->
-  admin_id = prompt('IDを入力してください', '')
-  password = prompt('パスワードを入力してください', '')
-  console.log typeof parseInt(admin_id)
-  console.log typeof password
-  console.log parseInt(admin_id)
-  console.log password
+admin_login = ->
+  admin_id = $("#admin_id").val()
+  admin_password = $("#admin_password").val()
   deferred = $.ajax
-    async: false
     type: 'PUT'
     url: './api/v1/admin/login'
     data: {
             admin_id: parseInt(admin_id),
-            admin_password: password
+            admin_password: admin_password
             }
 
 
-do ->
-  login()
-    .done (data)->
-      document.location = location.href
-    .fail (data)->
-      console.log 'login ng'
+$('#admin-login').bind 'click', ->
+  admin_login()
+    .done (data) ->
+      document.location = '/admin/top'
+    .fail (data) ->
       alert 'エラーが発生しました'
+
