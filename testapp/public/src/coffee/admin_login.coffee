@@ -5,7 +5,7 @@ admin_login = ->
     type: 'PUT'
     url: './api/v1/admin/login'
     data: {
-            admin_id: parseInt(admin_id),
+            admin_id: admin_id,
             admin_password: admin_password
             }
 
