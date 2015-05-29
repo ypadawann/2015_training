@@ -212,11 +212,20 @@ parametersを受け取り、resultsをJSONで返す。
     * 管理者登録
     * header
     * parameters
-        * admin_id
-	* admin_name
-	* admin_password
+        * admin_id: integer
+	* admin_name: string
+	* admin_password: string
     * results
     * error
+
+* PUT admin/:admin_id/
+    * 管理者情報取得
+    * headers
+    * parameters
+    * results
+        * admin_name: string
+    * errors
+        * 403: 認証に失敗した
 
 * DELETE admin/:admin_id/
     * 管理者削除
@@ -230,9 +239,9 @@ parametersを受け取り、resultsをJSONで返す。
     * 管理者情報更新
     * headers
     * parameters
-        * admin_name
-	* admin_new_password
-	* admin_password
+        * admin_name: string
+	* admin_new_password: string
+	* admin_password: string
     * results
     * errors
         * 403: 認証に失敗した
@@ -241,8 +250,8 @@ parametersを受け取り、resultsをJSONで返す。
     * 管理者ログイン
     * headers
     * parameters
-	* admin_id
-        * admin_password
+	* admin_id: integer
+        * admin_password: string
     * results
     * errors
         * 403: 認証に失敗した
@@ -273,7 +282,7 @@ parametersを受け取り、resultsをJSONで返す。
     * parameters
         * (optional) user_name: string
         * (optional) department: string
-	* (optional) user_new_password: string
+        * (optional) user_new_password: string
     * results
         * user_id: integer
         * user_name: string
