@@ -34,6 +34,7 @@ module Model
   end
 
   class Admin < ActiveRecord::Base
+    self.primary_key = :id
     validates :id, presence: true
     validates :id, uniqueness: true
     validates :password, presence: true
