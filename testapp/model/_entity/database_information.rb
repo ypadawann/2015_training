@@ -11,6 +11,8 @@ ActiveRecord::Base.establish_connection(config[db_env])
 
 module Model
   class User < ActiveRecord::Base
+    self.primary_key = :id
+
     validates :id, presence: true
     validates :id, uniqueness: true
     validates :id, numericality: {
