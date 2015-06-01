@@ -2,6 +2,91 @@ body{
   font-family:"MS ゴシック","Hiragino Kaku Gothic ProN",sans-serif;
 }
 
+.table{
+  border-collapse: collapse;
+}
+
+.table__menu{
+  font-size:9px;
+  border-style:solid;
+  border-width:1px;
+  border-color:#000000;
+  text-align:center;
+  vertical-align:middle;
+  height:28px;
+}
+
+.table__menu__insert{
+  width:150px;
+  height:28px;
+  border:none;
+  background:none;
+  text-align:center;
+  vertical-align:middle;
+  font-size:8px;
+}
+
+
+.table__insert__1-2rows{
+  border:none;
+  background:none;
+  text-align:center;
+  vertical-align:middle;
+  font-size:6px;
+  width:27px;
+  height:21px;
+}
+
+.table__insert__3-4rows{
+  border:none;
+  background:none;
+  text-align:center;
+  vertical-align:middle;
+  font-size:6px;
+  width:75px;
+  height:21px;
+}
+
+.table__insert__5row{
+  border:none;
+  background:none;
+  text-align:center;
+  vertical-align:middle;
+  font-size:6px;
+  width:64px;
+  height:21px;
+}
+
+.table__insert__6-7-8rows{
+  border:none;
+  background:none;
+  text-align:center;
+  vertical-align:middle;
+  font-size:6px;
+  width:77px;
+  height:21px;
+}
+
+.table__insert__9-10rows{
+  border:none;
+  background:none;
+  text-align:center;
+  vertical-align:middle;
+  font-size:6px;
+  width:60px;
+  height:21px;
+}
+
+.table__insert__etc{
+  border:none;
+  background:none;
+  text-align:center;
+  vertical-align:middle;
+  font-size:6px;
+  width:230px;
+  height:21px;
+}
+
 td.dayAndweek{
   padding:4px 0px 0px 0px;
   font-size:6px;
@@ -23,16 +108,6 @@ td.column{
   vertical-align:middle;
   width:60px;
   height:50px;
-}
-
-td.menu{
-  font-size:9px;
-  border-style:solid;
-  border-width:1px;
-  border-color:#000000;
-  text-align:center;
-  vertical-align:middle;
-  height:28px;
 }
 
 td.etc{
