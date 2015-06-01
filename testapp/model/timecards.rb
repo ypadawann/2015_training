@@ -6,18 +6,19 @@ require_relative '_entity/database_information'
 
 module Model
   class Timecard_operation
+    def self.prepare_timecard(day, user_id)
+      Model::Timecard.where(day: day, user_id: user_id).first ||
+      Model::Timecard.new(day: day, user_id: user_id)
+    end
+
     def self.attend(day, user_id, time)
-      timecards = Model::Timecard.where(day: day, user_id: user_id).first
-      if timecards.nil?
-        new_timecard_add(user_id, day, time, nil)
-        return true
+      timecard = prepare_timecard(day, user_id)
+      if timecard.attendance.present?
+        false
+      else
+        timecard.attendance = time
+        timecard.save
       end
-      if !timecards.attendance.present?
-        timecards.attendance = time
-        timecards.save
-        return true
-      end
-      return false
     end
 
     def self.update_attend(date, user_id, time)
@@ -31,15 +32,12 @@ module Model
     end
 
     def self.returnhome(day, user_id, time)
-      timecards = Model::Timecard.where(day: day, user_id: user_id).first
-      if timecards.nil?
-        new_timecard_add(user_id, day, nil, time)
-        return true
-      end
-      if !timecards.leaving.present?
-        timecards.leaving = time
-        timecards.save
-        return true
+      timecard = prepare_timecard(day, user_id)
+      if timecard.leaving.present?
+        false
+      else
+        timecard.leaving = time
+        timecard.save
       end
     end
 
@@ -56,14 +54,10 @@ module Model
     def self.update_all(year, month, timecard_data, user_id)
       timecard_data.each do |tc_data|
         date = "#{year}-#{month}-#{tc_data[1].day}"
-        timecard = Timecard.where(day: date, user_id: user_id).first
-        if timecard.nil?
-          new_timecard_add(user_id, date, tc_data[1].attendance, tc_data[1].leaving)
-        else
-          timecard.attendance = tc_data[1].attendance
-          timecard.leaving = tc_data[1].leaving
-          timecard.save
-        end
+        timecard = prepare_timecard(date, user_id)
+        timecard.attendance = tc_data[1].attendance
+        timecard.leaving = tc_data[1].leaving
+        timecard.save
       end
     end
 
@@ -80,14 +74,22 @@ module Model
       timecard_json = []
       timecards.each do |t|
         push_empty_data(timecard_json, i, t.day.day - 1)
-        attendance = time_to_string(t.attendance)
-        leaving = time_to_string(t.leaving)
-        timecard_json.push(day: i, attendance: attendance, leaving: leaving)
+        timecard_json.push(day: i, attendance: t.attendance, leaving: t.leaving)
         i = t.day.day + 1
       end
       max_day = (Date.new(year.to_i, month.to_i + 1) - 1).day
       push_empty_data(timecard_json, i, max_day)
       timecard_json
+    end
+
+    def self.get_attendance(day, user_id)
+      Model::Timecard.where(day: day, user_id: user_id).first
+        .try(:attendance)
+    end
+
+    def self.get_leaving(day, user_id)
+      Model::Timecard.where(day: day, user_id: user_id).first
+        .try(:leaving)
     end
 
     def self.new_timecard_add(user_id, day, attendance, leaving)
