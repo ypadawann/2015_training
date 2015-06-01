@@ -61,8 +61,9 @@ isHolidays = (year, month, day) ->
     3: '憲法記念日'
     4: 'みどりの日'
     5: 'こどもの日'
+  getHoliday[6] = ''
   getHoliday[7] = 20: '海の日'
-  #GetHoliday[8] = {11 : "山の日"}; 2016年から
+  #getHoliday[8] = {11 : "山の日"}; 2016年から
   getHoliday[9] =
     21: '敬老の日'
     9: '国民の休日'
