@@ -17,4 +17,4 @@ $('#admin-register').bind 'click', ->
         alert '登録に成功しました'
         location.reload()
       .fail (xhr) ->
-        alert ("#{xhr.status} #{xhr.statusText}")
+        alert ("エラーが発生しました")

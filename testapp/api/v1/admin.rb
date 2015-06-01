@@ -108,6 +108,7 @@ module API
         get do
           p 'get users'
           session_check()
+          find_user!(params[:user_id])
           Model::Users.status(params[:user_id])
         end
         
@@ -128,6 +129,7 @@ module API
         put do
           session_check()
           user_id = params[:user_id]
+          find_user!(user_id)
 #          authenticate!(user_id)
 #          verify_password!(user_id, params[:password])
           
