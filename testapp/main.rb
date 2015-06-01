@@ -61,6 +61,11 @@ class Main < Sinatra::Base
     erb %s(userpage/index)
   end
 
+  get %r{\/userpage\/[\w\/]*} do
+    redirect to('/') unless @name
+    show_erb
+  end
+
   get %r{\/[\w\/]+} do
     show_erb
   end
