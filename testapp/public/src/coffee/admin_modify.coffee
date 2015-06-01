@@ -2,7 +2,7 @@ admin_select = ->
   admin_id = $("#admin_id").val()
   deferred = $.ajax
     type:      "GET"
-    url:       "http://#{location.host}/admin/api/v1/admin/#{admin_id}"
+    url:       "#{location.protocol}//#{location.host}/admin/api/v1/admin/#{admin_id}"
     dataType:  "json"
     context:    this
 
@@ -10,7 +10,7 @@ admin_modify = ->
   admin_id = $('#admin_id').val()
   deferred = $.ajax
     type:      "PUT"
-    url:       "http://#{location.host}/admin/api/v1/admin/#{admin_id}"
+    url:       "#{location.protocol}//#{location.host}/admin/api/v1/admin/#{admin_id}"
     data:
       'admin_new_password': $('#admin_new_password').val()
       'admin_password': $('#admin_password').val()
@@ -21,10 +21,10 @@ admin_delete = ->
   admin_id = $("#admin_id").val()
   deferred = $.ajax
     type:      "DELETE"
-    url:       "http://#{location.host}/admin/api/v1/admin/#{admin_id}"
+    url:       "#{location.protocol}//#{location.host}/admin/api/v1/admin/#{admin_id}"
     dataType:  "json"
     context:    this
-      
+
 $('#admin-modify').bind 'click', ->
   if $('#admin_new_password').val() isnt $('#confirm_admin_new_password').val()
     alert '確認パスワードが違います'

@@ -138,6 +138,10 @@ parametersを受け取り、resultsをJSONで返す。
             * day: integer
             * attendace: time
             * leaving: time
+            * prearranged-holiday: date
+            * paid-vacation: float
+            * holiday-acquisition: date
+            * etc: string
     * results
         * user_id: integer
         * name: string
@@ -154,6 +158,10 @@ parametersを受け取り、resultsをJSONで返す。
             * day: integer
             * attendace: time
             * leaving: time
+            * prearranged-holiday: date
+            * paid-vacation: float
+            * holiday-acquisition: date
+            * etc: string
         * user_id: integer
         * name: string
         * department: string

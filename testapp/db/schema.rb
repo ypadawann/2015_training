@@ -23,9 +23,13 @@ ActiveRecord::Schema.define(version: 4) do
 
   create_table "timecards", force: :cascade do |t|
     t.date    "day"
-    t.integer "user_id",    limit: 4
-    t.string  "attendance", limit: 10
-    t.string  "leaving",    limit: 10
+    t.integer "user_id",             limit: 4
+    t.string  "attendance",          limit: 10
+    t.string  "leaving",             limit: 10
+    t.date    "prearranged_holiday"
+    t.float   "paid_vacation",       limit: 24
+    t.date    "holiday_acquisition"
+    t.string  "etc",                 limit: 50
   end
 
   add_index "timecards", ["user_id"], name: "fk_rails_72a13e4c12", using: :btree
