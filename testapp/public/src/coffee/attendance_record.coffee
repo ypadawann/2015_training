@@ -8,7 +8,7 @@ save = (user_id, year, month, day) ->
     }
   request = $.ajax(
     type: 'put'
-    url: "api/v1/users/#{user_id}/attend-leave/#{year}/#{month}"
+    url: "#{location.protocol}//#{location.host}/api/v1/users/#{user_id}/attend-leave/#{year}/#{month}"
     dataType: 'json'
     data:
       'user_id': user_id
@@ -25,9 +25,10 @@ if month < 10
 day = new Date(year, month, 0).getDate()
 if day < 10
   day = "0#{day}"
+#TODO関数化
 request = $.ajax(
   type: 'get'
-  url: "api/v1/users/#{user_id}/attend-leave/#{year}/#{month}"
+  url: "#{location.protocol}//#{location.host}/api/v1/users/#{user_id}/attend-leave/#{year}/#{month}"
   dataType: 'json'
   data:
     'user_id': user_id
@@ -40,6 +41,8 @@ request = $.ajax(
     for i in [1..msg.data.length]
       $("#attendance#{i}").val msg.data[i - 1].attendance
       $("#leaving#{i}").val msg.data[i - 1].leaving
+      if msg.data[i - 1].leaving > '22:00'
+        $("#graveyard-shift#{i}").val msg.data[i - 1].leaving
     console.log msg
 $('#save').bind 'click', ->
   save(user_id, year, month, day)
