@@ -22,17 +22,17 @@ makeRow = (table, rowNumber) ->
   cell9.setAttribute 'class', 'line'
   cell10.setAttribute 'class', 'line'
   cell11.setAttribute 'class', 'line'
-  data1 = '<input type="text" id="day' + rowNumber + '" readonly="readonly" style="width:27px; height:21px; border:none; background:none; text-align:center; vertical-align:middle; font-size:6px;" />'
-  data2 = '<input type="text" id="week' + rowNumber + '" readonly="readonly" style="width:27px; height:21px; border:none; background:none; text-align:center; vertical-align:middle; font-size:6px;" />'
-  data3 = '<input type="text" id="attendance' + rowNumber + '" onchange="save()" style="width:75px; height:21px; border:none; background:none; text-align:center; vertical-align:middle; font-size:6px;" />'
-  data4 = '<input type="text" id="leaving' + rowNumber + '" style="width:75px; height:21px; border:none; background:none; text-align:center; vertical-align:middle; font-size:6px;" />'
-  data5 = '<input type="text" id="mark' + rowNumber + '" style="width:64px; height:21px; border:none; background:none; text-align:center; vertical-align:middle; font-size:6px;" />'
-  data6 = ''
-  data7 = ''
-  data8 = ''
-  data9 = ''
-  data10 = ''
-  data11 = ''
+  data1 = '<input type="text" id="day' + rowNumber + '" readonly="readonly" class="table__insert__1-2rows" />'
+  data2 = '<input type="text" id="week' + rowNumber + '" readonly="readonly" class="table__insert__1-2rows" />'
+  data3 = '<input type="text" id="attendance' + rowNumber + '" class="table__insert__3-4rows" />'
+  data4 = '<input type="text" id="leaving' + rowNumber + '" class="table__insert__3-4rows" />'
+  data5 = '<input type="text" id="mark' + rowNumber + '" class="table__insert__5row" />'
+  data6 = '<input type="text" id="graveyard-shift' + rowNumber + '" class="table__insert__6-7-8rows">'
+  data7 = '<input type="text" id="holiday-shift" class="table__insert__6-7-8rows">'
+  data8 = '<input type="text" id="prearranged-holiday" class="table__insert__6-7-8rows">'
+  data9 = '<input type="text" id="paid-vagation" class="table__insert__9-10rows">'
+  data10 = '<input type="text" id="holiday-acquisition" class="table__insert__9-10rows">'
+  data11 = '<input type="text" id="etc" class="table__insert__etc">'
   cell1.innerHTML = data1
   cell2.innerHTML = data2
   cell3.innerHTML = data3
@@ -61,8 +61,10 @@ isHolidays = (year, month, day) ->
     3: '憲法記念日'
     4: 'みどりの日'
     5: 'こどもの日'
+  getHoliday[6] = ''
   getHoliday[7] = 20: '海の日'
-  #GetHoliday[8] = {11 : "山の日"}; 2016年から
+  getHoliday[8] = ''
+  #getHoliday[8] = {11 : "山の日"}; 2016年から
   getHoliday[9] =
     21: '敬老の日'
     9: '国民の休日'
