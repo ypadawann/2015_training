@@ -9,19 +9,15 @@ user_select = ->
 
 user_modify = ->
   user_id = $('#user_id').val()
-  name = $('#name').val()
-  department = $('#department option:selected').text()
-  new_password = $('#new_password').val()
-  password = $('#password').val()
   deferred = $.ajax
     async:     true
     type:      "PUT"
     url:       "http://#{location.host}/admin/api/v1/admin/users/#{user_id}"
     data:
-      'name': name
-      'department': department
-      'new_password': new_password
-      'password': password
+      'name': $('#name').val()
+      'department': $('#department option:selected').text()
+      'new_password': $('#new_password').val()
+      'password': $('#password').val()
     dataType:  "json"
     context:    this
 

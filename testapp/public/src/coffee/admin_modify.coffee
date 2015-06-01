@@ -8,14 +8,12 @@ admin_select = ->
 
 admin_modify = ->
   admin_id = $('#admin_id').val()
-  admin_new_password = $('#admin_new_password').val()
-  admin_password = $('#admin_password').val()
   deferred = $.ajax
     type:      "PUT"
     url:       "http://#{location.host}/admin/api/v1/admin/#{admin_id}"
     data:
-      'admin_new_password': admin_new_password
-      'admin_password': admin_password
+      'admin_new_password': $('#admin_new_password').val()
+      'admin_password': $('#admin_password').val()
     dataType:  "json"
     context:    this
 
