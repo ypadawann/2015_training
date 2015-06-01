@@ -11,17 +11,16 @@ module API
           user_id = params[:user_id].to_i
           authenticate!(user_id)
           date = Date.today
-          error!('already attend', 400) unless
+          error!('Already Attended', 400) unless
             Model::Timecard_operation.get_attendance(date, user_id).nil?
 
           time = (Time.now).strftime('%H:%M')
           Model::Timecard_operation.attend(date, user_id, time)
 
-          name = Model::Users.get_name(user_id)
-          department =
-            Model::Departments.name_of(Model::Users.get_department(user_id))
-          { user_id: user_id, name: name,
-            department: department, date: date, attendance: time }
+          results = Model::Users.status(user_id)
+          results[:date] = date
+          results[:attendance] = time
+          results
         end
 
         put '/attend/:date' do
@@ -30,17 +29,17 @@ module API
           date = params[:date]
           time = params[:attendance]
           Model::Timecard_operation.attend(date, user_id, time)
-          name = Model::Users.get_name(user_id)
-          department =
-            Model::Departments.name_of(Model::Users.get_department(user_id))
-          { user_id: user_id, name: name, department: department }
+
+          results = Model::Users.status(user_id)
+          results[:attendance] = time
+          results
         end
 
         post '/leave' do
           user_id = params[:user_id].to_i
           authenticate!(user_id)
           date = Date.today
-          error!('wrong access', 400) unless
+          error!('Already Left', 400) unless
             Model::Timecard_operation.get_leaving(date, user_id).nil?
           error!('Not Attended Yet', 404) if
             Model::Timecard_operation.get_attendance(date, user_id).nil?
@@ -48,11 +47,10 @@ module API
           time = (Time.now).strftime('%H:%M')
           Model::Timecard_operation.returnhome(date, user_id, time)
 
-          name = Model::Users.get_name(user_id)
-          department =
-            Model::Departments.name_of(Model::Users.get_department(user_id))
-          { user_id: user_id, name: name,
-            department: department, date: date, leaving: time }
+          results = Model::Users.status(user_id)
+          results[:date] = date
+          results[:leaving] = time
+          results
         end
 
         put 'leave/:date' do
@@ -61,10 +59,10 @@ module API
           date = params[:date]
           time = params[:leaving]
           Model::Timecard_operation.leave(date, user_id, time)
-          name = Model::Users.get_name(user_id)
-          department =
-            Model::Departments.name_of(Model::Users.get_department(user_id))
-          { user_id: user_id, name: name, department: department }
+
+          results = Model::Users.status(user_id)
+          results[:leaving] = time
+          results
         end
 
         put '/attend-leave/:year/:month' do
@@ -74,21 +72,20 @@ module API
           month = params[:month]
           timecard_data = params[:data]
           Model::Timecard_operation.update_all(year, month, timecard_data, user_id)
-          name = Model::Users.get_name(user_id)
-          department =
-            Model::Departments.name_of(Model::Users.get_department(user_id))
-          { user_id: user_id, name: name, department: department }
+
+          Model::Users.status(user_id)
         end
 
         get '/attend-leave/:year/:month' do
           user_id = params[:user_id].to_i
           year = params[:year]
           month = params[:month]
-          data = Model::Timecard_operation.read_monthly_data(user_id, year, month)
-          name = Model::Users.get_name(user_id)
-          department =
-            Model::Departments.name_of(Model::Users.get_department(user_id))
-         { data: data ,user_id: user_id, name: name, department: department }
+          data =
+            Model::Timecard_operation.read_monthly_data(user_id, year, month)
+
+          results = Model::Users.status(user_id)
+          results[:data] = data
+          results
         end
       end
     end
