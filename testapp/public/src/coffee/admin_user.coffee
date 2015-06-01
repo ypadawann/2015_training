@@ -43,11 +43,10 @@ $('#user-select').bind 'click', ->
       ($('#department option').filter ->
         return $(this).text() is data.department).prop 'selected', true
     .fail (xhr,  textStatus, errorThrown) ->
-      console.log JSON.parse(xhr.responseText).error
       if xhr.status is 403
-        $("#message").text '認証に失敗しました'
+        alert '認証に失敗しました'
       else
-        $("#message").text 'エラーが発生しました'
+        alert 'エラーが発生しました'
       
 $('#modify').bind 'click', ->
   if $('#new_password').val() isnt $('#confirm_new_password').val()
@@ -55,12 +54,13 @@ $('#modify').bind 'click', ->
   else
     user_modify()
       .done (data)   ->
-        $("#message").text 'ユーザ情報を変更しました'
+        alert 'ユーザ情報を変更しました'
+        location.reload()
       .fail (xhr,  status, error) ->
         if xhr.status is 403
-          $("#message").text '認証に失敗しました'
+          alert '認証に失敗しました'
         else
-          $("#message").text 'エラーが発生しました'
+          alert 'エラーが発生しました'
 
 $('#delete').click ->
   if !window.confirm '本当にアカウントを削除しますか？'
@@ -71,5 +71,5 @@ $('#delete').click ->
         alert 'アカウントを削除しました'
         location.reload()
       .fail (xhr,  status, error) ->
-        $("#message").text 'エラーが発生しました'
+        alert 'エラーが発生しました'
 

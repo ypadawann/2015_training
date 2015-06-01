@@ -33,21 +33,22 @@ $('#admin-modify').bind 'click', ->
   else
     admin_modify()
       .done (data)   ->
-        $("#message").text 'ユーザ情報を変更しました'
+         alert '管理者情報を変更しました'
+         location.reload()
       .fail (xhr,  status, error) ->
         if xhr.status is 403
-          $("#message").text '認証に失敗しました'
+          alert '認証に失敗しました'
         else
-          $("#message").text 'エラーが発生しました'
+          alert 'エラーが発生しました'
 
 $('#admin-delete').bind 'click', ->
   if !window.confirm '本当にアカウントを削除しますか？'
-    $("#message").text 'アカウント削除をキャンセルしました'
+    alert 'アカウント削除をキャンセルしました'
   else
     admin_delete()
       .done (data) ->
         alert 'アカウントを削除しました'
         location.reload()
       .fail (xhr,  status, error) ->
-        $("#message").text 'エラーが発生しました'
+        alert 'エラーが発生しました'
 

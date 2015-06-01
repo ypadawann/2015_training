@@ -17,5 +17,5 @@ $('#admin-login').bind 'click', ->
     .done (data) ->
       document.location = '/admin/top'
     .fail (data) ->
-      alert 'エラーが発生しました'
+      alert 'ログインに失敗しました'
 
