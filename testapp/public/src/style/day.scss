@@ -2,19 +2,52 @@ body{
   font-family:"MS ゴシック","Hiragino Kaku Gothic ProN",sans-serif;
 }
 
-td.dayAndweek{
-  padding:4px 0px 0px 0px;
-  font-size:6px;
+.title{
+  font-size:20px;
+}
+
+.profession{
+  position: absolute;
+  top: 0px;
+  left: 590px;
+  border-style: solid;
+  border-width: 1px;
+  padding: 23px 63px 23px 63px;
+  font-weight:bold;
+  font-size:20px;
+}
+
+.table{
+  border-collapse: collapse;
+}
+
+.table__menu{
+  font-size:9px;
   border-style:solid;
   border-width:1px;
   border-color:#000000;
   text-align:center;
-  vertical-align:top;
-  width:27px;
-  height:50px;
+  vertical-align:middle;
+  height:28px;
 }
 
-td.column{
+.table__menu__hidden{
+  border-style:none;
+  border-top-style:hidden;
+}
+
+.table__menu__insert{
+  width:150px;
+  height:28px;
+  border:none;
+  background:none;
+  text-align:center;
+  vertical-align:middle;
+  font-size:8px;
+}
+
+
+.table__column{
   font-size:6px;
   border-style:solid;
   border-width:1px;
@@ -25,68 +58,100 @@ td.column{
   height:50px;
 }
 
-td.menu{
-  font-size:9px;
-  border-style:solid;
-  border-width:1px;
-  border-color:#000000;
-  text-align:center;
-  vertical-align:middle;
-  height:28px;
+.table__column--dayAndweek{
+  @extend .table__column;
+  padding:4px 0px 0px 0px;
+  vertical-align:top;
+  width:27px;
+  height:50px;
 }
 
-td.etc{
-  font-size:6px;
-  border-style:solid;
-  border-width:1px;
-  border-color:#000000;
-  text-align:center;
-  vertical-align:middle;
+.table__column--attendance{
+  @extend .table__column;
+  width:75px;
+  height:50px;
+  border-right-style:dotted;
+}
+
+
+.table__column--leaving{
+  @extend .table__column;
+  width:75px;
+  height:50px;
+  border-left-style:none;
+}
+.table__column--mark{
+  @extend .table__column;
+  width:64px;
+  font-size:11px;
+  font-weight:bold;
+}
+
+.table__column--graveyardAndholidayAndprearranged{
+  @extend .table__column;
+  width:77px;
+}
+
+.table__column--etc{
+  @extend .table__column;
   width:230px;
   height:50px;
 }
 
-td.attendance{
-  font-size:6px;
+.table__cell{
   border-style:solid;
   border-width:1px;
   border-color:#000000;
-  text-align:center;
-  vertical-align:middle;
-  width:75px;
-  height:50px;
+  font-size:6px;
+  height:21px;
+}
+
+.table__cell--attendanceLine{
+  @extend .table__cell;
   border-right-style:dotted;
 }
 
-td.leaving{
-  font-size:6px;
-  border-style:solid;
-  border-width:1px;
-  border-color:#000000;
+.table__cell--leavingLine{
+  @extend .table__cell;
+  border-left-style:none;
+}
+
+.table__insert{
+  border:none;
+  background:none;
   text-align:center;
   vertical-align:middle;
+  font-size:6px;
+  width:60px;
+  height:21px;
+}
+
+.table__insert__dayAndweek{
+  @extend .table__insert;
+  width:27px;
+}
+
+.table__insert__attendanceAndleaving{
+  @extend .table__insert;
   width:75px;
-  height:50px;
-  border-left-style:none;
 }
 
-td.attendanceLine{
-  border-style:solid;
-  border-width:1px;
-  border-color:#000000;
-  border-right-style:dotted;
-  height:21px;
+.table__insert__mark{
+  @extend .table__insert;
+  width:64px;
 }
 
-td.leavingLine{
-  border-style:solid;
-  border-width:1px;
-  border-color:#000000;
-  border-left-style:none;
-  height:21px;
+.table__insert__graveyardAndholidayAndprearranged{
+  @extend .table__insert;
+  width:77px;
 }
 
-td.line{
+.table__insert__etc{
+  @extend .table__insert;
+  width:230px;
+}
+
+.table__total{
   border-style:solid;
   border-width:1px;
   border-color:#000000;
@@ -94,11 +159,23 @@ td.line{
   height:21px;
 }
 
-p.profession{
-  position: absolute;
-  top: 0px;
-  left: 590px;
-  border-style: solid;
-  border-width: 1px;
-  padding: 23px 63px 23px 63px;
+.table__total--top{
+  @extend .table__total;
+  text-align:center;
+  vertical-align:middle;
+}
+
+
+.table__finish-vacation{
+  border-style:solid;
+  border-width:1px;
+  border-color:#000000;
+  font-size:6px;
+  height:28px;
+}
+
+.table__finish-vacation--top{
+  @extend .table__finish-vacation;
+  text-align:center;
+  vertical-align:middle;
 }
