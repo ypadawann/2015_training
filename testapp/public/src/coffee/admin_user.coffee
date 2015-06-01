@@ -42,21 +42,25 @@ $('#user-select').bind 'click', ->
       document.querySelector("#name").value = data.name
       ($('#department option').filter ->
         return $(this).text() is data.department).prop 'selected', true
-    .fail (xhr,  status, error) ->
+    .fail (xhr,  textStatus, errorThrown) ->
+      console.log JSON.parse(xhr.responseText).error
       if xhr.status is 403
         $("#message").text '認証に失敗しました'
       else
         $("#message").text 'エラーが発生しました'
       
 $('#modify').bind 'click', ->
-  user_modify()
-    .done (data)   ->
-      $("#message").text 'ユーザ情報を変更しました'
-    .fail (xhr,  status, error) ->
-      if xhr.status is 403
-        $("#message").text '認証に失敗しました'
-      else
-        $("#message").text 'エラーが発生しました'
+  if $('#new_password').val() isnt $('#confirm_new_password').val()
+    alert '確認パスワードが違います'
+  else
+    user_modify()
+      .done (data)   ->
+        $("#message").text 'ユーザ情報を変更しました'
+      .fail (xhr,  status, error) ->
+        if xhr.status is 403
+          $("#message").text '認証に失敗しました'
+        else
+          $("#message").text 'エラーが発生しました'
 
 $('#delete').click ->
   if !window.confirm '本当にアカウントを削除しますか？'
