@@ -115,7 +115,11 @@ $ RACK_ENV=test bundle exec rake db:migrate
 日付|day|date|no||NULL
 社員番号|user_id|int(11)|no|FK(users.id)|NULL
 入室時刻|attendance|varchar(10)|yes||NULL
-退出時刻|leaving|varchar(10)|yes
+退出時刻|leaving|varchar(10)|yes||NULL
+振替休暇予定日|prearranged-holiday|date|yes||NULL
+有給休暇|paid-vacation|float|yes||NULL
+振替休暇取得日|holiday-acquisition|date|yes||NULL
+備考|etc|varchar(50)|yes||NULL
 
 
 **Adminsテーブル**
