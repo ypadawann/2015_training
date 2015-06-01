@@ -28,16 +28,19 @@ admin_delete = ->
     context:    this
       
 $('#admin-modify').bind 'click', ->
-  admin_modify()
-    .done (data)   ->
-      $("#message").text 'ユーザ情報を変更しました'
-    .fail (xhr,  status, error) ->
-      if xhr.status is 403
-        $("#message").text '認証に失敗しました'
-      else
-        $("#message").text 'エラーが発生しました'
+  if $('#admin_new_password').val() isnt $('#confirm_admin_new_password').val()
+    alert '確認パスワードが違います'
+  else
+    admin_modify()
+      .done (data)   ->
+        $("#message").text 'ユーザ情報を変更しました'
+      .fail (xhr,  status, error) ->
+        if xhr.status is 403
+          $("#message").text '認証に失敗しました'
+        else
+          $("#message").text 'エラーが発生しました'
 
-$('#admin-delete').click ->
+$('#admin-delete').bind 'click', ->
   if !window.confirm '本当にアカウントを削除しますか？'
     $("#message").text 'アカウント削除をキャンセルしました'
   else
