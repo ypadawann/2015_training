@@ -1,73 +1,70 @@
 <head>
-        <link rel="stylesheet" type="text/css" href=<%= "#{css_path}/day.css" %>/>
-        <link rel="stylesheet" type="text/css" href=<%= "#{css_path}/print.css"%> media="print"/>
+  <link rel="stylesheet" type="text/css" href=<%= "#{css_path}/day.css" %>/>
+  <link rel="stylesheet" type="text/css" href=<%= "#{css_path}/print.css"%> media="print"/>
 </head>
-<body>
-        <div style="font-size:20px;">
-                勤　務　管　理　表
-        </div>
-        <p class="profession"><b style="font-size:20px;">専門職用</b></p>
-        <p></p>
-        <table  border="1" cellspacing="0" cellpadding="0" id="table1" class="table">
-                <tr>
-                        <td class="table__menu" colspan="2">年月</td>
-                        <td class="table__menu" colspan="2"><input type="text" id="YearsAndMonths" readonly="readonly" class="table__menu__insert"></td>
-                        <td class="table__menu" style="border-style:none; border-top-style: hidden;"></td>
-                        <td class="table__menu" colspan="3">承認</td>
-                        <td class="table__menu">申請</td>
-                </tr>
-                <tr>
-                        <td class="table__menu" colspan="2">所属</td>
-                        <td class="table__menu" colspan="2"><input type="text" id="department" value="" class="table__menu__insert"></td>
-                        <td class="table__menu" style="border-style:none;"></td>
-                        <td class="table__menu" rowspan="2">　</td>
-                        <td class="table__menu" rowspan="2">　</td>
-                        <td class="table__menu" rowspan="2">　</td>
-                        <td class="table__menu" rowspan="2">　</td>
-                </tr>
-                <tr>
-                        <td class="table__menu" colspan="2">No.</td>
-                        <td class="table__menu" colspan="2"><input type="text" id="user_id" value="<%= @user_id %>" class="table__menu__insert"></td>
-                </tr>
-                <tr>
-                        <td class="table__menu" colspan="2">氏名</td>
-                        <td class="table__menu" colspan="2"><input type="text" id="name" value="" class="table__menu__insert"></td>
-                </tr>
+  <div class="title">
+    勤　務　管　理　表
+  </div>
+  <p class="profession">専門職用</p>
+  <table  border="1" cellspacing="0" cellpadding="0" id="table1" class="table">
+    <tr>
+      <td class="table__menu" colspan="2">年月</td>
+      <td class="table__menu" colspan="2"><input type="text" id="YearsAndMonths" readonly="readonly" class="table__menu__insert"></td>
+      <td class="table__menu__hidden"></td>
+      <td class="table__menu" colspan="3">承認</td>
+      <td class="table__menu">申請</td>
+    </tr>
+    <tr>
+      <td class="table__menu" colspan="2">所属</td>
+      <td class="table__menu" colspan="2"><input type="text" id="department" value="" class="table__menu__insert"></td>
+      <td class="table__menu__hidden"></td>
+      <td class="table__menu" rowspan="2">　</td>
+      <td class="table__menu" rowspan="2">　</td>
+      <td class="table__menu" rowspan="2">　</td>
+      <td class="table__menu" rowspan="2">　</td>
+    </tr>
+    <tr>
+      <td class="table__menu" colspan="2">No.</td>
+      <td class="table__menu" colspan="2"><input type="text" id="user_id" value="<%= @user_id %>" class="table__menu__insert"></td>
+    </tr>
+    <tr>
+      <td class="table__menu" colspan="2">氏名</td>
+      <td class="table__menu" colspan="2"><input type="text" id="name" value="" class="table__menu__insert"></td>
+    </tr>
 
-                <tr bgcolor="#BFBFBF">
-                        <td class="dayAndweek">日付</td>
-                        <td class="dayAndweek">曜日</td>
-                        <td class="attendance">入室時刻</td>
-                        <td class="leaving">退出時刻</td>
-                        <td class="column" style="width:64px; font-size:11px;"><b>上司<br>承認印</b></td>
-                        <td class="column" style="width:77px;">深夜勤務<br>22時-翌5時</td>
-                        <td class="column" style="width:77px;" >休日<br>勤務時間</td>
-                        <td class="column" style="width:77px;">振替休暇<br>予定日</td>
-                        <td class="column">有給<br>休暇</td>
-                        <td class="column">振替休暇<br>取得日</td>
-                        <td class="etc">時間外業務は必ず上司による指示を受けてください。</td>
-                </tr>
-                <tr>
-                        <td class="line" style="font-size:6px; text-align:center; vertical-align:middle; height:21px;">合計</td>
-                        <td class="line"></td>
-                        <td class="line"></td>
-                        <td class="line"></td>
-                        <td class="line"></td>
-                        <td class="line"></td>
-                        <td class="line"></td>
-                        <td class="line"></td>
-                        <td class="line"></td>
-                        <td class="line"></td>
-                        <td class="line"></td>
-                </tr>
-                <tr>
-                        <td class="line" colspan="2" style="font-size:6px; text-align:center; vertical-align:middle; height:28px;">当月消化<br>有休日数</td>
-                        <td class="line"></td>
-                        <td class="line" colspan="2"></td>
-                        <td class="line"></td>
-                </tr>
+    <tr bgcolor="#BFBFBF">
+      <td class="table__column--dayAndweek">日付</td>
+      <td class="table__column--dayAndweek">曜日</td>
+      <td class="table__column--attendance">入室時刻</td>
+      <td class="table__column--leaving">退出時刻</td>
+      <td class="table__column--mark">上司<br>承認印</td>
+      <td class="table__column--graveyardAndholidayAndprearranged">深夜勤務<br>22時-翌5時</td>
+      <td class="table__column--graveyardAndholidayAndprearranged">休日<br>勤務時間</td>
+      <td class="table__column--graveyardAndholidayAndprearranged">振替休暇<br>予定日</td>
+      <td class="table__column">有給<br>休暇</td>
+      <td class="table__column">振替休暇<br>取得日</td>
+      <td class="table__column--etc">時間外業務は必ず上司による指示を受けてください。</td>
+    </tr>
+    <tr>
+      <td class="table__total--top">合計</td>
+      <td class="table__total"></td>
+      <td class="table__total"></td>
+      <td class="table__total"></td>
+      <td class="table__total"></td>
+      <td class="table__total"></td>
+      <td class="table__total"></td>
+      <td class="table__total"></td>
+      <td class="table__total"></td>
+      <td class="table__total"></td>
+      <td class="table__total"></td>
+    </tr>
+    <tr>
+      <td class="table__finish-vacation--top" colspan="2">当月消化<br>有休日数</td>
+      <td class="table__finish-vacation"></td>
+      <td class="table__finish-vacation" colspan="2"></td>
+      <td class="table__finish-vacation"></td>
+    </tr>
 
-        </table>
-        <input type="button" id="save" value="保存">
-        <script type="text/javascript" src=<%= "#{js_path}/read_data.js" %>></script>
-</body>
+  </table>
+  <input type="button" id="save" value="保存">
+  <script type="text/javascript" src=<%= "#{js_path}/read_data.js" %>></script>
