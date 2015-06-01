@@ -11,6 +11,8 @@ ActiveRecord::Base.establish_connection(config[db_env])
 
 module Model
   class User < ActiveRecord::Base
+    self.primary_key = :id
+
     validates :id, presence: true
     validates :id, uniqueness: true
     validates :id, numericality: {
@@ -29,11 +31,18 @@ module Model
   end
 
   class Timecard < ActiveRecord::Base
+    validates :day, presence: true
+    validates :user_id, presence: true
+    validates :attendance, length: { maximum: 10 }
+    validates :leaving, length: { maximum: 10 }
   end
 
   class Admin < ActiveRecord::Base
+    self.primary_key = :id
+
     validates :id, presence: true
     validates :id, uniqueness: true
+    validates :id, length: { maximum: 50 }
     validates :password, presence: true
   end
 end
