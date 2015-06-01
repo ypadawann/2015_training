@@ -1,4 +1,4 @@
-B32;278;0c# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
