@@ -8,47 +8,19 @@ module Model
   class Timecard_operation
     def self.prepare_timecard(day, user_id)
       Model::Timecard.where(day: day, user_id: user_id).first ||
-      Model::Timecard.new(day: day, user_id: user_id)
+        Model::Timecard.new(day: day, user_id: user_id)
     end
 
     def self.attend(day, user_id, time)
       timecard = prepare_timecard(day, user_id)
-      if timecard.attendance.present?
-        false
-      else
-        timecard.attendance = time
-        timecard.save
-      end
-    end
-
-    def self.update_attend(date, user_id, time)
-      timecard = Timecard.where(day: date, user_id: user_id).first
-      if timecard.nil?
-        new_timecard_add(user_id, date, time, nil)
-      else
-        timecard.attendance = time
-        timecard.save
-      end
+      timecard.attendance = time
+      timecard.save
     end
 
     def self.returnhome(day, user_id, time)
       timecard = prepare_timecard(day, user_id)
-      if timecard.leaving.present?
-        false
-      else
-        timecard.leaving = time
-        timecard.save
-      end
-    end
-
-    def self.update_leave(date, user_id, time)
-      timecard = Timecard.where(day: date, user_id: user_id).first
-      if timecard.nil?
-        new_timecard_add(user_id, date, nil, time)
-      else
-        timecard.leaving = time
-        timecard.save
-      end
+      timecard.leaving = time
+      timecard.save
     end
 
     def self.update_all(year, month, timecard_data, user_id)
@@ -90,23 +62,6 @@ module Model
     def self.get_leaving(day, user_id)
       Model::Timecard.where(day: day, user_id: user_id).first
         .try(:leaving)
-    end
-
-    def self.new_timecard_add(user_id, day, attendance, leaving)
-      timecards = Model::Timecard.new
-      timecards.user_id = user_id
-      timecards.day = day
-      timecards.attendance = attendance
-      timecards.leaving = leaving
-      timecards.save
-    end
-
-    def self.time_to_string(time)
-      if time.nil?
-        return ''
-      else
-        return time
-      end
     end
   end
 end

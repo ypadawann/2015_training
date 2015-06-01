@@ -5,19 +5,18 @@ require './model/departments'
 module API
   module V1
     class Timecards < Grape::API
-      # prefix 'users'
-      # resource '/:user_id' do
-
       resource 'users/:user_id' do
 
         post '/attend' do
           user_id = params[:user_id].to_i
           authenticate!(user_id)
-          time = (Time.now).strftime('%H:%M')
           date = Date.today
-          if !Model::Timecard_operation.attend(date, user_id, time)
-            error!('already attend', 400)
-          end
+          error!('already attend', 400) unless
+            Model::Timecard_operation.get_attendance(date, user_id).nil?
+
+          time = (Time.now).strftime('%H:%M')
+          Model::Timecard_operation.attend(date, user_id, time)
+
           name = Model::Users.get_name(user_id)
           department =
             Model::Departments.name_of(Model::Users.get_department(user_id))
@@ -30,7 +29,7 @@ module API
           authenticate!(user_id)
           date = params[:date]
           time = params[:attendance]
-          Model::Timecard_operation.update_attend(date, user_id, time)
+          Model::Timecard_operation.attend(date, user_id, time)
           name = Model::Users.get_name(user_id)
           department =
             Model::Departments.name_of(Model::Users.get_department(user_id))
@@ -40,11 +39,15 @@ module API
         post '/leave' do
           user_id = params[:user_id].to_i
           authenticate!(user_id)
-          time = (Time.now).strftime('%H:%M')
           date = Date.today
-          if !Model::Timecard_operation.returnhome(date, user_id, time)
-            error!('wrong access', 400)
-          end
+          error!('wrong access', 400) unless
+            Model::Timecard_operation.get_leaving(date, user_id).nil?
+          error!('Not Attended Yet', 404) if
+            Model::Timecard_operation.get_attendance(date, user_id).nil?
+
+          time = (Time.now).strftime('%H:%M')
+          Model::Timecard_operation.returnhome(date, user_id, time)
+
           name = Model::Users.get_name(user_id)
           department =
             Model::Departments.name_of(Model::Users.get_department(user_id))
@@ -57,7 +60,7 @@ module API
           authenticate!(user_id)
           date = params[:date]
           time = params[:leaving]
-          Model::Timecard_operation.update_leave(date, user_id, time)
+          Model::Timecard_operation.leave(date, user_id, time)
           name = Model::Users.get_name(user_id)
           department =
             Model::Departments.name_of(Model::Users.get_department(user_id))
