@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+B32;278;0c# -*- coding: utf-8 -*-
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
@@ -49,11 +49,8 @@ class Admin < Sinatra::Base
   end
 
   get '/' do
-    if session[:login_status]
-      erb :'admin/top'.to_sym
-    else
-      erb 'admin/login'.to_sym
-    end
+    redirect to('/top') if session[:login_status]
+    erb 'admin/login'.to_sym
   end
 
   get %r{\/\w+} do
