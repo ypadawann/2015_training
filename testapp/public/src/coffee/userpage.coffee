@@ -43,6 +43,6 @@ $('#logout').bind 'click', ->
   .fail (msg) ->
     alert('エラーが発生しました')
 $('#readdata').bind 'click', ->
-  document.location = '/read_data'
+  document.location = '/userpage/read_data'
 $('#modify').bind 'click', ->
-  document.location = '/userdata_modify'
+  document.location = '/userpage/modify'

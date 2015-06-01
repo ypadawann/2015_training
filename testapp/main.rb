@@ -9,6 +9,8 @@ require 'json'
 require 'sinatra/contrib'
 require 'erubis'
 
+require './controller_helpers'
+
 require_relative 'model/users'
 require_relative 'model/departments'
 require_relative 'model/timecards'
@@ -27,33 +29,21 @@ class Main < Sinatra::Base
     @name = Model::Users.get_name(@user_id.to_i)
   end
 
-  helpers do
-    def show_erb
-      path = request.path
-      path.slice!(0, 1)
-      if File.exist?("#{settings.views}/#{path}.erb")
-        erb "#{path}".to_sym
-      else
-        raise Sinatra::NotFound.new
-      end
-    end
-
-    def app_path
-      "#{request.scheme}://#{request.host}:#{request.port}#{request.script_name}"
-    end
-
-    def js_path
-      "#{app_path}/dist/js"
-    end
-
-    def css_path
-      "#{app_path}/dist/style"
-    end
-  end
+  helpers ControllerHelpers
 
   get '/' do
     redirect to('/userpage') if @name
     erb :index
+  end
+
+  get '/userpage' do
+    redirect to('/') unless @name
+    erb %s(userpage/index)
+  end
+
+  get %r{\/userpage\/[\w\/]*} do
+    redirect to('/') unless @name
+    show_erb
   end
 
   get %r{\/[\w\/]+} do
