@@ -3,7 +3,7 @@ user_select = ->
   deferred = $.ajax
     async:     true
     type:      "GET"
-    url:       "http://#{location.host}/admin/api/v1/admin/users/#{user_id}"
+    url:       "#{location.protocol}//#{location.host}/admin/api/v1/admin/users/#{user_id}"
     dataType:  "json"
     context:    this
 
@@ -12,7 +12,7 @@ user_modify = ->
   deferred = $.ajax
     async:     true
     type:      "PUT"
-    url:       "http://#{location.host}/admin/api/v1/admin/users/#{user_id}"
+    url:       "#{location.protocol}//#{location.host}/admin/api/v1/admin/users/#{user_id}"
     data:
       'name': $('#name').val()
       'department': $('#department option:selected').text()
@@ -26,7 +26,7 @@ user_delete = ->
   deferred = $.ajax
     async:     true
     type:      "DELETE"
-    url:       "http://#{location.host}/admin/api/v1/admin/users/#{user_id}"
+    url:       "#{location.protocol}//#{location.host}/admin/api/v1/admin/users/#{user_id}"
     dataType:  "json"
     context:    this
 
@@ -43,7 +43,7 @@ $('#user-select').bind 'click', ->
         alert '認証に失敗しました'
       else
         alert 'エラーが発生しました'
-      
+
 $('#modify').bind 'click', ->
   if $('#new_password').val() isnt $('#confirm_new_password').val()
     alert '確認パスワードが違います'

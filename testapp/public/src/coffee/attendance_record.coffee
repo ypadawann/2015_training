@@ -8,7 +8,7 @@ save = (user_id, year, month, day) ->
     }
   request = $.ajax(
     type: 'put'
-    url: "api/v1/users/#{user_id}/attend-leave/#{year}/#{month}"
+    url: "#{location.protocol}//#{location.host}/api/v1/users/#{user_id}/attend-leave/#{year}/#{month}"
     dataType: 'json'
     data:
       'user_id': user_id
@@ -27,7 +27,7 @@ if day < 10
   day = "0#{day}"
 request = $.ajax(
   type: 'get'
-  url: "api/v1/users/#{user_id}/attend-leave/#{year}/#{month}"
+  url: "#{location.protocol}//#{location.host}/api/v1/users/#{user_id}/attend-leave/#{year}/#{month}"
   dataType: 'json'
   data:
     'user_id': user_id
@@ -44,4 +44,4 @@ request = $.ajax(
 $('#save').bind 'click', ->
   save(user_id, year, month, day)
   .done (msg) ->
-    document.location = '/read_data'
+    document.location = '/userpage/read_data'

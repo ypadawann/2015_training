@@ -1,7 +1,7 @@
 admin_login = ->
   deferred = $.ajax
     type: 'PUT'
-    url: "http://#{location.host}/admin/api/v1/admin/login"
+    url: "#{location.protocol}//#{location.host}/admin/api/v1/admin/login"
     data: {
             admin_id: $("#admin_id").val(),
             admin_password: $("#admin_password").val()

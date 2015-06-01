@@ -1,7 +1,7 @@
 department_register = ->
   deferred = $.ajax
     type:      "POST"
-    url:       "http://#{location.host}/admin/api/v1/departments"
+    url:       "#{location.protocol}//#{location.host}/admin/api/v1/departments"
     data: 'name': $("#register-name").val()
     dataType:  "json"
     context:    this
@@ -10,7 +10,7 @@ department_rename = ->
   department_id = $("#department-rename-id option:selected").val()
   deferred = $.ajax
     type:      "PUT"
-    url:       "http://#{location.host}/admin/api/v1/departments/#{department_id}"
+    url:       "#{location.protocol}//#{location.host}/admin/api/v1/departments/#{department_id}"
     data: 'name': $("#new-department-name").val()
     dataType: 'json'
 
@@ -18,7 +18,7 @@ department_delete = ->
   department_id = $("#department-delete-id option:selected").val()
   deferred = $.ajax
     type:      "DELETE"
-    url:       "http://#{location.host}/admin/api/v1/departments/#{department_id}"
+    url:       "#{location.protocol}//#{location.host}/admin/api/v1/departments/#{department_id}"
     dataType: 'json'
 
 $('#department-register').bind 'click', ->
@@ -31,7 +31,7 @@ $('#department-register').bind 'click', ->
         alert 'すでに登録されている部署です'
       else
         alert '部署の登録に失敗しました'
-      
+
 $('#department-rename').bind 'click', ->
   old_name = $("#department-rename-id option:selected").text()
   department_rename()
@@ -43,7 +43,7 @@ $('#department-rename').bind 'click', ->
         alert '部署が見つかりません'
       else
         alert '部署名の変更に失敗しました'
-      
+
 $('#department-delete').click ->
   if !window.confirm '本当に部署を削除しますか？'
   else

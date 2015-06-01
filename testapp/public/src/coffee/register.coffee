@@ -14,7 +14,7 @@ $ ->
   register = ->
     $.ajax(
       type: 'post'
-      url: 'api/v1/users'
+      url: "#{location.protocol}//#{location.host}/api/v1/users"
       data:
         'user_id'   : $('#no').val()
         'name'      : $('#name').val()
@@ -25,7 +25,7 @@ $ ->
   login = ->
     $.ajax(
       type: 'put'
-      url: "api/v1/users/#{$('#no').val()}/login"
+      url: "#{location.protocol}//#{location.host}/api/v1/users/#{$('#no').val()}/login"
       data:
         'user_id' : $('#no').val()
         'password': $('#pass').val()
