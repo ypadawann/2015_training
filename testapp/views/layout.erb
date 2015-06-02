@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <link rel="stylesheet" type="text/css" href=<%= "#{css_path}/day.css"%>/>
+  <link rel="stylesheet" type="text/css" href=<%= "#{css_path}/print.css"%> media="print"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <title><%= @title %></title>
 </head>
 <body>
   <%== yield %>
-  </br>
+  <br>
   <a href=<%= app_path %>>トップページ</a>
 </body>
 </html>
