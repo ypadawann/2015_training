@@ -21,6 +21,7 @@ module Model
     validates :name, length: { maximum: 50 }
     belongs_to :department
     validates :department, presence: true
+    validates :enter, presence: true
   end
 
   class Department < ActiveRecord::Base
