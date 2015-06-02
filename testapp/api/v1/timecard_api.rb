@@ -11,8 +11,8 @@ module API
           user_id = params[:user_id].to_i
           authenticate!(user_id)
           date = Date.today
-          error!('Already Attended', 400) unless
-            Model::Timecard_operation.get_attendance(date, user_id).nil?
+          error!('Already Attended', 400) if
+            Model::Timecard_operation.get_attendance(date, user_id).present?
 
           time = (Time.now).strftime('%H:%M')
           Model::Timecard_operation.attend(date, user_id, time)
@@ -39,10 +39,10 @@ module API
           user_id = params[:user_id].to_i
           authenticate!(user_id)
           date = Date.today
-          error!('Already Left', 400) unless
-            Model::Timecard_operation.get_leaving(date, user_id).nil?
+          error!('Already Left', 400) if
+            Model::Timecard_operation.get_leaving(date, user_id).present?
           error!('Not Attended Yet', 404) if
-            Model::Timecard_operation.get_attendance(date, user_id).nil?
+            Model::Timecard_operation.get_attendance(date, user_id).blank?
 
           time = (Time.now).strftime('%H:%M')
           Model::Timecard_operation.returnhome(date, user_id, time)
