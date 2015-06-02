@@ -138,9 +138,9 @@ parametersを受け取り、resultsをJSONで返す。
             * day: integer
             * attendace: time
             * leaving: time
-            * prearranged-holiday: date
-            * paid-vacation: float
-            * holiday-acquisition: date
+            * prearranged_holiday: date
+            * paid_vacation: string
+            * holiday_acquisition: date
             * etc: string
     * results
         * user_id: integer
@@ -156,11 +156,15 @@ parametersを受け取り、resultsをJSONで返す。
     * results
         * data: array of
             * day: integer
+            * weekday: string
+            * isholiday: boolean
             * attendace: time
             * leaving: time
-            * prearranged-holiday: date
-            * paid-vacation: float
-            * holiday-acquisition: date
+            * midnight_work: string
+            * holiday_shift: string
+            * prearranged_holiday: date
+            * paid_vacation: string
+            * holiday_acquisition: date
             * etc: string
         * user_id: integer
         * name: string
