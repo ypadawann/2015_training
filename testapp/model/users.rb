@@ -26,13 +26,14 @@ module Model
         user && Model::Helper.start_verify(user.password, password)
       end
 
-      def add(id, name, department, password)
+      def add(id, name, department, password, enter)
         user =
           Model::User.new(
             id: id,
             name: name,
             department_id: Model::Departments.id_of(department),
-            password: Model::Helper.start_hash(password)
+            password: Model::Helper.start_hash(password),
+            enter: enter
           )
         user.save
       end

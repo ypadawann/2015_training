@@ -23,6 +23,7 @@ parametersを受け取り、resultsをJSONで返す。
         * name: string
         * department: string
         * password: string
+        * enter_date: date
     * results
         * user_id: integer
         * name: string

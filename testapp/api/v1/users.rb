@@ -29,10 +29,13 @@ module API
           requires :name, type: String, desc: 'ユーザ名'
           requires :department, type: String, desc: '部署名'
           requires :password, type: String, desc: 'パスワード'
+          requires :enter_date, type: Date, desc: '入社日'
         end
         post do
+          p params[:enter_date]
           if Model::Users.add(params[:user_id], params[:name],
-                              params[:department], params[:password])
+                              params[:department], params[:password], 
+                              params[:enter_date] )
             { user_id:    params[:user_id],
               name:       params[:name],
               department: params[:department] }
