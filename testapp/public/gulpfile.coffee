@@ -27,7 +27,7 @@ gulp.task('build:bundle', ['build:coffee'], () ->
     .src './temp/*.js'
     .pipe gulpWebpack({
        entry: {
-         read_data: ['./temp/attendance_record.js', './temp/read_data.js'],
+         attedance_record: './temp/attendance_record.js',
          register: './temp/register.js',
          userpage: './temp/userpage.js',
          login: './temp/login.js',

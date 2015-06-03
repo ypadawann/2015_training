@@ -7,7 +7,7 @@ module API
       MIDNIGHT_START = 22.0
       MIDNIGHT_END   = 24.0 + 5.0
       TIME_DELIMITER = ':'
-      WEEKDAY_NAMES = %w('日' '月' '火' '水' '木' '金' '土')
+      WEEKDAY_NAMES = %w(日 月 火 水 木 金 土)
 
       public
 

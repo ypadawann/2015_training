@@ -17,7 +17,7 @@
   </tr>
   <tr>
     <td class="table__menu" colspan="2">所属</td>
-    <td class="table__menu" colspan="2"><input type="text" id="department" value="" class="table__menu__insert"></td>
+    <td class="table__menu" colspan="2"><input type="text" id="department" value="" readonly="readonly" class="table__menu__insert"></td>
     <td class="table__menu--hidden"></td>
     <td class="table__menu" rowspan="2">　</td>
     <td class="table__menu" rowspan="2">　</td>
@@ -26,11 +26,11 @@
   </tr>
   <tr>
     <td class="table__menu" colspan="2">No.</td>
-    <td class="table__menu" colspan="2"><input type="text" id="user_id" value="<%= @user_id %>" class="table__menu__insert"></td>
+    <td class="table__menu" colspan="2"><input type="text" id="user_id" value="<%= @user_id %>" readonly="readonly" class="table__menu__insert"></td>
   </tr>
   <tr>
     <td class="table__menu" colspan="2">氏名</td>
-    <td class="table__menu" colspan="2"><input type="text" id="name" value="" class="table__menu__insert"></td>
+    <td class="table__menu" colspan="2"><input type="text" id="name" value="" readonly="readonly" class="table__menu__insert"></td>
   </tr>
   <tr bgcolor="#BFBFBF">
     <td class="table__column--dayAndweek">日付</td>
@@ -66,4 +66,4 @@
   </tr>
 </table>
 <input type="button" id="save" class="save" value="保存">
-<script type="text/javascript" src=<%= "#{js_path}/read_data.js" %>></script>
+<script type="text/javascript" src=<%= "#{js_path}/attendance_record.js" %>></script>
