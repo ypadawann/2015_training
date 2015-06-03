@@ -25,7 +25,8 @@ module Model
 
     def self.update_all(year, month, timecard_data, user_id)
       timecard_data.each do |tc_data|
-        date = "#{year}-#{month}-#{tc_data[1].day}"
+        p tc_data
+        date = sprintf("%d-%02d-%02d", year, month, tc_data[1].day)
         timecard = prepare_timecard(date, user_id)
         timecard.attendance = tc_data[1].attendance
         timecard.leaving = tc_data[1].leaving
@@ -40,8 +41,9 @@ module Model
     end
 
     def self.read_monthly_data(user_id, year, month)
-      timecards = Model::Timecard.where('day LIKE ?', "#{year}-#{month}-%")
-                  .where(user_id: user_id).order('day')
+      timecards =
+        Model::Timecard.where('day LIKE ?', sprintf("%d-%02d-%", year, month))
+        .where(user_id: user_id).order('day')
       i = 1
       timecard_json = []
       timecards.each do |t|

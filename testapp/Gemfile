@@ -1,7 +1,7 @@
 # A sample Gemfile
 source "https://rubygems.org"
 
-# gem 
+# gem
 gem 'rake'
 gem 'sinatra'
 gem 'sinatra-contrib'
@@ -15,3 +15,4 @@ gem 'grape'
 gem 'rspec'
 gem 'guard-rspec'
 gem 'unicorn'
+gem 'holiday_jp'
