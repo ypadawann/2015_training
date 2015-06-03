@@ -34,9 +34,15 @@ module Model
       end
     end
 
-    def self.push_empty_data(t, day_from, day_to)
-      day_from.upto(day_to) do |d|
-        t.push(day: d, attendance: '', leaving: '')
+    def self.empty_data(day_from, day_to)
+      (day_from..day_to).map do |d|
+        { day:                   d,
+          attendance:          nil,
+          leaving:             nil,
+          prearranged_holiday: nil,
+          paid_vacation:       nil,
+          holiday_acquisition: nil,
+          etc:                 nil  }
       end
     end
 
@@ -44,16 +50,21 @@ module Model
       timecards =
         Model::Timecard.where('day LIKE ?', sprintf("%d-%02d-%", year, month))
         .where(user_id: user_id).order('day')
-      i = 1
-      timecard_json = []
-      timecards.each do |t|
-        push_empty_data(timecard_json, i, t.day.day - 1)
-        timecard_json.push(day: i, attendance: t.attendance, leaving: t.leaving)
-        i = t.day.day + 1
+      day = 1
+      timecards.map do |t|
+        previous_day = day
+        day = t.day.day + 1
+        stored_data = { day:                 t.day.day,
+                        attendance:          t.attendance,
+                        leaving:             t.leaving,
+                        prearranged_holiday: t.prearranged_holiday,
+                        paid_vacation:       t.paid_vacation,
+                        holiday_acquisition: t.holiday_acquisition,
+                        etc:                 t.etc                  }
+        empty_data(previous_day, t.day.day - 1) << stored_data
       end
-      max_day = (Date.new(year.to_i, month.to_i + 1) - 1).day
-      push_empty_data(timecard_json, i, max_day)
-      timecard_json
+        .concat(empty_data(day, Date.new(year, month, -1).day))
+        .flatten(1)
     end
 
     def self.get_attendance(day, user_id)

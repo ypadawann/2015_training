@@ -110,7 +110,7 @@ parametersを受け取り、resultsをJSONで返す。
         * name: string
         * department: string
         * date: date
-        * attendance: time
+        * attendance: string
     * errors
         * 400: すでに出勤している
         * 403: 認証に失敗した
@@ -123,7 +123,7 @@ parametersを受け取り、resultsをJSONで返す。
         * name: string
         * department: string
         * date: date
-        * leaving: time
+        * leaving: string
     * errors
         * 403: 認証に失敗した
         * 404: 出勤していない
@@ -132,7 +132,7 @@ parametersを受け取り、resultsをJSONで返す。
     * 出勤の更新
     * headers
     * parameters
-        * attendance: time
+        * attendance: string
     * results
         * user_id: integer
         * name: string
@@ -144,7 +144,7 @@ parametersを受け取り、resultsをJSONで返す。
     * 退勤の更新
     * headers
     * parameters
-        * leaving: time
+        * leaving: string
     * results
         * user_id: integer
         * name: string
@@ -158,10 +158,10 @@ parametersを受け取り、resultsをJSONで返す。
     * parameters
         * data: array of
             * day: integer
-            * attendace: time
-            * leaving: time
+            * attendance: string
+            * leaving: string
             * prearranged_holiday: date
-            * paid_vacation: string
+            * paid_vacation: float
             * holiday_acquisition: date
             * etc: string
     * results
@@ -180,12 +180,12 @@ parametersを受け取り、resultsをJSONで返す。
             * day: integer
             * weekday: string
             * isholiday: boolean
-            * attendace: time
-            * leaving: time
-            * midnight_work: string
-            * holiday_shift: string
+            * attendance: string
+            * leaving: string
+            * midnight_work: float
+            * holiday_shift: float
             * prearranged_holiday: date
-            * paid_vacation: string
+            * paid_vacation: float
             * holiday_acquisition: date
             * etc: string
         * user_id: integer
