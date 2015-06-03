@@ -41,7 +41,6 @@ module API
           Model::Timecard_operation.add_paid_vacation(params[:user_id], 
                                                       full_vacation,
                                                       half_vacation)
-          #p JSON.parse( full_vacation )
         end
 
       end

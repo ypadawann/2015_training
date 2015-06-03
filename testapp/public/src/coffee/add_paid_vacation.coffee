@@ -24,7 +24,7 @@ array_to_postdata = (array) ->
 $('#add-vacation').bind 'click', ->
   add_vacation()
   .done (msg) ->
-    $('#attend_message').text msg.attendance + 'に出勤しました'
+    alert '登録しました'
   .fail (msg) ->
     console.log(msg.status)
-    $('#attend_message').text '本日は既に出勤しています'
+    alert '登録に失敗しました'
