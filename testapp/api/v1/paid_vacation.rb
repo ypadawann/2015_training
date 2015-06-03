@@ -15,12 +15,22 @@ module API
         desc '有給残数取得'
         get do
           user_id = params[:user_id]
-          paid_vacation_num = Model::Users.get_usable_vacation_num(user_id)
-          { paid_vacation_num: paid_vacation_num }
-        end
+          user_enter = Model::Users.get_enter(user_id)
+          this_year = get_business_year(Date.today)
 
-        desc '有給取得日一括登録'
-        post do
+          carry_over = 0
+          year = user_enter.year
+          while year < this_year do
+            carry_over =
+              calculate_carry_over(user_id, user_enter, year, carry_over)
+            year += 1
+          end
+
+          given = get_given_vacation_num(year, user_enter)
+          used = Model::Timecard_operation.get_used_vacation_num(user_id, year)
+          usable_vacation = carry_over + given - used
+
+          { paid_vacation_num: usable_vacation }
         end
 
       end
