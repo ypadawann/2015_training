@@ -23,6 +23,7 @@ parametersを受け取り、resultsをJSONで返す。
         * name: string
         * department: string
         * password: string
+        * enter_date: date
     * results
         * user_id: integer
         * name: string
@@ -71,6 +72,15 @@ parametersを受け取り、resultsをJSONで返す。
     * results
     * errors
         * 403: 認証に失敗した
+
+* GET users/:user_id/paid_vacation
+    * 有給残数取得
+    * headers
+    * parameters
+    * results
+        * paid_vacation_num: float
+    * errors
+        * 403: 認証に失敗しました
 
 * PUT users/:user_id/logout
     * ログアウト

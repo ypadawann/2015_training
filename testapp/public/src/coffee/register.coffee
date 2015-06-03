@@ -12,6 +12,10 @@ $ ->
       alert ("#{xhr.status} #{xhr.statusText}")
 
   register = ->
+    year = $("#enter_year").val()
+    month = $("#enter_month").val()
+    day = $("#enter_day").val()
+    date = new Date(year, month - 1, day)
     $.ajax(
       type: 'post'
       url: "#{location.protocol}//#{location.host}/api/v1/users"
@@ -20,6 +24,7 @@ $ ->
         'name'      : $('#name').val()
         'department': $('#department option:selected').text()
         'password'  : $('#pass').val()
+        'enter_date'      : date
     )
 
   login = ->

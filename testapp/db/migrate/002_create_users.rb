@@ -5,6 +5,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :name, null: false, limit: 50
       t.integer :department_id, null: false
       t.string :password, null: false
+      t.date :enter, null: false
     end
     add_foreign_key(:users, :departments)
     execute 'ALTER TABLE users ADD PRIMARY KEY (id)'

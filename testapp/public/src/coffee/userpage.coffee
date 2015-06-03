@@ -22,6 +22,14 @@ logout = ->
     dataType: 'json'
     data: 'user_id': user_id)
 
+view_paid_vacation_num = ->
+  user_id = document.getElementById('user_id').textContent
+  request = $.ajax(
+    type: 'get'
+    url: "#{location.protocol}//#{location.host}/api/v1/users/#{user_id}/paid-vacation"
+    dataType: 'json'
+    )
+
 $('#attend').bind 'click', ->
   attend()
   .done (msg) ->
@@ -42,6 +50,14 @@ $('#logout').bind 'click', ->
     document.location = '/'
   .fail (msg) ->
     alert('エラーが発生しました')
+
+$('#paid-vacation').bind 'click', ->
+  view_paid_vacation_num()
+  .done (data) ->
+    alert "#{data.paid_vacation_num} 日"
+  .fail (xhr) ->
+    alert 'Failed'
+
 $('#readdata').bind 'click', ->
   document.location = '/userpage/read_data'
 $('#modify').bind 'click', ->

@@ -63,5 +63,16 @@ module Model
       Model::Timecard.where(day: day, user_id: user_id).first
         .try(:leaving)
     end
+
+    def self.get_used_vacation_num(user_id, year)
+      timecard =
+        Timecard.where(user_id: user_id).where(day: "#{year}-04-01".."#{year+1}-03-30")
+      use_paid_vacation = 0
+      timecard.each do |t|
+        use_paid_vacation += t.paid_vacation unless t.paid_vacation.nil?
+      end
+      return use_paid_vacation
+    end
+    
   end
 end
