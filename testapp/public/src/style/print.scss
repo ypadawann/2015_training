@@ -10,7 +10,7 @@ body{
 .profession{
   position: absolute;
   top: 0px;
-  left: 482px;
+  left: 500px;
   border-style: solid;
   border-width: 1px;
   padding: 23px 63px 23px 63px;
@@ -55,7 +55,7 @@ body{
   border-color: #000000;
   text-align: center;
   vertical-align: middle;
-  width: 42px;
+  width: 60px;
   height: 50px;
 }
 
@@ -69,14 +69,14 @@ body{
 
 .table__column--attendance{
   @extend .table__column;
-  width: 67px;
+  width: 70px;
   height: 50px;
   border-right-style: dotted;
 }
 
 .table__column--leaving{
   @extend .table__column;
-  width: 67px;
+  width: 70px;
   height: 50px;
   border-left-style: none;
 }
@@ -88,14 +88,14 @@ body{
   font-weight: bold;
 }
 
-.table__column--graveyardAndholidayAndprearranged{
+.table__column--midnightAndholidayAndprearranged{
   @extend .table__column;
   width: 59px;
 }
 
 .table__column--etc{
   @extend .table__column;
-  width: 212px;
+  width: 165px;
   height: 50px;
 }
 
@@ -123,7 +123,7 @@ body{
   text-align: center;
   vertical-align: middle;
   font-size: 6px;
-  width: 42px;
+  width: 60px;
   height: 21px;
 }
 
@@ -134,7 +134,7 @@ body{
 
 .table__insert__attendanceAndleaving{
   @extend .table__insert;
-  width: 57px;
+  width: 70px;
 }
 
 .table__insert__mark{
@@ -142,14 +142,14 @@ body{
   width: 56px;
 }
 
-.table__insert__graveyardAndholidayAndprearranged{
+.table__insert__midnightAndholidayAndprearranged{
   @extend .table__insert;
   width: 59px;
 }
 
 .table__insert__etc{
   @extend .table__insert;
-  width: 212px;
+  width: 165px;
 }
 
 .table__total{
@@ -185,5 +185,9 @@ a{
 }
 
 .save{
+  display: none;
+}
+
+.hidden{
   display: none;
 }

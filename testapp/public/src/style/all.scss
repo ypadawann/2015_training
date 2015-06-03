@@ -2,6 +2,12 @@ body{
   font-family: "MS ゴシック","Hiragino Kaku Gothic ProN",sans-serif;
 }
 
+.year{
+  width: 50px;
+}
+.month{
+  width: 30px;
+}
 .title{
   font-size: 20px;
   letter-spacing: 1em;
@@ -88,14 +94,14 @@ body{
   font-weight: bold;
 }
 
-.table__column--graveyardAndholidayAndprearranged{
+.table__column--midnightAndholidayAndprearranged{
   @extend .table__column;
   width: 77px;
 }
 
 .table__column--etc{
   @extend .table__column;
-  width: 230px;
+  width: 200px;
   height: 50px;
 }
 
@@ -142,14 +148,14 @@ body{
   width: 64px;
 }
 
-.table__insert__graveyardAndholidayAndprearranged{
+.table__insert__midnightAndholidayAndprearranged{
   @extend .table__insert;
   width: 77px;
 }
 
 .table__insert__etc{
   @extend .table__insert;
-  width: 230px;
+  width: 200px;
 }
 
 .table__total{

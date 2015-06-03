@@ -27,9 +27,9 @@ makeRow = (table, rowNumber) ->
   data3 = '<input type="text" id="attendance' + rowNumber + '" class="table__insert__attendanceAndleaving" />'
   data4 = '<input type="text" id="leaving' + rowNumber + '" class="table__insert__attendanceAndleaving" />'
   data5 = '<input type="text" id="mark' + rowNumber + '" class="table__insert__mark" />'
-  data6 = '<input type="text" id="graveyard-shift' + rowNumber + '" class="table__insert__graveyardAndholidayAndprearranged">'
-  data7 = '<input type="text" id="holiday-shift" class="table__insert__graveyardAndholidayAndprearranged">'
-  data8 = '<input type="text" id="prearranged-holiday" class="table__insert__graveyardAndholidayAndprearranged">'
+  data6 = '<input type="text" id="midnight-work' + rowNumber + '" class="table__insert__midnightAndholidayAndprearranged">'
+  data7 = '<input type="text" id="holiday-shift" class="table__insert__midnightAndholidayAndprearranged">'
+  data8 = '<input type="text" id="prearranged-holiday" class="table__insert__midnightAndholidayAndprearranged">'
   data9 = '<input type="text" id="paid-vacation" class="table__insert">'
   data10 = '<input type="text" id="holiday-acquisition" class="table__insert">'
   data11 = '<input type="text" id="etc" class="table__insert__etc">'
@@ -61,6 +61,7 @@ isHolidays = (year, month, day) ->
     3: '憲法記念日'
     4: 'みどりの日'
     5: 'こどもの日'
+    6: '振り替え休日'
   getHoliday[6] = ''
   getHoliday[7] = 20: '海の日'
   getHoliday[8] = ''
@@ -91,29 +92,28 @@ DATE_OF_WEEKS = [
 now = new Date
 year = now.getFullYear()
 month = now.getMonth() + 1
-firstDayOfMonth = new Date(year, month - 1, 1)
-weekDayOfFirstDay = firstDayOfMonth.getDay()
-date = new Date(year, month, 0).getDate()
-makeHoliday = 0
-counter = 1
-while counter <= date
-  table1 = document.getElementById('table1')
-  row = makeRow(table1, counter)
-  document.getElementById('day' + counter).value = counter
-  document.getElementById('week' + counter).value = DATE_OF_WEEKS[weekDayOfFirstDay]
-  if isWeekEnds(weekDayOfFirstDay)
-    row.style.backgroundColor = '#D9D9D9'
-  if isHolidays(year, month, counter)
-    row.style.backgroundColor = '#D9D9D9'
-    #振替休日
-    if weekDayOfFirstDay == 0
-      makeHoliday++
-    else if makeHoliday == 1
+$('#year').val year
+$('#month').val month
+$('#select').bind 'click', ->
+  year = $('#year').val()
+  month = $('#month').val()
+  firstDayOfMonth = new Date(year, month - 1, 1)
+  weekDayOfFirstDay = firstDayOfMonth.getDay()
+  date = new Date(year, month, 0).getDate()
+  makeHoliday = 0
+  counter = 1
+  while counter <= date
+    table1 = document.getElementById('table1')
+    row = makeRow(table1, counter)
+    document.getElementById("day#{counter}").value = counter
+    document.getElementById("week#{counter}").value = DATE_OF_WEEKS[weekDayOfFirstDay]
+    if isWeekEnds(weekDayOfFirstDay)
       row.style.backgroundColor = '#D9D9D9'
-    makeHoliday--
-  # 曜日の循環をリセットしている
-  if weekDayOfFirstDay == 6
-    weekDayOfFirstDay = -1
-  weekDayOfFirstDay++
-  counter++
-document.getElementById('YearsAndMonths').value = year + '年' + month + '月'
+    if isHolidays(year, month, counter)
+      row.style.backgroundColor = '#D9D9D9'
+    # 曜日の循環をリセットしている
+    if weekDayOfFirstDay == 6
+      weekDayOfFirstDay = -1
+    weekDayOfFirstDay++
+    counter++
+  document.getElementById('YearsAndMonths').value = "#{year}年#{month}月"
