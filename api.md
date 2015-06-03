@@ -161,7 +161,7 @@ parametersを受け取り、resultsをJSONで返す。
             * attendace: time
             * leaving: time
             * prearranged_holiday: date
-            * paid_vacation: string
+            * paid_vacation: float
             * holiday_acquisition: date
             * etc: string
     * results
@@ -182,10 +182,10 @@ parametersを受け取り、resultsをJSONで返す。
             * isholiday: boolean
             * attendace: time
             * leaving: time
-            * midnight_work: string
-            * holiday_shift: string
+            * midnight_work: float
+            * holiday_shift: float
             * prearranged_holiday: date
-            * paid_vacation: string
+            * paid_vacation: float
             * holiday_acquisition: date
             * etc: string
         * user_id: integer
