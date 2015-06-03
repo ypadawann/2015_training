@@ -73,6 +73,20 @@ module Model
       end
       return use_paid_vacation
     end
+
+    def self.add_paid_vacation(user_id, full_dates, half_dates)
+      full_dates.length.times do |i|
+        timecard = prepare_timecard(full_dates[i].date, user_id)
+        timecard.paid_vacation = 1
+        timecard.save
+      end
+
+      half_dates.length.times do |i|
+        timecard = prepare_timecard(half_dates[i].date, user_id)
+        timecard.paid_vacation = 0.5
+        timecard.save
+      end
+    end
     
   end
 end
