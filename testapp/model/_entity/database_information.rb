@@ -36,6 +36,17 @@ module Model
     validates :user_id, presence: true
     validates :attendance, length: { maximum: 10 }
     validates :leaving, length: { maximum: 10 }
+
+    class TimeValidator < ActiveModel::Validator
+      FORMAT = /\A\d\d?:\d\d\Z/
+      def validate(record)
+        record.errors[:attendance] << '出勤時間の形式が不適切です。' if
+          record[:attendance].present? && FORMAT.match(record[:attendance]).nil?
+        record.errors[:leaving] << '退勤時間の形式が不適切です。' if
+          record[:leaving].present? && FORMAT.match(record[:leaving]).nil?
+      end
+    end
+    validates_with TimeValidator
   end
 
   class Admin < ActiveRecord::Base
