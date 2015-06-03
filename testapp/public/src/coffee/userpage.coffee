@@ -58,6 +58,9 @@ $('#paid-vacation').bind 'click', ->
   .fail (xhr) ->
     alert 'Failed'
 
+$('#add-paid-vacation').bind 'click', ->
+  document.location = '/userpage/add_paid_vacation'
+
 $('#readdata').bind 'click', ->
   document.location = '/userpage/read_data'
 $('#modify').bind 'click', ->

@@ -1,0 +1,20 @@
+<h1><%= "有給登録" %></h1>
+
+<div id="user_id"><%= @user_id %></div>
+
+<p>
+  <input type="button" id="add-vacation" value="登録">
+</p>
+
+<table>
+  <tr>
+    <td>全休</td>
+    <td>半休</td>
+  </tr>
+  <tr>
+    <td><textarea id="full_vacation" rows="10" cols="20"></textarea></td>
+    <td><textarea id="half_vacation" rows="10" cols="20"></textarea></td>
+  </tr>
+</table>
+
+<script type="text/javascript" src=<%= "#{js_path}/add_paid_vacation.js" %>></script>
