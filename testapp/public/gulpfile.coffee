@@ -38,6 +38,7 @@ gulp.task('build:bundle', ['build:coffee'], () ->
          admin_department: './temp/admin_department.js'
          admin_modify: './temp/admin_modify.js'
          admin_register: './temp/admin_register.js'
+         add_paid_vacation: './temp/add_paid_vacation.js'
        },
        output: {
          filename: '[name].js',

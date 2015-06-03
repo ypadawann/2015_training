@@ -82,6 +82,18 @@ parametersを受け取り、resultsをJSONで返す。
     * errors
         * 403: 認証に失敗しました
 
+* POST users/:user_id/paid_vacation
+    * 有給一括登録
+    * headers
+    * parameters
+        * full_vacation array of
+            * date: date
+        * half_vacation array of
+            * date: date
+    * results
+    * errors
+        * 403: 認証に失敗しました
+
 * PUT users/:user_id/logout
     * ログアウト
     * headers

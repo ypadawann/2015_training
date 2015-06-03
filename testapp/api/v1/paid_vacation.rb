@@ -33,6 +33,17 @@ module API
           { paid_vacation_num: usable_vacation }
         end
 
+        desc '有給一括取得日登録'
+        post do
+          p params[:full_vacation]
+          p full_vacation = params[:full_vacation]
+          p half_vacation = params[:half_vacation]
+          Model::Timecard_operation.add_paid_vacation(params[:user_id], 
+                                                      full_vacation,
+                                                      half_vacation)
+          #p JSON.parse( full_vacation )
+        end
+
       end
     end
   end
