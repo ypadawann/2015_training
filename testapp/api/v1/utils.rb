@@ -1,4 +1,3 @@
-
 module API
   module V1
     module Utils
@@ -20,7 +19,7 @@ module API
 
       def calculate_carry_over(user_id, enter, year, carry_over)
         given = get_given_vacation_num(year, enter)
-        used = get_used_vacation_num(user_id, year)
+        used = Model::Timecard_operation.get_used_vacation_num(user_id, year)
         if used > carry_over
           carry_over + given - used
         else
