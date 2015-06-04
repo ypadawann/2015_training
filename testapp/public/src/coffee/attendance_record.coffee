@@ -1,5 +1,5 @@
-makeRow = (table, rowNumber) ->
-  row = table1.insertRow(rowNumber + 4)
+makeRow = (tableobj, rowNumber) ->
+  row = tableobj.insertRow(rowNumber + 4)
   cell1 = row.insertCell(0)
   cell2 = row.insertCell(1)
   cell3 = row.insertCell(2)
@@ -28,11 +28,11 @@ makeRow = (table, rowNumber) ->
   data4 = '<input type="text" id="leaving' + rowNumber + '" class="table__insert__attendanceAndleaving" />'
   data5 = '<input type="text" id="mark' + rowNumber + '" class="table__insert__mark" />'
   data6 = '<input type="text" id="midnight-work' + rowNumber + '" class="table__insert__midnightAndholidayAndprearranged">'
-  data7 = '<input type="text" id="holiday-shift" class="table__insert__midnightAndholidayAndprearranged">'
-  data8 = '<input type="text" id="prearranged-holiday" class="table__insert__midnightAndholidayAndprearranged">'
-  data9 = '<input type="text" id="paid-vacation" class="table__insert">'
-  data10 = '<input type="text" id="holiday-acquisition" class="table__insert">'
-  data11 = '<input type="text" id="etc" class="table__insert__etc">'
+  data7 = '<input type="text" id="holiday-shift' + rowNumber + '" class="table__insert__midnightAndholidayAndprearranged">'
+  data8 = '<input type="text" id="prearranged-holiday' + rowNumber + '" class="table__insert__midnightAndholidayAndprearranged">'
+  data9 = '<input type="text" id="paid-vacation' + rowNumber + '" class="table__insert">'
+  data10 = '<input type="text" id="holiday-acquisition' + rowNumber + '" class="table__insert">'
+  data11 = '<input type="text" id="etc' + rowNumber + '" class="table__insert__etc">'
   cell1.innerHTML = data1
   cell2.innerHTML = data2
   cell3.innerHTML = data3
@@ -65,17 +65,14 @@ save = (user_id, year, month, day) ->
     data:
       'data': data)
 
-now = new Date
-year = now.getFullYear()
-month = now.getMonth() + 1
-$('#year').val year
-$('#month').val month
-
-$('#select').bind 'click', ->
+make_record = (year, month) ->
   user_id = $('#user_id').val()
-  year = $('#year').val()
-  month = $('#month').val()
   day = new Date(year, month, 0).getDate()
+  tableobj = document.getElementById("table")
+  if tableobj.rows.length isnt 7
+    deleterow = tableobj.rows.length
+    for i in [8..deleterow]
+      tableobj.deleteRow 5
   $('#YearsAndMonths').val "#{year}年#{month}月"
   request = $.ajax(
     type: 'get'
@@ -86,8 +83,7 @@ $('#select').bind 'click', ->
       $('#name').val msg.name
       $('#user_id').val msg.user_id
       for i in [1..msg.data.length]
-        table1 = $('#table1')
-        row = makeRow(table1, i)
+        row = makeRow(tableobj, i)
         $("#day#{i}").val msg.data[i - 1].day
         $("#weekday#{i}").val msg.data[i - 1].weekday
         $("#attendance#{i}").val msg.data[i - 1].attendance
@@ -100,8 +96,22 @@ $('#select').bind 'click', ->
         $("#etc#{i}").val msg.data[i - 1].etc
         if msg.data[i - 1].weekday is "日" or  msg.data[i - 1].weekday is "土" or msg.data[i - 1].isholiday isnt false
           row.style.backgroundColor = '#D9D9D9'
+        datanumber = i
       console.log msg
   $('#save').bind 'click', ->
     save(user_id, year, month, day)
     .done (msg) ->
       document.location = '/userpage/read_data'
+
+$('#select').bind 'click', ->
+  year = $('#year').val()
+  month = $('#month').val()
+  make_record(year, month)
+
+now = new Date
+year = now.getFullYear()
+month = now.getMonth() + 1
+datanumber = 0
+$('#year').val year
+$('#month').val month
+make_record(year, month)

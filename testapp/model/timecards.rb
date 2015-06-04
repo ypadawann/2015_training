@@ -29,6 +29,10 @@ module Model
         timecard = prepare_timecard(date, user_id)
         timecard.attendance = tc_data[1].attendance
         timecard.leaving = tc_data[1].leaving
+        timecard.prearranged_holiday = tc_data[1].prearranged_holiday
+        timecard.paid_vacation = tc_data[1].paid_vacation
+        timecard.holiday_acquisition = tc_data[1].holiday_acquisition
+        timecard.etc = tc_data[1].etc
         timecard.save
       end
     end
