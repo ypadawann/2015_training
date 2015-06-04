@@ -31,4 +31,11 @@
   <input type="button" id="logout" value="ログアウト">
 </p>
 
+<p>
+  <a href=javascript:window.open(<%= "\"#{app_path}/bookmarklet/attend\"" %>); >出勤ブックマークレット</a>
+</p>
+<p>
+  <a href=javascript:window.open(<%= "\"#{app_path}/bookmarklet/leave\"" %>); >退勤ブックマークレット</a>
+</p>
+
 <script type="text/javascript" src=<%= "#{js_path}/userpage.js" %>></script>
