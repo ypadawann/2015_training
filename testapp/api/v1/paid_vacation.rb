@@ -34,14 +34,18 @@ module API
         end
 
         desc '有給一括取得日登録'
+        params do
+          requires :full_vacation, type: Array do
+            requires :date, type: Date
+          end
+          requires :half_vacation, type: Array do
+            requires :date, type: Date
+          end
+        end
         post do
-          p params[:full_vacation]
-          p full_vacation = params[:full_vacation]
-          p half_vacation = params[:half_vacation]
-          Model::Timecard_operation.add_paid_vacation(params[:user_id], 
-                                                      full_vacation,
-                                                      half_vacation)
-          #p JSON.parse( full_vacation )
+          full_vacation = params[:full_vacation]
+          half_vacation = params[:half_vacation]
+          Model::Timecard_operation.add_paid_vacation(params[:user_id], full_vacation, half_vacation)
         end
 
       end
