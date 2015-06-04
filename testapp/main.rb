@@ -50,15 +50,4 @@ class Main < Sinatra::Base
     show_erb
   end
 
-  get '/admin-add' do
-    Model::Admins.add('root', 'password')
-  end
-
-  get '/admin-auth' do
-    if Model::Admins.verify('root', 'password')
-      p 'true'
-    else
-      p 'false'
-    end
-  end
 end
