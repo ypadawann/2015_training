@@ -4,6 +4,11 @@ require './model/departments'
 module API
   module V1
     class Departments < Grape::API
+
+      before do
+        session_check()
+      end
+
       helpers do
         def find!(department_id)
           error!('Not Found', 404) unless
