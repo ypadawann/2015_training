@@ -25,7 +25,6 @@ module Model
 
     def self.update_all(year, month, timecard_data, user_id)
       timecard_data.each do |tc_data|
-        p tc_data
         date = sprintf("%d-%02d-%02d", year, month, tc_data[1].day)
         timecard = prepare_timecard(date, user_id)
         timecard.attendance = tc_data[1].attendance

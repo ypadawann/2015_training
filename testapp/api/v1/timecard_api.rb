@@ -89,7 +89,6 @@ module API
           year = params[:year]
           month = params[:month]
           data = params[:data]
-          p data
           Model::Timecard_operation.update_all(year, month, data, user_id)
 
           Model::Users.status(user_id)
@@ -109,8 +108,8 @@ module API
           timecards =
             timecards.map do |timecard|
               timecard
-              .merge(types_of_day(year, month, timecard[:day]))
-              .merge(calculate_extra_hours(timecard))
+              .merge!(types_of_day(year, month, timecard[:day]))
+              .merge!(calculate_extra_hours(timecard))
             end
 
           results = Model::Users.status(user_id)
