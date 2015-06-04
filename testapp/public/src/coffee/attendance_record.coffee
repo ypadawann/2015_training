@@ -99,6 +99,8 @@ make_record = (year, month) ->
         datanumber = i
       console.log msg
   $('#save').bind 'click', ->
+    year = $('#year').val()
+    month = $('#month').val()
     save(user_id, year, month, day)
     .done (msg) ->
       document.location = '/userpage/read_data'
