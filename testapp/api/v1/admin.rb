@@ -10,22 +10,16 @@ module API
           error!('Access Denied', 403) unless
             Model::Admins.verify(admin_id, admin_password)
         end
-
+        
         def find_user!(user_id)
           error!('the account is not found', 404) unless
             Model::Users.exists?(user_id)
         end
-
+        
         def find_admin!(user_id)
           error!('the account is not found', 404) unless
             Model::Admins.exists?(user_id)
         end
-
-        def session_check()
-          if !env['rack.session'][:login_status]
-            error!('Not Found', 404)
-          end
-        end  
       end
 
       resource '/admin' do
@@ -130,8 +124,6 @@ module API
           session_check()
           user_id = params[:user_id]
           find_user!(user_id)
-#          authenticate!(user_id)
-#          verify_password!(user_id, params[:password])
           
           if params[:name].present?
             Model::Users.update_name(user_id, params[:name]) \
