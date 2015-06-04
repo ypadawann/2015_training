@@ -1,7 +1,7 @@
 add_vacation = ->
   user_id = $('#user_id').text()
-  console.log full_array = $("#full_vacation").val().split(/\s/)
-  console.log half_array = $("#half_vacation").val().split(/\s/)
+  full_array = $("#full_vacation").val().split(/\s/)
+  half_array = $("#half_vacation").val().split(/\s/)
   request = $.ajax(
     type: 'post'
     url: "#{location.protocol}//#{location.host}/api/v1/users/#{user_id}/paid-vacation"
