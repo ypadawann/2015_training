@@ -31,6 +31,12 @@ class Main < Sinatra::Base
 
   helpers ControllerHelpers
 
+  get '/bookmarklet/:action' do
+    redirect to('/') unless @name
+    p @action = params[:action]
+    erb :bookmarklet
+  end
+
   get '/' do
     redirect to('/userpage') if @name
     erb :index
