@@ -2,7 +2,7 @@ module API
   module V1
     module Utils
       def authenticate!(user_id)
-        if user_id == env['rack.session'][:no].to_i
+        if env['rack.session'][:user_login]
         else
           p 'error'
           error!('Access Denied', 403)
@@ -10,7 +10,8 @@ module API
       end
 
       def session_create(user_id)
-        env['rack.session'][:no] = params[:user_id]
+        env['rack.session'][:user_id] = params[:user_id]
+        env['rack.session'][:user_login] = true
       end
 
       def session_destroy()

@@ -54,7 +54,7 @@ module API
         put  do
           verify_password!(params[:admin_id], params[:admin_password])
           env['rack.session'][:id] = params[:admin_id]
-          env['rack.session'][:login_status] = true
+          env['rack.session'][:admin_login] = true
         end
       end
       

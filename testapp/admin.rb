@@ -24,17 +24,13 @@ class Admin < Sinatra::Base
   helpers ControllerHelpers
 
   get '/' do
-    redirect to('/top') if session[:login_status]
+    redirect to('/top') if session[:admin_login]
     erb 'admin/login'.to_sym
   end
 
   get %r{\/\w+} do
-    p 'admin'
-    if session[:login_status]
-      show_erb
-    else
-      erb 'admin/login'.to_sym
-    end
+    redirect to ('/') unless session[:admin_login]
+    show_erb
   end
 
 end
