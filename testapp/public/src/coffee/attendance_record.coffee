@@ -103,7 +103,7 @@ make_record = (year, month) ->
     month = $('#month').val()
     save(user_id, year, month, day)
     .done (msg) ->
-      document.location = '/userpage/read_data'
+      make_record(year, month)
 
 $('#select').bind 'click', ->
   year = $('#year').val()
