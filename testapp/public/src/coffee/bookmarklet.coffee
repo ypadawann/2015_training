@@ -14,41 +14,32 @@ leave = ->
     dataType: 'json'
     data: 'user_id': user_id)
 
-complete_message = ->
-  alert 'comp'
-  $('#bookmarklet_msg').text 'comp'
-
 bookmarklet_attend = ->
-  alert 'attend'
   attend()
     .done (data) ->
-      alert 'attend ok'
-      complete_message()
+      $('#bookmarklet_result').text '出勤時間を登録しました。'
+      bookmarklet_success()
     .fail (xhr) ->
-      alert 'attend ng'
-      complete_message()
+      $('#bookmarklet_result').text '退勤時間の登録に失敗しました'
 
 bookmarklet_leave = ->
     leave()
       .done (data) ->
-        alert 'leave ok'
+        $('#bookmarklet_result').text '退勤時間を登録しました。'
+        bookmarklet_success()
       .fail (xhr) ->
-        alert 'leave ng'
+        $('#bookmarklet_result').text '退勤時間の登録に失敗しました'
 
+bookmarklet_success = ->
+  $('#bookmarklet_message').text '5秒後にウィンドウを閉じます。'
+  setTimeout ->
+    window.close()
+  , 5000
 
-
-bookmarklet_action = $('#bookmarklet_action').text()
-switch bookmarklet_action
-  when "attend"
-    bookmarklet_attend()
-  when "leave"
-    bookmarklet_leave()
-    
-###
-console.log  action = $('#action').text()
-bookmarklet_action(action)
-  .done (msg) ->
-    alert 'ok'
-  .fail (msg) ->
-    alert 'ng'
-###
+$ ->
+  bookmarklet_action = $('#bookmarklet_action').text()
+  switch bookmarklet_action
+    when "attend"
+      bookmarklet_attend()
+    when "leave"
+      bookmarklet_leave()
