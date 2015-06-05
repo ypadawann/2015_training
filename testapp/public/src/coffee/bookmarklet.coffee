@@ -20,7 +20,7 @@ bookmarklet_attend = ->
       $('#bookmarklet_result').text '出勤時間を登録しました。'
       bookmarklet_success()
     .fail (xhr) ->
-      $('#bookmarklet_result').text '退勤時間の登録に失敗しました'
+      $('#bookmarklet_result').text '出勤時間の登録に失敗しました'
 
 bookmarklet_leave = ->
     leave()
