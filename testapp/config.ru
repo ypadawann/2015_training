@@ -19,7 +19,7 @@ end
 map '/' do
   use Rack::Session::Cookie,
     key: 'ams_session',
-    expire_after: 86_400
+    expire_after: 604_800
   use Rack::Protection
 
   run Rack::Cascade.new [API::Base, Main]

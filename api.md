@@ -125,6 +125,7 @@ parametersを受け取り、resultsをJSONで返す。
         * date: date
         * leaving: string
     * errors
+        * 404: すでに退勤している
         * 403: 認証に失敗した
         * 404: 出勤していない
 
