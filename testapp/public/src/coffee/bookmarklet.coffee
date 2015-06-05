@@ -21,14 +21,29 @@ bookmarklet_attend = ->
       bookmarklet_success()
     .fail (xhr) ->
       $('#bookmarklet_result').text '出勤時間の登録に失敗しました'
+      switch xhr.status
+        when 400
+          msg = 'すでに出勤しています'
+        when 403
+          msg = 'セッションが不正です'
+      $('#bookmarklet_message').text msg
+
 
 bookmarklet_leave = ->
-    leave()
-      .done (data) ->
-        $('#bookmarklet_result').text '退勤時間を登録しました。'
-        bookmarklet_success()
-      .fail (xhr) ->
-        $('#bookmarklet_result').text '退勤時間の登録に失敗しました'
+  leave()
+    .done (data) ->
+      $('#bookmarklet_result').text '退勤時間を登録しました。'
+      bookmarklet_success()
+    .fail (xhr) ->
+      $('#bookmarklet_result').text '退勤時間の登録に失敗しました'
+      switch xhr.status
+        when 400
+          msg = 'すでに退勤しています'
+        when 403
+          msg = 'セッションが不正です'
+        when 404
+          msg = 'まだ出勤していません'
+      $('#bookmarklet_message').text msg
 
 bookmarklet_success = ->
   $('#bookmarklet_message').text '5秒後にウィンドウを閉じます。'
