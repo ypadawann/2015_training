@@ -30,7 +30,7 @@ class Main < Sinatra::Base
     erb :index
   end
 
-  before %r{\/[\w\/]+} do
+  before %r{\/(userpage|bookmarklet)[\w\/]*} do
     redirect to('/') unless session[:user_login]
     @user_id = session[:user_id]
   end
