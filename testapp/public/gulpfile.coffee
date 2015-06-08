@@ -30,11 +30,12 @@ gulp.task('build:bundle', ['build:coffee'], () ->
     .src './temp/*.js'
     .pipe gulpWebpack({
        entry: {
-         attendance_record: './temp/attendance_record.js',
          register: './temp/register.js',
-         userpage: './temp/userpage.js',
          login: './temp/login.js',
-         userdata_modify: './temp/userdata_modify.js'
+         userpage: './temp/userpage/userpage.js',
+         userdata_modify: './temp/userpage/userdata_modify.js'
+         attendance_record: './temp/userpage/attendance_record.js',
+         add_paid_vacation: './temp/userpage/add_paid_vacation.js'
          admin: './temp/admin/admin.js'
        },
        output: {

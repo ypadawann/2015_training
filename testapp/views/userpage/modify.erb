@@ -1,7 +1,7 @@
 <h1>ユーザ情報管理</h1>
 <p><div id="message"></div></p>
-<p>ID:<span id="user_id"><%= @user_id %></span></p>
-<p>名前:<input type="text" id="name" size="40"></p>
+<p>ID:<span id="user-id"><%= @user_id %></span></p>
+<p>名前:<input type="text" id="user-name" size="40"></p>
 <p>所属：
   <select id="department">
     <option value="0" id="default_department"></option>
@@ -12,13 +12,13 @@
        %>
   </select>
 </p>
-<p>new pass:<input type="password" id="new_password" size="40"></p>
+<p>new pass:<input type="password" id="new-password" size="40"></p>
 <p>pass:<input type="password" id="password" size="40"></p>
 <p>
-  <input type="button" id="modify" value="変更">
+  <input type="button" id="user-modify" value="変更">
 </p>
 <p>
-  <input type="button" id="delete" value="削除">
+  <input type="button" id="user-delete" value="削除">
 </p>
 
 <script type="text/javascript" src=<%= "#{js_path}/userdata_modify.js" %>></script>
