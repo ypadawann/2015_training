@@ -1,13 +1,13 @@
 <h1>ユーザ情報管理</h1>
 <p><div id="message"></div></p>
 <p>
-  ID:<input type="number" id="user_id" size="40">
+  ID:<input type="number" id="user-id" size="40">
   <input type="button" id="user-select" value="選択">
 </p>
-<p>名前:<input type="text" id="name" size="40"></p>
+<p>名前:<input type="text" id="user-name" size="40"></p>
 <p>所属：
-  <select id="department">
-    <option value="0" id="default_department"></option>
+  <select id="select-department">
+    <option value="0" id="default-department"></option>
     <%==
        Model::Departments.list_ids.map { |d|
        "<option value=#{d}>#{Model::Departments.name_of(d)}</option>"
@@ -15,13 +15,13 @@
        %>
   </select>
 </p>
-<p>new pass:<input type="password" id="new_password" size="40"></p>
+<p>new pass:<input type="password" id="user-new-password" size="40"></p>
 
-<p>confirm new pass:<input type="password" id="confirm_new_password" size="40"></p>
+<p>confirm new pass:<input type="password" id="confirm-user-new-password" size="40"></p>
 
 <p>
-  <input type="button" id="modify" value="変更">
+  <input type="button" id="user-modify" value="変更">
 </p>
 <p>
-  <input type="button" id="delete" value="削除">
+  <input type="button" id="user-delete" value="削除">
 </p>

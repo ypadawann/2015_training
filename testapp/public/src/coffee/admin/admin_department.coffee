@@ -1,28 +1,28 @@
-department_register = ->
+departmentRegister = ->
   deferred = $.ajax
     type:      "POST"
     url:       "#{location.protocol}//#{location.host}/admin/api/v1/departments"
-    data: 'name': $("#register-name").val()
+    data: 'name': $("#register-department-name").val()
     dataType:  "json"
     context:    this
 
-department_rename = ->
-  department_id = $("#department-rename-id option:selected").val()
+departmentRename = ->
+  department_id = $("#select-department option:selected").val()
   deferred = $.ajax
     type:      "PUT"
     url:       "#{location.protocol}//#{location.host}/admin/api/v1/departments/#{department_id}"
     data: 'name': $("#new-department-name").val()
     dataType: 'json'
 
-department_delete = ->
-  department_id = $("#department-delete-id option:selected").val()
+departmentDelete = ->
+  department_id = $("#select-department option:selected").val()
   deferred = $.ajax
     type:      "DELETE"
     url:       "#{location.protocol}//#{location.host}/admin/api/v1/departments/#{department_id}"
     dataType: 'json'
 
 $('#department-register').bind 'click', ->
-  department_register()
+  departmentRegister()
     .done (data) ->
       alert "#{data.name}の登録に成功しました"
       location.reload()
@@ -33,10 +33,11 @@ $('#department-register').bind 'click', ->
         alert '部署の登録に失敗しました'
 
 $('#department-rename').bind 'click', ->
-  old_name = $("#department-rename-id option:selected").text()
-  department_rename()
+  oldName = $("#select-department option:selected").text()
+  console.log 'rename'
+  departmentRename()
     .done (data) ->
-      alert "#{old_name} を #{data.name} に変更しました"
+      alert "#{oldName} を #{data.name} に変更しました"
       location.reload()
     .fail (xhr,  status, error) ->
       if xhr.status is 404
@@ -47,7 +48,7 @@ $('#department-rename').bind 'click', ->
 $('#department-delete').click ->
   if !window.confirm '本当に部署を削除しますか？'
   else
-    department_delete()
+    departmentDelete()
       .done (data) ->
         alert '部署を削除しました'
         location.reload()

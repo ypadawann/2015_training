@@ -1,4 +1,4 @@
-logout = ->
+adminLogout = ->
   deferred = $.ajax
     async:     true
     type:      "PUT"
@@ -18,7 +18,7 @@ $('#to-admin-register').bind 'click', ->
   document.location = '/admin/admin_register'
 
 $('#admin-logout').bind 'click', ->
-  logout()
+  adminLogout()
     .done (data) ->
       document.location = '/admin'
     .fail (data) ->
