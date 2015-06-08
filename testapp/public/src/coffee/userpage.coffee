@@ -62,6 +62,6 @@ $('#add-paid-vacation').bind 'click', ->
   document.location = '/userpage/add_paid_vacation'
 
 $('#readdata').bind 'click', ->
-  document.location = '/userpage/read_data'
+  document.location = '/userpage/attendance_record'
 $('#modify').bind 'click', ->
   document.location = '/userpage/modify'
