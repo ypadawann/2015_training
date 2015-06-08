@@ -195,6 +195,14 @@ parametersを受け取り、resultsをJSONで返す。
     * errors
         * 403: 認証に失敗した
 
+* GET users/:user_id/attend-leave/:year/:month/export
+    * 月の出退勤情報のエクスポート
+    * headers
+    * results
+        * CSVファイル
+    * errors
+        * 403: 認証に失敗した
+
 * GET departments
     * 部署一覧の取得
     * headers

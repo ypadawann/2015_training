@@ -11,6 +11,16 @@ module API
 
       public
 
+      def get_full_attendance_data(user_id, year, month)
+        timecards =
+          Model::Timecard_operation.read_monthly_data(user_id, year, month)
+        timecards.map do |timecard|
+          timecard
+            .merge!(types_of_day(year, month, timecard[:day]))
+            .merge!(calculate_extra_hours(timecard))
+        end
+      end
+
       def types_of_day(year, month, day)
         date = Date.new(year, month, day)
         { weekday: WEEKDAY_NAMES[date.wday],
