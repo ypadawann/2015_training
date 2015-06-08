@@ -2,6 +2,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
+require 'sinatra/content_for'
 require 'date'
 
 require 'csv'
@@ -22,15 +23,20 @@ class Admin < Sinatra::Base
   set :erb, :escape_html => true
 
   helpers ControllerHelpers
+  helpers Sinatra::ContentFor
 
   get '/' do
     redirect to('/top') if session[:admin_login]
-    erb 'admin/login'.to_sym
+    erb :'admin/layout'.to_sym do
+      erb 'admin/login'.to_sym
+    end
   end
 
   get %r{\/\w+} do
     redirect to ('/') unless session[:admin_login]
-    show_erb
+    erb :'admin/layout'.to_sym do
+      show_erb
+    end
   end
-
+  
 end
