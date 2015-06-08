@@ -2,6 +2,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
+require 'sinatra/content_for'
 require 'date'
 
 require 'csv'
@@ -24,6 +25,7 @@ class Main < Sinatra::Base
   register Sinatra::Reloader
 
   helpers ControllerHelpers
+  helpers Sinatra::ContentFor
 
   get '/' do
     redirect to('/userpage') if session[:user_login]
