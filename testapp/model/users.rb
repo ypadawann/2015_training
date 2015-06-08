@@ -93,23 +93,7 @@ module Model
       def get_enter(user_id)
         Model::User.find_by_id(user_id).try(:enter)
       end
-=begin      
-      def get_usable_vacation_num(user_id)
-        p user = Model::User.find_by_id(user_id)
-        p this_year = get_business_year(Date.today)
-        p enter = user.enter
-        carry_over = 0
-        p year = enter.year
-        while year < this_year do
-          carry_over = calculate_carry_over(user_id, enter, year, carry_over)
-          year += 1
-        end
-        p carry_over
-        p given = get_given_vacation_num(year, enter)
-        p used = Model::Timecard_operation.get_used_vacation_num(user_id, year)
-        p  usable_vacation = carry_over + given - used
-      end
-=end      
+      
     end
   end
 end
