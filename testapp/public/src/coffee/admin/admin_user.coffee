@@ -1,32 +1,31 @@
 userSelect = ->
-  user_id = $("#user_id").val()
+  userId = $("#user-id").val()
   deferred = $.ajax
     async:     true
     type:      "GET"
-    url:       "#{location.protocol}//#{location.host}/admin/api/v1/admin/users/#{user_id}"
+    url:       "#{location.protocol}//#{location.host}/admin/api/v1/admin/users/#{userId}"
     dataType:  "json"
     context:    this
 
 userModify = ->
-  user_id = $('#user_id').val()
+  userId = $('#user-id').val()
   deferred = $.ajax
     async:     true
     type:      "PUT"
-    url:       "#{location.protocol}//#{location.host}/admin/api/v1/admin/users/#{user_id}"
+    url:       "#{location.protocol}//#{location.host}/admin/api/v1/admin/users/#{userId}"
     data:
-      'name': $('#name').val()
-      'department': $('#department option:selected').text()
-      'new_password': $('#new_password').val()
-      'password': $('#password').val()
+      'name': $('#user-name').val()
+      'department': $('#select-department option:selected').text()
+      'new_password': $('#user-new-password').val()
     dataType:  "json"
     context:    this
 
 userDelete = ->
-  user_id = $("#user_id").val()
+  userId = $("#user-id").val()
   deferred = $.ajax
     async:     true
     type:      "DELETE"
-    url:       "#{location.protocol}//#{location.host}/admin/api/v1/admin/users/#{user_id}"
+    url:       "#{location.protocol}//#{location.host}/admin/api/v1/admin/users/#{userId}"
     dataType:  "json"
     context:    this
 
@@ -35,8 +34,8 @@ $('#user-select').bind 'click', ->
   userSelect()
     .done (data) ->
       console.log data
-      document.querySelector("#name").value = data.name
-      ($('#department option').filter ->
+      document.querySelector("#user-name").value = data.name
+      ($('#select-department option').filter ->
         return $(this).text() is data.department).prop 'selected', true
     .fail (xhr,  textStatus, errorThrown) ->
       if xhr.status is 403
@@ -44,8 +43,8 @@ $('#user-select').bind 'click', ->
       else
         alert 'エラーが発生しました'
 
-$('#modify').bind 'click', ->
-  if $('#new_password').val() isnt $('#confirm_new_password').val()
+$('#user-modify').bind 'click', ->
+  if $('#user-new-password').val() isnt $('#confirm-user-new-password').val()
     alert '確認パスワードが違います'
   else
     userModify()
@@ -58,7 +57,7 @@ $('#modify').bind 'click', ->
         else
           alert 'エラーが発生しました'
 
-$('#delete').click ->
+$('#user-delete').click ->
   if !window.confirm '本当にアカウントを削除しますか？'
     $("#message").text 'アカウント削除をキャンセルしました'
   else

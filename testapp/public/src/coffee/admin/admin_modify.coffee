@@ -1,32 +1,32 @@
 adminSelect = ->
-  admin_id = $("#admin_id").val()
+  adminId = $("#admin-id").val()
   deferred = $.ajax
     type:      "GET"
-    url:       "#{location.protocol}//#{location.host}/admin/api/v1/admin/#{admin_id}"
+    url:       "#{location.protocol}//#{location.host}/admin/api/v1/admin/#{adminId}"
     dataType:  "json"
     context:    this
 
 adminModify = ->
-  admin_id = $('#admin_id').val()
+  adminId = $('#admin-id').val()
   deferred = $.ajax
     type:      "PUT"
-    url:       "#{location.protocol}//#{location.host}/admin/api/v1/admin/#{admin_id}"
+    url:       "#{location.protocol}//#{location.host}/admin/api/v1/admin/#{adminId}"
     data:
-      'admin_new_password': $('#admin_new_password').val()
-      'admin_password': $('#admin_password').val()
+      'admin_new_password': $('#admin-new-password').val()
+      'admin_password': $('#admin-password').val()
     dataType:  "json"
     context:    this
 
 adminDelete = ->
-  admin_id = $("#admin_id").val()
+  adminId = $("#admin-id").val()
   deferred = $.ajax
     type:      "DELETE"
-    url:       "#{location.protocol}//#{location.host}/admin/api/v1/admin/#{admin_id}"
+    url:       "#{location.protocol}//#{location.host}/admin/api/v1/admin/#{adminId}"
     dataType:  "json"
     context:    this
 
 $('#admin-modify').bind 'click', ->
-  if $('#admin_new_password').val() isnt $('#confirm_admin_new_password').val()
+  if $('#admin-new-password').val() isnt $('#confirm-admin-new-password').val()
     alert '確認パスワードが違います'
   else
     adminModify()
