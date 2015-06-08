@@ -1,4 +1,4 @@
-admin_register = ->
+adminRegister = ->
   $.ajax(
     type: 'post'
     url: "#{location.protocol}//#{location.host}/admin/api/v1/admin"
@@ -12,7 +12,7 @@ $('#admin-register').bind 'click', ->
   if $('#admin_password').val() isnt $('#confirm_admin_password').val()
     alert 'パスワードが違います'
   else
-    admin_register()
+    adminRegister()
       .done ->
         alert '登録に成功しました'
         location.reload()

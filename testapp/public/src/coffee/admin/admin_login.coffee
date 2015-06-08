@@ -1,4 +1,4 @@
-admin_login = ->
+adminLlogin = ->
   deferred = $.ajax
     type: 'PUT'
     url: "#{location.protocol}//#{location.host}/admin/api/v1/admin/login"
@@ -11,7 +11,7 @@ admin_login = ->
 $('#admin-login').bind 'click', ->
   console.log location.host
   console.log location.hash
-  admin_login()
+  adminLlogin()
     .done (data) ->
       document.location = '/admin/top'
     .fail (data) ->

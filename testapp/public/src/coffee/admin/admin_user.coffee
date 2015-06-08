@@ -1,4 +1,4 @@
-user_select = ->
+userSelect = ->
   user_id = $("#user_id").val()
   deferred = $.ajax
     async:     true
@@ -7,7 +7,7 @@ user_select = ->
     dataType:  "json"
     context:    this
 
-user_modify = ->
+userModify = ->
   user_id = $('#user_id').val()
   deferred = $.ajax
     async:     true
@@ -21,7 +21,7 @@ user_modify = ->
     dataType:  "json"
     context:    this
 
-user_delete = ->
+userDelete = ->
   user_id = $("#user_id").val()
   deferred = $.ajax
     async:     true
@@ -32,7 +32,7 @@ user_delete = ->
 
 
 $('#user-select').bind 'click', ->
-  user_select()
+  userSelect()
     .done (data) ->
       console.log data
       document.querySelector("#name").value = data.name
@@ -48,7 +48,7 @@ $('#modify').bind 'click', ->
   if $('#new_password').val() isnt $('#confirm_new_password').val()
     alert '確認パスワードが違います'
   else
-    user_modify()
+    userModify()
       .done (data)   ->
         alert 'ユーザ情報を変更しました'
         location.reload()
@@ -62,7 +62,7 @@ $('#delete').click ->
   if !window.confirm '本当にアカウントを削除しますか？'
     $("#message").text 'アカウント削除をキャンセルしました'
   else
-    user_delete()
+    userDelete()
       .done (data) ->
         alert 'アカウントを削除しました'
         location.reload()

@@ -1,4 +1,4 @@
-admin_select = ->
+adminSelect = ->
   admin_id = $("#admin_id").val()
   deferred = $.ajax
     type:      "GET"
@@ -6,7 +6,7 @@ admin_select = ->
     dataType:  "json"
     context:    this
 
-admin_modify = ->
+adminModify = ->
   admin_id = $('#admin_id').val()
   deferred = $.ajax
     type:      "PUT"
@@ -17,7 +17,7 @@ admin_modify = ->
     dataType:  "json"
     context:    this
 
-admin_delete = ->
+adminDelete = ->
   admin_id = $("#admin_id").val()
   deferred = $.ajax
     type:      "DELETE"
@@ -29,7 +29,7 @@ $('#admin-modify').bind 'click', ->
   if $('#admin_new_password').val() isnt $('#confirm_admin_new_password').val()
     alert '確認パスワードが違います'
   else
-    admin_modify()
+    adminModify()
       .done (data)   ->
          alert '管理者情報を変更しました'
          location.reload()
@@ -43,7 +43,7 @@ $('#admin-delete').bind 'click', ->
   if !window.confirm '本当にアカウントを削除しますか？'
     alert 'アカウント削除をキャンセルしました'
   else
-    admin_delete()
+    adminDelete()
       .done (data) ->
         alert 'アカウントを削除しました'
         location.reload()
