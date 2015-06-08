@@ -2,12 +2,12 @@ departmentRegister = ->
   deferred = $.ajax
     type:      "POST"
     url:       "#{location.protocol}//#{location.host}/admin/api/v1/departments"
-    data: 'name': $("#register-name").val()
+    data: 'name': $("#register-department-name").val()
     dataType:  "json"
     context:    this
 
 departmentRename = ->
-  department_id = $("#department-rename-id option:selected").val()
+  department_id = $("#select-department option:selected").val()
   deferred = $.ajax
     type:      "PUT"
     url:       "#{location.protocol}//#{location.host}/admin/api/v1/departments/#{department_id}"
@@ -15,7 +15,7 @@ departmentRename = ->
     dataType: 'json'
 
 departmentDelete = ->
-  department_id = $("#department-delete-id option:selected").val()
+  department_id = $("#select-department option:selected").val()
   deferred = $.ajax
     type:      "DELETE"
     url:       "#{location.protocol}//#{location.host}/admin/api/v1/departments/#{department_id}"
@@ -33,10 +33,11 @@ $('#department-register').bind 'click', ->
         alert '部署の登録に失敗しました'
 
 $('#department-rename').bind 'click', ->
-  old_name = $("#department-rename-id option:selected").text()
+  oldName = $("#select-department option:selected").text()
+  console.log 'rename'
   departmentRename()
     .done (data) ->
-      alert "#{old_name} を #{data.name} に変更しました"
+      alert "#{oldName} を #{data.name} に変更しました"
       location.reload()
     .fail (xhr,  status, error) ->
       if xhr.status is 404
