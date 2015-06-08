@@ -8,6 +8,9 @@ gulp.task 'build:coffee', ->
   gulp.src('src/coffee/*.coffee')
     .pipe(coffee())
     .pipe(gulp.dest('temp/'))
+  gulp.src('src/coffee/*/*.coffee')
+    .pipe(coffee())
+    .pipe(gulp.dest('temp/'))
 
 
 
@@ -32,7 +35,7 @@ gulp.task('build:bundle', ['build:coffee'], () ->
          userpage: './temp/userpage.js',
          login: './temp/login.js',
          userdata_modify: './temp/userdata_modify.js'
-         admin: './temp/admin.js'
+         admin: './temp/admin/admin.js'
        },
        output: {
          filename: '[name].js',
