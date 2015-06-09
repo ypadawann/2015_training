@@ -13,13 +13,11 @@ registVacation = ->
               )
     )
 
-arrayToPostdata = (array) ->
-  data = []
-  i = 0
-  while i < array.length
-    tmp = { date: array[i] }
-    data.push(tmp)
-    i += 1
+arrayToPostdata = (array) ->  
+  data =
+    _.range(array.length)
+    .map (i) ->
+      { date: array[i] }
   return data
 
 $('#regist-vacation').bind 'click', ->
