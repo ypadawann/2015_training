@@ -99,7 +99,7 @@ makeRecord = (year, month) ->
         if msg.data[i - 1].weekday is "日" or  msg.data[i - 1].weekday is "土" or msg.data[i - 1].isholiday isnt false
           row.style.backgroundColor = '#D9D9D9'
         datanumber = i
-      
+
 $('#timecard-save').bind 'click', ->
   year = $('#year').val()
   month = $('#month').val()
@@ -113,6 +113,13 @@ $('#date-select').bind 'click', ->
   year = $('#year').val()
   month = $('#month').val()
   makeRecord(year, month)
+
+$('#exportCSV').bind 'click', ->
+  userId = $('#user-id').val()
+  year = $('#year').val()
+  month = $('#month').val()
+  document.location =
+    "//#{location.host}/api/v1/users/#{userId}/attend-leave/#{year}/#{month}/export"
 
 switch location.pathname
   when '/userpage/attendance_record'
