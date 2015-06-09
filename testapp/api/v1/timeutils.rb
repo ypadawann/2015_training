@@ -1,6 +1,12 @@
 
 require 'holiday_jp'
 
+class Float
+  def rounddown_point5
+    (self * 2.0).floor / 2.0
+  end
+end
+
 module API
   module V1
     module TimeUtils
@@ -21,6 +27,14 @@ module API
         end
       end
 
+      def calculate_totals(data)
+        { midnight_work: attr_total(data, :midnight_work),
+          holiday_shift: attr_total(data, :holiday_shift),
+          paid_vacation: attr_total(data, :paid_vacation) }
+      end
+
+      private
+
       def types_of_day(year, month, day)
         date = Date.new(year, month, day)
         { weekday: WEEKDAY_NAMES[date.wday],
@@ -40,7 +54,11 @@ module API
         end
       end
 
-      private
+      def attr_total(data, attr)
+        data.inject(0) { |total, d|
+          total + (d[attr].presence || 0)
+        }.rounddown_point5
+      end
 
       def isweekend(wday)
         wday == 0 || wday == 6
