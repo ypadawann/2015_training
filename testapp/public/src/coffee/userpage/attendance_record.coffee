@@ -47,17 +47,18 @@ makeRow = (tableobj, rowNumber) ->
   row
 
 save = (userId, year, month, day) ->
-  data = []
-  for i in [1..day]
-    data[i - 1] = {
-      "day": i
-      "attendance": $("#attendance#{i}").val()
-      "leaving": $("#leaving#{i}").val()
-      "prearranged_holiday": $("#prearranged-holiday#{i}").val()
-      "paid_vacation": $("#paid-vacation#{i}").val()
-      "holiday_acquisition": $("#holiday-acquisition#{i}").val()
-      "etc": $("#etc#{i}").val()
-    }
+  data =
+    _.range(1, day + 1)
+    .map (i) ->
+      {
+        day: i
+        attendance: $("#attendance#{i}").val()
+        leaving: $("#leaving#{i}").val()
+        prearranged_holiday: $("#prearranged-holiday#{i}").val()
+        paid_vacation: $("#paid-vacation#{i}").val()
+        holiday_acquisition: $("#holiday-acquisition#{i}").val()
+        etc: $("#etc#{i}").val()
+      }
   request = $.ajax(
     type: 'put'
     url: "#{location.protocol}//#{location.host}/api/v1/users/#{userId}/attend-leave/#{year}/#{month}"
