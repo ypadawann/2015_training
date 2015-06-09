@@ -23,6 +23,18 @@ $ pwd
 $ bundle exec unicorn -c unicorn.rb -E "環境名" -D
 ```
 
+###npmパッケージの導入
+
+パッケージがインストールされていない場合はpublicディレクトリで以下のコマンド
+
+```bash
+$ npm install
+```
+lodashが導入されていなければ以下のコマンドでpublicディレクトリ下にlodash.jsを作成
+```bash
+$ node_modules/.bin/lodash modern -o ./lodash.js
+```
+
 ### 依存パッケージの導入
 
 bundlerの導入が済んでいない場合は導入しておく必要があります。
