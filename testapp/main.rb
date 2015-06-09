@@ -39,12 +39,16 @@ class Main < Sinatra::Base
 
   get '/userpage' do
     @name = Model::Users.get_name(@user_id.to_i)
-    erb %s(userpage/index)
+    erb %s(userpage/layout) do
+      erb %s(userpage/index)
+    end
   end
 
   get %r{\/userpage\/[\w\/]*} do
     @name = Model::Users.get_name(@user_id.to_i)
-    show_erb
+    erb %s(userpage/layout) do
+      show_erb
+    end
   end
 
   get '/bookmarklet/:action' do

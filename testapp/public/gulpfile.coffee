@@ -32,10 +32,7 @@ gulp.task('build:bundle', ['build:coffee'], () ->
        entry: {
          register: './temp/register.js',
          login: './temp/login.js',
-         userpage: './temp/userpage/userpage.js',
-         userdata_modify: './temp/userpage/userdata_modify.js'
-         attendance_record: './temp/userpage/attendance_record.js',
-         add_paid_vacation: './temp/userpage/add_paid_vacation.js'
+         userpage: './temp/userpage/userpage.js'
          admin: './temp/admin/admin.js'
        },
        output: {

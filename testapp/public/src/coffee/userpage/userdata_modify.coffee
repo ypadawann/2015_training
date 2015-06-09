@@ -56,16 +56,17 @@ $('#user-delete').click ->
       .fail (xhr,  status, error) ->
         $("#message").text 'エラーが発生しました'
 
-
-userSelect()
-  .done (data) ->
-    document.querySelector("#user-name").value = data.name
-    ($('#department option').filter ->
-      return $(this).text() is data.department).prop 'selected', true
-  .fail (xhr,  status, error) ->
-    if xhr.status is 403
-      $("#message").text '認証に失敗しました'
-    else
-      $("#message").text 'エラーが発生しました'
+switch location.pathname
+  when '/userpage/modify'
+    userSelect()
+      .done (data) ->
+        document.querySelector("#user-name").value = data.name
+        ($('#department option').filter ->
+          return $(this).text() is data.department).prop 'selected', true
+      .fail (xhr,  status, error) ->
+        if xhr.status is 403
+          $("#message").text '認証に失敗しました'
+        else
+          $("#message").text 'エラーが発生しました'
 
 

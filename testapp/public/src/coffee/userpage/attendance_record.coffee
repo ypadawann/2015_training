@@ -46,7 +46,7 @@ makeRow = (tableobj, rowNumber) ->
   cell11.innerHTML = data11
   row
 
-save = (user_id, year, month, day) ->
+save = (userId, year, month, day) ->
   data = []
   for i in [1..day]
     data[i - 1] = {
@@ -58,16 +58,17 @@ save = (user_id, year, month, day) ->
       "holiday_acquisition": $("#holiday-acquisition#{i}").val()
       "etc": $("#etc#{i}").val()
     }
+  console.log data
   request = $.ajax(
     type: 'put'
-    url: "#{location.protocol}//#{location.host}/api/v1/users/#{user_id}/attend-leave/#{year}/#{month}"
+    url: "#{location.protocol}//#{location.host}/api/v1/users/#{userId}/attend-leave/#{year}/#{month}"
     dataType: 'json'
     data:
       'data': data)
 
-make_record = (year, month) ->
-  user_id = $('#user_id').val()
-  day = new Date(year, month, 0).getDate()
+makeRecord = (year, month) ->
+  console.log userId = $('#user-id').val()
+  console.log day = new Date(year, month, 0).getDate()
   tableobj = document.getElementById("table")
   if tableobj.rows.length isnt 7
     deleterow = tableobj.rows.length
@@ -76,12 +77,12 @@ make_record = (year, month) ->
   $('#YearsAndMonths').val "#{year}年#{month}月"
   request = $.ajax(
     type: 'get'
-    url: "#{location.protocol}//#{location.host}/api/v1/users/#{user_id}/attend-leave/#{year}/#{month}"
+    url: "#{location.protocol}//#{location.host}/api/v1/users/#{userId}/attend-leave/#{year}/#{month}"
     dataType: 'json')
     .done (msg) ->
       $('#department').val msg.department
       $('#name').val msg.name
-      $('#user_id').val msg.user_id
+      $('#user-id').val msg.user_id
       for i in [1..msg.data.length]
         row = makeRow(tableobj, i)
         $("#day#{i}").val msg.data[i - 1].day
@@ -97,23 +98,27 @@ make_record = (year, month) ->
         if msg.data[i - 1].weekday is "日" or  msg.data[i - 1].weekday is "土" or msg.data[i - 1].isholiday isnt false
           row.style.backgroundColor = '#D9D9D9'
         datanumber = i
-      console.log msg
-  $('#save').bind 'click', ->
-    year = $('#year').val()
-    month = $('#month').val()
-    save(user_id, year, month, day)
-    .done (msg) ->
-      make_record(year, month)
-
-$('#select').bind 'click', ->
+      
+$('#timecard-save').bind 'click', ->
   year = $('#year').val()
   month = $('#month').val()
-  make_record(year, month)
+  userId = $('#user-id').val()
+  console.log day = new Date(year, month, 0).getDate()
+  save(userId, year, month, day)
+    .done (msg) ->
+      makeRecord(year, month)
 
-now = new Date
-year = now.getFullYear()
-month = now.getMonth() + 1
-datanumber = 0
-$('#year').val year
-$('#month').val month
-make_record(year, month)
+$('#date-select').bind 'click', ->
+  year = $('#year').val()
+  month = $('#month').val()
+  makeRecord(year, month)
+
+switch location.pathname
+  when '/userpage/attendance_record'
+    now = new Date
+    year = now.getFullYear()
+    month = now.getMonth() + 1
+    datanumber = 0
+    $('#year').val year
+    $('#month').val month
+    makeRecord(year, month)
