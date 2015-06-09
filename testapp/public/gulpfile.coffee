@@ -18,9 +18,6 @@ sass = require 'gulp-sass'
 
 gulp.task 'build:sass', ->
   gulp
-    .src 'node_modules/normalize.css/normalize.css'
-    .pipe gulp.dest('src/style/')
-  gulp
     .src 'src/style/*.scss'
     .pipe sass()
     .pipe gulp.dest('dist/style/')
