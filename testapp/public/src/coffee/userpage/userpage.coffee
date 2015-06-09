@@ -1,3 +1,4 @@
+require '../../lodash'
 require './index'
 require './attendance_record'
 require './userdata_modify'
