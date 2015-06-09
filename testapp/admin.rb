@@ -27,14 +27,14 @@ class Admin < Sinatra::Base
 
   get '/' do
     redirect to('/top') if session[:admin_login]
-    erb :'admin/layout'.to_sym do
+    erb 'admin/layout'.to_sym do
       erb 'admin/login'.to_sym
     end
   end
 
   get %r{\/\w+} do
     redirect to ('/') unless session[:admin_login]
-    erb :'admin/layout'.to_sym do
+    erb 'admin/layout'.to_sym do
       show_erb
     end
   end

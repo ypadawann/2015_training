@@ -32,11 +32,10 @@ gulp.task('build:bundle', ['build:coffee'], () ->
     .src './temp/*.js'
     .pipe gulpWebpack({
        entry: {
-         attendance_record: './temp/attendance_record.js',
          register: './temp/register.js',
-         userpage: './temp/userpage.js',
          login: './temp/login.js',
-         userdata_modify: './temp/userdata_modify.js'
+         bookmarklet: './temp/bookmarklet.js',
+         userpage: './temp/userpage/userpage.js',
          admin: './temp/admin/admin.js'
        },
        output: {

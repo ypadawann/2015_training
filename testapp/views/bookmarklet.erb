@@ -4,4 +4,6 @@
 <div id="bookmarklet_result"></div>
 <div id="bookmarklet_message"></div>
 
+<% content_for :javascript do %>
 <script type="text/javascript" src=<%= "#{js_path}/bookmarklet.js" %>></script>
+<% end %>
