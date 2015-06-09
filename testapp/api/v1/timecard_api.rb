@@ -105,6 +105,8 @@ module API
           contents[:data] =
             get_full_attendance_data(
               params[:user_id], params[:year], params[:month])
+          contents[:total] =
+            calculate_totals(contents[:data])
           contents
         end
 
@@ -118,6 +120,8 @@ module API
           contents[:data] =
             get_full_attendance_data(
               params[:user_id], params[:year], params[:month])
+          contents[:total] =
+            calculate_totals(contents[:data])
 
           bom = '   '
           bom.setbyte(0, 0xEF)

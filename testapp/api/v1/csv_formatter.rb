@@ -40,6 +40,17 @@ module API
               d[:etc]
             ]
           end
+          csv << [
+            '合計',
+            '',
+            '',
+            '',
+            '',
+            contents[:total][:midnight_work],
+            contents[:total][:holiday_shift],
+            '',
+            contents[:total][:paid_vacation]
+          ]
         end
       end
     end

@@ -189,6 +189,10 @@ parametersを受け取り、resultsをJSONで返す。
             * paid_vacation: float
             * holiday_acquisition: date
             * etc: string
+        * total:
+            * midnight_work: float
+            * holiday_shift: float
+            * paid_vacation: float
         * user_id: integer
         * name: string
         * department: string
