@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require './model/timecards'
 require './model/users'
 require './model/departments'
@@ -82,6 +83,15 @@ module API
         end
 
         params do
+          requires :data, type: Array, desc: '月の出退勤データ' do
+            requires :day, type: Integer, desc: '日'
+            requires :attendance, type: String, desc: '出勤時間'
+            requires :leaving, type: String, desc: '退勤時間'
+            requires :prearranged_holiday, type: Date, desc: '振替休暇予定日'
+            requires :paid_vacation, type: Float, desc: '有給休暇'
+            requires :holiday_acquisition, type: Date, desc: '振替休暇取得日'
+            requires :etc, type: String, desc: 'その他'
+          end
           requires :year, type: Integer, desc: '年'
           requires :month, type: Integer, desc: '月'
         end
