@@ -99,6 +99,9 @@ makeRecord = (year, month) ->
         if msg.data[i - 1].weekday is "日" or  msg.data[i - 1].weekday is "土" or msg.data[i - 1].isholiday isnt false
           row.style.backgroundColor = '#D9D9D9'
         datanumber = i
+      $("#total-midnight-work").text msg.total.midnight_work
+      $("#total-holiday-shift").text msg.total.holiday_shift
+      $("#total-paid-vacation").text msg.total.paid_vacation
 
 $('#timecard-save').bind 'click', ->
   year = $('#year').val()
