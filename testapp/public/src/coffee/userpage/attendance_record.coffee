@@ -58,17 +58,18 @@ save = (userId, year, month, day) ->
       "holiday_acquisition": $("#holiday-acquisition#{i}").val()
       "etc": $("#etc#{i}").val()
     }
-  console.log data
   request = $.ajax(
     type: 'put'
     url: "#{location.protocol}//#{location.host}/api/v1/users/#{userId}/attend-leave/#{year}/#{month}"
     dataType: 'json'
+    contentType: 'application/json'
     data:
-      'data': data)
+      JSON.stringify(data: data)
+      )
 
 makeRecord = (year, month) ->
-  console.log userId = $('#user-id').val()
-  console.log day = new Date(year, month, 0).getDate()
+  userId = $('#user-id').val()
+  day = new Date(year, month, 0).getDate()
   tableobj = document.getElementById("table")
   if tableobj.rows.length isnt 7
     deleterow = tableobj.rows.length
@@ -103,7 +104,7 @@ $('#timecard-save').bind 'click', ->
   year = $('#year').val()
   month = $('#month').val()
   userId = $('#user-id').val()
-  console.log day = new Date(year, month, 0).getDate()
+  day = new Date(year, month, 0).getDate()
   save(userId, year, month, day)
     .done (msg) ->
       makeRecord(year, month)

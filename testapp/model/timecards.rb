@@ -25,14 +25,14 @@ module Model
 
     def self.update_all(year, month, timecard_data, user_id)
       timecard_data.each do |tc_data|
-        date = sprintf("%d-%02d-%02d", year, month, tc_data[1].day)
+        date = sprintf("%d-%02d-%02d", year, month, tc_data.day)
         timecard = prepare_timecard(date, user_id)
-        timecard.attendance = tc_data[1].attendance
-        timecard.leaving = tc_data[1].leaving
-        timecard.prearranged_holiday = tc_data[1].prearranged_holiday
-        timecard.paid_vacation = tc_data[1].paid_vacation
-        timecard.holiday_acquisition = tc_data[1].holiday_acquisition
-        timecard.etc = tc_data[1].etc
+        timecard.attendance = tc_data.attendance
+        timecard.leaving = tc_data.leaving
+        timecard.prearranged_holiday = tc_data.prearranged_holiday
+        timecard.paid_vacation = tc_data.paid_vacation
+        timecard.holiday_acquisition = tc_data.holiday_acquisition
+        timecard.etc = tc_data.etc
         timecard.save
       end
     end
