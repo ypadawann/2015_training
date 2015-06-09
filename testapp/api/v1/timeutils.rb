@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 
 require 'holiday_jp'
 
@@ -55,7 +56,7 @@ module API
       end
 
       def attr_total(data, attr)
-        data.inject(0) { |total, d|
+        data.inject(0.to_f) { |total, d|
           total + (d[attr].presence || 0)
         }.rounddown_point5
       end
