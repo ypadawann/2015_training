@@ -4,13 +4,13 @@
   <link rel="stylesheet" type="text/css" href=<%= "#{css_path}/normalize.css"%>/>
   <link rel="stylesheet" type="text/css" href=<%= "#{css_path}/all.css"%>/>
   <link rel="stylesheet" type="text/css" href=<%= "#{css_path}/print.css"%> media="print"/>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <title><%= @title %></title>
 </head>
 <body>
   <%== yield %>
   <br>
   <a href=<%= app_path %> class="print--hidden">トップページ</a>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <%== yield_content :javascript %>
 </body>
 </html>

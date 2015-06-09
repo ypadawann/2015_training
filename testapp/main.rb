@@ -27,14 +27,14 @@ class Main < Sinatra::Base
   helpers ControllerHelpers
   helpers Sinatra::ContentFor
 
-  get '/' do
-    redirect to('/userpage') if session[:user_login]
-    erb :index
-  end
-
   before %r{\/(userpage|bookmarklet)[\w\/]*} do
     redirect to('/') unless session[:user_login]
     @user_id = session[:user_id]
+  end
+
+  get '/' do
+    redirect to('/userpage') if session[:user_login]
+    erb :index
   end
 
   get '/userpage' do

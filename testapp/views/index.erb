@@ -12,4 +12,6 @@
 
 <a href=<%= "#{app_path}/register" %>>ユーザ登録</a>
 
+<% content_for :javascript do %>
 <script type="text/javascript" src=<%= "#{js_path}/login.js" %>></script>
+<% end %>
