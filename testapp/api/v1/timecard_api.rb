@@ -3,11 +3,13 @@ require './model/users'
 require './model/departments'
 
 require './api/v1/timeutils'
+require './api/v1/csv_formatter'
 
 module API
   module V1
     class Timecards < Grape::API
       helpers TimeUtils
+      helpers CSVFormatter
 
       params do
         requires :user_id, type: Integer, desc: '社員番号'
@@ -99,22 +101,34 @@ module API
           requires :month, type: Integer, desc: '月'
         end
         get '/attend-leave/:year/:month' do
-          user_id = params[:user_id]
-          year = params[:year]
-          month = params[:month]
-          timecards =
-            Model::Timecard_operation.read_monthly_data(user_id, year, month)
+          contents = Model::Users.status(params[:user_id])
+          contents[:data] =
+            get_full_attendance_data(
+              params[:user_id], params[:year], params[:month])
+          contents
+        end
 
-          timecards =
-            timecards.map do |timecard|
-              timecard
-              .merge!(types_of_day(year, month, timecard[:day]))
-              .merge!(calculate_extra_hours(timecard))
-            end
+        params do
+          requires :year, type: Integer, desc: '年'
+          requires :month, type: Integer, desc: '月'
+        end
+        get '/attend-leave/:year/:month/export' do
+          authenticate!(params[:user_id])
+          contents = Model::Users.status(params[:user_id])
+          contents[:data] =
+            get_full_attendance_data(
+              params[:user_id], params[:year], params[:month])
 
-          results = Model::Users.status(user_id)
-          results[:data] = timecards
-          results
+          bom = '   '
+          bom.setbyte(0, 0xEF)
+          bom.setbyte(1, 0xBB)
+          bom.setbyte(2, 0xBF)
+
+          content_type 'text/csv'
+          filename = format('%d_%d%02d.csv',
+                            params[:user_id], params[:year], params[:month])
+          header('Content-Disposition', "attachment; filename=#{filename}")
+          bom + export_csv(contents, params[:year], params[:month])
         end
       end
     end
