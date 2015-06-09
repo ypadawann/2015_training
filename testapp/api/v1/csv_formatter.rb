@@ -47,8 +47,10 @@ module API
             '',
             '',
             contents[:total][:midnight_work],
-            contents[:total][:holiday_shift],
-            '',
+            contents[:total][:holiday_shift]
+          ]
+          csv << [
+            '当月消化有休日数',
             contents[:total][:paid_vacation]
           ]
         end
