@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 require 'active_support'
+require 'action_controller'
 
 require_relative '_entity/database_information'
 
@@ -23,17 +24,20 @@ module Model
       timecard.save
     end
 
+    def self.permitted_update_params(params)
+      ActionController::Parameters.new(params).permit(
+        :attendance, :leaving,
+        :midnight_work, :holiday_shift, :paid_vacation,
+        :prearranged_holiday, :holiday_acquisition, :etc
+      )
+    end
+
     def self.update_all(year, month, timecard_data, user_id)
       timecard_data.each do |tc_data|
         date = sprintf("%d-%02d-%02d", year, month, tc_data.day)
         timecard = prepare_timecard(date, user_id)
-        timecard.attendance = tc_data.attendance
-        timecard.leaving = tc_data.leaving
-        timecard.prearranged_holiday = tc_data.prearranged_holiday
-        timecard.paid_vacation = tc_data.paid_vacation
-        timecard.holiday_acquisition = tc_data.holiday_acquisition
-        timecard.etc = tc_data.etc
-        timecard.save
+        params = permitted_update_params(tc_data)
+        timecard.update_attributes(params)
       end
     end
 
@@ -103,6 +107,6 @@ module Model
         timecard.save
       end
     end
-    
+
   end
 end
