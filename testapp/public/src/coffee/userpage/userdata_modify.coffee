@@ -1,5 +1,6 @@
 userSelect = ->
   userId = $("#user-id").text()
+  # REVIEW: 無意味な空行を入れるのはやめましょう。整列するか、一文字に統一するかしてください
   deferred = $.ajax
     async:     true
     type:      "GET"

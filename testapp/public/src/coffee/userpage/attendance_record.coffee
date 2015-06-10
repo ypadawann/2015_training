@@ -46,7 +46,9 @@ makeRow = (tableobj, rowNumber) ->
   cell11.innerHTML = data11
   row
 
+
 save = (userId, year, month, day) ->
+  _ = require 'lodash'
   data =
     _.range(1, day + 1)
     .map (i) ->
@@ -68,6 +70,7 @@ save = (userId, year, month, day) ->
       JSON.stringify(data: data)
       )
 
+# REVIEW: 関数が長過ぎます。適切に分割、抽象化しましょう
 makeRecord = (year, month) ->
   userId = $('#user-id').val()
   day = new Date(year, month, 0).getDate()
@@ -104,6 +107,7 @@ makeRecord = (year, month) ->
       $("#total-holiday-shift").text msg.total.holiday_shift
       $("#total-paid-vacation").text msg.total.paid_vacation
 
+
 $('#timecard-save').bind 'click', ->
   year = $('#year').val()
   month = $('#month').val()
@@ -113,10 +117,12 @@ $('#timecard-save').bind 'click', ->
     .done (msg) ->
       makeRecord(year, month)
 
+
 $('#date-select').bind 'click', ->
   year = $('#year').val()
   month = $('#month').val()
   makeRecord(year, month)
+
 
 $('#exportCSV').bind 'click', ->
   userId = $('#user-id').val()
@@ -125,6 +131,9 @@ $('#exportCSV').bind 'click', ->
   document.location =
     "//#{location.host}/api/v1/users/#{userId}/attend-leave/#{year}/#{month}/export"
 
+
+# REVIEW: こういった汎用的な仕組みをその場しのぎで作るのは辞めましょう。
+#         機能を持ったモジュールに分割するか、サードパーティを使うべきです。
 switch location.pathname
   when '/userpage/attendance_record'
     now = new Date
