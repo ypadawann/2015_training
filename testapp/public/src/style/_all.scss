@@ -1,13 +1,84 @@
+.screen--hidden{
+  display: none;
+}
+
 body{
   font-family: "MS ゴシック","Hiragino Kaku Gothic ProN",sans-serif;
-  background: #ffffff;
+//  background: #8BBF46;
+  color: #000000;
+  background: #F2DFA7;
+}
+
+.main-menu{
+  width: 100%;
+  height: 20%;
+  background-color: #8BBF46;
+  padding: 10px;
+  margin: 0px;
+  list-style-type: none;
+  text-align: center;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.main-menu__column{
+  width: 10%;
+  float: left;
+  padding: 0px;
+  margin: 10px 5px 0px;
+  text-align: center;
+  display: inline;
+}
+
+.main-menu__column__insert{
+  color: #000000;
+  padding: 10px 0px;
+  margin: 0px;
+  display: block;
+  background: #F2DFA7;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+.main-menu__user{
+  color: #FFFFFF;
+  font-size:15px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.main-page{
+  padding: 10px 40px;
+}
+
+@mixin button__design{
+  background-color: #8BBF46;
+  color: #000000;
+  border: 1px solid #DDD;
+  font-size: 18px;
+}
+
+.user-page__button{
+  @include button__design;
+  width: 140px;
+  height: 40px;
+  padding: 5px 10px;
+}
+
+.button--design{
+  @include button__design;
+  width: 50px;
+  height: 30px;
 }
 
 .attendance-record{
-  top: 0px;
-  left:30px;
-  width: 1000px;
+  top: 10px;
+  left: 30px;
+  width: 900px;
   position: relative;
+  background: #FFFFFF;
 }
 
 .attendance-record__select__year{
@@ -60,6 +131,7 @@ body{
   vertical-align: middle;
   height: 28px;
   width: 150px;
+  background-color: #FFFFFF;
   box-sizing: border-box;
 }
 
@@ -99,6 +171,7 @@ body{
   vertical-align: middle;
   font-size: 8px;
   width: 100%;
+  height: 100%;
 }
 
 .attendance-record__table__column{
@@ -208,6 +281,7 @@ body{
   vertical-align: middle;
   font-size: 6px;
   width: 100%;
+  height: 100%;
 }
 
 .attendance-record__table__total{

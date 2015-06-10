@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <link rel="stylesheet" type="text/css" href=<%= "#{css_path}/main.css"%>/>
-  <title><%= @title %></title>
-</head>
-<body>
-  <%== yield %>
-  <br>
-  <a href=<%= app_path %> class="print--hidden">トップページ</a>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-  <%== yield_content :javascript %>
-</body>
+  <head>
+    <link rel="stylesheet" type="text/css" href=<%= "#{css_path}/main.css"%>/>
+    <title><%= @title %></title>
+  </head>
+  <body>
+    <%== yield %>
+    <br>
+    <a href=<%= app_path %> class="print--hidden">トップページ</a>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <%== yield_content :javascript %>
+  </body>
 </html>

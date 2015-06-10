@@ -1,5 +1,14 @@
-<%== yield %>
-
+<ul class="main-menu print--hidden">
+  <li class="main-menu__column"><span class="main-menu__user">社員番号<%= @user_id %></span><br><span class="main-menu__user"><%= @name %>さん</span></li>
+  <li class="main-menu__column"><a class="main-menu__column__insert" href="<%= app_path %>">ユーザページ</a></li>
+  <li class="main-menu__column"><a class="main-menu__column__insert" href="<%= app_path %>/userpage/attendance_record">出退勤状況</a></li>
+  <li class="main-menu__column"><a class="main-menu__column__insert" href="<%= app_path %>/userpage/add_paid_vacation">有給取得日登録</a></li>
+  <li class="main-menu__column"><a class="main-menu__column__insert" href="<%- app_path %>/userpage/modify">ユーザ情報変更</a></li>
+  <li class="main-menu__column"><a class="main-menu__column__insert" href="#" id="logout">ログアウト</a></li>
+</ul>
+<div class="main-page">
+  <%== yield %>
+</div>
 <% content_for :javascript do %>
-<script type="text/javascript" src=<%= "#{js_path}/userpage.js"%>></script>
+  <script type="text/javascript" src=<%= "#{js_path}/userpage.js"%>></script>
 <% end %>

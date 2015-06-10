@@ -1,34 +1,18 @@
 <h1>ユーザページ</h1>
-<p id="user-id"><%= @user_id %></p>
-<p id="user-name"><%= @name %>さん</p>
-<div id="attend-message"></div>
-<div id="leave-message"></div>
+<p id="user-id" class="screen--hidden"><%= @user_id %></p>
+<p id="user-name" class="screen--hidden"><%= @name %>さん</p>
 <p>
-  <input type="button" id="attend" value="出勤">
+  <input type="button" id="attend" class="user-page__button" value="出勤">
+  <span id="attend-message"></span>
 </p>
 
 <p>
-  <input type="button" id="leave" value="退勤">
+  <input type="button" id="leave" class="user-page__button" value="退勤">
+  <span id="leave-message"></span>
 </p>
 
 <p>
-  <input type="button" id="to-read-data" value="出退勤状況">
-</p>
-
-<p>
-  <input type="button" id="to-modify" value="ユーザ情報変更">
-</p>
-
-<p>
-  <input type="button" id="view-paid-vacation" value="有給残数">
-</p>
-
-<p>
-  <input type="button" id="to-add-paid-vacation" value="有給取得日登録">
-</p>
-
-<p>
-  <input type="button" id="logout" value="ログアウト">
+  <input type="button" id="view-paid-vacation" class="user-page__button" value="有給残数">
 </p>
 
 <p>
