@@ -32,6 +32,19 @@ module Model
       )
     end
 
+    def self.find_invalid_data(year, month, timecard_data, user_id)
+      timecard_data.each do |tc_data|
+        date = sprintf("%d-%02d-%02d", year, month, tc_data.day)
+        params = permitted_update_params(tc_data)
+        timecard = Model::Timecard.new(day: date, user_id: user_id)
+        timecard.attributes = params
+        if timecard.invalid?
+          return [timecard.day, timecard.errors.full_messages]
+        end
+      end
+      nil
+    end
+
     def self.update_all(year, month, timecard_data, user_id)
       timecard_data.each do |tc_data|
         date = sprintf("%d-%02d-%02d", year, month, tc_data.day)
