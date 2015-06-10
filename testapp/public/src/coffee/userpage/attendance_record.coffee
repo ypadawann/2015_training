@@ -46,7 +46,9 @@ makeRow = (tableobj, rowNumber) ->
   cell11.innerHTML = data11
   row
 
+
 save = (userId, year, month, day) ->
+  _ = require 'lodash'
   data =
     _.range(1, day + 1)
     .map (i) ->
