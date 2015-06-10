@@ -30,6 +30,8 @@ viewPaidVacationNum = ->
     dataType: 'json'
     )
 
+
+# REVIEW: ここ以下、か毒性のためにも適切に改行を入れていってください
 $('#attend').bind 'click', ->
   attend()
   .done (msg) ->
