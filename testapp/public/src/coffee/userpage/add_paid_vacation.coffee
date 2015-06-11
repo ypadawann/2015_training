@@ -1,23 +1,20 @@
 registVacation = ->
   userId = $('#user-id').text()
-  fullArray = $("#full-vacation").val().split(/\s/)
-  halfArray = $("#half-vacation").val().split(/\s/)
   request = $.ajax(
     type: 'post'
     url: "#{location.protocol}//#{location.host}/api/v1/users/#{userId}/paid-vacation"
     dataType: 'json'
     contentType: 'application/json'
     data: JSON.stringify(
-      full_vacation: arrayToPostdata(fullArray)
-      half_vacation: arrayToPostdata(halfArray)
+      full_vacation: arrayToPostdata($("#full-vacation").val().split(/\s/))
+      half_vacation: arrayToPostdata($("#half-vacation").val().split(/\s/))
               )
     )
 
-arrayToPostdata = (array) ->  
+arrayToPostdata = (array) ->
   data =
-    _.range(array.length)
-    .map (i) ->
-      { date: array[i] }
+    array.map (array_map) ->
+      { date:  array_map }
   return data
 
 $('#regist-vacation').bind 'click', ->
