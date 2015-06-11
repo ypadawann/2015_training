@@ -26,9 +26,9 @@ ActiveRecord::Schema.define(version: 4) do
     t.integer "user_id",             limit: 4
     t.string  "attendance",          limit: 10
     t.string  "leaving",             limit: 10
-    t.date    "prearranged_holiday"
+    t.string  "prearranged_holiday", limit: 15
     t.float   "paid_vacation",       limit: 24
-    t.date    "holiday_acquisition"
+    t.string  "holiday_acquisition", limit: 15
     t.string  "etc",                 limit: 50
   end
 
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 4) do
     t.string  "name",          limit: 50,  null: false
     t.integer "department_id", limit: 4,   null: false
     t.string  "password",      limit: 255, null: false
+    t.date    "enter",                     null: false
   end
 
   add_index "users", ["department_id"], name: "fk_rails_f29bf9cdf2", using: :btree
