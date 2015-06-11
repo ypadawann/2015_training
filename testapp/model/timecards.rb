@@ -39,7 +39,7 @@ module Model
         timecard = Model::Timecard.new(day: date, user_id: user_id)
         timecard.attributes = params
         if timecard.invalid?
-          return [timecard.day, timecard.errors.full_messages]
+          return [timecard.day, timecard.errors.messages.values.join("\n")]
         end
       end
       nil

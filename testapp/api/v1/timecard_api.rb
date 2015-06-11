@@ -105,7 +105,7 @@ module API
           invalid_date, msg =
             Model::Timecard_operation.find_invalid_data(
               year, month, data, user_id)
-          return error!("#{invalid_date}: #{msg}", 400) unless invalid_date.nil?
+          return error!("#{invalid_date}:\n#{msg}", 400) unless invalid_date.nil?
 
           Model::Timecard_operation.update_all(year, month, data, user_id)
 
