@@ -24,7 +24,7 @@ $ ->
         'name'      : $('#name').val()
         'department': $('#department option:selected').text()
         'password'  : $('#pass').val()
-        'enter_date'      : date
+        'enter_date' : date
     )
 
   login = ->

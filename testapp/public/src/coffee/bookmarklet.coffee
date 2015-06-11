@@ -1,18 +1,18 @@
 attend = ->
   user_id = document.getElementById('user_id').textContent
-  request = $.ajax(
+  $.ajax(
     type: 'post'
     url: "#{location.protocol}//#{location.host}/api/v1/users/#{user_id}/attend"
-    dataType: 'json'
-    data: 'user_id': user_id)
+    data: 'user_id': user_id
+  )
 
 leave = ->
   user_id = document.getElementById('user_id').textContent
-  request = $.ajax(
+  $.ajax(
     type: 'post'
     url: "#{location.protocol}//#{location.host}/api/v1/users/#{user_id}/leave"
-    dataType: 'json'
-    data: 'user_id': user_id)
+    data: 'user_id': user_id
+  )
 
 bookmarklet_attend = ->
   attend()
