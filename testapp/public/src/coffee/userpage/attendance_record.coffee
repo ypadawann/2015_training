@@ -113,6 +113,9 @@ $('#timecard-save').bind 'click', ->
   save(userId, year, month, day)
     .done (msg) ->
       makeRecord(year, month)
+    .fail (xhr, status, error) ->
+      json_msg = JSON.parse(xhr.responseText)
+      alert json_msg.error
 
 $('#date-select').bind 'click', ->
   year = $('#year').val()

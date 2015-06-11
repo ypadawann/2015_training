@@ -5,9 +5,9 @@ class CreateTimecards < ActiveRecord::Migration
       t.integer :user_id
       t.string :attendance, limit: 10
       t.string :leaving, limit: 10
-      t.date :prearranged_holiday
+      t.string :prearranged_holiday, limit: 15
       t.float :paid_vacation
-      t.date :holiday_acquisition
+      t.string :holiday_acquisition, limit: 15
       t.string :etc, limit: 50
     end
     add_foreign_key(:timecards, :users, column: 'user_id')
