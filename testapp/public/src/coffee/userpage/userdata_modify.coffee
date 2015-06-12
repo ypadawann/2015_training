@@ -1,12 +1,9 @@
 userSelect = ->
   userId = $("#user-id").text()
-  deferred = $.ajax
-    async:     true
-    type:      "GET"
+  $.ajax(
+    type: "get"
     url: "#{location.protocol}//#{location.host}/api/v1/users/#{userId}"
-    dataType:  "json"
-    context:    this
-  deferred.promise()
+  )
 
 userModify = ->
   userId = $('#user-id').text()
@@ -14,25 +11,22 @@ userModify = ->
   department = $('#department option:selected').text()
   newPassword = $('#new-password').val()
   password = $('#password').val()
-  deferred = $.ajax
-    async:     true
-    type:      "PUT"
+  $.ajax(
+    type: "put"
     url: "#{location.protocol}//#{location.host}/api/v1/users/#{userId}"
-    data: { name: name, department: department, new_password: newPassword, password: password }
-    dataType:  "json"
-    context:    this
-  deferred.promise()
+    data:
+      name: name
+      department: department
+      new_password: newPassword
+      password: password
+  )
 
 userDelete = ->
   userId = $("#user-id").text()
-  deferred = $.ajax
-    async:     true
-    type:      "DELETE"
+  $.ajax(
+    type: "delete"
     url: "#{location.protocol}//#{location.host}/api/v1/users/#{userId}"
-    dataType:  "json"
-    context:    this
-  deferred.promise()
-
+  )
 
 $('#user-modify').bind 'click', ->
   userModify()

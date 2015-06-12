@@ -1,34 +1,33 @@
 attend = ->
   userId = document.getElementById('user-id').textContent
-  request = $.ajax(
+  $.ajax(
     type: 'post'
     url: "#{location.protocol}//#{location.host}/api/v1/users/#{userId}/attend"
-    dataType: 'json'
-    data: 'user_id': userId)
+    data: 'user_id': userId
+  )
 
 leave = ->
   userId = document.getElementById('user-id').textContent
-  request = $.ajax(
+  $.ajax(
     type: 'post'
     url: "#{location.protocol}//#{location.host}/api/v1/users/#{userId}/leave"
-    dataType: 'json'
-    data: 'user_id': userId)
+    data: 'user_id': userId
+  )
 
 logout = ->
   userId = document.getElementById('user-id').textContent
-  request = $.ajax(
+  $.ajax(
     type: 'put'
     url: "#{location.protocol}//#{location.host}/api/v1/users/#{userId}/logout"
-    dataType: 'json'
-    data: 'user_id': userId)
+    data: 'user_id': userId
+  )
 
 viewPaidVacationNum = ->
   userId = document.getElementById('user-id').textContent
-  request = $.ajax(
+  $.ajax(
     type: 'get'
     url: "#{location.protocol}//#{location.host}/api/v1/users/#{userId}/paid-vacation"
-    dataType: 'json'
-    )
+  )
 
 $('#attend').bind 'click', ->
   attend()
@@ -37,6 +36,7 @@ $('#attend').bind 'click', ->
   .fail (msg) ->
     console.log(msg.status)
     $('#attend-message').text '本日は既に出勤しています'
+
 $('#leave').bind 'click', ->
   leave()
   .done (msg) ->
@@ -44,6 +44,7 @@ $('#leave').bind 'click', ->
   .fail (msg) ->
     $('#leave-message').text '本日は既に退勤しています'
     console.log(msg.status)
+
 $('#logout').bind 'click', ->
   logout()
   .done (msg) ->
@@ -63,5 +64,6 @@ $('#to-add-paid-vacation').bind 'click', ->
 
 $('#to-read-data').bind 'click', ->
   document.location = '/userpage/attendance_record'
+
 $('#to-modify').bind 'click', ->
   document.location = '/userpage/modify'
