@@ -1,6 +1,6 @@
 registVacation = ->
   userId = $('#user-id').text()
-  request = $.ajax(
+  $.ajax(
     type: 'post'
     url: "#{location.protocol}//#{location.host}/api/v1/users/#{userId}/paid-vacation"
     dataType: 'json'
@@ -8,14 +8,11 @@ registVacation = ->
     data: JSON.stringify(
       full_vacation: arrayToPostdata($("#full-vacation").val().split(/\s/))
       half_vacation: arrayToPostdata($("#half-vacation").val().split(/\s/))
-              )
     )
+  )
 
-arrayToPostdata = (array) ->
-  data =
-    array.map (array_map) ->
-      { date:  array_map }
-  return data
+arrayToPostdata = (vacation_dates) ->
+  vacation_dates.map (date) -> { date:  date }
 
 $('#regist-vacation').bind 'click', ->
   registVacation()
