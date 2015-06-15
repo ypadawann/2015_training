@@ -37,11 +37,12 @@ class Main < Sinatra::Base
       Model::Departments.add(params['department_name'])
     end
 
-    get '/test/add_user/:user_id/:name/:department/:password' do
+    get '/test/add_user/:user_id/:name/:department/:password/:enter' do
       Model::Users.add(params['user_id'].to_i,
                        params['name'],
                        params['department'],
-                       params['password'])
+                       params['password'],
+                       params['enter'])
     end
   end
 
