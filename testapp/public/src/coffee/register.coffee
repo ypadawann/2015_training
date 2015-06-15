@@ -20,18 +20,18 @@ $ ->
       type: 'post'
       url: "#{location.protocol}//#{location.host}/api/v1/users"
       data:
-        'user_id'   : $('#no').val()
+        'user_id'   : $('#user_id').val()
         'name'      : $('#name').val()
         'department': $('#department option:selected').text()
-        'password'  : $('#pass').val()
+        'password'  : $('#password').val()
         'enter_date' : date
     )
 
   login = ->
     $.ajax(
       type: 'put'
-      url: "#{location.protocol}//#{location.host}/api/v1/users/#{$('#no').val()}/login"
+      url: "#{location.protocol}//#{location.host}/api/v1/users/#{$('#user_id').val()}/login"
       data:
-        'user_id' : $('#no').val()
-        'password': $('#pass').val()
+        'user_id' : $('#user_id').val()
+        'password': $('#password').val()
     )
