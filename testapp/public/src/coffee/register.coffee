@@ -35,3 +35,5 @@ $ ->
         'user_id' : $('#user_id').val()
         'password': $('#password').val()
     )
+  $(document).ready ->
+    $("#department").material_select()
