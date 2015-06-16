@@ -74,11 +74,11 @@
     Battleship Haruna
     """
     かつ "部署(#select-department)" で "呉鎮守府" を選択
-    かつ "変更ボタン(#user-modify)" をクリック
-    
-    #ならば "メッセージ(#message)" に "ok" と表示
 
-    かつ "ユーザ情報管理(/admin/user)" にアクセス
+    ならば "変更ボタン(#user-modify)" をクリック
+    
+
+    もし "ユーザ情報管理(/admin/user)" にアクセス
     かつ "ユーザID(#user-id)" に以下を入力
     """
     23
@@ -96,6 +96,15 @@
     """
     横須賀鎮守府
     """
-    かつ "選択ボタン(#department-register)" をクリック
+    ならば "選択ボタン(#department-register)" をクリック
 
-    ならば アラートに "登録" と表示
+    もし "部署(#select-department)" で "横須賀鎮守府" を選択
+    かつ "新しい部署名(#new-department-name)" に以下を入力
+    """
+    ブラック鎮守府
+    """
+    ならば "部署名変更(#department-rename)" をクリック
+
+    もし "部署(#select-department)" で "ブラック鎮守府" を選択
+    ならば "部署削除(#department-delete)" をクリック
+    

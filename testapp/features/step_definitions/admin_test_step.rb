@@ -56,3 +56,4 @@ end
   selected_id = page.find(:xpath, "//html/body/p/select").value
   expect(page.find(:xpath, "//html/body/p/select/option[@value = #{selected_id}]").text).to eq(str)
 end
+

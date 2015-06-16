@@ -28,6 +28,11 @@ class Test < Sinatra::Base
   helpers Sinatra::ContentFor
 
   get '/init-data' do
+    Model::Admins.add('admin', 'password')
+
+    Model::Departments.add('大日本帝国海軍')
+    Model::Departments.add('呉鎮守府')
+    Model::Departments.remove(Model::Departments.id_of('横須賀鎮守府'))
     Model::Users.remove(23)
     Model::Users.add(23, '戦艦　榛名', '大日本帝国海軍', 'kongoclass', '1915-04-19')
   end

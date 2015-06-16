@@ -33,7 +33,6 @@ userDelete = ->
 $('#user-select').bind 'click', ->
   userSelect()
     .done (data) ->
-      console.log data
       document.querySelector("#user-name").value = data.name
       ($('#select-department option').filter ->
         return $(this).text() is data.department).prop 'selected', true
