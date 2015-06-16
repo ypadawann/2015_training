@@ -34,16 +34,14 @@ $('#attend').bind 'click', ->
   .done (msg) ->
     $('#attend-message').text msg.attendance + 'に出勤しました'
   .fail (msg) ->
-    console.log(msg.status)
-    $('#attend-message').text '本日は既に出勤しています'
+    $('#attend-message').text JSON.parse(msg.responseText).error
 
 $('#leave').bind 'click', ->
   leave()
   .done (msg) ->
     $('#leave-message').text msg.leaving + 'に退勤しました'
   .fail (msg) ->
-    $('#leave-message').text '本日は既に退勤しています'
-    console.log(msg.status)
+    $('#leave-message').text JSON.parse(msg.responseText).error
 
 $('#logout').bind 'click', ->
   logout()
