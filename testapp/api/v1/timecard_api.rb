@@ -87,9 +87,9 @@ module API
             requires :day, type: Integer, desc: '日'
             requires :attendance, type: String, desc: '出勤時間'
             requires :leaving, type: String, desc: '退勤時間'
-            requires :prearranged_holiday, type: Date, desc: '振替休暇予定日'
+            requires :prearranged_holiday, type: String, desc: '振替休暇予定日'
             requires :paid_vacation, type: Float, desc: '有給休暇'
-            requires :holiday_acquisition, type: Date, desc: '振替休暇取得日'
+            requires :holiday_acquisition, type: String, desc: '振替休暇取得日'
             requires :etc, type: String, desc: 'その他'
           end
           requires :year, type: Integer, desc: '年'
