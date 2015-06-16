@@ -20,7 +20,7 @@ module API
           user_id = params[:user_id]
           authenticate!(user_id)
           date = Date.today
-          error!('Already Attended', 400) if
+          error!('本日は既に出勤しています。', 400) if
             Model::Timecard_operation.get_attendance(date, user_id).present?
 
           time = (Time.now).strftime('%H:%M')
@@ -52,9 +52,9 @@ module API
           user_id = params[:user_id]
           authenticate!(user_id)
           date = Date.today
-          error!('Already Left', 400) if
+          error!('本日は既に退勤しています。', 400) if
             Model::Timecard_operation.get_leaving(date, user_id).present?
-          error!('Not Attended Yet', 404) if
+          error!('本日はまだ出勤していません。', 400) if
             Model::Timecard_operation.get_attendance(date, user_id).blank?
 
           time = (Time.now).strftime('%H:%M')
