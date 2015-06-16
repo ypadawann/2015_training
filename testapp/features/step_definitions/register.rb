@@ -19,6 +19,7 @@ end
 end
 
 ならば(/^.*?\((.*?)\) 画面に遷移(?:し|する)$/) do |path|
+  sleep 1
   expect(page.current_path).to eq(path)
 end
 
