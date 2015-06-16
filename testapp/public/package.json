@@ -20,6 +20,7 @@
     "webpack": "^1.9.7"
   },
   "dependencies": {
-    "lodash": "^3.9.3"
+    "lodash": "^3.9.3",
+    "materialize-css": "^0.96.1"
   }
 }
