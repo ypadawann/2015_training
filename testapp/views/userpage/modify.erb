@@ -3,7 +3,7 @@
 <p>ID:<span id="user-id"><%= @user_id %></span></p>
 <p>名前:<input type="text" id="user-name" size="40"></p>
 <p>所属：
-  <select id="department">
+  <select class="browser-default" id="department">
     <option value="0" id="default_department"></option>
     <%==
        Model::Departments.list_ids.map { |d|

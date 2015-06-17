@@ -6,7 +6,7 @@
 </p>
 <p>名前:<input type="text" id="user-name" size="40"></p>
 <p>所属：
-  <select id="select-department">
+  <select class="browser-default" id="select-department">
     <option value="0" id="default-department"></option>
     <%==
        Model::Departments.list_ids.map { |d|

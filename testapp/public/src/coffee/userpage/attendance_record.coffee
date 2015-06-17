@@ -70,7 +70,7 @@ save = (userId, year, month, day) ->
       )
 
 makeRecord = (year, month) ->
-  userId = $('#user-id').val()
+  userId = document.getElementById('user-id').textContent
   day = new Date(year, month, 0).getDate()
   tableobj = document.getElementById("table")
   if tableobj.rows.length isnt 7
@@ -83,7 +83,7 @@ makeRecord = (year, month) ->
     url: "#{location.protocol}//#{location.host}/api/v1/users/#{userId}/attend-leave/#{year}/#{month}"
     dataType: 'json')
     .done (msg) ->
-      $('#department').val msg.department
+      $('#departments').val msg.department
       $('#name').val msg.name
       $('#user-id').val msg.user_id
       for i in [1..msg.data.length]
@@ -108,7 +108,7 @@ makeRecord = (year, month) ->
 $('#timecard-save').bind 'click', ->
   year = $('#year').val()
   month = $('#month').val()
-  userId = $('#user-id').val()
+  userId = document.getElementById('user-id').textContent
   day = new Date(year, month, 0).getDate()
   save(userId, year, month, day)
     .done (msg) ->
