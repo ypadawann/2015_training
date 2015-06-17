@@ -1,3 +1,5 @@
+require 'es5-shim'
+
 attend = ->
   user_id = document.getElementById('user_id').textContent
   $.ajax(
