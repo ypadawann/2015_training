@@ -63,4 +63,5 @@ switch location.pathname
         else
           $("#message").text 'エラーが発生しました'
 
-
+$(document).ready ->
+ $("#department").material_select()

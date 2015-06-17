@@ -58,3 +58,5 @@ $('#department-delete').click ->
         if xhr.status is 404
           alert '部署が見つかりません'
 
+$(document).ready ->
+ $("#select-department").material_select()
