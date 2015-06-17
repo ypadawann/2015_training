@@ -1,5 +1,16 @@
+<nav class="print--hidden">
+<div class="nav-wrapper">
+  <ul class="left hide-on-med-and-dow"/>
+    <li><a href=<%= app_path %>>ユーザページ</a></li>
+    <li><a href="#" id="to-read-data">出退勤状況</a></li>
+    <li><a href="#" id="to-modify">ユーザ情報変更</a></li>
+    <li><a href="#" id="to-add-paid-vacation">有給取得日登録</a></li>
+    <li><a href="#" id="logout">ログアウト</a></li>
+  </ul>
+</div>
+</nav>
 <%== yield %>
 
 <% content_for :javascript do %>
-<script type="text/javascript" src=<%= "#{js_path}/userpage.js"%>></script>
+  <script type="text/javascript" src=<%= "#{js_path}/userpage.js"%>></script>
 <% end %>

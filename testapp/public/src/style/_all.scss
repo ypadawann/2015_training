@@ -3,21 +3,35 @@ body{
   background: #ffffff;
 }
 
+@mixin attendance-record__input{
+  background-color: transparent;
+  border: none;
+  border-bottom: none;
+  border-radius: 0;
+  outline: none;
+  height: 1rem;
+  font-size: 5px;
+  margin: 0px;
+  padding: 0px;
+  box-shadow: none;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  transition: all 0.3s;
+}
+
 .attendance-record{
   top: 0px;
-  left:30px;
-  width: 1000px;
   position: relative;
 }
 
-.attendance-record__select__year{
-  width: 60px;
+.attendance-record__select{
   font-size:15px;
 }
 
-.attendance-record__select__month{
-  width: 40px;
-  font-size:15px;
+.attendance-record__btn{
+  width: 60px;
+  padding: 0 5px;
 }
 
 .attendance-record__title{
@@ -41,12 +55,14 @@ body{
   border-collapse: collapse;
   margin-top: 15px;
   box-sizing: border-box;
+  width: 819px;
 }
 
 .attendance-record__table2{
   @extend .attendance-record__table;
   position: absolute;
   left: 310px;
+  width: 291px;
 }
 
 .attendance-record__table__menu{
@@ -56,6 +72,7 @@ body{
   border-style: solid;
   border-width: 1px;
   border-color: #000000;
+  color: #000000;
   text-align: center;
   vertical-align: middle;
   height: 28px;
@@ -90,15 +107,14 @@ body{
   height: 56px;
 }
 
-.attendance-record__table__menu__insert{
+#table .attendance-record__table__menu__insert{
+  @include attendance-record__input;
   border: none;
-  margin: 0px;
-  padding: 0px;
-  background: none;
   text-align: center;
   vertical-align: middle;
   font-size: 8px;
-  width: 100%;
+  color:#000000;
+  border-bottom: none;
 }
 
 .attendance-record__table__column{
@@ -199,15 +215,13 @@ body{
   width: 200px;
 }
 
-.attendance-record__table__insert{
-  border: none;
-  padding: 0px;
-  margin: 0px;
+#table .attendance-record__table__insert{
+  @include attendance-record__input;
   background: none;
   text-align: center;
   vertical-align: middle;
   font-size: 6px;
-  width: 100%;
+  color:#000000;
 }
 
 .attendance-record__table__total{
