@@ -70,7 +70,7 @@ save = (userId, year, month, day) ->
       )
 
 makeRecord = (year, month) ->
-  userId = $('#user-id').val()
+  userId = document.getElementById('user-id').textContent
   day = new Date(year, month, 0).getDate()
   tableobj = document.getElementById("table")
   if tableobj.rows.length isnt 7
@@ -108,7 +108,7 @@ makeRecord = (year, month) ->
 $('#timecard-save').bind 'click', ->
   year = $('#year').val()
   month = $('#month').val()
-  userId = $('#user-id').val()
+  userId = document.getElementById('user-id').textContent
   day = new Date(year, month, 0).getDate()
   save(userId, year, month, day)
     .done (msg) ->
