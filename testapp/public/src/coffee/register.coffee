@@ -1,3 +1,4 @@
+require 'es5-shim'
 
 $ ->
   $('#register').bind 'click', ->

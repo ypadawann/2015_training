@@ -1,3 +1,5 @@
+require 'es5-shim'
+
 login = ->
   user_id = $('#user_id').val()
   password = $('#password').val()

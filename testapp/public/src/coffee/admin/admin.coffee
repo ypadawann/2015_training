@@ -1,3 +1,4 @@
+require 'es5-shim'
 require './admin_top'
 require './admin_user'
 require './admin_department'
