@@ -29,12 +29,15 @@ end
   page.find(:css, element_id).click
 end
 
+もし(/^(.*?) リンクをクリックした?$/) do |element_id|
+  page.find_link(element_id).click
+end
+
 ならば(/^ページタイトルは (.*?) であ(?:り|る)$/) do |title|
   expect(page.title).to eq(title)
 end
 
 ならば(/^.*?\((.*?)\) 画面に遷移(?:し|する)$/) do |path|
-  sleep 1
   expect(page.current_path).to eq(path)
 end
 
@@ -42,11 +45,19 @@ end
   expect(page.find(element_id).text).to eq(value)
 end
 
+ならば(/^.*?\((.*?)\) 欄に何も表示され(?:ず|ない)$/) do |element_id|
+  expect(page.find(element_id).text).to eq('')
+end
+
+ならば(/^.*?\((.*?)\) 欄に (.*?) が含まれる?$/) do |element_id, value|
+  page.find(element_id).has_text?(value)
+end
+
 ならば(/^.*?\((.*?)\) 欄に (.*?) が入力される?$/) do |element_id, value|
   page.has_field?(element_id, with: value)
 end
 
-もし(/^.*?\((.*?)\) 欄から (.*?) が選択される?$/) do |element_id, value|
+ならば(/^.*?\((.*?)\) 欄から (.*?) が選択される?$/) do |element_id, value|
   page.has_select?(element_id, selected: value)
 end
 
