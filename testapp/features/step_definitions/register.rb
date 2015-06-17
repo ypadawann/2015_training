@@ -29,6 +29,10 @@ end
   page.find(:css, element_id).click
 end
 
+もし(/^(.*?) リンクをクリックした?$/) do |element_id|
+  page.find_link(element_id).click
+end
+
 ならば(/^ページタイトルは (.*?) であ(?:り|る)$/) do |title|
   expect(page.title).to eq(title)
 end
@@ -39,6 +43,14 @@ end
 
 ならば(/^.*?\((.*?)\) 欄に (.*?) が表示される?$/) do |element_id, value|
   expect(page.find(element_id).text).to eq(value)
+end
+
+ならば(/^.*?\((.*?)\) 欄に何も表示され(?:ず|ない)$/) do |element_id|
+  expect(page.find(element_id).text).to eq('')
+end
+
+ならば(/^.*?\((.*?)\) 欄に (.*?) が含まれる?$/) do |element_id, value|
+  page.find(element_id).has_text?(value)
 end
 
 ならば(/^.*?\((.*?)\) 欄に (.*?) が入力される?$/) do |element_id, value|
