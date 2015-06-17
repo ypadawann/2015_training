@@ -28,9 +28,11 @@ $('#department-register').bind 'click', ->
       location.reload()
     .fail (xhr,  status, error) ->
       if xhr.status is 400
-        alert 'すでに登録されている部署です'
+        #alert 'すでに登録されている部署です'
+        Materialize.toast('すでに登録されている部署です', 5000, 'alert-message')
       else
-        alert '部署の登録に失敗しました'
+        Materialize.toast('部署の登録に失敗しました', 5000, 'alert-message')
+
 
 $('#department-rename').bind 'click', ->
   oldName = $("#select-department option:selected").text()
@@ -41,9 +43,12 @@ $('#department-rename').bind 'click', ->
       location.reload()
     .fail (xhr,  status, error) ->
       if xhr.status is 404
-        alert '部署が見つかりません'
+        #alert '部署が見つかりません'
+        Materialize.toast('部署が見つかりません', 5000, 'alert-message')
       else
-        alert '部署名の変更に失敗しました'
+        #alert '部署名の変更に失敗しました'
+        Materialize.toast('部署名の変更に失敗しました', 5000, 'alert-message')
+
 
 $('#department-delete').click ->
   if !window.confirm '本当に部署を削除しますか？'
@@ -54,9 +59,12 @@ $('#department-delete').click ->
         location.reload()
       .fail (xhr,  status, error) ->
         if xhr.status is 400
-          alert '所属している人がいます'
+          #alert '所属している人がいます'
+          Materialize.toast('所属している人がいます', 5000, 'alert-message')
         if xhr.status is 404
-          alert '部署が見つかりません'
+          #alert '部署が見つかりません'
+          Materialize.toast('部署が見つかりません', 5000, 'alert-message')
+
 
 $(document).ready ->
  $("#select-department").material_select()

@@ -38,9 +38,9 @@ $('#user-select').bind 'click', ->
         return $(this).text() is data.department).prop 'selected', true
     .fail (xhr,  textStatus, errorThrown) ->
       if xhr.status is 403
-        alert '認証に失敗しました'
+        Materialize.toast('認証に失敗しました', 5000, 'alert-message')
       else
-        alert 'エラーが発生しました'
+       Materialize.toast('エラーが発生しました', 5000, 'alert-message')
 
 $('#user-modify').bind 'click', ->
   if $('#user-new-password').val() isnt $('#confirm-user-new-password').val()
@@ -52,9 +52,9 @@ $('#user-modify').bind 'click', ->
         location.reload()
       .fail (xhr,  status, error) ->
         if xhr.status is 403
-          alert '認証に失敗しました'
+          Materialize.toast('認証に失敗しました', 5000, 'alert-message')
         else
-          alert 'エラーが発生しました'
+          Materialize.toast('エラーが発生しました', 5000, 'alert-message')
 
 $('#user-delete').click ->
   if !window.confirm '本当にアカウントを削除しますか？'
@@ -65,5 +65,4 @@ $('#user-delete').click ->
         alert 'アカウントを削除しました'
         location.reload()
       .fail (xhr,  status, error) ->
-        alert 'エラーが発生しました'
-
+        Materialize.toast('エラーが発生しました', 5000, 'alert-message')

@@ -13,5 +13,5 @@ $('#admin-login').bind 'click', ->
     .done (data) ->
       document.location = '/admin/top'
     .fail (data) ->
-      alert 'ログインに失敗しました'
+      Materialize.toast('ログインに失敗しました', 5000, 'alert-message')
 
