@@ -67,17 +67,17 @@
     もし ユーザ(/userpage) 画面にアクセスし
     かつ 出退勤状況(#to-read-data) ボタンをクリックした
 
-    ならば 勤務管理表(/userpage/attendance_record) 画面に遷移する (非同期)
+    ならば 勤務管理表(/userpage/attendance_record) 画面に遷移する
 
     もし ユーザ(/userpage) 画面にアクセスし
     かつ ユーザ情報変更(#to-modify) ボタンをクリックし
 
-    ならば ユーザ情報管理(/userpage/modify) 画面に遷移する (非同期)
+    ならば ユーザ情報管理(/userpage/modify) 画面に遷移する
 
     もし ユーザ(/userpage) 画面にアクセスし
     かつ 有休取得日登録(#to-add-paid-vacation) ボタンをクリックした
 
-    ならば 有休取得日登録(/userpage/add_paid_vacation) 画面に遷移する (非同期)
+    ならば 有休取得日登録(/userpage/add_paid_vacation) 画面に遷移する
 
   シナリオ: 出勤ブックマークレットを実行して新しいウインドウを開く
     前提: 部署 RDD が存在する
@@ -87,7 +87,7 @@
     もし ユーザ(/userpage) 画面にアクセスし
     かつ 出勤ブックマークレット リンクをクリックし 新しいウインドウを開いた
 
-    ならば 出勤ブックマークレット(/bookmarklet/attend) 画面に遷移する (非同期)
+    ならば 出勤ブックマークレット(/bookmarklet/attend) 画面に遷移する
 
   シナリオ: 退勤ブックマークレットを実行して新しいウインドウを開く
     前提: 部署 RDD が存在する
@@ -97,4 +97,4 @@
     もし ユーザ(/userpage) 画面にアクセスし
     かつ 退勤ブックマークレット リンクをクリックし 新しいウインドウを開いた
 
-    ならば 退勤ブックマークレット(/bookmarklet/leave) 画面に遷移する (非同期)
+    ならば 退勤ブックマークレット(/bookmarklet/leave) 画面に遷移する
