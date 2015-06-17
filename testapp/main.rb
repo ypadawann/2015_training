@@ -32,20 +32,6 @@ class Main < Sinatra::Base
     @user_id = session[:user_id]
   end
 
-  configure :test do
-    get '/test/add_department/:department_name' do
-      Model::Departments.add(params['department_name'])
-    end
-
-    get '/test/add_user/:user_id/:name/:department/:password/:enter' do
-      Model::Users.add(params['user_id'].to_i,
-                       params['name'],
-                       params['department'],
-                       params['password'],
-                       params['enter'])
-    end
-  end
-
   get '/' do
     redirect to('/userpage') if session[:user_login]
     erb :index
