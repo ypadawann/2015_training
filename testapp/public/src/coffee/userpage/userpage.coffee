@@ -1,3 +1,4 @@
+require 'es5-shim'
 require './index'
 require './attendance_record'
 require './userdata_modify'
