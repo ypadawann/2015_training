@@ -34,7 +34,6 @@ end
 end
 
 ならば(/^.*?\((.*?)\) 画面に遷移(?:し|する)$/) do |path|
-  sleep 1
   expect(page.current_path).to eq(path)
 end
 
@@ -46,7 +45,7 @@ end
   page.has_field?(element_id, with: value)
 end
 
-もし(/^.*?\((.*?)\) 欄から (.*?) が選択される?$/) do |element_id, value|
+ならば(/^.*?\((.*?)\) 欄から (.*?) が選択される?$/) do |element_id, value|
   page.has_select?(element_id, selected: value)
 end
 
