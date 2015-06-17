@@ -40,7 +40,6 @@ module API
       resource '/admin/logout' do
         desc 'ログアウト'
         put  do
-          p 'logout'
           env['rack.session'].destroy
         end
       end
@@ -100,7 +99,6 @@ module API
         
         desc 'ユーザ情報の取得' 
         get do
-          p 'get users'
           session_check()
           find_user!(params[:user_id])
           Model::Users.status(params[:user_id])

@@ -17,4 +17,6 @@ $('#admin-register').bind 'click', ->
         alert '登録に成功しました'
         location.reload()
       .fail (xhr) ->
-        alert ("エラーが発生しました")
+        #alert ("エラーが発生しました")
+        Materialize.toast('エラーが発生しました', 5000, 'alert-message')
+  

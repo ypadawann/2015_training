@@ -1,4 +1,4 @@
-
+require './test'
 require './main'
 require './admin'
 
@@ -6,6 +6,9 @@ require './api/base.rb'
 
 require 'rack/protection'
 
+map '/test' do
+    run Test
+end
 
 map '/admin' do
   use Rack::Session::Cookie,
