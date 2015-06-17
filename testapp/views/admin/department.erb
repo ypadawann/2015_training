@@ -8,7 +8,7 @@
 <hr>
 
 <p>部署の変更・削除
-  <select id="select-department"><%==
+  <select class="browser-default" id="select-department"><%==
     Model::Departments.list_ids.map { |d|
       "<option value=#{d}>#{Model::Departments.name_of(d)}</option>"
     }.join

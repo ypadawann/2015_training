@@ -2,7 +2,7 @@
 <p>ID:<input type="number" id="user_id" size="40"></p>
 <p>名前:<input type="text" id="name" size="40"></p>
 <p>所属：
-  <select id="department"><%==
+  <select class="browser-default" id="department"><%==
     Model::Departments.list_ids.map { |d|
       "<option value=#{d}>#{Model::Departments.name_of(d)}</option>"
     }.join
