@@ -44,7 +44,8 @@ $('#user-select').bind 'click', ->
 
 $('#user-modify').bind 'click', ->
   if $('#user-new-password').val() isnt $('#confirm-user-new-password').val()
-    alert '確認パスワードが違います'
+    #alert '確認パスワードが違います'
+    Materialize.toast('パスワードが違います', 5000, 'alert-message')
   else
     userModify()
       .done (data)   ->
