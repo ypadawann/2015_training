@@ -39,11 +39,11 @@
   <table border="1" cellspacing="0" cellpadding="0" id="table" class="attendance-record__table">
     <tr>
       <td class="attendance-record__table__menu--title" colspan="2">年月</td>
-      <td class="attendance-record__table__menu" colspan="2"><input type="text" id="YearsAndMonths" readonly="readonly" class="attendance-record__table__menu__insert"></td>
+      <td class="attendance-record__table__menu" colspan="2"><div id="YearsAndMonths" class="attendance-record__table__menu__insert"/></td>
     </tr>
     <tr>
       <td class="attendance-record__table__menu--title" colspan="2">所属</td>
-      <td class="attendance-record__table__menu" colspan="2"><input type="text" id="departments" value="" readonly="readonly" class="attendance-record__table__menu__insert"></td>
+      <td class="attendance-record__table__menu" colspan="2"><div id="departments" class="attendance-record__table__menu__insert"><%= @department %></div></td>
     </tr>
     <tr>
       <td class="attendance-record__table__menu--title" colspan="2">No.</td>
@@ -51,7 +51,7 @@
     </tr>
     <tr>
       <td class="attendance-record__table__menu--title" colspan="2">氏名</td>
-      <td class="attendance-record__table__menu" colspan="2"><input type="text" id="name" value="" readonly="readonly" class="attendance-record__table__menu__insert"></td>
+      <td class="attendance-record__table__menu" colspan="2"><div id="name" class="attendance-record__table__menu__insert"><%= @name %></div></td>
     </tr>
     <tr bgcolor="#BFBFBF">
       <td class="attendance-record__table__column--dayAndweek">日付</td>

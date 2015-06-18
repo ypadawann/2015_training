@@ -37,5 +37,17 @@ class Test < Sinatra::Base
     Model::Users.remove(23)
     Model::Users.add(23, '戦艦　榛名', '大日本帝国海軍', 'kongoclass', '1915-04-19')
   end
- 
+
+  get '/add_department/:department_name' do
+    Model::Departments.add(params['department_name'])
+  end
+
+  get '/add_user/:user_id/:name/:department/:password/:enter' do
+    Model::Users.add(params['user_id'].to_i,
+                     params['name'],
+                     params['department'],
+                     params['password'],
+                     params['enter'])
+  end
+
 end

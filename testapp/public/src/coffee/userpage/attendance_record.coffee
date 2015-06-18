@@ -22,13 +22,13 @@ makeRow = (tableobj, rowNumber) ->
   cell9.setAttribute 'class', 'attendance-record__table__cell'
   cell10.setAttribute 'class', 'attendance-record__table__cell'
   cell11.setAttribute 'class', 'attendance-record__table__cell--etc'
-  data1 = '<input type="text" id="day' + rowNumber + '" readonly="readonly" class="attendance-record__table__insert" />'
-  data2 = '<input type="text" id="weekday' + rowNumber + '" readonly="readonly" class="attendance-record__table__insert" />'
+  data1 = '<div id="day' + rowNumber + '" readonly="readonly" class="attendance-record__table__insert" />'
+  data2 = '<div id="weekday' + rowNumber + '" readonly="readonly" class="attendance-record__table__insert" />'
   data3 = '<input type="text" id="attendance' + rowNumber + '" class="attendance-record__table__insert" />'
   data4 = '<input type="text" id="leaving' + rowNumber + '" class="attendance-record__table__insert" />'
-  data5 = '<input type="text" id="mark' + rowNumber + '" class="attendance-record__table__insert" />'
-  data6 = '<input type="text" id="midnight-work' + rowNumber + '" readonly="readonly"  class="attendance-record__table__insert" />'
-  data7 = '<input type="text" id="holiday-shift' + rowNumber + '" readonly="readonly" class="attendance-record__table__insert" />'
+  data5 = '<div id="mark' + rowNumber + '" class="attendance-record__table__insert" />'
+  data6 = '<div id="midnight-work' + rowNumber + '" class="attendance-record__table__insert" />'
+  data7 = '<div id="holiday-shift' + rowNumber + '" class="attendance-record__table__insert" />'
   data8 = '<input type="text" id="prearranged-holiday' + rowNumber + '" class="attendance-record__table__insert" />'
   data9 = '<input type="text" id="paid-vacation' + rowNumber + '" class="attendance-record__table__insert" />'
   data10 = '<input type="text" id="holiday-acquisition' + rowNumber + '" class="attendance-record__table__insert" />'
@@ -77,23 +77,20 @@ makeRecord = (year, month) ->
     deleterow = tableobj.rows.length
     for i in [8..deleterow]
       tableobj.deleteRow 5
-  $('#YearsAndMonths').val "#{year}年#{month}月"
+  $('#YearsAndMonths').text "#{year}年#{month}月"
   request = $.ajax(
     type: 'get'
     url: "#{location.protocol}//#{location.host}/api/v1/users/#{userId}/attend-leave/#{year}/#{month}"
     dataType: 'json')
     .done (msg) ->
-      $('#departments').val msg.department
-      $('#name').val msg.name
-      $('#user-id').val msg.user_id
       for i in [1..msg.data.length]
         row = makeRow(tableobj, i)
-        $("#day#{i}").val msg.data[i - 1].day
-        $("#weekday#{i}").val msg.data[i - 1].weekday
+        $("#day#{i}").text msg.data[i - 1].day
+        $("#weekday#{i}").text msg.data[i - 1].weekday
         $("#attendance#{i}").val msg.data[i - 1].attendance
         $("#leaving#{i}").val msg.data[i - 1].leaving
-        $("#midnight-work#{i}").val msg.data[i - 1].midnight_work
-        $("#holiday-shift#{i}").val msg.data[i - 1].holiday_shift
+        $("#midnight-work#{i}").text msg.data[i - 1].midnight_work
+        $("#holiday-shift#{i}").text msg.data[i - 1].holiday_shift
         $("#prearranged-holiday#{i}").val msg.data[i - 1].prearranged_holiday
         $("#paid-vacation#{i}").val msg.data[i - 1].paid_vacation
         $("#holiday-acquisition#{i}").val msg.data[i - 1].holiday_acquisition

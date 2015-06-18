@@ -29,21 +29,10 @@ class Main < Sinatra::Base
 
   before %r{\/(userpage|bookmarklet)[\w\/]*} do
     redirect to('/') unless session[:user_login]
-    @user_id = session[:user_id]
-  end
-
-  configure :test do
-    get '/test/add_department/:department_name' do
-      Model::Departments.add(params['department_name'])
-    end
-
-    get '/test/add_user/:user_id/:name/:department/:password/:enter' do
-      Model::Users.add(params['user_id'].to_i,
-                       params['name'],
-                       params['department'],
-                       params['password'],
-                       params['enter'])
-    end
+    login_user = Model::Users.status(session[:user_id])
+    @user_id = login_user[:user_id]
+    @name = login_user[:name]
+    @department = login_user[:department]
   end
 
   get '/' do
@@ -52,14 +41,12 @@ class Main < Sinatra::Base
   end
 
   get '/userpage' do
-    @name = Model::Users.get_name(@user_id.to_i)
     erb %s(userpage/layout) do
       erb %s(userpage/index)
     end
   end
 
   get %r{\/userpage\/[\w\/]*} do
-    @name = Model::Users.get_name(@user_id.to_i)
     erb %s(userpage/layout) do
       show_erb
     end
