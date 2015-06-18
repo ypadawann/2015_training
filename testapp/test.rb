@@ -28,6 +28,7 @@ class Test < Sinatra::Base
   helpers Sinatra::ContentFor
 
   get '/init-data' do
+    Model::Admins.remove('admin')
     Model::Admins.add('admin', 'password')
 
     Model::Departments.add('大日本帝国海軍')

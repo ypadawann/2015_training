@@ -27,7 +27,8 @@ adminDelete = ->
 
 $('#admin-modify').bind 'click', ->
   if $('#admin-new-password').val() isnt $('#confirm-admin-new-password').val()
-    alert '確認パスワードが違います'
+    #alert '確認パスワードが違います'
+    Materialize.toast('確認パスワードが違います', 5000, 'alert-message')
   else
     adminModify()
       .done (data)   ->

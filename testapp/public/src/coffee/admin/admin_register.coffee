@@ -10,7 +10,9 @@ adminRegister = ->
 
 $('#admin-register').bind 'click', ->
   if $('#admin-password').val() isnt $('#confirm-admin-password').val()
-    alert 'パスワードが違います'
+    #alert 'パスワードが違います'
+    Materialize.toast('確認パスワードが違います', 5000, 'alert-message')
+  
   else
     adminRegister()
       .done ->
