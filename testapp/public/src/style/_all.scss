@@ -1,6 +1,15 @@
-body{
-  font-family: "MS ゴシック","Hiragino Kaku Gothic ProN",sans-serif;
-  background: #ffffff;
+#user-page{
+  margin: 0px;
+}
+
+#user-page .user-page__button{
+  margin: 10px 10px;
+}
+
+.user-page__vertical{
+  float:left;
+  vertical-align: middle;
+  margin: 25px 0px;
 }
 
 @mixin attendance-record__input{
