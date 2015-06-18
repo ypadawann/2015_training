@@ -23,4 +23,8 @@ module ControllerHelpers
   def css_path
     "#{app_path}/dist/style"
   end
+
+  def js_library_path
+    "#{app_path}/node_modules"
+  end
 end
