@@ -15,9 +15,10 @@ end
 end
 
 もし(/^以下を入力した?$/) do |table|
-  table.hashes.each do |element|
-    m = /.*?\((.*?)\)$/.match(element['id'])
-    page.find(:css, m[1]).set(element['value'])
+  table.raw.each do |element|
+    element_id, value = element
+    m = /.*?\((.*?)\)$/.match(element_id)
+    page.find(:css, m[1]).set(value)
   end
 end
 
@@ -54,8 +55,26 @@ end
   page.find(element_id).has_text?(value)
 end
 
+ならば(/^以下が表示される?$/) do |table|
+  wait_for_ajax
+  table.raw.each do |element|
+    element_id, value = element
+    m = /.*?\((.*?)\)$/.match(element_id)
+    expect(page.find(m[1]).text).to eq(value)
+  end
+end
+
 ならば(/^.*?\((.*?)\) 欄に (.*?) が入力される?$/) do |element_id, value|
   page.has_field?(element_id, with: value)
+end
+
+ならば(/^以下が入力される?$/) do |table|
+  wait_for_ajax
+  table.raw.each do |element|
+    element_id, value = element
+    m = /.*?\((.*?)\)$/.match(element_id)
+    page.has_field?(m[1], with: value)
+  end
 end
 
 ならば(/^.*?\((.*?)\) 欄から (.*?) が選択される?$/) do |element_id, value|
