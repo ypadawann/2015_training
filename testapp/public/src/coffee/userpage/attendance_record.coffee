@@ -120,7 +120,7 @@ $('#date-select').bind 'click', ->
   makeRecord(year, month)
 
 $('#exportCSV').bind 'click', ->
-  userId = $('#user-id').val()
+  userId = $('#user-id').text()
   year = $('#year').val()
   month = $('#month').val()
   document.location =
