@@ -7,12 +7,12 @@ module API
     class Users < Grape::API
       helpers do
         def verify_password!(user_id, password)
-          error!('Access Denied', 403) unless
+          error!('認証に失敗しました。', 403) unless
             Model::Users.verify(user_id, password)
         end
 
         def find_user!(user_id)
-          error!('Not Found', 404) unless
+          error!('ユーザが見つかりません。', 404) unless
             Model::Users.exists?(user_id)
         end
       end
@@ -32,16 +32,22 @@ module API
           requires :enter_date, type: Date, desc: '入社日'
         end
         post do
-          p params[:enter_date]
-          if Model::Users.add(params[:user_id], params[:name],
-                              params[:department], params[:password], 
-                              params[:enter_date] )
-            { user_id:    params[:user_id],
-              name:       params[:name],
-              department: params[:department] }
-          else
-            error!('Failed to Register', 400)
-          end
+          error_msgs =
+            Model::Users.invalid?(
+              params[:user_id], params[:name],
+              params[:department], params[:password],
+              params[:enter_date]
+            )
+          error!(error_msgs.join("\n"), 400) if error_msgs.present?
+
+          Model::Users.add(
+            params[:user_id], params[:name],
+            params[:department], params[:password],
+            params[:enter_date]
+          )
+          { user_id:    params[:user_id],
+            name:       params[:name],
+            department: params[:department] }
         end
       end
 
