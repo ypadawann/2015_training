@@ -11,7 +11,7 @@ end
   visit t_path
 end
 
-もし(/^".*?\((.*?)\)" に以下を入力$/) do |t_css, t_doc|
+もし(/^".*?\((.*?)\)" に "(.*?)" を入力$/) do |t_css, t_doc|
   page.find(t_css).set(t_doc)
 end
 
@@ -42,8 +42,7 @@ end
 
 もし(/^".*?\((.*?)\)" で "(.*?)" が選択$/) do |obj, str|
   wait_for_ajax
-  selected_id = page.find(:xpath, "//html/body/p/select").value
-  expect(page.find(:xpath, "//html/body/p/select/option[@value = #{selected_id}]").text).to eq(str)
+  page.find(obj).has_select?(:selected => str)
 end
 
 もし(/^"(.*?)" 秒待機$/) do | second |
