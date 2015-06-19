@@ -29,7 +29,7 @@ module API
           requires :name, type: String, desc: 'ユーザ名'
           requires :department, type: String, desc: '部署名'
           requires :password, type: String, desc: 'パスワード'
-          requires :enter_date, type: Date, desc: '入社日'
+          requires :enter_date, type: String, desc: '入社日'
         end
         post do
           error_msgs =
