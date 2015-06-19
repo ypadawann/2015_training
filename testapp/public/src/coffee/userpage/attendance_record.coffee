@@ -111,8 +111,7 @@ $('#timecard-save').bind 'click', ->
     .done (msg) ->
       makeRecord(year, month)
     .fail (xhr, status, error) ->
-      json_msg = JSON.parse(xhr.responseText)
-      alert json_msg.error
+      Materialize.toast(JSON.parse(xhr.responseText).error, 5000, 'alert-message')
 
 $('#date-select').bind 'click', ->
   year = $('#year').val()
@@ -120,7 +119,7 @@ $('#date-select').bind 'click', ->
   makeRecord(year, month)
 
 $('#exportCSV').bind 'click', ->
-  userId = $('#user-id').val()
+  userId = $('#user-id').text()
   year = $('#year').val()
   month = $('#month').val()
   document.location =

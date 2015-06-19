@@ -7,6 +7,7 @@ end
 end
 
 もし(/^.*?\((.*?)\) 画面にアクセスした?$/) do |path|
+  @visited_path = path
   visit path
 end
 
@@ -15,9 +16,10 @@ end
 end
 
 もし(/^以下を入力した?$/) do |table|
-  table.hashes.each do |element|
-    m = /.*?\((.*?)\)$/.match(element['id'])
-    page.find(:css, m[1]).set(element['value'])
+  table.raw.each do |element|
+    element_id, value = element
+    m = /.*?\((.*?)\)$/.match(element_id)
+    page.find(:css, m[1]).set(value)
   end
 end
 
@@ -39,7 +41,12 @@ end
 
 ならば(/^.*?\((.*?)\) 画面に遷移(?:し|する)$/) do |path|
   sleep 0.5
+  @visited_path = page.current_path
   expect(page.current_path).to eq(path)
+end
+
+ならば(/^画面遷移(?:せず|しない)$/) do
+  expect(page.current_path).to eq(@visited_path)
 end
 
 ならば(/^.*?\((.*?)\) 欄に (.*?) が表示される?$/) do |element_id, value|
@@ -50,12 +57,30 @@ end
   expect(page.find(element_id).text).to eq('')
 end
 
-ならば(/^.*?\((.*?)\) 欄に (.*?) が含まれる?$/) do |element_id, value|
+ならば(/^.*?\((.*?)\) 欄に (.*?) を含む表示がされる?$/) do |element_id, value|
   page.find(element_id).has_text?(value)
+end
+
+ならば(/^以下が表示される?$/) do |table|
+  wait_for_ajax
+  table.raw.each do |element|
+    element_id, value = element
+    m = /.*?\((.*?)\)$/.match(element_id)
+    expect(page.find(m[1]).text).to eq(value)
+  end
 end
 
 ならば(/^.*?\((.*?)\) 欄に (.*?) が入力される?$/) do |element_id, value|
   page.has_field?(element_id, with: value)
+end
+
+ならば(/^以下が入力される?$/) do |table|
+  wait_for_ajax
+  table.raw.each do |element|
+    element_id, value = element
+    m = /.*?\((.*?)\)$/.match(element_id)
+    page.has_field?(m[1], with: value)
+  end
 end
 
 ならば(/^.*?\((.*?)\) 欄から (.*?) が選択される?$/) do |element_id, value|

@@ -8,15 +8,14 @@ $ ->
       .done ->
         document.location = '/'
       .fail (xhr) ->
-        alert ("#{xhr.status} #{xhr.statusText}")
+        Materialize.toast(JSON.parse(xhr.responseText).error, 5000, 'alert-message')
     .fail (xhr) ->
-      alert ("#{xhr.status} #{xhr.statusText}")
+      Materialize.toast(JSON.parse(xhr.responseText).error, 5000, 'alert-message')
 
   register = ->
     year = $("#enter_year").val()
     month = $("#enter_month").val()
     day = $("#enter_day").val()
-    date = new Date(year, month - 1, day)
     $.ajax(
       type: 'post'
       url: "#{location.protocol}//#{location.host}/api/v1/users"
@@ -25,7 +24,7 @@ $ ->
         'name'      : $('#name').val()
         'department': $('#department option:selected').text()
         'password'  : $('#password').val()
-        'enter_date' : date
+        'enter_date' : [year, month, day].join('-')
     )
 
   login = ->

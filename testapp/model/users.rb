@@ -26,6 +26,21 @@ module Model
         user && Model::Helper.start_verify(user.password, password)
       end
 
+      def invalid?(id, name, department, password, enter)
+        error_msgs = []
+        user =
+          Model::User.new(
+            id: id,
+            name: name,
+            department_id: Model::Departments.id_of(department),
+            password: Model::Helper.start_hash(password),
+            enter: enter
+          )
+        error_msgs << 'パスワードを入力して下さい。' if password.blank?
+        error_msgs << user.errors.messages.values if user.invalid?
+        error_msgs
+      end
+
       def add(id, name, department, password, enter)
         user =
           Model::User.new(
@@ -93,7 +108,6 @@ module Model
       def get_enter(user_id)
         Model::User.find_by_id(user_id).try(:enter)
       end
-      
     end
   end
 end
