@@ -27,6 +27,21 @@ class Test < Sinatra::Base
   helpers ControllerHelpers
   helpers Sinatra::ContentFor
 
+  get '/admin-init/:id/:pass' do
+    Model::Admins.remove(params[:id])
+    Model::Admins.add(params[:id], params[:pass])
+  end
+
+  get '/user-init/:id/:name/:department/:pass/:enter' do
+    Model::Departments.add(params[:department])
+    Model::Users.remove(params[:id])
+    Model::Users.add(params[:id], params[:name], params[:department], params[:pass], params[:enter])
+  end
+
+  get '/department-init/:department' do
+    Model::Departments.add(params[:department])
+  end
+
   get '/init-data' do
     Model::Admins.remove('root')
     Model::Admins.remove('admin')
@@ -49,6 +64,7 @@ class Test < Sinatra::Base
                      params['department'],
                      params['password'],
                      params['enter'])
+    p 'ok'
   end
 
 end

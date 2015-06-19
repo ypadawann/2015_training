@@ -3,45 +3,38 @@
 機能: 管理者機能
   サンプル用のテストアプリケーションの動作確認
 
-  シナリオ: 初期化（管理者登録、部署登録、ユーザ登録）
-    もし "初期化ページ(/test/init-data)" にアクセス
-
   シナリオ: ログイン画面を表示
     もし "ログイン画面(/admin)" にアクセス
 
     ならば "ログインボタン(#admin-login)" が存在
 
   シナリオ: ログイン処理
+    前提 管理者にID "admin"、パスワード "password" が存在
+
     もし "ログインページ(/admin/login)" にアクセス
-
-    かつ "管理者ID(#admin-id)" に以下を入力
-    """
-    admin
-    """
-    かつ "管理者パスワード(#admin-password)" に以下を入力
-    """
-    password
-    """
+    かつ "管理者ID(#admin-id)" に "admin" を入力
+    かつ "管理者パスワード(#admin-password)" に "password" を入力
     かつ "ログインボタン(#admin-login)" をクリック
-
     ならば "ログアウトボタン(#admin-logout)" が存在
 
   シナリオ: ログイン処理（失敗）
+    前提 管理者にID "admin"、パスワード "password" が存在
+
     もし "ログインページ(/admin/login)" にアクセス
-    かつ "管理者ID(#admin-id)" に以下を入力
-    """
-    admin
-    """
-    かつ "管理者パスワード(#admin-password)" に以下を入力
-    """
-    passwordpssword
-    """
+    かつ "管理者ID(#admin-id)" に "admin" を入力
+    かつ "管理者パスワード(#admin-password)" に "passwordpssword" を入力
     かつ "ログインボタン(#admin-login)" をクリック
     ならば "アラート(.alert-message)" に "ログインに失敗しました" と表示
 
 
   シナリオ: ログイン後にページ遷移
-    もし "ID(admin)" と "パスワード(password)" で管理者ログイン
+    前提 管理者にID "admin"、パスワード "password" が存在
+
+    もし "ログインページ(/admin/login)" にアクセス
+    ならば "管理者ID(#admin-id)" に "admin" を入力
+    かつ "管理者パスワード(#admin-password)" に "password" を入力
+   
+    もし "ログインボタン(#admin-login)" をクリック
     ならば "ログアウトボタン(#admin-logout)" が存在
 
     もし "ユーザ情報管理(#admin-user)" をクリック
@@ -52,78 +45,69 @@
     ならば "部署登録ボタン(#department-register)" が存在
 
   シナリオ: ユーザ情報変更
-    もし "ID(admin)" と "パスワード(password)" で管理者ログイン
-    かつ "ユーザ情報管理(#admin-user)" をクリック
-    かつ "ユーザID(#user-id)" に以下を入力
-    """
-    23
-    """
-    かつ "選択ボタン(#user-select)" をクリック
-    かつ "1" 秒待機
-    ならば "ユーザ名(#user-name)" に "戦艦　榛名" と表示
-    かつ "部署(#select-department)" で "大日本帝国海軍" が選択
+    前提 管理者にID "admin"、パスワード "password" が存在
+    前提 部署 "Kure" が存在
+    前提 ユーザにID "23"、名前 "Haruna"、部署 "Navy"、パスワード "userpassword"、入社日 "1915-04-19" が存在
 
-    もし "ユーザ名(#user-name)" に以下を入力
-    """
-    Battleship Haruna
-    """
-    かつ "部署(#select-department)" で "呉鎮守府" を選択
+    もし "ログインページ(/admin/login)" にアクセス
+    ならば "管理者ID(#admin-id)" に "admin" を入力
+    かつ "管理者パスワード(#admin-password)" に "password" を入力
+
+    もし "ログインボタン(#admin-login)" をクリック
+    ならば "ログアウトボタン(#admin-logout)" が存在
+
+    もし "ユーザ情報管理(#admin-user)" をクリック
+    かつ "ユーザID(#user-id)" に "23" を入力
+    かつ "選択ボタン(#user-select)" をクリック
+    ならば "ユーザ名(#user-name)" に "Haruna" と表示
+    かつ "部署(#select-department)" で "Navy" が選択
+
+    もし "ユーザ名(#user-name)" に "榛名" を入力
+    かつ "部署(#select-department)" で "Kure" を選択
     かつ "変更ボタン(#user-modify)" をクリック
     ならば "アラート(.alert-message)" に "ユーザ情報を変更しました" と表示
     
     もし "1" 秒待機
-    かつ "ユーザID(#user-id)" に以下を入力
-    """
-    23
-    """
+    かつ "ユーザID(#user-id)" に "23" を入力
     かつ "選択ボタン(#user-select)" をクリック
-    ならば "ユーザ名(#user-name)" に "Battleship Haruna" と表示
-    かつ "部署(#select-department)" で "呉鎮守府" が選択
+    ならば "ユーザ名(#user-name)" に "榛名" と表示
+    かつ "部署(#select-department)" で "Kure" が選択
 
-    もし "新しいパスワード(#user-new-password)" に以下を入力
-    """
-    newpassword
-    """
-    かつ "確認パスワード(#confirm-user-new-password)" に以下を入力
-    """
-    wrongpassword
-    """
+    もし "新しいパスワード(#user-new-password)" に "newpassword" を入力
+    かつ "確認パスワード(#confirm-user-new-password)" に "wrongpassword" を入力
     かつ "変更ボタン(#user-modify)" をクリック
     ならば "アラート(.alert-message)" に "パスワードが違います" と表示
 
-    もし "確認パスワード(#confirm-user-new-password)" に以下を入力
-    """
-    newpassword
-    """
+    もし "確認パスワード(#confirm-user-new-password)" に "newpassword" を入力
     かつ "変更ボタン(#user-modify)" をクリック
     ならば "1" 秒待機
     かつ "アラート(.alert-message)" に "ユーザ情報を変更しました" と表示
     かつ "新しいパスワード(#user-new-password)" に "" と表示
     かつ "確認パスワード(#confirm-user-new-password)" に "" と表示
 
-  シナリオ: ユーザのパスワードが変更されているか確認
     もし "ユーザログイン画面(/)" にアクセス
-    かつ "ユーザID(#user_id)" に以下を入力
-    """
-    23
-    """
-    かつ "パスワード(#password)" に以下を入力
-    """
-    newpassword
-    """
+    かつ "ユーザID(#user_id)" に "23" を入力
+    かつ "パスワード(#password)" に "newpassword" を入力
     かつ "ログインボタン(#login)" をクリック
     ならば "ログアウトボタン(#logout)" が存在
 
   シナリオ: ユーザを削除
-    もし "ID(admin)" と "パスワード(password)" で管理者ログイン
-    かつ "ユーザ情報管理(#admin-user)" をクリック
-    かつ "ユーザID(#user-id)" に以下を入力
-    """
-    23
-    """
+    前提 管理者にID "admin"、パスワード "password" が存在
+    前提 ユーザにID "23"、名前 "Haruna"、部署 "Navy"、パスワード "userpassword"、入社日 "1915-04-19" が存在
+
+    もし "初期化ページ(/test/init-data)" にアクセス
+
+    もし "ログインページ(/admin/login)" にアクセス
+    ならば "管理者ID(#admin-id)" に "admin" を入力
+    かつ "管理者パスワード(#admin-password)" に "password" を入力
+    かつ "ログインボタン(#admin-login)" をクリック
+
+    もし "ユーザ情報管理(#admin-user)" をクリック
+    ならば "ユーザID(#user-id)" に "23" を入力
     かつ "選択ボタン(#user-select)" をクリック
-    ならば "1" 秒待機
-    かつ "削除ボタン(#user-delete)" をクリック
+
+    もし "1" 秒待機
+    ならば "削除ボタン(#user-delete)" をクリック
 
     もし "1" 秒待機
     もし "モーダル(#modal)" が存在
@@ -142,28 +126,26 @@
     かつ "確認パスワード(#confirm-user-new-password)" に "" と表示
 
   シナリオ: 部署管理
-    もし "ID(admin)" と "パスワード(password)" で管理者ログイン
-    かつ "部署管理(#admin-department)" をクリック
-    かつ "登録する部署名(#register-department-name)" に以下を入力
-    """
-    横須賀鎮守府
-    """
-    ならば "選択ボタン(#department-register)" をクリック
+    前提 管理者にID "admin"、パスワード "password" が存在
+
+    もし "ログインページ(/admin/login)" にアクセス
+    ならば "管理者ID(#admin-id)" に "admin" を入力
+    かつ "管理者パスワード(#admin-password)" に "password" を入力
+    かつ "ログインボタン(#admin-login)" をクリック    
+
+
+    もし "部署管理(#admin-department)" をクリック
+    ならば "登録する部署名(#register-department-name)" に "横須賀鎮守府" を入力
+    かつ "選択ボタン(#department-register)" をクリック
 
     もし "1" 秒待機
-    かつ "登録する部署名(#register-department-name)" に以下を入力
-    """
-    横須賀鎮守府
-    """
+    かつ "登録する部署名(#register-department-name)" に "横須賀鎮守府" を入力
     かつ "選択ボタン(#department-register)" をクリック
     ならば "アラート(.alert-message)" に "すでに登録されている部署です" と表示
     
     もし "1" 秒待機
     かつ "部署(#select-department)" で "横須賀鎮守府" を選択
-    かつ "新しい部署名(#new-department-name)" に以下を入力
-    """
-    ブラック鎮守府
-    """
+    かつ "新しい部署名(#new-department-name)" に "ブラック鎮守府" を入力
     ならば "部署名変更(#department-rename)" をクリック
 
     もし "1" 秒待機
@@ -172,108 +154,94 @@
     
 
   シナリオ: 管理者情報管理（パスワード変更）
-    もし "ID(admin)" と "パスワード(password)" で管理者ログイン
+    前提 管理者にID "admin"、パスワード "password" が存在
+
+    もし "ログインページ(/admin/login)" にアクセス
+    ならば "管理者ID(#admin-id)" に "admin" を入力
+    かつ "管理者パスワード(#admin-password)" に "password" を入力
+    かつ "ログインボタン(#admin-login)" をクリック
+
+
+    もし "ログインページ(/admin/login)" にアクセス
+    かつ "管理者ID(#admin-id)" に "admin" を入力
+    かつ "管理者パスワード(#admin-password)" に "password" を入力
+    かつ "ログインボタン(#admin-login)" をクリック
     かつ "管理者情報管理(#admin-admin)" をクリック
     ならば "管理者ID(#admin-id)" に "admin" と表示
 
-    もし "新しいパスワード(#admin-new-password)" に以下を入力
-    """
-    adminnewpassword
-    """
-    かつ "確認パスワード(#confirm-admin-new-password)" に以下を入力
-    """
-    wrongadminnewpassword
-    """
+    もし "新しいパスワード(#admin-new-password)" に "adminnewpassword" を入力
+    かつ "確認パスワード(#confirm-admin-new-password)" に "wrongadminnewpassword" を入力
     かつ "変更ボタン(#admin-modify)" をクリック
     ならば "アラート(.alert-message)" に "確認パスワードが違います" と表示
     
-    もし "確認パスワード(#confirm-admin-new-password)" に以下を入力
-    """
-    adminnewpassword
-    """
+    もし "確認パスワード(#confirm-admin-new-password)" に "adminnewpassword" を入力
     かつ "変更ボタン(#admin-modify)" をクリック
     ならば "アラート(.alert-message)" に "認証に失敗しました" と表示
 
-    もし "パスワード(#admin-password)" に以下を入力
-    """
-    wrongpassword
-    """
+    もし "パスワード(#admin-password)" に "wrongpassword" を入力
     かつ "変更ボタン(#admin-modify)" をクリック
     ならば "アラート(.alert-message)" に "認証に失敗しました" と表示
 
-    もし "パスワード(#admin-password)" に以下を入力
-    """
-    password
-    """
+    もし "パスワード(#admin-password)" に "password" を入力
     かつ "変更ボタン(#admin-modify)" をクリック
     ならば "1" 秒待機
     かつ "新しいパスワード(#admin-new-password)" に "" と表示
 
-  シナリオ: パスワード変更の確認
-    もし "ID(admin)" と "パスワード(adminnewpassword)" で管理者ログイン
+    もし "ログインページ(/admin/login)" にアクセス
+    かつ "管理者ID(#admin-id)" に "admin" を入力
+    かつ "管理者パスワード(#admin-password)" に "adminnewpassword" を入力
+    かつ "ログインボタン(#admin-login)" をクリック
     ならば "ログアウトボタン(#admin-logout)" が存在
 
-
   シナリオ: 管理者登録
-    もし "ID(admin)" と "パスワード(adminnewpassword)" で管理者ログイン
+    前提 管理者にID "admin"、パスワード "password" が存在
+
+    もし "ログインページ(/admin/login)" にアクセス
+    ならば "管理者ID(#admin-id)" に "admin" を入力
+    かつ "管理者パスワード(#admin-password)" に "password" を入力
+    かつ "ログインボタン(#admin-login)" をクリック
+
     かつ "管理者情報管理(#to-admin-register)" をクリック
     ならば "管理者登録ボタン(#admin-register)" が存在
 
-    もし "管理者ID(#admin-id)" に以下を入力
-    """
-    root
-    """
-    かつ "管理者パスワード(#admin-password)" に以下を入力
-    """
-    rootpassword
-    """
-    かつ "確認パスワード(#confirm-admin-password)" に以下を入力
-    """
-    wrongrootpassword
-    """
+    もし "管理者ID(#admin-id)" に "root" を入力
+    かつ "管理者パスワード(#admin-password)" に "rootpassword" を入力
+    かつ "確認パスワード(#confirm-admin-password)" に "wrongrootpassword" を入力
     かつ "管理者登録ボタン(#admin-register)" をクリック
     ならば "アラート(.alert-message)" に "確認パスワードが違います" と表示
 
-    もし "確認パスワード(#confirm-admin-password)" に以下を入力
-    """
-    rootpassword
-    """
+    もし "確認パスワード(#confirm-admin-password)" に "rootpassword" を入力
     かつ "管理者登録ボタン(#admin-register)" をクリック
     ならば "アラート(.alert-message)" に "登録に成功しました" と表示
     かつ "管理者ID(#admin-id)" に "" と表示
     かつ "パスワード(#admin-password)" に "" と表示
     かつ "確認パスワード(#confirm-admin-password)" に "" と表示
 
-    もし "管理者ID(#admin-id)" に以下を入力
-    """
-    admin
-    """
-    かつ "管理者パスワード(#admin-password)" に以下を入力
-    """
-    secondpassword
-    """
-    かつ "確認パスワード(#confirm-admin-password)" に以下を入力
-    """
-    secondpassword
-    """
+    もし "管理者ID(#admin-id)" に "admin" を入力
+    かつ "管理者パスワード(#admin-password)" に "secondpassword" を入力
+    かつ "確認パスワード(#confirm-admin-password)" に "secondpassword" を入力
     かつ "管理者登録ボタン(#admin-register)" をクリック
     ならば "アラート(.alert-message)" に "エラーが発生しました" と表示
 
-
-  シナリオ: 管理者が登録されていることを確認
-    もし "ID(root)" と "パスワード(rootpassword)" で管理者ログイン
+    もし "ログインページ(/admin/login)" にアクセス
+    かつ "管理者ID(#admin-id)" に "root" を入力
+    かつ "管理者パスワード(#admin-password)" に "rootpassword" を入力
+    かつ "ログインボタン(#admin-login)" をクリック
     ならば "ログアウトボタン(#admin-logout)" が存在
 
   シナリオ: 管理者を削除
-    もし "ID(admin)" と "パスワード(adminnewpassword)" で管理者ログイン
-    かつ "管理者情報管理(#admin-admin)" をクリック
+    前提 管理者にID "admin"、パスワード "password" が存在
+    前提 管理者にID "root"、パスワード "rootpassword" が存在
+
+    もし "ログインページ(/admin/login)" にアクセス
+    ならば "管理者ID(#admin-id)" に "admin" を入力
+    かつ "管理者パスワード(#admin-password)" に "password" を入力
+    かつ "ログインボタン(#admin-login)" をクリック
+
+    もし "管理者情報管理(#admin-admin)" をクリック
     ならば "管理者ID(#admin-id)" に "admin" と表示
 
-    もし "管理者ID(#admin-id)" に以下を入力
-    """
-    root
-    """
-
+    もし "管理者ID(#admin-id)" に "root" を入力
     かつ "削除ボタン(#admin-delete)" をクリック
 
     もし "1" 秒待機
@@ -286,11 +254,30 @@
 
     もし "はい(#admin-delete-agree)" をクリック
     ならば "アラート(.alert-message)" に "アカウントを削除しました" と表示
-    #かつ "管理者ID(#admin-id)" に "" と表示
     かつ "新しいパスワード(#admin-new-password)" に "" と表示
     かつ "確認パスワード(#confirm-admin-new-password)" に "" と表示
     かつ "管理者パスワード(#admin-password)" に "" と表示
 
-  シナリオ: 管理者が削除されたことを確認
-    もし "ID(root)" と "パスワード(rootpassword)" で管理者ログイン
+    もし "ログインページ(/admin/login)" にアクセス
+    かつ "管理者ID(#admin-id)" に "root" を入力
+    かつ "管理者パスワード(#admin-password)" に "rootpassword" を入力
+    かつ "ログインボタン(#admin-login)" をクリック
     ならば "アラート(.alert-message)" に "ログインに失敗しました" と表示
+
+  シナリオ: 管理者登録（失敗）
+    前提 管理者にID "admin"、パスワード "password" が存在
+    
+    もし "ログインページ(/admin/login)" にアクセス
+    かつ "管理者ID(#admin-id)" に "admin" を入力
+    かつ "管理者パスワード(#admin-password)" に "password" を入力
+    かつ "ログインボタン(#admin-login)" をクリック
+    ならば "管理者追加(#to-admin-register)" が存在
+
+    もし "管理者追加(#to-admin-register)" をクリック
+    ならば "登録ボタン(#admin-register)" が存在
+
+    もし "管理者ID(#admin-id)" に "wrongadmin" を入力
+    かつ "パスワード(#admin-password)" に "pass" を入力
+    かつ "確認パスワード(#confirm-admin-password)" に "pass" を入力
+    かつ "登録ボタン(#admin-register)" をクリック
+    ならば "アラート(.alert-message)" に "エラーが発生しました" と表示
