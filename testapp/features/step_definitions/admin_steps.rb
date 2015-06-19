@@ -1,17 +1,21 @@
 # -*- coding: utf-8 -*-
+前提 (/^管理者にID "(.*?)"、パスワード "(.*?)" が存在$/) do |id, pass|
+  visit "/test/admin-init/#{id}/#{pass}"
+end
 
-もし(/^".*?\((.*?)\)" と ".*?\((.*?)\)" で管理者ログイン$/) do |id, password|
-  visit '/admin'
-  page.find('#admin-id').set(id)
-  page.find('#admin-password').set(password)
-  page.find('#admin-login').click
+前提 (/^ユーザにID "(.*?)"、名前 "(.*?)"、部署 "(.*?)"、パスワード "(.*?)"、入社日 "(.*?)" が存在$/) do |id, name, department, pass, enter |
+  visit "/test/user-init/#{id}/#{name}/#{department}/#{pass}/#{enter}"
+end
+
+前提(/^部署 "(.*?)" が存在$/) do |department|
+  visit "/test/department-init/#{department}"
 end
 
 もし(/^".*?\((.*?)\)" にアクセス$/) do |t_path|
   visit t_path
 end
 
-もし(/^".*?\((.*?)\)" に以下を入力$/) do |t_css, t_doc|
+もし(/^".*?\((.*?)\)" に "(.*?)" を入力$/) do |t_css, t_doc|
   page.find(t_css).set(t_doc)
 end
 
@@ -42,8 +46,7 @@ end
 
 もし(/^".*?\((.*?)\)" で "(.*?)" が選択$/) do |obj, str|
   wait_for_ajax
-  selected_id = page.find(:xpath, "//html/body/p/select").value
-  expect(page.find(:xpath, "//html/body/p/select/option[@value = #{selected_id}]").text).to eq(str)
+  page.find(obj).has_select?(:selected => str)
 end
 
 もし(/^"(.*?)" 秒待機$/) do | second |

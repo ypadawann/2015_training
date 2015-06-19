@@ -30,6 +30,9 @@ module API
         end
         post do
           session_check()
+          if params[:admin_password].length < 8
+            error!('Failed to Register', 400)
+          end
           if Model::Admins.add(params[:admin_id], params[:admin_password])
           else
             error!('Failed to Register', 400)
