@@ -10,15 +10,15 @@ adminRegister = ->
 
 $('#admin-register').bind 'click', ->
   if $('#admin-password').val() isnt $('#confirm-admin-password').val()
-    #alert 'パスワードが違います'
-    Materialize.toast('確認パスワードが違います', 5000, 'alert-message')
-  
+    Materialize.toast('確認パスワードが違います', 5000, 'alert-message')  
   else
     adminRegister()
       .done ->
-        alert '登録に成功しました'
-        location.reload()
+        Materialize.toast('登録に成功しました', 5000, 'alert-message')
+        $('#admin-id').val ''
+        $('#admin-password').val ''
+        $('#confirm-admin-password').val ''
+        location.href='#'
       .fail (xhr) ->
-        #alert ("エラーが発生しました")
         Materialize.toast('エラーが発生しました', 5000, 'alert-message')
   

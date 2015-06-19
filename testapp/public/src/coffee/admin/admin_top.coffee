@@ -22,4 +22,4 @@ $('#admin-logout').bind 'click', ->
     .done (data) ->
       document.location = '/admin'
     .fail (data) ->
-      alert 'エラーが発生しました'
+      Materialize.toast('エラーが発生しました', 5000, 'alert-message')

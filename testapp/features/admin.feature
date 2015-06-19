@@ -68,9 +68,9 @@
     Battleship Haruna
     """
     かつ "部署(#select-department)" で "呉鎮守府" を選択
-    ならば "変更ボタン(#user-modify)" をクリック
+    かつ "変更ボタン(#user-modify)" をクリック
+    ならば "アラート(.alert-message)" に "ユーザ情報を変更しました" と表示
     
-    #もし "ユーザ情報管理(/admin/user)" にアクセス
     もし "1" 秒待機
     かつ "ユーザID(#user-id)" に以下を入力
     """
@@ -97,7 +97,9 @@
     """
     かつ "変更ボタン(#user-modify)" をクリック
     ならば "1" 秒待機
-    かつ "ユーザ名(#user-name)" に "" と表示
+    かつ "アラート(.alert-message)" に "ユーザ情報を変更しました" と表示
+    かつ "新しいパスワード(#user-new-password)" に "" と表示
+    かつ "確認パスワード(#confirm-user-new-password)" に "" と表示
 
   シナリオ: ユーザのパスワードが変更されているか確認
     もし "ユーザログイン画面(/)" にアクセス
@@ -112,6 +114,32 @@
     かつ "ログインボタン(#login)" をクリック
     ならば "ログアウトボタン(#logout)" が存在
 
+  シナリオ: ユーザを削除
+    もし "ID(admin)" と "パスワード(password)" で管理者ログイン
+    かつ "ユーザ情報管理(#admin-user)" をクリック
+    かつ "ユーザID(#user-id)" に以下を入力
+    """
+    23
+    """
+    かつ "選択ボタン(#user-select)" をクリック
+    ならば "1" 秒待機
+    かつ "削除ボタン(#user-delete)" をクリック
+
+    もし "1" 秒待機
+    もし "モーダル(#modal)" が存在
+    かつ "(#modal-h4)" に "確認" と表示
+    かつ "(#modal-p)" に "本当にユーザを削除しますか？" と表示
+    かつ "はい(#user-delete-agree)" が存在
+    かつ "はい(#user-delete-agree)" に "はい" と表示
+    かつ "いいえ(#user-delete-disagree)" が存在
+    ならば "はい(#user-delete-agree)" をクリック
+
+    もし "アラート(.alert-message)" に "アカウントを削除しました" と表示
+    かつ "ユーザID(#user-id)" に "" と表示
+    かつ "ユーザ名(#user-name)" に "" と表示
+    かつ "部署名(#select-department)" で "" が選択
+    かつ "新しいパスワード(#user-new-password)" に "" と表示
+    かつ "確認パスワード(#confirm-user-new-password)" に "" と表示
 
   シナリオ: 部署管理
     もし "ID(admin)" と "パスワード(password)" で管理者ログイン
@@ -211,8 +239,10 @@
     rootpassword
     """
     かつ "管理者登録ボタン(#admin-register)" をクリック
-    かつ "1" 秒待機
-    ならば "管理者ID(#admin-id)" に "" と表示
+    ならば "アラート(.alert-message)" に "登録に成功しました" と表示
+    かつ "管理者ID(#admin-id)" に "" と表示
+    かつ "パスワード(#admin-password)" に "" と表示
+    かつ "確認パスワード(#confirm-admin-password)" に "" と表示
 
     もし "管理者ID(#admin-id)" に以下を入力
     """
@@ -243,9 +273,23 @@
     """
     root
     """
+
     かつ "削除ボタン(#admin-delete)" をクリック
-    かつ "1" 秒待機
-    ならば "管理者ID(#admin-id)" に "admin" と表示
+
+    もし "1" 秒待機
+    ならば "モーダル(#modal)" が存在
+    かつ "(#modal-h4)" に "確認" と表示
+    かつ "(#modal-p)" に "本当にこのアカウントを削除しますか？" と表示
+    かつ "はい(#admin-delete-agree)" が存在
+    かつ "はい(#admin-delete-agree)" に "はい" と表示
+    かつ "いいえ(#admin-delete-disagree)" が存在
+
+    もし "はい(#admin-delete-agree)" をクリック
+    ならば "アラート(.alert-message)" に "アカウントを削除しました" と表示
+    #かつ "管理者ID(#admin-id)" に "" と表示
+    かつ "新しいパスワード(#admin-new-password)" に "" と表示
+    かつ "確認パスワード(#confirm-admin-new-password)" に "" と表示
+    かつ "管理者パスワード(#admin-password)" に "" と表示
 
   シナリオ: 管理者が削除されたことを確認
     もし "ID(root)" と "パスワード(rootpassword)" で管理者ログイン
