@@ -49,3 +49,9 @@ end
 もし(/^"(.*?)" 秒待機$/) do | second |
   sleep second.to_f
 end
+
+もし(/^アラートをチェック$/) do
+  within ".modal-footer" do
+    page.find('.alert-message')
+  end
+end
