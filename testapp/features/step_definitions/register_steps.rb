@@ -7,6 +7,7 @@ end
 end
 
 もし(/^.*?\((.*?)\) 画面にアクセスした?$/) do |path|
+  @visited_path = path
   visit path
 end
 
@@ -40,7 +41,12 @@ end
 
 ならば(/^.*?\((.*?)\) 画面に遷移(?:し|する)$/) do |path|
   sleep 0.5
+  @visited_path = page.current_path
   expect(page.current_path).to eq(path)
+end
+
+ならば(/^画面遷移(?:せず|しない)$/) do
+  expect(page.current_path).to eq(@visited_path)
 end
 
 ならば(/^.*?\((.*?)\) 欄に (.*?) が表示される?$/) do |element_id, value|
@@ -51,7 +57,7 @@ end
   expect(page.find(element_id).text).to eq('')
 end
 
-ならば(/^.*?\((.*?)\) 欄に (.*?) が含まれる?$/) do |element_id, value|
+ならば(/^.*?\((.*?)\) 欄に (.*?) を含む表示がされる?$/) do |element_id, value|
   page.find(element_id).has_text?(value)
 end
 

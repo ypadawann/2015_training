@@ -26,7 +26,7 @@ module Model
       message: '名前は50字以下で入力して下さい。' }
     belongs_to :department
     validates :department, presence: {
-      message: '部署名を選択して下さい。' }
+      message: '所属を選択して下さい。' }
     validates_format_of :enter, with: /\A\d{4}-\d\d?-\d\d?\z/,
       message: '入社年月日の形式が不適切です。'
   end
