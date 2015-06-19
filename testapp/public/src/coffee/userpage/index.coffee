@@ -53,9 +53,11 @@ $('#logout').bind 'click', ->
 $('#view-paid-vacation').bind 'click', ->
   viewPaidVacationNum()
   .done (data) ->
-    alert "#{data.paid_vacation_num} 日"
+    #alert "#{data.paid_vacation_num} 日"
+    Materialize.toast("#{data.paid_vacation_num} 日", 5000, 'alert-message')
   .fail (xhr) ->
-    alert 'Failed'
+    #auert 'Failed'
+    Materialize.toast('Failed', 5000, 'alert-message')
 
 $('#to-add-paid-vacation').bind 'click', ->
   document.location = '/userpage/add_paid_vacation'
