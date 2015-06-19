@@ -36,6 +36,7 @@ module Model
             password: Model::Helper.start_hash(password),
             enter: enter
           )
+        error_msgs << 'パスワードを入力して下さい。' if password.blank?
         error_msgs << user.errors.messages.values if user.invalid?
         error_msgs
       end
