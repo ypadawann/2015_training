@@ -8,9 +8,9 @@ $ ->
       .done ->
         document.location = '/'
       .fail (xhr) ->
-        alert ("#{xhr.status} #{xhr.statusText}")
+        Materialize.toast(JSON.parse(xhr.responseText).error, 5000, 'alert-message')
     .fail (xhr) ->
-      alert ("#{xhr.status} #{xhr.statusText}")
+      Materialize.toast(JSON.parse(xhr.responseText).error, 5000, 'alert-message')
 
   register = ->
     year = $("#enter_year").val()
