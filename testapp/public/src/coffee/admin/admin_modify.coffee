@@ -27,31 +27,33 @@ adminDelete = ->
 
 $('#admin-modify').bind 'click', ->
   if $('#admin-new-password').val() isnt $('#confirm-admin-new-password').val()
-    #alert '確認パスワードが違います'
     Materialize.toast('確認パスワードが違います', 5000, 'alert-message')
   else
     adminModify()
       .done (data)   ->
-         alert '管理者情報を変更しました'
-         location.reload()
+         Materialize.toast('管理者情報を変更しました', 5000, 'alert-message')
+         $('#admin-new-password').val ''
+         $('#confirm-admin-new-password').val ''
+         $('#admin-password').val ''
       .fail (xhr,  status, error) ->
         if xhr.status is 403
-          #alert '認証に失敗しました'
           Materialize.toast('認証に失敗しました', 5000, 'alert-message')
         else
-          #alert 'エラーが発生しました'
           Materialize.toast('エラーが発生しました', 5000, 'alert-message')
 
-$('#admin-delete').bind 'click', ->
-  if !window.confirm '本当にアカウントを削除しますか？'
-    alert 'アカウント削除をキャンセルしました'
-  else
-    adminDelete()
-      .done (data) ->
-        alert 'アカウントを削除しました'
-        location.reload()
-      .fail (xhr,  status, error) ->
-        #alert 'エラーが発生しました'
-        Materialize.toast('エラーが発生しました', 5000, 'alert-message')
+startAdminDelete = ->
+  adminDelete()
+    .done (data) ->
+      Materialize.toast('アカウントを削除しました', 50000, 'alert-message')
+      $('#admin-new-password').val ''
+      $('#confirm-admin-new-password').val ''
+      $('#admin-password').val ''
+    .fail (xhr,  status, error) ->
+      Materialize.toast('エラーが発生しました', 5000, 'alert-message')
 
-
+$ ->
+  $('#admin-delete').leanModal({
+    ready: ->
+      $('#admin-delete-agree').bind 'click', ->
+        startAdminDelete()
+    })
