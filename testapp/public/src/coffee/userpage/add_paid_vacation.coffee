@@ -17,7 +17,9 @@ arrayToPostdata = (vacation_dates) ->
 $('#regist-vacation').bind 'click', ->
   registVacation()
   .done (data) ->
-    alert '登録しました'
-    location.reload()
+    #alert '登録しました'
+    Materialize.toast('登録しました', 5000,'alert-message')
+    #location.reload()
   .fail (xhr) ->
-    alert '登録に失敗しました'
+    #alert '登録に失敗しました'
+    Materialize.toast('登録に失敗しました', 5000, 'alert-message')
