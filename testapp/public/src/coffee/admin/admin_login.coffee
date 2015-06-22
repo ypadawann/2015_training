@@ -17,6 +17,6 @@ startAdminLogin = ->
 $('#admin-login').bind 'click', ->
   startAdminLogin()
 
-$('.enter-keydown').bind 'keydown', ->
+$('.enter-keydown-login').bind 'keydown', ->
   if event.keyCode is 13
     startAdminLogin()
