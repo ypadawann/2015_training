@@ -12,6 +12,10 @@
   margin: 25px 0px;
 }
 
+.none{
+  display: none;
+}
+
 @mixin attendance-record__input{
   background-color: transparent;
   border: none;
