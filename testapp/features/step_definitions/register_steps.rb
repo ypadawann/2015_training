@@ -61,6 +61,11 @@ end
   page.find(element_id).has_text?(value)
 end
 
+ならば(/^(.*?) を含むアラートが表示される?$/) do |text|
+  elements = page.all('.alert-message').find { |elem| elem.text.include?(text) }
+  expect(elements).not_to be_nil
+end
+
 ならば(/^以下が表示される?$/) do |table|
   wait_for_ajax
   table.raw.each do |element|
