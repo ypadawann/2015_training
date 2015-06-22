@@ -130,7 +130,7 @@
     もし "アラート(.alert-message)" に "アカウントを削除しました" と表示
     かつ "ユーザID(#user-id)" に "" と表示
     かつ "ユーザ名(#user-name)" に "" と表示
-    かつ "部署名(#select-department)" で "" が選択
+    かつ "部署名(#select-department)" で "部署を選択" が選択
     かつ "新しいパスワード(#user-new-password)" に "" と表示
     かつ "確認パスワード(#confirm-user-new-password)" に "" と表示
 
