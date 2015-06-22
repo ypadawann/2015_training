@@ -1,7 +1,29 @@
 <h1 id="page-name"><%= "管理者登録" %></h1>
-<p>ID:<input type="text" id="admin-id" size="40"></p>
-<p>pass:<input type="password" id="admin-password" size="40"></p>
-<p>confirm pass:<input type="password" id="confirm-admin-password" size="40"></p>
+
+<div class="row">
+  <form class="col s12">
+    <div clas="row">
+      <div class="input-field col s12">
+	<input id="admin-id" type="text" class="validate" >
+	<label for="admin-id">Admin ID</label>
+      </div>
+    </div>
+    <div clas="row">
+      <div class="input-field col s12">
+	<input id="admin-password" type="password" class="validate">
+	<label for="admin-password">Password</label>
+      </div>
+    </div>
+    <div clas="row">
+      <div class="input-field col s12">
+	<input id="confirm-admin-password" type="password" class="validate">
+	<label for="confirm-admin-password">Confirm Password</label>
+      </div>
+    </div>
+  </form>
+</div>
+
+
 <p>
-  <input type="button" id="admin-register" value="送信">
+  <a class="waves-effect waves-light btn" id="admin-register" href="#">登録</a>
 </p>

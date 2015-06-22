@@ -40,7 +40,7 @@ $('#user-select').bind 'click', ->
       if xhr.status is 403
         Materialize.toast('認証に失敗しました', 5000, 'alert-message')
       else
-       Materialize.toast('エラーが発生しました', 5000, 'alert-message')
+        Materialize.toast('エラーが発生しました', 5000, 'alert-message')
 
 $('#user-modify').bind 'click', ->
   if $('#user-new-password').val() isnt $('#confirm-user-new-password').val()
