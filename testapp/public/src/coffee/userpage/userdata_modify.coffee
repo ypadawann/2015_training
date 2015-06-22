@@ -23,32 +23,23 @@ userModify = ->
 
 userDelete = ->
   userId = $("#user-id").text()
+  password = $('#password').val()
   $.ajax(
-    type: "delete"
-    url: "#{location.protocol}//#{location.host}/api/v1/users/#{userId}"
+    type: "post"
+    url: "#{location.protocol}//#{location.host}/api/v1/users/delete/#{userId}"
+    data:
+      password: password
   )
 
 $('#user-modify').bind 'click', ->
   userModify()
     .done (data)   ->
-      $("#message").text 'ユーザ情報を変更しました'
+      Materialize.toast('ユーザ情報を変更しました', 5000, 'alert-message')
     .fail (xhr,  status, error) ->
       if xhr.status is 403
-        $("#message").text '認証に失敗しました'
+        Materialize.toast('認証に失敗しました', 5000, 'alert-message')
       else
-        $("#message").text 'エラーが発生しました'
-
-
-$('#user-delete').click ->
-  if !window.confirm '本当にアカウントを削除しますか？'
-    $("#message").text 'アカウント削除をキャンセルしました'
-  else
-    userDelete()
-      .done (data) ->
-        alert 'アカウントを削除しました'
-        document.location = '/'
-      .fail (xhr,  status, error) ->
-        $("#message").text 'エラーが発生しました'
+        Materialize.toast('エラーが発生しました', 5000, 'alert-message')
 
 switch location.pathname
   when '/userpage/modify'
@@ -59,9 +50,39 @@ switch location.pathname
           return $(this).text() is data.department).prop 'selected', true
       .fail (xhr,  status, error) ->
         if xhr.status is 403
-          $("#message").text '認証に失敗しました'
+          Materialize.toast('認証に失敗しました', 5000, 'alert-message')
         else
-          $("#message").text 'エラーが発生しました'
+          Materialize.toast('エラーが発生しました', 5000, 'alert-message')
+
+$('#ok').bind 'click', ->
+  userDelete()
+    .done (data) ->
+      Materialize.toast('アカウントを削除しました', 5000, 'alert-message')
+      setTimeout( ->
+        document.location = '/'
+      , 1500)
+    .fail (xhr, status, error) ->
+      if xhr.status is 403
+        Materialize.toast('認証に失敗しました', 5000, 'alert-message')
+        setTimeout( ->
+          location.reload()
+        ,1500)
+      else
+        Materialize.toast('エラーが発生しました', 5000, 'alert-message')
+        setTimeout( ->
+          location.reload()
+        ,1500 )
+
+$('#cancel').bind 'click', ->
+  Materialize.toast('アカウント削除をキャンセルしました', 1500, 'alert-message')
+  setTimeout( ->
+    location.reload()
+  , 1500)
 
 $(document).ready ->
   $("#department").material_select()
+  $('.modal-trigger').leanModal(
+      opacity: .5,
+      in_duration: 300,
+      out_duration: 200,
+  )
