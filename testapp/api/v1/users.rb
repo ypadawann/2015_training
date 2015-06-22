@@ -66,6 +66,7 @@ module API
         delete do
           authenticate!(params[:user_id])
           find_user!(params[:user_id])
+          verify_password!(params[:user_id], params[:password])
           Model::Users.remove(params[:user_id])
           Model::Users.status(params[:user_id])
           session_destroy()
