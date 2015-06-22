@@ -60,12 +60,19 @@ module Model
       message: '備考欄は50字以下で入力して下さい。' }
 
     class TimeValidator < ActiveModel::Validator
-      FORMAT = /\A\d\d?:\d\d\Z/
+      FORMAT = /\A\d\d?:(\d\d)\z/
+
+      def self.invalid_format?(time)
+        return false if time.blank?
+        m = FORMAT.match(time)
+        m.nil? || m[1].to_i >= 60
+      end
+
       def validate(record)
         record.errors[:attendance] << '出勤時間の形式が不適切です。' if
-          record[:attendance].present? && FORMAT.match(record[:attendance]).nil?
+          TimeValidator.invalid_format?(record[:attendance])
         record.errors[:leaving] << '退勤時間の形式が不適切です。' if
-          record[:leaving].present? && FORMAT.match(record[:leaving]).nil?
+          TimeValidator.invalid_format?(record[:leaving])
       end
     end
     validates_with TimeValidator
