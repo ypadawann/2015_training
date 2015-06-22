@@ -29,6 +29,10 @@ end
   box.select(target_opt)
 end
 
+もし(/^".*?\((.*?)\)" に "(.*?)" が存在しない$/) do |select_obj, target_opt|
+  box = page.find(select_obj)
+  expect(box.has_css?('option', text: target_opt)).to eq(false)
+end
  
 もし(/^".*?\((.*?)\)" が存在$/) do |obj|
   page.find(obj)
