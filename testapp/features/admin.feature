@@ -135,8 +135,9 @@
 
 
     もし "部署管理(#admin-department)" をクリック
-    ならば "登録する部署名(#register-department-name)" に "横須賀鎮守府" を入力
+    かつ "登録する部署名(#register-department-name)" に "横須賀鎮守府" を入力
     かつ "選択ボタン(#department-register)" をクリック
+    ならば "アラート(.alert-message)" に "横須賀鎮守府の登録に成功しました" と表示
 
     もし "1" 秒待機
     かつ "登録する部署名(#register-department-name)" に "横須賀鎮守府" を入力
@@ -150,7 +151,18 @@
 
     もし "1" 秒待機
     かつ "部署(#select-department)" で "ブラック鎮守府" を選択
-    ならば "部署削除(#department-delete)" をクリック
+    かつ "部署削除(#department-delete)" をクリック
+    ならば "モーダル(#modal)" が存在
+    かつ "メッセージ(#modal-p)" に "本当に部署を削除しますか？" と表示
+
+    もし "いいえ(#department-delete-disagree)" をクリック
+    かつ "1" 秒待機
+    ならば "ページ(body)" に "モーダル(#modal)" が存在しない
+
+    もし "部署削除(#department-delete)" をクリック
+    かつ "はい(#department-delete-agree)" をクリック
+    ならば "アラート(.alert-message)" に "ブラック鎮守府を削除しました" と表示
+    かつ "部署(#select-department)" に "選択肢(ブラック鎮守府)" が存在しない
     
 
   シナリオ: 管理者情報管理（パスワード変更）

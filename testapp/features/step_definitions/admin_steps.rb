@@ -26,9 +26,19 @@ end
 
 もし(/^".*?\((.*?)\)" で "(.*?)" を選択$/) do |select_obj, target_opt|
   box = page.find(select_obj)
-  box.select target_opt
+  box.select(target_opt)
 end
 
+もし(/^".*?\((.*?)\)" に ".*?\((.*?)\)" が存在しない$/) do |obj, target_opt|
+  case page.find(obj).tag_name
+  when 'select'
+    box = page.find(obj)
+    expect(box.has_css?('option', text: target_opt)).to eq(false)
+  else
+    expect(page.has_css?(target_opt)).to eq(false)
+  end
+end
+ 
 もし(/^".*?\((.*?)\)" が存在$/) do |obj|
   page.find(obj)
 end
@@ -44,9 +54,13 @@ end
   end
 end
 
-もし(/^".*?\((.*?)\)" で "(.*?)" が選択$/) do |obj, str|
+もし(/^".*?\((.*?)\)" で "(.*?)" が選択$/) do |element_id, str|
   wait_for_ajax
-  page.find(obj).has_select?(:selected => str)
+  #p page.has_select?(element_id, selected: value)
+  #obj = page.find(:xpath, "//select[@id='select-department']/option[@selected='selected']")
+  select_element = page.find(element_id)
+  selected_id = select_element.value
+  expect(select_element.find(:xpath, "//option[@value=#{selected_id}]").text).to eq(str)
 end
 
 もし(/^"(.*?)" 秒待機$/) do | second |
