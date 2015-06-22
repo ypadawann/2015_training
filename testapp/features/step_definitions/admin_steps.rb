@@ -63,12 +63,10 @@ end
   expect(select_element.find(:xpath, "//option[@value=#{selected_id}]").text).to eq(str)
 end
 
-もし(/^"(.*?)" 秒待機$/) do | second |
-  sleep second.to_f
+もし(/^".*?\((.*?)\)" で ".*?\((.*?)\)" をキー入力$/) do |element_id, key|
+  page.find(element_id).native.send_keys(key.to_sym)
 end
 
-もし(/^アラートをチェック$/) do
-  within ".modal-footer" do
-    page.find('.alert-message')
-  end
+もし(/^"(.*?)" 秒待機$/) do | second |
+  sleep second.to_f
 end

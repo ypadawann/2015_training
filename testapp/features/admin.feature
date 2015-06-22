@@ -8,13 +8,22 @@
 
     ならば "ログインボタン(#admin-login)" が存在
 
-  シナリオ: ログイン処理
+  シナリオ: ログイン処理（マウスクリック）
     前提 管理者にID "admin"、パスワード "password" が存在
 
     もし "ログインページ(/admin/login)" にアクセス
     かつ "管理者ID(#admin-id)" に "admin" を入力
     かつ "管理者パスワード(#admin-password)" に "password" を入力
     かつ "ログインボタン(#admin-login)" をクリック
+    ならば "ログアウトボタン(#admin-logout)" が存在
+
+  シナリオ: ログイン処理（エンターキー）
+    前提 管理者にID "admin"、パスワード "password" が存在
+
+    もし "ログインページ(/admin/login)" にアクセス
+    かつ "管理者ID(#admin-id)" に "admin" を入力
+    かつ "管理者パスワード(#admin-password)" に "password" を入力
+    かつ "パスワード欄(#admin-password)" で "エンターキー(Enter)" をキー入力
     ならば "ログアウトボタン(#admin-logout)" が存在
 
   シナリオ: ログイン処理（失敗）
