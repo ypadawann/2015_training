@@ -18,16 +18,19 @@ module Model
     validates :id, uniqueness: {
       message: 'その社員番号は既に登録されています。' }
     validates :id, numericality: {
-      only_integer: true, greater_than: 0, less_than: 100_000,
+      only_integer: true,
+      greater_than: 0, less_than: 100_000,
       message: '社員番号は5桁以下の正の数字で入力して下さい。' }
     validates :name, presence: {
       message: '名前を入力して下さい。' }
-    validates :name, length: { maximum: 50,
+    validates :name, length: {
+      maximum: 50,
       message: '名前は50字以下で入力して下さい。' }
     belongs_to :department
     validates :department, presence: {
       message: '所属を選択して下さい。' }
-    validates_format_of :enter, with: /\A\d{4}-\d\d?-\d\d?\z/,
+    validates_format_of :enter,
+      with: /\A\d{4}-\d\d?-\d\d?\z/,
       message: '入社年月日の形式が不適切です。'
   end
 
@@ -36,7 +39,8 @@ module Model
       message: '部署名を入力して下さい。' }
     validates :name, uniqueness: {
       message: 'その部署名は既に登録されています。' }
-    validates :name, length: { maximum: 50,
+    validates :name, length: {
+      maximum: 50,
       message: '部署名は50字以下で入力して下さい。' }
     has_many :user
   end
@@ -45,11 +49,14 @@ module Model
     validates :day, presence: {
       message: '日付を入力して下さい。' }
     validates :user_id, presence: true
-    validates :prearranged_holiday, length: { maximum: 15,
+    validates :prearranged_holiday, length: {
+      maximum: 15,
       message: '振替休暇予定日は15字以下で入力して下さい。' }
-    validates :holiday_acquisition, length: { maximum: 15,
+    validates :holiday_acquisition, length: {
+      maximum: 15,
       message: '振替休暇取得日は15字以下で入力して下さい。' }
-    validates :etc, length: { maximum: 50,
+    validates :etc, length: {
+      maximum: 50,
       message: '備考欄は50字以下で入力して下さい。' }
 
     class TimeValidator < ActiveModel::Validator
@@ -71,7 +78,8 @@ module Model
       message: 'IDを入力して下さい。' }
     validates :id, uniqueness: {
       message: 'そのIDは既に使われています。' }
-    validates :id, length: { maximum: 50,
+    validates :id, length: {
+      maximum: 50,
       message: 'IDは50字以下で入力して下さい。' }
     validates :password, presence: {
       message: 'パスワードを入力して下さい。' }
