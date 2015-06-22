@@ -15,7 +15,7 @@ userModify = ->
     type: "put"
     url: "#{location.protocol}//#{location.host}/api/v1/users/#{userId}"
     data:
-      name: name
+      name: userName
       department: department
       new_password: newPassword
       password: password
@@ -64,4 +64,4 @@ switch location.pathname
           $("#message").text 'エラーが発生しました'
 
 $(document).ready ->
- $("#department").material_select()
+  $("#department").material_select()
