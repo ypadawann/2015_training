@@ -1,27 +1,56 @@
 <h1 id="page-name">ユーザ情報管理</h1>
-<p><div id="message"></div></p>
-<p>
-  ID:<input type="number" id="user-id" size="40">
-  <input type="button" id="user-select" value="選択">
-</p>
-<p>名前:<input type="text" id="user-name" size="40"></p>
-<p>所属：
-  <select class="browser-default" id="select-department">
-    <option value="0" id="default-department"></option>
-    <%==
-       Model::Departments.list_ids.map { |d|
-       "<option value=#{d}>#{Model::Departments.name_of(d)}</option>"
-       }.join
-       %>
-  </select>
-</p>
-<p>new pass:<input type="password" id="user-new-password" size="40"></p>
 
-<p>confirm new pass:<input type="password" id="confirm-user-new-password" size="40"></p>
+<div class="row">
+  <form class="col s12">
+    <div class="row">
+      <div class="input-field col s6">
+        <input id="user-id" type="text" class="validate">
+        <label for="user-id">User ID</label>
+      </div>
+      <div class="input-field col s6">
+        <a class="waves-effect waves-light btn" id="user-select">選択</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="user-name" type="text" class="validate">
+        <label for="user-id">User Name</label>
+      </div>
+    </div>
+  </form>
+</div>
+
+<label>所属部署</label>
+<select class="browser-default" id="select-department">
+  <option value="0" disabled selected>部署を選択</option>
+  <%==
+     Model::Departments.list_ids.map { |d|
+     "<option value=#{d}>#{Model::Departments.name_of(d)}</option>"
+     }.join
+     %>
+</select>
+
+<div class="row">
+  <form class="col s12">
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="user-new-password" type="text" class="validate">
+        <label for="user-new-password">New Password</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="confirm-user-new-password" type="text" class="validate">
+        <label for="confirm-user-new-password">Confirm Password</label>
+      </div>
+    </div>
+  </form>
+</div>
 
 <p>
-  <input type="button" id="user-modify" href="#" value="変更">
+  <a class="waves-effect waves-light btn" id="user-modify" href="#">変更</a>
 </p>
+
 <p>
   <a class="waves-effect waves-light btn modal-trigger" id="user-delete" href="#modal">削除</a>
 </p>

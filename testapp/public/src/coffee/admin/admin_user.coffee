@@ -64,7 +64,7 @@ startUserDelete = ->
       $('#user-id').val ''
       $('#user-name').val ''
       ($('#select-department option').filter ->
-        $(this).text() is '' ).prop 'selected', true
+        $(this).text() is '部署を選択' ).prop 'selected', true
       $('#user-new-password').val ''
       $('#confirm-user-new-password').val ''
     .fail (xhr,  status, error) ->
