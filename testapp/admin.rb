@@ -32,6 +32,7 @@ class Admin < Sinatra::Base
 
   get %r{\/\w+} do
     redirect to ('/') unless session[:admin_login]
+    @admin_id = session[:id]
     erb 'admin/layout'.to_sym do
       show_erb
     end
