@@ -62,7 +62,7 @@ save = (userId, year, month, day) ->
       }
   request = $.ajax(
     type: 'put'
-    url: "#{location.protocol}//#{location.host}/api/v1/users/#{userId}/attend-leave/#{year}/#{month}"
+    url: "//#{location.host}/api/v1/users/#{userId}/attend-leave/#{year}/#{month}"
     dataType: 'json'
     contentType: 'application/json'
     data:
@@ -80,7 +80,7 @@ makeRecord = (year, month) ->
   $('#YearsAndMonths').text "#{year}年#{month}月"
   request = $.ajax(
     type: 'get'
-    url: "#{location.protocol}//#{location.host}/api/v1/users/#{userId}/attend-leave/#{year}/#{month}"
+    url: "//#{location.host}/api/v1/users/#{userId}/attend-leave/#{year}/#{month}"
     dataType: 'json')
     .done (msg) ->
       for i in [1..msg.data.length]

@@ -2,7 +2,7 @@ registVacation = ->
   userId = $('#user-id').text()
   $.ajax(
     type: 'post'
-    url: "#{location.protocol}//#{location.host}/api/v1/users/#{userId}/paid-vacation"
+    url: "//#{location.host}/api/v1/users/#{userId}/paid-vacation"
     dataType: 'json'
     contentType: 'application/json'
     data: JSON.stringify(

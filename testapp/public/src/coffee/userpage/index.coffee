@@ -3,28 +3,28 @@ userId = $('#current-user-id').text()
 attend = ->
   $.ajax(
     type: 'post'
-    url: "#{location.protocol}//#{location.host}/api/v1/users/#{userId}/attend"
+    url: "//#{location.host}/api/v1/users/#{userId}/attend"
     data: 'user_id': userId
   )
 
 leave = ->
   $.ajax(
     type: 'post'
-    url: "#{location.protocol}//#{location.host}/api/v1/users/#{userId}/leave"
+    url: "//#{location.host}/api/v1/users/#{userId}/leave"
     data: 'user_id': userId
   )
 
 logout = ->
   $.ajax(
     type: 'put'
-    url: "#{location.protocol}//#{location.host}/api/v1/users/#{userId}/logout"
+    url: "//#{location.host}/api/v1/users/#{userId}/logout"
     data: 'user_id': userId
   )
 
 viewPaidVacationNum = ->
   $.ajax(
     type: 'get'
-    url: "#{location.protocol}//#{location.host}/api/v1/users/#{userId}/paid-vacation"
+    url: "//#{location.host}/api/v1/users/#{userId}/paid-vacation"
   )
 
 $('#attend').bind 'click', ->

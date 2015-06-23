@@ -13,7 +13,7 @@ module ControllerHelpers
   end
 
   def app_path
-    "#{request.scheme}://#{request.host_with_port}#{request.script_name}"
+    "//#{request.host_with_port}#{request.script_name}"
   end
 
   def js_path
