@@ -264,6 +264,15 @@ parametersを受け取り、resultsをJSONで返す。
     * results
     * error
 
+* GET admin
+    * 管理者ID一覧取得
+    * header
+    * parameters
+    * results
+        * admins: array of
+           * admin_id: string
+    * error
+
 * PUT admin/:admin_id/
     * 管理者情報取得
     * headers

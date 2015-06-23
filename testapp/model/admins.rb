@@ -61,6 +61,10 @@ module Model
         Admin.exists?(admin_id)
       end
 
+      def get_all_id
+        Model::Admin.all.map { |admin| admin.id  }
+      end
+
     end
   end
 end
