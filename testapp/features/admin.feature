@@ -366,6 +366,30 @@
     かつ "ログインボタン(#admin-login)" をクリック
     ならば "アラート(.alert-message)" に "ログインに失敗しました" と表示
 
+  シナリオ: 自身の管理者IDは削除できない
+    前提 管理者にID "admin"、パスワード "password" が存在
+    前提 管理者にID "root"、パスワード "rootpassword" が存在
+
+    もし "ログインページ(/admin/login)" にアクセス
+    ならば "管理者ID(#admin-id)" に "admin" を入力
+    かつ "管理者パスワード(#admin-password)" に "password" を入力
+    かつ "ログインボタン(#admin-login)" をクリック
+
+    もし "管理者情報管理(#admin-admin)" をクリック
+    ならば "管理者ID(#admin-id)" に "admin" と表示
+
+    もし "削除ボタン(#admin-delete)" をクリック
+    かつ "1" 秒待機
+    ならば "モーダル(#modal)" が存在
+    かつ "(#modal-h4)" に "確認" と表示
+    かつ "(#modal-p)" に "本当にこのアカウントを削除しますか？" と表示
+    かつ "はい(#admin-delete-agree)" が存在
+    かつ "はい(#admin-delete-agree)" に "はい" と表示
+    かつ "いいえ(#admin-delete-disagree)" が存在
+
+    もし "はい(#admin-delete-agree)" をクリック
+    ならば "アラート(.alert-message)" に "エラーが発生しました" と表示
+   
   シナリオ: 管理者登録（失敗）
     前提 管理者にID "admin"、パスワード "password" が存在
     
