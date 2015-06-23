@@ -68,6 +68,9 @@ module API
         desc '管理者削除'
         delete do
           session_check()
+          if env['rack.session'][:id] == params[:admin_id]
+            error!('Can not delete this account', 400)
+          end
           if !Model::Admins.remove(params[:admin_id])
             error!('Fail to Delete', 400)
           end
