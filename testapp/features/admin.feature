@@ -235,12 +235,9 @@
     かつ "ログインボタン(#admin-login)" をクリック
 
 
-    もし "ログインページ(/admin/login)" にアクセス
-    かつ "管理者ID(#admin-id)" に "admin" を入力
-    かつ "管理者パスワード(#admin-password)" に "password" を入力
-    かつ "ログインボタン(#admin-login)" をクリック
-    かつ "管理者情報管理(#admin-admin)" をクリック
-    ならば "管理者ID(#admin-id)" に "admin" と表示
+    もし "管理者情報管理(#admin-admin)" をクリック
+    かつ "1" 秒待機
+    ならば "管理者ID(#select-admin-id)" で "admin" が選択
 
     もし "新しいパスワード(#admin-new-password)" に "adminnewpassword" を入力
     かつ "確認パスワード(#confirm-admin-new-password)" に "wrongadminnewpassword" を入力
@@ -341,9 +338,9 @@
     かつ "ログインボタン(#admin-login)" をクリック
 
     もし "管理者情報管理(#admin-admin)" をクリック
-    ならば "管理者ID(#admin-id)" に "admin" と表示
+    ならば "管理者ID(#select-admin-id)" で "admin" が選択
 
-    もし "管理者ID(#admin-id)" に "root" を入力
+    もし "管理者ID(#select-admin-id)" で "root" を選択
     かつ "削除ボタン(#admin-delete)" をクリック
 
     もし "1" 秒待機
@@ -356,6 +353,7 @@
 
     もし "はい(#admin-delete-agree)" をクリック
     ならば "アラート(.alert-message)" に "アカウントを削除しました" と表示
+    かつ "管理者ID(#select-admin-id)" で "admin" が選択
     かつ "新しいパスワード(#admin-new-password)" に "" と表示
     かつ "確認パスワード(#confirm-admin-new-password)" に "" と表示
     かつ "管理者パスワード(#admin-password)" に "" と表示
@@ -376,7 +374,7 @@
     かつ "ログインボタン(#admin-login)" をクリック
 
     もし "管理者情報管理(#admin-admin)" をクリック
-    ならば "管理者ID(#admin-id)" に "admin" と表示
+    ならば "管理者ID(#select-admin-id)" で "admin" が選択
 
     もし "削除ボタン(#admin-delete)" をクリック
     かつ "1" 秒待機
