@@ -22,17 +22,17 @@ makeRow = (tableobj, rowNumber) ->
   cell9.setAttribute 'class', 'attendance-record__table__cell'
   cell10.setAttribute 'class', 'attendance-record__table__cell'
   cell11.setAttribute 'class', 'attendance-record__table__cell--etc'
-  data1 = '<div id="day' + rowNumber + '" readonly="readonly" class="attendance-record__table__insert" />'
-  data2 = '<div id="weekday' + rowNumber + '" readonly="readonly" class="attendance-record__table__insert" />'
-  data3 = '<input type="text" id="attendance' + rowNumber + '" class="attendance-record__table__insert" />'
-  data4 = '<input type="text" id="leaving' + rowNumber + '" class="attendance-record__table__insert" />'
+  data1 = '<div id="day' + rowNumber + '" class="attendance-record__table__insert" />'
+  data2 = '<div id="weekday' + rowNumber + '" class="attendance-record__table__insert" />'
+  data3 = '<input type="text" id="attendance' + rowNumber + '" maxlength="5" class="attendance-record__table__insert" />'
+  data4 = '<input type="text" id="leaving' + rowNumber + '" maxlength="5" class="attendance-record__table__insert" />'
   data5 = '<div id="mark' + rowNumber + '" class="attendance-record__table__insert" />'
   data6 = '<div id="midnight-work' + rowNumber + '" class="attendance-record__table__insert" />'
   data7 = '<div id="holiday-shift' + rowNumber + '" class="attendance-record__table__insert" />'
-  data8 = '<input type="text" id="prearranged-holiday' + rowNumber + '" class="attendance-record__table__insert" />'
-  data9 = '<input type="text" id="paid-vacation' + rowNumber + '" class="attendance-record__table__insert" />'
-  data10 = '<input type="text" id="holiday-acquisition' + rowNumber + '" class="attendance-record__table__insert" />'
-  data11 = '<input type="text" id="etc' + rowNumber + '" class="attendance-record__table__insert" />'
+  data8 = '<input type="text" id="prearranged-holiday' + rowNumber + '" maxlength="10" class="attendance-record__table__insert" />'
+  data9 = '<input type="text" id="paid-vacation' + rowNumber + '" maxlength="3" class="attendance-record__table__insert" />'
+  data10 = '<input type="text" id="holiday-acquisition' + rowNumber + '" maxlength="10" class="attendance-record__table__insert" />'
+  data11 = '<input type="text" id="etc' + rowNumber + '" maxlength="50" class="attendance-record__table__insert" />'
   cell1.innerHTML = data1
   cell2.innerHTML = data2
   cell3.innerHTML = data3
@@ -62,7 +62,7 @@ save = (userId, year, month, day) ->
       }
   request = $.ajax(
     type: 'put'
-    url: "#{location.protocol}//#{location.host}/api/v1/users/#{userId}/attend-leave/#{year}/#{month}"
+    url: "//#{location.host}/api/v1/users/#{userId}/attend-leave/#{year}/#{month}"
     dataType: 'json'
     contentType: 'application/json'
     data:
@@ -80,7 +80,7 @@ makeRecord = (year, month) ->
   $('#YearsAndMonths').text "#{year}年#{month}月"
   request = $.ajax(
     type: 'get'
-    url: "#{location.protocol}//#{location.host}/api/v1/users/#{userId}/attend-leave/#{year}/#{month}"
+    url: "//#{location.host}/api/v1/users/#{userId}/attend-leave/#{year}/#{month}"
     dataType: 'json')
     .done (msg) ->
       for i in [1..msg.data.length]

@@ -2,7 +2,7 @@ userSelect = ->
   userId = $("#user-id").text()
   $.ajax(
     type: "get"
-    url: "#{location.protocol}//#{location.host}/api/v1/users/#{userId}"
+    url: "//#{location.host}/api/v1/users/#{userId}"
   )
 
 userModify = ->
@@ -13,7 +13,7 @@ userModify = ->
   password = $('#password').val()
   $.ajax(
     type: "put"
-    url: "#{location.protocol}//#{location.host}/api/v1/users/#{userId}"
+    url: "//#{location.host}/api/v1/users/#{userId}"
     data:
       name: userName
       department: department
@@ -26,7 +26,7 @@ userDelete = ->
   password = $('#password').val()
   $.ajax(
     type: "post"
-    url: "#{location.protocol}//#{location.host}/api/v1/users/delete/#{userId}"
+    url: "//#{location.host}/api/v1/users/delete/#{userId}"
     data:
       password: password
   )

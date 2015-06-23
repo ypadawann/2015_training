@@ -42,12 +42,17 @@ gulp.task('build:bundle', ['build:coffee'], () ->
     .pipe gulp.dest('dist/js/')
 )
 
+gulp.task 'build:package', ->
+  gulp
+    .src 'node_modules/materialize-css/font/roboto/*'
+    .pipe gulp.dest('dist/style/font/roboto/')
 
 gulp.task 'default', ['build']
 
 gulp.task 'build', [
   'build:bundle'
   'build:sass'
+  'build:package'
 ]
 
 

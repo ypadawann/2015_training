@@ -18,7 +18,7 @@ $ ->
     day = $("#enter_day").val()
     $.ajax(
       type: 'post'
-      url: "#{location.protocol}//#{location.host}/api/v1/users"
+      url: "//#{location.host}/api/v1/users"
       data:
         'user_id'   : $('#user_id').val()
         'name'      : $('#name').val()
@@ -30,7 +30,7 @@ $ ->
   login = ->
     $.ajax(
       type: 'put'
-      url: "#{location.protocol}//#{location.host}/api/v1/users/#{$('#user_id').val()}/login"
+      url: "//#{location.host}/api/v1/users/#{$('#user_id').val()}/login"
       data:
         'user_id' : $('#user_id').val()
         'password': $('#password').val()

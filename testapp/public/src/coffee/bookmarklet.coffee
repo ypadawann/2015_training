@@ -4,7 +4,7 @@ attend = ->
   user_id = document.getElementById('user_id').textContent
   $.ajax(
     type: 'post'
-    url: "#{location.protocol}//#{location.host}/api/v1/users/#{user_id}/attend"
+    url: "//#{location.host}/api/v1/users/#{user_id}/attend"
     data: 'user_id': user_id
   )
 
@@ -12,7 +12,7 @@ leave = ->
   user_id = document.getElementById('user_id').textContent
   $.ajax(
     type: 'post'
-    url: "#{location.protocol}//#{location.host}/api/v1/users/#{user_id}/leave"
+    url: "//#{location.host}/api/v1/users/#{user_id}/leave"
     data: 'user_id': user_id
   )
 

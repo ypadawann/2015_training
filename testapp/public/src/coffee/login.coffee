@@ -5,7 +5,7 @@ login = ->
   password = $('#password').val()
   $.ajax(
     type: 'put'
-    url: "#{location.protocol}//#{location.host}/api/v1/users/#{user_id}/login"
+    url: "//#{location.host}/api/v1/users/#{user_id}/login"
     data:
       'user_id': user_id
       'password': password
