@@ -30,7 +30,7 @@ userDelete = ->
     context:    this
 
 
-$('#user-select').bind 'click', ->
+startUserSelect = ->
   userSelect()
     .done (data) ->
       document.querySelector("#user-name").value = data.name
@@ -41,6 +41,10 @@ $('#user-select').bind 'click', ->
         Materialize.toast('認証に失敗しました', 5000, 'alert-message')
       else
         Materialize.toast('エラーが発生しました', 5000, 'alert-message')
+
+
+$('#user-select').bind 'click', ->
+  startUserSelect()
 
 $('#user-modify').bind 'click', ->
   if $('#user-new-password').val() isnt $('#confirm-user-new-password').val()
@@ -76,3 +80,7 @@ $ ->
       $('#user-delete-agree').bind 'click', ->
         startUserDelete()
     })
+
+  $('.enter-for-select-user').bind 'keydown', ->
+    if event.keyCode is 13
+      startUserSelect()

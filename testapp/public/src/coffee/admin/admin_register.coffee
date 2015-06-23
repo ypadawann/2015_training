@@ -8,7 +8,7 @@ adminRegister = ->
   )
 
 
-$('#admin-register').bind 'click', ->
+startAdminRegister = ->
   if $('#admin-password').val() isnt $('#confirm-admin-password').val()
     Materialize.toast('確認パスワードが違います', 5000, 'alert-message')  
   else
@@ -21,4 +21,11 @@ $('#admin-register').bind 'click', ->
         location.href='#'
       .fail (xhr) ->
         Materialize.toast('エラーが発生しました', 5000, 'alert-message')
+
+ 
+$('#admin-register').bind 'click', ->
+  startAdminRegister()
   
+$('.enter-for-regist-admin').bind 'keydown', ->
+  if event.keyCode is 13
+    startAdminRegister()
