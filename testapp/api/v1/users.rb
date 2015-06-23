@@ -61,16 +61,20 @@ module API
           find_user!(params[:user_id])
           Model::Users.status(params[:user_id])
         end
+      end
 
+      resource '/users/delete/:user_id' do
         desc 'ユーザ削除'
-        delete do
+        post do
           authenticate!(params[:user_id])
           find_user!(params[:user_id])
+          verify_password!(params[:user_id], params[:password])
           Model::Users.remove(params[:user_id])
           Model::Users.status(params[:user_id])
           session_destroy()
         end
-
+      end
+      resource '/users/:user_id' do
         desc 'ユーザ情報の変更'
         params do
           optional :name, type: String, desc: 'ユーザ名'

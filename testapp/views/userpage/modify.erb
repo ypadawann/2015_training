@@ -1,22 +1,30 @@
 <h3>ユーザ情報管理</h3>
-<p><div id="message"></div></p>
 <p>ID:<span id="user-id"><%= @user_id %></span></p>
 <p>名前:<input type="text" id="user-name" size="40"></p>
 <p>所属：
   <select class="browser-default" id="department">
     <option value="0" id="default_department"></option>
     <%==
-       Model::Departments.list_ids.map { |d|
-       "<option value=#{d}>#{Model::Departments.name_of(d)}</option>"
-       }.join
-       %>
+      Model::Departments.list_ids.map { |d|
+      "<option value=#{d}>#{Model::Departments.name_of(d)}</option>"
+    }.join
+    %>
   </select>
 </p>
 <p>new pass:<input type="password" id="new-password" size="40"></p>
 <p>pass:<input type="password" id="password" size="40"></p>
 <p>
-  <input type="button" id="user-modify" value="変更">
+<input type="button" id="user-modify" class="btn" value="変更">
 </p>
 <p>
-  <input type="button" id="user-delete" value="削除">
+<button id="delete" data-target="modal1" class="btn modal-trigger">削除</button>
 </p>
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <p>本当にアカウントを削除しますか？</p>
+  </div>
+  <div class="modal-footer">
+    <a id="cancel" class=" modal-action modal-close waves-effect waves-green btn-flat">cancel</a>
+    <a id="ok" class=" modal-action modal-close waves-effect waves-green btn-flat">ok</a>
+  </div>
+</div>
