@@ -7,8 +7,7 @@ departmentRegister = ->
     context:    this
 
 departmentRename = ->
-  alert 'rename api'
-  alert department_id = $("#select-department option:selected").val()
+  department_id = $("#select-department option:selected").val()
   deferred = $.ajax
     type:      "PUT"
     url:       "#{location.protocol}//#{location.host}/admin/api/v1/departments/#{department_id}"
@@ -40,13 +39,11 @@ startDepartmentRegister = ->
 
 
 startDepartmentRename = ->
-  console.log 'rename'
   oldName = $("#select-department option:selected").text()
   departmentRename()
     .done (data) ->
       $("#select-department option:selected").text data.name
       $("#new-department-name").val ''
-      alert 'rename done'
       Materialize.toast("#{oldName} を #{data.name} に変更しました", 5000, 'alert-message')
     .fail (xhr,  status, error) ->
       if xhr.status is 404

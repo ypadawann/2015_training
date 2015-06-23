@@ -33,7 +33,8 @@ userDelete = ->
 startUserSelect = ->
   userSelect()
     .done (data) ->
-      document.querySelector("#user-name").value = data.name
+      $("#user-name").focus()
+      $("#user-name").val data.name
       ($('#select-department option').filter ->
         $(this).text() is data.department).prop 'selected', true
     .fail (xhr,  textStatus, errorThrown) ->
