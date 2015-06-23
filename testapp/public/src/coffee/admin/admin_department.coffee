@@ -21,7 +21,8 @@ departmentDelete = ->
     url:       "#{location.protocol}//#{location.host}/admin/api/v1/departments/#{department_id}"
     dataType: 'json'
 
-$('#department-register').bind 'click', ->
+
+startDepartmentRegister = ->
   departmentRegister()
     .done (data) ->
       Materialize.toast("#{data.name}の登録に成功しました", 5000, 'alert-message')
@@ -37,13 +38,13 @@ $('#department-register').bind 'click', ->
         Materialize.toast('部署の登録に失敗しました', 5000, 'alert-message')
 
 
-$('#department-rename').bind 'click', ->
+startDepartmentRename = ->
   oldName = $("#select-department option:selected").text()
   departmentRename()
     .done (data) ->
-      Materialize.toast("#{oldName} を #{data.name} に変更しました", 5000, 'alert-message')
       $("#select-department option:selected").text data.name
-      $("#new-department-name").val ''      
+      $("#new-department-name").val ''
+      Materialize.toast("#{oldName} を #{data.name} に変更しました", 5000, 'alert-message')
     .fail (xhr,  status, error) ->
       if xhr.status is 404
         Materialize.toast('部署が見つかりません', 5000, 'alert-message')
@@ -62,12 +63,28 @@ startDepartmentDelete = ->
       if xhr.status is 404
         Materialize.toast('部署が見つかりません', 5000, 'alert-message')
 
+
+$('#department-register').bind 'click', ->
+  startDepartmentRegister()
+
+$('#department-rename').bind 'click', ->
+  startDepartmentRename()
+
+
 $ ->
+  $("#select-department").material_select()
+  
   $('#department-delete').leanModal({
     ready: ->
       $('#department-delete-agree').bind 'click', ->
         startDepartmentDelete()
     })
 
-  $(document).ready ->
-    $("#select-department").material_select()
+
+  $('.enter-for-regist-department').bind 'keydown', ->
+    if event.keyCode is 13
+      startDepartmentRegister()
+
+  $('.enter-for-rename-department').bind 'keydown', ->
+    if event.keyCode is 13
+      startDepartmentRename()

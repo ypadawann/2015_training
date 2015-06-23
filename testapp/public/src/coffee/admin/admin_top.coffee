@@ -5,6 +5,9 @@ adminLogout = ->
     url:       "#{location.protocol}//#{location.host}/admin/api/v1/admin/logout"
 
 
+$('#to-top').bind 'click', ->
+  document.location = '/admin/top'
+
 $('#admin-user').bind 'click', ->
   document.location = '/admin/user'
 

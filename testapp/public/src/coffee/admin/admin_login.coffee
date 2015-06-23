@@ -7,11 +7,16 @@ adminLlogin = ->
             admin_password: $("#admin-password").val()
             }
 
-
-$('#admin-login').bind 'click', ->
+startAdminLogin = ->
   adminLlogin()
     .done (data) ->
       document.location = '/admin/top'
     .fail (data) ->
       Materialize.toast('ログインに失敗しました', 5000, 'alert-message')
 
+$('#admin-login').bind 'click', ->
+  startAdminLogin()
+
+$('.enter-keydown-login').bind 'keydown', ->
+  if event.keyCode is 13
+    startAdminLogin()

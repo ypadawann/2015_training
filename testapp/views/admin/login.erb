@@ -1,11 +1,25 @@
 <h1 id="page-name">管理画面ログイン</h1>
-<div id="error_message"></div>
-<p>
-  ID:<input type="text" id="admin-id" size="40">
-</p>
-<p>
-  Pass:<input type="password" id="admin-password" size"40">
-</p>
-<p>
-  <input type="button"  id="admin-login" value="ログイン">
-</p>
+
+<div class="row">
+  <div class="col s12">
+    <div class="row">
+      <div class="input-field col s12">
+        <input class="enter-keydown-login" id="admin-id" type="text" class="validate">
+        <label for="admin-id">Admin ID</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input class="enter-keydown-login" id="admin-password" type="password" class="validate">
+        <label for="admin-password">Password</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<a class="waves-effect waves-light btn" id="admin-login">ログイン</a>
+
+
+<% content_for :javascript do %>
+<script type="text/javascript" src=<%= "#{js_path}/admin.js"%>></script>
+<% end %>

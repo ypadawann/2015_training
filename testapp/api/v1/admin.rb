@@ -23,11 +23,16 @@ module API
       end
 
       resource '/admin' do
-        desc '管理者登録'
+        desc '管理者ID一覧取得'
+        get do
+          session_check()
+          { users: Model::Admins.get_all_id() }
+        end
         params do
           requires :admin_id, type: String , desc: '管理者ID'
           requires :admin_password, type: String, desc: 'パスワード'
         end
+        desc '管理者登録'
         post do
           session_check()
           if params[:admin_password].length < 8
@@ -68,6 +73,9 @@ module API
         desc '管理者削除'
         delete do
           session_check()
+          if env['rack.session'][:id] == params[:admin_id]
+            error!('Can not delete this account', 400)
+          end
           if !Model::Admins.remove(params[:admin_id])
             error!('Fail to Delete', 400)
           end

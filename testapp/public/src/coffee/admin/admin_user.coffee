@@ -30,17 +30,22 @@ userDelete = ->
     context:    this
 
 
-$('#user-select').bind 'click', ->
+startUserSelect = ->
   userSelect()
     .done (data) ->
-      document.querySelector("#user-name").value = data.name
+      $("#user-name").focus()
+      $("#user-name").val data.name
       ($('#select-department option').filter ->
         $(this).text() is data.department).prop 'selected', true
     .fail (xhr,  textStatus, errorThrown) ->
       if xhr.status is 403
         Materialize.toast('認証に失敗しました', 5000, 'alert-message')
       else
-       Materialize.toast('エラーが発生しました', 5000, 'alert-message')
+        Materialize.toast('エラーが発生しました', 5000, 'alert-message')
+
+
+$('#user-select').bind 'click', ->
+  startUserSelect()
 
 $('#user-modify').bind 'click', ->
   if $('#user-new-password').val() isnt $('#confirm-user-new-password').val()
@@ -64,7 +69,7 @@ startUserDelete = ->
       $('#user-id').val ''
       $('#user-name').val ''
       ($('#select-department option').filter ->
-        $(this).text() is '' ).prop 'selected', true
+        $(this).text() is '部署を選択' ).prop 'selected', true
       $('#user-new-password').val ''
       $('#confirm-user-new-password').val ''
     .fail (xhr,  status, error) ->
@@ -76,3 +81,7 @@ $ ->
       $('#user-delete-agree').bind 'click', ->
         startUserDelete()
     })
+
+  $('.enter-for-select-user').bind 'keydown', ->
+    if event.keyCode is 13
+      startUserSelect()

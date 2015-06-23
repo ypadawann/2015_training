@@ -1,5 +1,20 @@
+<div style="display:none"><%= @admin_id %></div>
+<nav>
+  <div class="nav-wrapper">
+    <ul class="left hide-on-med-and-dow"/>
+      <li><a href="#" id="to-top">トップページ</a></li>
+      <li><a href="#" id="admin-user">ユーザ情報管理</a></li>
+      <li><a href="#" id="admin-department">部署管理</a></li>
+      <li><a href="#" id="admin-admin">管理者情報管理</a></li>
+      <li><a href="#" id="to-admin-register">管理者追加</a></li>
+      <li><a href="#" id="admin-logout">ログアウト</a></li>
+    </ul>
+  </div>
+</nav>
+
 <%== yield %>
 
 <% content_for :javascript do %>
 <script type="text/javascript" src=<%= "#{js_path}/admin.js"%>></script>
 <% end %>
+
