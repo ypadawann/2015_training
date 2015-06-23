@@ -85,23 +85,6 @@
     ならば 画面遷移せず (非同期)
     かつ 名前 を含むアラートが表示される
 
-  シナリオ: 名前が長すぎるときユーザ登録が失敗する
-    前提: 部署 RDD が存在する
-
-    もし ユーザ登録(/register) 画面にアクセスし
-    かつ 以下を入力し
-      | 社員番号(#user_id)    | 1000        |
-      | 名前(#name)           | abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz |
-      | 入社年(#enter_year)   | 2014        |
-      | 入社月(#enter_month)  | 4           |
-      | 入社日(#enter_day)    | 1           |
-      | パスワード(#password) | abc         |
-    かつ 所属(#department) 欄から RDD を選択し
-    かつ 送信(#register) ボタンをクリックした
-
-    ならば 画面遷移せず (非同期)
-    かつ 名前 を含むアラートが表示される
-
   シナリオ: 部署が選択されていないときユーザ登録が失敗する
     もし ユーザ登録(/register) 画面にアクセスし
     かつ 以下を入力し
