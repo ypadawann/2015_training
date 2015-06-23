@@ -1,7 +1,14 @@
 @media print{
   body{
     font-family: "MS ゴシック","Hiragino Kaku Gothic ProN",sans-serif;
-    background: #ffffff;
+    margin: 0px;
+    color: #010101;
+  }
+
+  .container{
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
   }
 
   .print--hidden{
@@ -11,24 +18,23 @@
   .attendance-record{
     top: 0px;
     left: 0px;
-    width: 670px;
     position: relative;
   }
 
   .attendance-record__title{
-    font-size: 16px;
+    font-size: 20px;
     letter-spacing: 1em;
   }
 
   .attendance-record__profession{
     position: absolute;
     top: 0px;
-    left: 475px;
+    left: 590px;
     border-style: solid;
     border-width: 1px;
-    padding: 13px 43px 13px 43px;
+    padding: 20px 55px 20px 55px;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 24px;
   }
 
   .attendance-record__table{
@@ -41,14 +47,14 @@
     border-collapse: collapse;
     margin-top: 15px;
     position: absolute;
-    left: 255px;
+    left: 280px;
     box-sizing: border-box;
   }
 
-  @mixin attendance-record__table__menu--mixin($width, $height: 28px){
+  @mixin attendance-record__table__menu--mixin($width, $height: 35px){
     padding: 0px;
     margin: 0px;
-    font-size: 9px;
+    font-size: 12px;
     border-style: solid;
     border-width: 1px;
     border-color: #000000;
@@ -60,27 +66,27 @@
   }
 
   .attendance-record__table__menu{
-    @include attendance-record__table__menu--mixin(140px);
+    @include attendance-record__table__menu--mixin(150px);
   }
 
   .attendance-record__table__menu--title{
-    @include attendance-record__table__menu--mixin(56px);
+    @include attendance-record__table__menu--mixin(54px);
   }
 
   .attendance-record__table2--approval__menu{
-    @include attendance-record__table__menu--mixin(165px);
+    @include attendance-record__table__menu--mixin(231px);
   }
 
   .attendance-record__table2--request__menu{
-    @include attendance-record__table__menu--mixin(45px);
+    @include attendance-record__table__menu--mixin(60px);
   }
 
   .attendance-record__table2--approval__insert{
-    @include attendance-record__table__menu--mixin(55px, 56px);
+    @include attendance-record__table__menu--mixin(77px, 70px);
   }
 
   .attendance-record__table2--request__insert{
-    @include attendance-record__table__menu--mixin(45px, 56px);
+    @include attendance-record__table__menu--mixin(60px, 70px);
   }
 
   .attendance-record__table__menu__insert{
@@ -90,12 +96,12 @@
     background: none;
     text-align: center;
     vertical-align: middle;
-    font-size: 8px;
+    font-size: 11px;
     width: 100%;
   }
 
-  @mixin attendance-record__table__column--mixin($width: 45px){
-    font-size: 6px;
+  @mixin attendance-record__table__column--mixin($width: 60px){
+    font-size: 9px;
     padding: 0px;
     margin: 0px;
     border-style: solid;
@@ -104,7 +110,7 @@
     text-align: center;
     vertical-align: middle;
     width: $width;
-    height: 50px;
+    height: 60px;
     box-sizing: border-box;
   }
 
@@ -113,73 +119,71 @@
   }
 
   .attendance-record__table__column--dayAndweek{
-    @include attendance-record__table__column--mixin(28px);
+    @include attendance-record__table__column--mixin(27px);
     padding-top: 4px;
     vertical-align: top;
   }
 
   .attendance-record__table__column--attendance{
-    @include attendance-record__table__column--mixin(70px);
+    @include attendance-record__table__column--mixin(75px);
     border-right-style: dotted;
   }
 
   .attendance-record__table__column--leaving{
-    @include attendance-record__table__column--mixin(70px);
+    @include attendance-record__table__column--mixin(75px);
     border-left-style: none;
   }
 
   .attendance-record__table__column--mark{
-    @include attendance-record__table__column--mixin(50px);
-    font-size: 11px;
+    @include attendance-record__table__column--mixin(64px);
+    font-size: 12px;
     font-weight: bold;
   }
 
   .attendance-record__table__column--midnightAndholidayAndprearranged{
-    @include attendance-record__table__column--mixin(55px);
+    @include attendance-record__table__column--mixin(77px);
   }
 
   .attendance-record__table__column--etc{
-    @include attendance-record__table__column--mixin;
-    width: 150px;
-    height: 50px;
+    @include attendance-record__table__column--mixin(160px);
   }
 
-  @mixin attendance-record__table__cell--mixin($width: 45px){
+  @mixin attendance-record__table__cell--mixin($width: 60px){
     padding: 0px;
     margin: 0px;
     border-style: solid;
     border-width: 1px;
     border-color: #000000;
-    font-size: 6px;
-    height: 21px;
+    font-size: 9px;
+    height: 27px;
     width: $width;
     box-sizing: border-box;
     overflow: hidden;
   }
   .attendance-record__table__cell--dayAndweek{
-    @include attendance-record__table__cell--mixin(28px);
+    @include attendance-record__table__cell--mixin(27px);
   }
 
   .attendance-record__table__cell--attendanceLine{
-    @include attendance-record__table__cell--mixin(70px);
+    @include attendance-record__table__cell--mixin(75px);
     border-right-style: dotted;
   }
 
   .attendance-record__table__cell--leavingLine{
-    @include attendance-record__table__cell--mixin(70px);
+    @include attendance-record__table__cell--mixin(75px);
     border-left-style: none;
   }
 
   .attendance-record__table__cell--mark{
-    @include attendance-record__table__cell--mixin(50px);
+    @include attendance-record__table__cell--mixin(64px);
   }
 
   .attendance-record__table__cell--midnightAndholidayAndprearranged{
-    @include attendance-record__table__cell--mixin(55px);
+    @include attendance-record__table__cell--mixin(77px);
   }
 
   .attendance-record__table__cell--etc{
-    @include attendance-record__table__cell--mixin(150px);
+    @include attendance-record__table__cell--mixin(160px);
   }
 
   .attendance-record__table__insert{
@@ -189,7 +193,7 @@
     background: none;
     text-align: center;
     vertical-align: middle;
-    font-size: 6px;
+    font-size: 9px;
     width: 100%;
   }
 
@@ -199,8 +203,8 @@
     border-style: solid;
     border-width: 1px;
     border-color: #000000;
-    font-size: 6px;
-    height: 21px;
+    font-size: 9px;
+    height: 27px;
     box-sizing: border-box;
   }
 
@@ -212,7 +216,6 @@
     @include attendance-record__table__total--mixin;
     text-align: center;
     vertical-align: middle;
-    width: 30px;
   }
 
   @mixin attendance-record__table__finish-vacation--mixin{
@@ -221,8 +224,8 @@
     border-style: solid;
     border-width: 1px;
     border-color: #000000;
-    font-size: 6px;
-    height: 28px;
+    font-size: 9px;
+    height: 31px;
     box-sizing: border-box;
   }
 
@@ -234,6 +237,6 @@
     @include attendance-record__table__finish-vacation--mixin;
     text-align: center;
     vertical-align: middle;
-    width: 60px
+    width: 54px
   }
 }
