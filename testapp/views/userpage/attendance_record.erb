@@ -1,11 +1,11 @@
 <div class="print--hidden attendance-record__select row">
   <h3>出退勤状況</h3>
   <div class="input-field col s1">
-    <input type="number" id="year" class="validate">
+    <input type="number" id="year" class="validate" value="<%= Time.now.year %>">
     <label for="year">Year</label>
   </div>
   <div class="input-field col s1">
-    <input type="number" id="month" class="validate">
+    <input type="number" id="month" class="validate" value="<%= Time.now.month %>">
     <label for="month">Month</label>
   </div>
   <div class="col s1">
