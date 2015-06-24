@@ -129,6 +129,24 @@ parametersを受け取り、resultsをJSONで返す。
         * 403: 認証に失敗した
         * 404: 出勤していない
 
+* GET users/:user_id/attend
+    * 出勤の取得
+    * headers
+    * parameters
+    * results
+        * attendance: string
+    * errors
+        * 404: 出勤していない
+
+* GET users/:user_id/leave
+    * 退勤の取得
+    * headers
+    * parameters
+    * results
+        * leaving: string
+    * errors
+        * 404: 退勤していない
+
 * PUT users/:user_id/attend/:date
     * 出勤の更新
     * headers

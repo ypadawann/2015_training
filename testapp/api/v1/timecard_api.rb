@@ -16,6 +16,17 @@ module API
         requires :user_id, type: Integer, desc: '社員番号'
       end
       resource 'users/:user_id' do
+        get '/attend' do
+          user_id = params[:user_id]
+          authenticate!(user_id)
+          date = Date.today
+          if Model::Timecard_operation.get_attendance(date, user_id).present? === true
+            Model::Timecard_operation.get_attendance(date, user_id)
+          else
+            error!('出勤していない', 404)
+          end
+        end
+
         post '/attend' do
           user_id = params[:user_id]
           authenticate!(user_id)
@@ -46,6 +57,17 @@ module API
           results = Model::Users.status(user_id)
           results[:attendance] = time
           results
+        end
+
+        get '/leave' do
+          user_id = params[:user_id]
+          authenticate!(user_id)
+          date = Date.today
+          if Model::Timecard_operation.get_leaving(date, user_id).present? === true
+            Model::Timecard_operation.get_leaving(date, user_id)
+          else
+            error!('退勤していない', 404)
+          end
         end
 
         post '/leave' do
