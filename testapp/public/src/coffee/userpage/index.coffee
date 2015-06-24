@@ -1,5 +1,18 @@
 userId = $('#current-user-id').text()
 
+if (document.getElementById("attend-message") isnt null)
+  $.ajax(
+    type: 'get'
+    url: "//#{location.host}/api/v1/users/#{userId}/attend")
+    .done (attendance) ->
+      $('#attend-message').text "本日は#{attendance}に出勤しました"
+
+  $.ajax(
+    type: 'get'
+    url: "//#{location.host}/api/v1/users/#{userId}/leave")
+    .done (leave) ->
+      $('#leave-message').text "本日は#{leave}に退勤しました"
+
 attend = ->
   $.ajax(
     type: 'post'
@@ -30,16 +43,16 @@ viewPaidVacationNum = ->
 $('#attend').bind 'click', ->
   attend()
   .done (msg) ->
-    $('#attend-message').text msg.attendance + 'に出勤しました'
+    $('#attend-message').text "#{msg.attendance}に出勤しました"
   .fail (msg) ->
-    $('#attend-message').text JSON.parse(msg.responseText).error
+    Materialize.toast(JSON.parse(msg.responseText).error, 5000, 'alert-message')
 
 $('#leave').bind 'click', ->
   leave()
   .done (msg) ->
-    $('#leave-message').text msg.leaving + 'に退勤しました'
+    $('#leave-message').text "#{msg.leaving}に退勤しました"
   .fail (msg) ->
-    $('#leave-message').text JSON.parse(msg.responseText).error
+    Materialize.toast(JSON.parse(msg.responseText).error, 5000, 'alert-message')
 
 $('#logout').bind 'click', ->
   logout()
