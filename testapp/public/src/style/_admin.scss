@@ -1,13 +1,41 @@
-.admin-button-color {
+$ADMIN_NORMAL_FONT_SIZE: 18px;
+$ADMIN_UPPER_LABEL_FONT_SIZE: 14px;
+
+.admin-button {
   //@extend .orange, .darken-4;
- @extend .deep-orange;
+  @extend .deep-orange;
   //@extend .purple, .accent-3
   //background-color: #FFF100;
   //background-color: #FDC734;
+  font-size: $ADMIN_NORMAL_FONT_SIZE;
 }
 
 .admin-menu-background-color{
   //@extend .deep-purple
   //background-color: #277FD8;
   background-color: #021F4D;
+}
+
+
+.admin-form{
+  .input-field {
+    input{
+      font-size: $ADMIN_NORMAL_FONT_SIZE;
+    }
+    label{
+      font-size: $ADMIN_NORMAL_FONT_SIZE;
+    }
+    label.active{
+      font-size: $ADMIN_UPPER_LABEL_FONT_SIZE;
+    }
+  }
+  .select-field {
+    label {
+      font-size: $ADMIN_UPPER_LABEL_FONT_SIZE;
+      color: #26a69a;
+    }
+    select {
+      font-size: $ADMIN_NORMAL_FONT_SIZE;
+    }
+  }
 }
