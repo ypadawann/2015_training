@@ -117,6 +117,7 @@ $('#timecard-save').bind 'click', ->
   save(userId, year, month)
   .done (msg) ->
     showRecords(userId, year, month)
+    Materialize.toast('保存しました。', 5000)
   .fail (xhr, status, error) ->
     Materialize.toast(JSON.parse(xhr.responseText).error, 5000, 'alert-message')
 
