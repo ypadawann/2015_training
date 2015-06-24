@@ -1,7 +1,6 @@
 _ = require 'lodash'
 
-makeRow = (tableobj, rowNumber) ->
-  row = tableobj.insertRow(rowNumber + 4)
+makeRow = (row, rowNumber) ->
   cell1 = row.insertCell(0)
   cell2 = row.insertCell(1)
   cell3 = row.insertCell(2)
@@ -46,7 +45,6 @@ makeRow = (tableobj, rowNumber) ->
   cell9.innerHTML = data9
   cell10.innerHTML = data10
   cell11.innerHTML = data11
-  row
 
 save = (userId, year, month) ->
   day = new Date(year, month, 0).getDate()
@@ -78,20 +76,20 @@ getRecords = (userId, year, month) ->
     dataType: 'json'
   )
 
-clearTable = (tableobj) ->
-  if tableobj.rows.length > 7
-    for i in [tableobj.rows.length-1..8]
-      tableobj.deleteRow i
+setTable = (table, data_length) ->
+  _.range(table.rows.length - 7, data_length, 1).map (i) ->
+    row = table.insertRow(i + 5)
+    makeRow(row, i + 1)
+  _.range(table.rows.length - 7, data_length, -1).map (i) ->
+    table.deleteRow(i + 4)
 
 showRecords = (userId, year, month) ->
   getRecords(userId, year, month)
   .done (msg) ->
-    table = $('#table')[0]
-    clearTable(table)
     $('#YearsAndMonths').text "#{year}年#{month}月"
+    setTable($('#table')[0], msg.data.length)
     _.forEach(msg.data, (data) ->
       i = data.day
-      makeRow(table, i)
       $("#day#{i}").text                data.day
       $("#weekday#{i}").text            data.weekday
       $("#attendance#{i}").val          data.attendance
@@ -105,6 +103,8 @@ showRecords = (userId, year, month) ->
       row = $("#table tr:nth-child(#{i + 5})")
       if data.isholiday
         row.addClass 'attendance-record__table__row--holiday'
+      else if row.hasClass 'attendance-record__table__row--holiday'
+        row.removeClass 'attendance-record__table__row--holiday'
     )
     $("#total-midnight-work").text msg.total.midnight_work
     $("#total-holiday-shift").text msg.total.holiday_shift
