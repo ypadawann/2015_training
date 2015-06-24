@@ -102,8 +102,9 @@ showRecords = (userId, year, month) ->
       $("#paid-vacation#{i}").val       data.paid_vacation
       $("#holiday-acquisition#{i}").val data.holiday_acquisition
       $("#etc#{i}").val                 data.etc
+      row = $("#table tr:nth-child(#{i + 5})")
       if data.isholiday
-        table.rows[i + 4].style.backgroundColor = '#D9D9D9'
+        row.addClass 'attendance-record__table__row--holiday'
     )
     $("#total-midnight-work").text msg.total.midnight_work
     $("#total-holiday-shift").text msg.total.holiday_shift
