@@ -207,7 +207,7 @@
     もし "1" 秒待機
     かつ "登録する部署名(#register-department-name)" に "横須賀鎮守府" を入力
     かつ "選択ボタン(#department-register)" をクリック
-    ならば "アラート(.alert-message)" に "すでに登録されている部署です" と表示
+    ならば "アラート(.alert-message)" に "その部署名は既に登録されています。" と表示
     
     もし "1" 秒待機
     かつ "部署(#select-department)" で "横須賀鎮守府" を選択
