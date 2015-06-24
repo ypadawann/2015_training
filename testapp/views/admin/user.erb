@@ -1,6 +1,6 @@
-<h1 id="page-name">ユーザ情報管理</h1>
+<h3>ユーザ情報管理</h3>
 
-<div class="row">
+<div class="row admin-form">
   <div class="col s12">
     <div class="row">
       <div class="input-field col s6">
@@ -8,30 +8,28 @@
         <label for="user-id">User ID</label>
       </div>
       <div class="input-field col s6">
-        <a class="waves-effect waves-light btn" id="user-select">選択</a>
+        <a class="waves-effect waves-light btn admin-button" id="user-select">選択</a>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s12">
         <input id="user-name" type="text" class="validate">
-        <label for="user-id">User Name</label>
+        <label for="user-name">User Name</label>
       </div>
     </div>
-  </div>
-</div>
-
-<label>所属部署</label>
-<select class="browser-default" id="select-department">
-  <option value="0" disabled selected>部署を選択</option>
-  <%==
-     Model::Departments.list_ids.map { |d|
-     "<option value=#{d}>#{Model::Departments.name_of(d)}</option>"
-     }.join
-     %>
-</select>
-
-<div class="row">
-  <div class="col s12">
+    <div class="row">
+      <div class="select-field col s8">
+	<label>所属部署</label>
+	<select class="browser-default" id="select-department">
+	  <option value="0" disabled selected>部署を選択</option>
+	  <%==
+	     Model::Departments.list_ids.map { |d|
+	     "<option value=#{d}>#{Model::Departments.name_of(d)}</option>"
+	     }.join
+	     %>
+	</select>
+      </div>
+    </div>
     <div class="row">
       <div class="input-field col s12">
         <input id="user-new-password" type="text" class="validate">
@@ -48,11 +46,11 @@
 </div>
 
 <p>
-  <a class="waves-effect waves-light btn" id="user-modify" href="#">変更</a>
+  <a class="waves-effect waves-light btn admin-button" id="user-modify" href="#">変更</a>
 </p>
 
 <p>
-  <a class="waves-effect waves-light btn modal-trigger" id="user-delete" href="#modal">削除</a>
+  <a class="waves-effect waves-light btn modal-trigger admin-button" id="user-delete" href="#modal">削除</a>
 </p>
 
 

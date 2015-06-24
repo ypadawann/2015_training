@@ -19,6 +19,9 @@
     かつ "ログインボタン(#admin-login)" をクリック
     ならば "ログアウトボタン(#admin-logout)" が存在
 
+    もし "ユーザ情報管理ページ(/admin/user)" にアクセス
+    ならば "ユーザ情報変更ボタン(#user-modify)" が存在
+
   シナリオ: ログイン処理（エンターキー）
     前提 管理者にID "admin"、パスワード "password" が存在
 
@@ -50,10 +53,46 @@
 
     もし "ユーザ情報管理(#admin-user)" をクリック
     ならば "ユーザ情報変更ボタン(#user-modify)" が存在
-
-    もし "トップページ(/admin/top)" にアクセス
-    かつ "部署管理(#admin-department)" をクリック
+    
+    もし "部署管理(#admin-department)" をクリック
     ならば "部署登録ボタン(#department-register)" が存在
+
+    もし "管理者情報管理(#admin-admin)" をクリック
+    ならば "管理者情報変更ボタン(#admin-modify)" が存在
+
+    もし "管理者追加(#to-admin-register)" をクリック
+    ならば "管理者登録ボタン(#admin-register)" が存在
+
+    もし "トップページ(#to-top)" をクリック
+    ならば "管理画面トップ" と表示されている
+
+
+  シナリオ: ログイン後にページ遷移(トップページから)
+    前提 管理者にID "admin"、パスワード "password" が存在
+
+    もし "ログインページ(/admin/login)" にアクセス
+    ならば "管理者ID(#admin-id)" に "admin" を入力
+    かつ "管理者パスワード(#admin-password)" に "password" を入力
+   
+    もし "ログインボタン(#admin-login)" をクリック
+    ならば "ログアウトボタン(#admin-logout)" が存在
+
+    もし "ユーザ情報管理(#top__admin-user)" をクリック
+    ならば "ユーザ情報変更ボタン(#user-modify)" が存在
+    
+    もし "管理者情報管理(#to-top)" をクリック
+    かつ "部署管理(#top__admin-department)" をクリック
+    ならば "部署登録ボタン(#department-register)" が存在
+
+    もし "管理者情報管理(#to-top)" をクリック
+    かつ "管理者情報管理(#top__admin-admin)" をクリック
+    ならば "管理者情報変更ボタン(#admin-modify)" が存在
+
+    もし "管理者情報管理(#to-top)" をクリック
+    かつ "管理者追加(#top__to-admin-register)" をクリック
+    ならば "管理者登録ボタン(#admin-register)" が存在
+
+
 
   シナリオ: ユーザ情報変更
     前提 管理者にID "admin"、パスワード "password" が存在

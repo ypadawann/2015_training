@@ -70,3 +70,8 @@ end
 もし(/^"(.*?)" 秒待機$/) do | second |
   sleep second.to_f
 end
+
+
+ならば(/^"(.*?)" と表示されている$/) do | str |
+  expect(page).to have_content str
+end
