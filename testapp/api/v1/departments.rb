@@ -11,7 +11,7 @@ module API
 
       helpers do
         def find!(department_id)
-          error!('Not Found', 404) unless
+          error!('存在しない部署です', 404) unless
             Model::Departments.exists?(department_id)
         end
       end
@@ -27,11 +27,14 @@ module API
           requires :name, type: String, desc: '部署名'
         end
         post do
+          if Model::Departments.name_exists?(params[:name])
+            error!('すでに登録されている部署です', 400)
+          end
           if Model::Departments.add(params[:name])
             { department_id: Model::Departments.id_of(params[:name]),
               name: params[:name] }
           else
-            error!('Failed to Register', 400)
+            error!('登録に失敗しました', 400)
           end
         end
 
@@ -63,7 +66,7 @@ module API
             if Model::Departments.remove(params[:department_id])
               { department_id: params[:department_id], name: name }
             else
-              error!('Failed to Delete', 400)
+              error!('削除に失敗しました', 400)
             end
           end
         end

@@ -7,7 +7,6 @@ adminSelect = ->
     context:    this
 
 adminModify = ->
-  #adminId = $('#admin-id').val()
   adminId =  $('#select-admin-id option:selected').text()
   deferred = $.ajax
     type:      "PUT"
@@ -19,7 +18,6 @@ adminModify = ->
     context:    this
 
 adminDelete = ->
-#  adminId = $("#admin-id").val()
   adminId =  $('#select-admin-id option:selected').text()
   deferred = $.ajax
     type:      "DELETE"
@@ -39,11 +37,8 @@ $('#admin-modify').bind 'click', ->
         $('#admin-new-password').val ''
         $('#confirm-admin-new-password').val ''
         $('#admin-password').val ''
-      .fail (xhr,  status, error) ->
-        if xhr.status is 403
-          Materialize.toast('認証に失敗しました', 5000, 'alert-message')
-        else
-          Materialize.toast('エラーが発生しました', 5000, 'alert-message')
+      .fail (xhr, status, error) ->
+        apiErrorToast(xhr)
 
 startAdminDelete = ->
   adminDelete()
@@ -55,8 +50,8 @@ startAdminDelete = ->
       $('#admin-new-password').val ''
       $('#confirm-admin-new-password').val ''
       $('#admin-password').val ''
-    .fail (xhr,  status, error) ->
-      Materialize.toast('エラーが発生しました', 5000, 'alert-message')
+    .fail (xhr, status, error) ->
+      apiErrorToast(xhr)
 
 $ ->
   $('#admin-delete').leanModal({

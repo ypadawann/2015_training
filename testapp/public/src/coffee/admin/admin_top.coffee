@@ -24,5 +24,5 @@ $('.admin-logout').bind 'click', ->
   adminLogout()
     .done (data) ->
       document.location = '/admin'
-    .fail (data) ->
-      Materialize.toast('エラーが発生しました', 5000, 'alert-message')
+    .fail (xhr) ->
+      apiErrorToast(xhr)

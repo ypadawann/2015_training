@@ -7,17 +7,17 @@ module API
     class Admin < Grape::API
       helpers do
         def verify_password!(admin_id, admin_password)
-          error!('Access Denied', 403) unless
+          error!('認証に失敗しました', 403) unless
             Model::Admins.verify(admin_id, admin_password)
         end
         
         def find_user!(user_id)
-          error!('the account is not found', 404) unless
+          error!('存在しないユーザIDです', 403) unless
             Model::Users.exists?(user_id)
         end
         
         def find_admin!(user_id)
-          error!('the account is not found', 404) unless
+          error!('存在しない管理者IDです', 403) unless
             Model::Admins.exists?(user_id)
         end
       end
@@ -36,11 +36,11 @@ module API
         post do
           session_check()
           if params[:admin_password].length < 8
-            error!('Failed to Register', 400)
+            error!('パスワードは8文字以上でなくてはなりません', 400)
           end
           if Model::Admins.add(params[:admin_id], params[:admin_password])
           else
-            error!('Failed to Register', 400)
+            error!('登録に失敗しました', 400)
           end
         end
       end
@@ -59,7 +59,11 @@ module API
           requires :admin_password, type: String, desc: 'パスワード'
         end
         put  do
-          verify_password!(params[:admin_id], params[:admin_password])
+          if params[:admin_id].empty?
+            error!('IDを入力してください', 403)
+          end
+          error!('ログインに失敗しました', 403) unless
+            Model::Admins.verify(params[:admin_id], params[:admin_password])
           env['rack.session'][:id] = params[:admin_id]
           env['rack.session'][:admin_login] = true
         end
@@ -74,10 +78,10 @@ module API
         delete do
           session_check()
           if env['rack.session'][:id] == params[:admin_id]
-            error!('Can not delete this account', 400)
+            error!('自身のアカウントは削除できません', 400)
           end
           if !Model::Admins.remove(params[:admin_id])
-            error!('Fail to Delete', 400)
+            error!('削除に失敗しました', 400)
           end
         end
 

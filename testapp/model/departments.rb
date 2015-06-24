@@ -52,5 +52,10 @@ module Model
     def self.exists?(id)
       Model::Department.exists?(id)
     end
+
+    def self.name_exists?(name)
+      Model::Department.exists?(name: name)
+    end
+
   end
 end

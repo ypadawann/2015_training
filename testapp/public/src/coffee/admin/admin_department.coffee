@@ -32,11 +32,7 @@ startDepartmentRegister = ->
       $("#select-department").append(new_node)
       $("#register-department-name").val ''
     .fail (xhr,  status, error) ->
-      if xhr.status is 400
-        Materialize.toast('すでに登録されている部署です', 5000, 'alert-message')
-      else
-        Materialize.toast('部署の登録に失敗しました', 5000, 'alert-message')
-
+      apiErrorToast(xhr)
 
 startDepartmentRename = ->
   oldName = $("#select-department option:selected").text()
@@ -45,12 +41,8 @@ startDepartmentRename = ->
       $("#select-department option:selected").text data.name
       $("#new-department-name").val ''
       Materialize.toast("#{oldName} を #{data.name} に変更しました", 5000, 'alert-message')
-    .fail (xhr,  status, error) ->
-      if xhr.status is 404
-        Materialize.toast('部署が見つかりません', 5000, 'alert-message')
-      else
-        Materialize.toast('部署名の変更に失敗しました', 5000, 'alert-message')
-
+    .fail (xhr, status, error) ->
+      apiErrorToast(xhr)
 
 startDepartmentDelete = ->
   departmentDelete()
@@ -58,11 +50,7 @@ startDepartmentDelete = ->
       Materialize.toast("#{data.name}を削除しました", 5000, 'alert-message')
       $("#select-department option:selected").remove()
     .fail (xhr,  status, error) ->
-      if xhr.status is 400
-        Materialize.toast('所属している人がいます', 5000, 'alert-message')
-      if xhr.status is 404
-        Materialize.toast('部署が見つかりません', 5000, 'alert-message')
-
+      apiErrorToast(xhr)
 
 $('#department-register').bind 'click', ->
   startDepartmentRegister()
