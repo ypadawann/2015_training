@@ -10,6 +10,7 @@ module Model
       new_department = Model::Department.new
       new_department.name = name
       new_department.save
+      new_department.errors.messages
     end
 
     def self.remove(id)
@@ -32,6 +33,7 @@ module Model
       department = Model::Department.find(id)
       department.name = name
       department.save
+      department.errors.messages
     end
 
     def self.list_names
@@ -52,10 +54,5 @@ module Model
     def self.exists?(id)
       Model::Department.exists?(id)
     end
-
-    def self.name_exists?(name)
-      Model::Department.exists?(name: name)
-    end
-
   end
 end

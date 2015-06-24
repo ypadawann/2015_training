@@ -27,14 +27,12 @@ module API
           requires :name, type: String, desc: '部署名'
         end
         post do
-          if Model::Departments.name_exists?(params[:name])
-            error!('すでに登録されている部署です', 400)
-          end
-          if Model::Departments.add(params[:name])
+          error_msg =  Model::Departments.add(params[:name])
+          if error_msg.empty?
             { department_id: Model::Departments.id_of(params[:name]),
               name: params[:name] }
           else
-            error!('登録に失敗しました', 400)
+            error!(error_msg[:name][0], 400)
           end
         end
 
@@ -54,9 +52,13 @@ module API
             requires :name, type: String, desc: '新しい部署名'
           end
           put do
-            find!(params[:department_id])
-            Model::Departments.update(params[:department_id], params[:name])
-            { department_id: params[:department_id], name: params[:name] }
+            error_msg =
+              Model::Departments.update(params[:department_id], params[:name])
+            if error_msg.empty?
+              { department_id: params[:department_id], name: params[:name] }
+            else
+              error!(error_msg[:name][0], 400)
+            end
           end
 
           desc '部署の削除'
