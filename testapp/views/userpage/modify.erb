@@ -1,27 +1,44 @@
-<h3>ユーザ情報管理</h3>
-<p>ID:<span id="user-id"><%= @user_id %></span></p>
-<p>名前:<input type="text" id="user-name" size="40"></p>
-<p>所属：
-  <select class="browser-default" id="department">
-    <option value="0" id="default_department"></option>
-    <%==
-      Model::Departments.list_ids.map { |d|
-      "<option value=#{d}>#{Model::Departments.name_of(d)}</option>"
-    }.join
-    %>
-  </select>
-</p>
-<p>new pass:<input type="password" id="new-password" size="40"></p>
-<p>pass:<input type="password" id="password" size="40"></p>
-<p>
-<input type="button" id="user-modify" class="btn" value="変更">
-</p>
-<p>
-<button id="delete" data-target="modal1" class="btn modal-trigger">削除</button>
-</p>
+<h3>ユーザ情報変更</h3>
+<div class="row">
+  <form class="col s12">
+    <div class="input-field col s12">
+      <input id="user-name" type="text" placeholder="" class="validate">
+      <label for="user-name">名前</label>
+    </div>
+    <div class="input-field col s12">
+      <select id="department">
+        <%==
+          Model::Departments.list_ids.map { |d|
+          "<option value=#{d}>#{Model::Departments.name_of(d)}</option>"
+        }.join
+        %>
+      </select>
+      <label>所属</label>
+    </div>
+    <div class="input-field">
+      <input id="new-password" type="password" placeholder="変更しない場合は空欄のままにして下さい。" class="validate">
+      <label for="new-password">新しいパスワード</label>
+    </div>
+  </form>
+</div>
+<div class="row">
+  <form class="col s12">
+    <div class="input-field col s12">
+      <input id="password" type="password" class="validate">
+      <label for="password">現在のパスワード</label>
+    </div>
+    <div class="col s6">
+      <input type="button" id="user-modify" class="btn" value="変更">
+    </div>
+    <div class="col s6">
+      <button id="delete" data-target="modal1" class="btn modal-trigger">アカウント削除</button>
+    </div>
+  </form>
+</div>
+
 <div id="modal1" class="modal">
   <div class="modal-content">
-    <p>本当にアカウントを削除しますか？</p>
+    <p>削除すると以後ログインできません。本当にアカウントを削除しますか？</p>
   </div>
   <div class="modal-footer">
     <a id="cancel" class=" modal-action modal-close waves-effect waves-green btn-flat">cancel</a>

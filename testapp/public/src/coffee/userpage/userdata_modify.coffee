@@ -1,12 +1,12 @@
+userId = $('#current-user-id').text()
+
 userSelect = ->
-  userId = $("#user-id").text()
   $.ajax(
     type: "get"
     url: "//#{location.host}/api/v1/users/#{userId}"
   )
 
 userModify = ->
-  userId = $('#user-id').text()
   userName = $('#user-name').val()
   department = $('#department option:selected').text()
   newPassword = $('#new-password').val()
@@ -22,7 +22,6 @@ userModify = ->
   )
 
 userDelete = ->
-  userId = $("#user-id").text()
   password = $('#password').val()
   $.ajax(
     type: "post"
