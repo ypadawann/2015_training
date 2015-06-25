@@ -53,8 +53,8 @@ switch location.pathname
     userSelect()
       .done (data) ->
         $('#user-name').val data.name
-        ($('#department option').filter ->
-          return $(this).text() is data.department).prop 'selected', true
+        $('#department').val(data.department)
+        $('#department').material_select()
         $('#enter-year').val data.enter_date.year
         $('#enter-month').val data.enter_date.month
         $('#enter-day').val data.enter_date.day
@@ -87,7 +87,6 @@ $('#cancel').bind 'click', ->
   Materialize.toast('アカウント削除をキャンセルしました', 1500, 'alert-message')
 
 $(document).ready ->
-  $("#department").material_select()
   $('.modal-trigger').leanModal(
       opacity: .5,
       in_duration: 300,
