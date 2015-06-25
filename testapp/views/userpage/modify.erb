@@ -1,5 +1,5 @@
-<h3>ユーザ情報変更</h3>
-<div class="row">
+<div class="row userpage__modify--operation">
+  <h3>ユーザ情報変更</h3>
   <form class="col s12">
     <div class="input-field col s12">
       <input id="user-name" type="text" placeholder="" class="validate">
@@ -28,22 +28,28 @@
       <label for="enter-day">日</label>
     </div>
     <div class="input-field col s12">
-      <input id="new-password" type="password" placeholder="変更しない場合は空欄のままにして下さい。" class="validate">
+      <input id="new-password" type="password" placeholder="変更しない場合は空欄にして下さい。" class="validate">
       <label for="new-password">新しいパスワード</label>
+    </div>
+    <div class="input-field col s12">
+      <input id="password-for-modify" type="password" class="validate">
+      <label for="password-for-modify">現在のパスワード</label>
+    </div>
+    <div class="col s12">
+      <input type="button" id="user-modify" class="btn" value="変更">
     </div>
   </form>
 </div>
-<div class="row">
+
+<div class="row userpage__modify--operation">
+  <h3>ユーザアカウント削除</h3>
   <form class="col s12">
     <div class="input-field col s12">
-      <input id="password" type="password" class="validate">
-      <label for="password">現在のパスワード</label>
+      <input id="password-for-delete" type="password" class="validate">
+      <label for="password-for-delete">パスワード</label>
     </div>
-    <div class="col s6">
-      <input type="button" id="user-modify" class="btn" value="変更">
-    </div>
-    <div class="col s6">
-      <button id="delete" data-target="modal1" class="btn modal-trigger">アカウント削除</button>
+    <div class="col s12">
+      <button id="delete" data-target="modal1" class="btn modal-trigger">削除</button>
     </div>
   </form>
 </div>
