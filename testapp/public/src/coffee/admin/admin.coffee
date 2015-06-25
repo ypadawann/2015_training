@@ -11,3 +11,6 @@ window.apiErrorToast = (response) ->
     Materialize.toast(JSON.parse(response.responseText).error, 5000, 'alert-message')
   catch error
     Materialize.toast('エラーが発生しました', 5000, 'alert-message') 
+
+$ ->
+  $("select").material_select()
