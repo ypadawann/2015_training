@@ -36,7 +36,7 @@
     </tr>
   </table>
 
-  <table border="1" cellspacing="0" cellpadding="0" id="table" class="attendance-record__table">
+  <table border="0" cellspacing="0" cellpadding="0" class="attendance-record__table">
     <tr>
       <td class="attendance-record__table__menu--title" colspan="2">年月</td>
       <td class="attendance-record__table__menu" colspan="2"><div id="YearsAndMonths" class="attendance-record__table__menu__insert"/></td>
@@ -66,18 +66,24 @@
       <td title="振替休暇取得日を入力" class="attendance-record__table__column">振替休暇<br>取得日</td>
       <td title="自由記入欄" class="attendance-record__table__column--etc">時間外業務は必ず上司による指示を受けてください。</td>
     </tr>
+  </table>
+
+  <table border="1" cellspacing="0" cellpadding="0" id="table" class="attendance-record__table">
+  </table>
+
+  <table border="1" cellspacing="0" cellpadding="0" class="attendance-record__table">
     <tr>
-      <td class="attendance-record__table__total--top">合計</td>
+      <td class="attendance-record__table__total--dayAndweek">合計</td>
+      <td class="attendance-record__table__total--dayAndweek"></td>
+      <td class="attendance-record__table__total--attendAndleave"></td>
+      <td class="attendance-record__table__total--attendAndleave"></td>
+      <td class="attendance-record__table__total--mark"></td>
+      <td class="attendance-record__table__total--midnightAndholidayAndprearranged"><span id="total-midnight-work"></span></td>
+      <td class="attendance-record__table__total--midnightAndholidayAndprearranged"><span id="total-holiday-shift"></span></td>
+      <td class="attendance-record__table__total--midnightAndholidayAndprearranged"></td>
       <td class="attendance-record__table__total"></td>
       <td class="attendance-record__table__total"></td>
-      <td class="attendance-record__table__total"></td>
-      <td class="attendance-record__table__total"></td>
-      <td class="attendance-record__table__total"><span id="total-midnight-work"></span></td>
-      <td class="attendance-record__table__total"><span id="total-holiday-shift"></span></td>
-      <td class="attendance-record__table__total"></td>
-      <td class="attendance-record__table__total"></td>
-      <td class="attendance-record__table__total"></td>
-      <td class="attendance-record__table__total"></td>
+      <td class="attendance-record__table__total--etc"></td>
     </tr>
     <tr>
       <td class="attendance-record__table__finish-vacation--top" colspan="2">当月消化<br>有休日数</td>

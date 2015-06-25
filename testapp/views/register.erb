@@ -1,11 +1,12 @@
-<h1><%= "ユーザ登録" %></h1>
-<p>ID:<input type="number" id="user_id" size="40"></p>
-<p>名前:<input type="text" id="name" maxlength="50" size="40"></p>
-<p>所属：
+<div class="container">
+  <h1><%= "ユーザ登録" %></h1>
+  <p>ID:<input type="number" id="user_id" size="40"></p>
+  <p>名前:<input type="text" id="name" maxlength="50" size="40"></p>
+  <p>所属：
   <select class="browser-default" id="department"><%==
     Model::Departments.list_ids.map { |d|
-      "<option value=#{d}>#{Model::Departments.name_of(d)}</option>"
-    }.join
+    "<option value=#{d}>#{Model::Departments.name_of(d)}</option>"
+  }.join
   %></select>
 </p>
 <p>入社日：
@@ -19,5 +20,7 @@
 </p>
 
 <% content_for :javascript do %>
-<script type="text/javascript" src=<%= "#{js_path}/register.js" %>></script>
+  <script type="text/javascript" src=<%= "#{js_path}/register.js" %>></script>
 <% end %>
+<a href=<%= app_path %> class="print--hidden">トップページ</a>
+</div>
