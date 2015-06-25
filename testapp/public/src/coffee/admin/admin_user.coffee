@@ -71,6 +71,8 @@ startUserDelete = ->
 $ ->
   $('#user-delete').leanModal({
     ready: ->
+      $('#modal__user-delete__user-id').text "ID: #{$('#user-id').val()}"
+      $('#modal__user-delete__user-name').text "名前: #{$('#user-name').val()}"
       $('#user-delete-agree').bind 'click', ->
         startUserDelete()
     })
