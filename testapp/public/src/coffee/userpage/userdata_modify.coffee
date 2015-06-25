@@ -34,6 +34,9 @@ $('#user-modify').bind 'click', ->
   userModify()
     .done (data)   ->
       Materialize.toast('ユーザ情報を変更しました', 5000, 'alert-message')
+      setTimeout( ->
+        location.reload()
+      ,1500)
     .fail (xhr,  status, error) ->
       if xhr.status is 403
         Materialize.toast('認証に失敗しました', 5000, 'alert-message')
@@ -74,9 +77,6 @@ $('#ok').bind 'click', ->
 
 $('#cancel').bind 'click', ->
   Materialize.toast('アカウント削除をキャンセルしました', 1500, 'alert-message')
-  setTimeout( ->
-    location.reload()
-  , 1500)
 
 $(document).ready ->
   $("#department").material_select()
