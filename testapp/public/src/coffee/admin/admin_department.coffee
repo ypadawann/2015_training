@@ -60,14 +60,11 @@ $('#department-rename').bind 'click', ->
 
 
 $ ->
-  $("#select-department").material_select()
-  
   $('#department-delete').leanModal({
     ready: ->
       $('#department-delete-agree').bind 'click', ->
         startDepartmentDelete()
     })
-
 
   $('.enter-for-regist-department').bind 'keydown', ->
     if event.keyCode is 13

@@ -1,18 +1,22 @@
-<div style="display:none"><%= @admin_id %></div>
-<nav>
-  <div class="nav-wrapper admin-menu-background-color">
-    <ul class="left hide-on-med-and-dow"/>
+<div class="container">
+
+  <div style="display:none"><%= @admin_id %></div>
+  <nav>
+    <div class="nav-wrapper admin-menu-background-color">
+      <ul class="left hide-on-med-and-dow">
       <li><a href="#" class="to-top" id="to-top">トップページ</a></li>
       <li><a href="#" class="to-admin-user" id="admin-user">ユーザ情報管理</a></li>
       <li><a href="#" class="to-admin-department" id="admin-department">部署管理</a></li>
       <li><a href="#" class="to-admin-modify" id="admin-admin">管理者情報管理</a></li>
       <li><a href="#" class="to-admin-register" id="to-admin-register">管理者追加</a></li>
       <li><a href="#" class="admin-logout" id="admin-logout">ログアウト</a></li>
-    </ul>
-  </div>
-</nav>
-
-<%== yield %>
+      </ul>
+    </div>
+  </nav>
+  
+  <%== yield %>
+  
+</div>
 
 <% content_for :javascript do %>
 <script type="text/javascript" src=<%= "#{js_path}/admin.js"%>></script>

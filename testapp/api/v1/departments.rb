@@ -28,12 +28,9 @@ module API
         end
         post do
           error_msg =  Model::Departments.add(params[:name])
-          if error_msg.empty?
-            { department_id: Model::Departments.id_of(params[:name]),
-              name: params[:name] }
-          else
-            error!(error_msg[:name][0], 400)
-          end
+          check_activerecord_validation(error_msg)
+          { department_id: Model::Departments.id_of(params[:name]),
+            name: params[:name] }
         end
 
         params do
@@ -54,11 +51,8 @@ module API
           put do
             error_msg =
               Model::Departments.update(params[:department_id], params[:name])
-            if error_msg.empty?
-              { department_id: params[:department_id], name: params[:name] }
-            else
-              error!(error_msg[:name][0], 400)
-            end
+            check_activerecord_validation(error_msg)
+            { department_id: params[:department_id], name: params[:name] }
           end
 
           desc '部署の削除'

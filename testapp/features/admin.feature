@@ -330,7 +330,7 @@
     かつ "管理者パスワード(#admin-password)" に "secondpassword" を入力
     かつ "確認パスワード(#confirm-admin-password)" に "secondpassword" を入力
     かつ "管理者登録ボタン(#admin-register)" をクリック
-    ならば "アラート(.alert-message)" に "登録に失敗しました" と表示
+    ならば "アラート(.alert-message)" に "そのIDは既に使われています。" と表示
 
     もし "ログインページ(/admin/login)" にアクセス
     かつ "管理者ID(#admin-id)" に "root" を入力

@@ -21,10 +21,11 @@ startAdminRegister = ->
         location.href='#'
       .fail (xhr) ->
         apiErrorToast(xhr)
- 
-$('#admin-register').bind 'click', ->
-  startAdminRegister()
-  
-$('.enter-for-regist-admin').bind 'keydown', ->
-  if event.keyCode is 13
+
+$ ->
+  $('#admin-register').bind 'click', ->
     startAdminRegister()
+
+  $('.enter-for-regist-admin').bind 'keydown', ->
+    if event.keyCode is 13
+      startAdminRegister()

@@ -1,24 +1,31 @@
-<h3>管理画面ログイン</h3>
-
-<div class="row admin-form">
-  <div class="col s12">
-    <div class="row">
-      <div class="input-field col s12">
-        <input id="admin-id" type="text" class="validate enter-keydown-login">
-        <label for="admin-id" class="test-css">Admin ID</label>
-      </div>
+<div class="container">
+  <nav>
+    <div class="nav-wrapper admin-menu-background-color">
     </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <input id="admin-password" type="password" class="validate enter-keydown-login">
-        <label for="admin-password">Password</label>
+  </nav>
+  
+  <div class="admin-pagename">管理画面ログイン</div>
+  
+  <div class="row admin-form">
+    <div class="col s12">
+      <div class="row">
+	<div class="input-field col s12">
+          <input id="admin-id" type="text" class="validate enter-keydown-login" autofocus>
+          <label for="admin-id" class="active">Admin ID</label>
+	</div>
+      </div>
+      <div class="row">
+	<div class="input-field col s12">
+          <input id="admin-password" type="password" class="validate enter-keydown-login">
+          <label for="admin-password">Password</label>
+	</div>
       </div>
     </div>
   </div>
+  
+  <a class="waves-effect waves-light btn admin-button" id="admin-login">ログイン</a>
+  
 </div>
-
-<a class="waves-effect waves-light btn admin-button" id="admin-login">ログイン</a>
-
 
 <% content_for :javascript do %>
 <script type="text/javascript" src=<%= "#{js_path}/admin.js"%>></script>

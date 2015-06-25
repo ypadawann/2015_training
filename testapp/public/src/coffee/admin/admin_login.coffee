@@ -13,10 +13,12 @@ startAdminLogin = ->
       document.location = '/admin/top'
     .fail (response) ->
       apiErrorToast(response)
-
-$('#admin-login').bind 'click', ->
-  startAdminLogin()
-
-$('.enter-keydown-login').bind 'keydown', ->
-  if event.keyCode is 13
+      
+$ ->
+  $('#admin-login').bind 'click', ->
     startAdminLogin()
+
+  $('.enter-keydown-login').bind 'keydown', ->
+    if event.keyCode is 13
+      startAdminLogin()
+
