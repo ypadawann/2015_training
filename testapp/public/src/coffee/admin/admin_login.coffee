@@ -11,8 +11,8 @@ startAdminLogin = ->
   adminLlogin()
     .done (data) ->
       document.location = '/admin/top'
-    .fail (data) ->
-      Materialize.toast('ログインに失敗しました', 5000, 'alert-message')
+    .fail (response) ->
+      apiErrorToast(response)
 
 $('#admin-login').bind 'click', ->
   startAdminLogin()

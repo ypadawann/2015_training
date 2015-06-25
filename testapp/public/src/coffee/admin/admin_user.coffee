@@ -38,18 +38,14 @@ startUserSelect = ->
       ($('#select-department option').filter ->
         $(this).text() is data.department).prop 'selected', true
     .fail (xhr,  textStatus, errorThrown) ->
-      if xhr.status is 403
-        Materialize.toast('認証に失敗しました', 5000, 'alert-message')
-      else
-        Materialize.toast('エラーが発生しました', 5000, 'alert-message')
-
+      apiErrorToast(xhr)
 
 $('#user-select').bind 'click', ->
   startUserSelect()
 
 $('#user-modify').bind 'click', ->
   if $('#user-new-password').val() isnt $('#confirm-user-new-password').val()
-    Materialize.toast('パスワードが違います', 5000, 'alert-message')
+    Materialize.toast('確認パスワードが違います', 5000, 'alert-message')
   else
     userModify()
       .done (data)   ->
@@ -57,10 +53,7 @@ $('#user-modify').bind 'click', ->
         $('#user-new-password').val ''
         $('#confirm-user-new-password').val ''
       .fail (xhr,  status, error) ->
-        if xhr.status is 403
-          Materialize.toast('認証に失敗しました', 5000, 'alert-message')
-        else
-          Materialize.toast('エラーが発生しました', 5000, 'alert-message')
+        apiErrorToast(xhr)
 
 startUserDelete = ->
   userDelete()
@@ -73,7 +66,7 @@ startUserDelete = ->
       $('#user-new-password').val ''
       $('#confirm-user-new-password').val ''
     .fail (xhr,  status, error) ->
-      Materialize.toast('エラーが発生しました', 5000, 'alert-message')
+      apiErrorToast(xhr)
 
 $ ->
   $('#user-delete').leanModal({

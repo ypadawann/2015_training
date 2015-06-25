@@ -127,7 +127,7 @@
     もし "新しいパスワード(#user-new-password)" に "newpassword" を入力
     かつ "確認パスワード(#confirm-user-new-password)" に "wrongpassword" を入力
     かつ "変更ボタン(#user-modify)" をクリック
-    ならば "アラート(.alert-message)" に "パスワードが違います" と表示
+    ならば "アラート(.alert-message)" に "確認パスワードが違います" と表示
 
     もし "確認パスワード(#confirm-user-new-password)" に "newpassword" を入力
     かつ "変更ボタン(#user-modify)" をクリック
@@ -207,7 +207,7 @@
     もし "1" 秒待機
     かつ "登録する部署名(#register-department-name)" に "横須賀鎮守府" を入力
     かつ "選択ボタン(#department-register)" をクリック
-    ならば "アラート(.alert-message)" に "すでに登録されている部署です" と表示
+    ならば "アラート(.alert-message)" に "その部署名は既に登録されています。" と表示
     
     もし "1" 秒待機
     かつ "部署(#select-department)" で "横須賀鎮守府" を選択
@@ -330,7 +330,7 @@
     かつ "管理者パスワード(#admin-password)" に "secondpassword" を入力
     かつ "確認パスワード(#confirm-admin-password)" に "secondpassword" を入力
     かつ "管理者登録ボタン(#admin-register)" をクリック
-    ならば "アラート(.alert-message)" に "エラーが発生しました" と表示
+    ならば "アラート(.alert-message)" に "登録に失敗しました" と表示
 
     もし "ログインページ(/admin/login)" にアクセス
     かつ "管理者ID(#admin-id)" に "root" を入力
@@ -425,7 +425,7 @@
     かつ "いいえ(#admin-delete-disagree)" が存在
 
     もし "はい(#admin-delete-agree)" をクリック
-    ならば "アラート(.alert-message)" に "エラーが発生しました" と表示
+    ならば "アラート(.alert-message)" に "自身のアカウントは削除できません" と表示
    
   シナリオ: 管理者登録（失敗）
     前提 管理者にID "admin"、パスワード "password" が存在
@@ -443,4 +443,4 @@
     かつ "パスワード(#admin-password)" に "pass" を入力
     かつ "確認パスワード(#confirm-admin-password)" に "pass" を入力
     かつ "登録ボタン(#admin-register)" をクリック
-    ならば "アラート(.alert-message)" に "エラーが発生しました" と表示
+    ならば "アラート(.alert-message)" に "パスワードは8文字以上でなくてはなりません" と表示

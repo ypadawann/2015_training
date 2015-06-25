@@ -20,8 +20,7 @@ startAdminRegister = ->
         $('#confirm-admin-password').val ''
         location.href='#'
       .fail (xhr) ->
-        Materialize.toast('エラーが発生しました', 5000, 'alert-message')
-
+        apiErrorToast(xhr)
  
 $('#admin-register').bind 'click', ->
   startAdminRegister()
