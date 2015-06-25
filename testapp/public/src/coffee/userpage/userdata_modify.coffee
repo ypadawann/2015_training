@@ -47,9 +47,12 @@ switch location.pathname
   when '/userpage/modify'
     userSelect()
       .done (data) ->
-        document.querySelector("#user-name").value = data.name
+        $('#user-name').val data.name
         ($('#department option').filter ->
           return $(this).text() is data.department).prop 'selected', true
+        $('#enter-year').val data.enter_date.year
+        $('#enter-month').val data.enter_date.month
+        $('#enter-day').val data.enter_date.day
       .fail (xhr,  status, error) ->
         if xhr.status is 403
           Materialize.toast('認証に失敗しました', 5000, 'alert-message')

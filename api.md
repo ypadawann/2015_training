@@ -13,6 +13,10 @@ parametersを受け取り、resultsをJSONで返す。
            * user_id: integer
            * name: string
            * department: string
+           * enter_date: hash
+               * year: integer
+               * month: integer
+               * day: integer
     * errors
 
 * POST users
@@ -28,6 +32,10 @@ parametersを受け取り、resultsをJSONで返す。
         * user_id: integer
         * name: string
         * department: string
+        * enter_date: hash
+            * year: integer
+            * month: integer
+            * day: integer
     * errors
         * 400: 登録に失敗した
 
@@ -43,6 +51,10 @@ parametersを受け取り、resultsをJSONで返す。
         * user_id: integer
         * name: string
         * department: string
+        * enter_date: hash
+            * year: integer
+            * month: integer
+            * day: integer
     * errors
         * 403: 認証に失敗した
 
@@ -53,6 +65,10 @@ parametersを受け取り、resultsをJSONで返す。
         * user_id: integer
         * name: string
         * department: string
+        * enter_date: hash
+            * year: integer
+            * month: integer
+            * day: integer
     * errors
         * 403: 認証に失敗した
 
@@ -156,6 +172,10 @@ parametersを受け取り、resultsをJSONで返す。
         * user_id: integer
         * name: string
         * department: string
+        * enter_date: hash
+            * year: integer
+            * month: integer
+            * day: integer
     * errors
         * 403: 認証に失敗した
 
@@ -168,6 +188,10 @@ parametersを受け取り、resultsをJSONで返す。
         * user_id: integer
         * name: string
         * department: string
+        * enter_date: hash
+            * year: integer
+            * month: integer
+            * day: integer
     * errors
         * 403: 認証に失敗した
 
@@ -187,6 +211,10 @@ parametersを受け取り、resultsをJSONで返す。
         * user_id: integer
         * name: string
         * department: string
+        * enter_date: hash
+            * year: integer
+            * month: integer
+            * day: integer
     * errors
         * 403: 認証に失敗した
 
@@ -214,6 +242,10 @@ parametersを受け取り、resultsをJSONで返す。
         * user_id: integer
         * name: string
         * department: string
+        * enter_date: hash
+            * year: integer
+            * month: integer
+            * day: integer
     * errors
         * 403: 認証に失敗した
 
