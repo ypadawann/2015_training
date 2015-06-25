@@ -62,6 +62,7 @@ $('#department-rename').bind 'click', ->
 $ ->
   $('#department-delete').leanModal({
     ready: ->
+      $('#modal__delete-department__name').text "#{$("#select-department option:selected").text()}"
       $('#department-delete-agree').bind 'click', ->
         startDepartmentDelete()
     })
