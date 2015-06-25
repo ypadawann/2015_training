@@ -1,4 +1,5 @@
 _ = require 'lodash'
+userId = $('#current-user-id').text()
 
 makeRow = (row, rowNumber) ->
   cell1 = row.insertCell(0)
@@ -46,7 +47,7 @@ makeRow = (row, rowNumber) ->
   cell10.innerHTML = data10
   cell11.innerHTML = data11
 
-save = (userId, year, month) ->
+save = (year, month) ->
   day = new Date(year, month, 0).getDate()
   data =
     _.range(1, day + 1)
@@ -69,7 +70,7 @@ save = (userId, year, month) ->
       JSON.stringify(data: data)
   )
 
-getRecords = (userId, year, month) ->
+getRecords = (year, month) ->
   $.ajax(
     type: 'get'
     url: "//#{location.host}/api/v1/users/#{userId}/attend-leave/#{year}/#{month}"
@@ -77,14 +78,14 @@ getRecords = (userId, year, month) ->
   )
 
 setTable = (table, data_length) ->
-  _.range(table.rows.length - 7, data_length, 1).map (i) ->
-    row = table.insertRow(i + 5)
+  _.range(table.rows.length, data_length, 1).map (i) ->
+    row = table.insertRow(-1)
     makeRow(row, i + 1)
-  _.range(table.rows.length - 7, data_length, -1).map (i) ->
-    table.deleteRow(i + 4)
+  _.range(table.rows.length, data_length, -1).map (i) ->
+    table.deleteRow(-1)
 
-showRecords = (userId, year, month) ->
-  getRecords(userId, year, month)
+showRecords = (year, month) ->
+  getRecords(year, month)
   .done (msg) ->
     $('#YearsAndMonths').text "#{year}年#{month}月"
     setTable($('#table')[0], msg.data.length)
@@ -100,7 +101,7 @@ showRecords = (userId, year, month) ->
       $("#paid-vacation#{i}").val       data.paid_vacation
       $("#holiday-acquisition#{i}").val data.holiday_acquisition
       $("#etc#{i}").val                 data.etc
-      row = $("#table tr:nth-child(#{i + 5})")
+      row = $("#table tr:nth-child(#{i})")
       if data.isholiday
         row.addClass 'attendance-record__table__row--holiday'
       else if row.hasClass 'attendance-record__table__row--holiday'
@@ -113,10 +114,9 @@ showRecords = (userId, year, month) ->
 $('#timecard-save').bind 'click', ->
   year = $('#year').val()
   month = $('#month').val()
-  userId = $('#user-id').text()
-  save(userId, year, month)
+  save(year, month)
   .done (msg) ->
-    showRecords(userId, year, month)
+    showRecords(year, month)
     Materialize.toast('保存しました。', 5000)
   .fail (xhr, status, error) ->
     Materialize.toast(JSON.parse(xhr.responseText).error, 5000, 'alert-message')
@@ -124,18 +124,15 @@ $('#timecard-save').bind 'click', ->
 $('#date-select').bind 'click', ->
   year = $('#year').val()
   month = $('#month').val()
-  userId = $('#user-id').text()
-  showRecords(userId, year, month)
+  showRecords(year, month)
 
 $('#exportCSV').bind 'click', ->
   year = $('#year').val()
   month = $('#month').val()
-  userId = $('#user-id').text()
   document.location =
     "//#{location.host}/api/v1/users/#{userId}/attend-leave/#{year}/#{month}/export"
 
 $ ->
   year = $('#year').val()
   month = $('#month').val()
-  userId = $('#user-id').text()
-  showRecords(userId, year, month)
+  showRecords(year, month)
