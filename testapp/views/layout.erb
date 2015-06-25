@@ -5,13 +5,9 @@
     <title><%= @title %></title>
   </head>
   <body>
-    <div class="container">
-      <%== yield %>
-      <br>
-      <a href=<%= app_path %> class="print--hidden">トップページ</a>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-      <%== yield_content :javascript %>
-      <script src=<%= "#{js_library_path}/materialize-css/bin/materialize.js" %>></script>
-    </div>
+    <%== yield %>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <%== yield_content :javascript %>
+    <script src=<%= "#{js_library_path}/materialize-css/bin/materialize.js" %>></script>
   </body>
 </html>
