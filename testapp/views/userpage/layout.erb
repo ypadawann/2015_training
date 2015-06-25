@@ -13,8 +13,9 @@
   <span id="current-user-id"><%= @user_id %></span>
   <span id="current-user-name"><%= @name %></span>
 </div>
-<%== yield %>
-
+<div class="container">
+  <%== yield %>
+</div>
 <% content_for :javascript do %>
   <script type="text/javascript" src=<%= "#{js_path}/userpage.js"%>></script>
 <% end %>
