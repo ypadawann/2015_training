@@ -23,7 +23,7 @@ module API
           if Model::Timecard_operation.get_attendance(date, user_id).present? === true
             Model::Timecard_operation.get_attendance(date, user_id)
           else
-            error!('出勤していない', 404)
+            error!('本日は、まだ出勤していません。', 400)
           end
         end
 
@@ -66,7 +66,7 @@ module API
           if Model::Timecard_operation.get_leaving(date, user_id).present? === true
             Model::Timecard_operation.get_leaving(date, user_id)
           else
-            error!('退勤していない', 404)
+            error!('本日は、まだ退勤していません。', 400)
           end
         end
 
