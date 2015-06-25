@@ -11,6 +11,10 @@ userModify = ->
   department = $('#department option:selected').text()
   newPassword = $('#new-password').val()
   password = $('#password').val()
+  enterDate =
+    year: $('#enter-year').val()
+    month: $('#enter-month').val()
+    day: $('#enter-day').val()
   $.ajax(
     type: "put"
     url: "//#{location.host}/api/v1/users/#{userId}"
@@ -18,6 +22,7 @@ userModify = ->
       name: userName
       department: department
       new_password: newPassword
+      enter_date: enterDate
       password: password
   )
 
