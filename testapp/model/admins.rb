@@ -22,10 +22,11 @@ module Model
       def add(id, password)
         admin =
           Model::Admin.new(
-            id: id,
-            password: Model::Helper.start_hash(password)
-          )
+                           id: id,
+                           password: Model::Helper.start_hash(password)
+                           )
         admin.save
+        admin.errors.messages
       end
 
       def remove(id)
@@ -40,12 +41,14 @@ module Model
         admin = Model::Admin.find_by_id(admin_id)
         admin.name = admin_name
         admin.save
+        admin.errors.messages
       end
 
       def update_password(id, password)
         admin = Model::Admin.find_by_id(id)
         admin.password = Model::Helper.start_hash(password)
         admin.save
+        admin.errors.messages
       end
       
       def status(admin_id)

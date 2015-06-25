@@ -38,10 +38,9 @@ module API
           if params[:admin_password].length < 8
             error!('パスワードは8文字以上でなくてはなりません', 400)
           end
-          if Model::Admins.add(params[:admin_id], params[:admin_password])
-          else
-            error!('登録に失敗しました', 400)
-          end
+          error_msg =
+            Model::Admins.add(params[:admin_id], params[:admin_password])
+          check_activerecord_validation(error_msg)
         end
       end
 
@@ -101,12 +100,14 @@ module API
           session_check()
           verify_password!(params[:admin_id], params[:admin_password])
           if params[:admin_new_password].present?
-            Model::Admins.update_password(
-              params[:admin_id], params[:admin_new_password])
+            error_msg =
+              Model::Admins.update_password(
+                params[:admin_id], params[:admin_new_password])
+            check_activerecord_validation(error_msg)
           end
         end
       end
-      
+ 
       resource '/admin/users/:user_id' do
         params do
           requires :user_id, type: Integer, desc: '社員番号'
