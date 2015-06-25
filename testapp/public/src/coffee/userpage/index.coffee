@@ -6,12 +6,16 @@ if (document.getElementById("attend-message") isnt null)
     url: "//#{location.host}/api/v1/users/#{userId}/attend")
     .done (attendance) ->
       $('#attend-message').text "本日は#{attendance}に出勤しました"
+    .fail (msg) ->
+      console.log $('#attend-message').text JSON.parse(msg.responseText).error
 
   $.ajax(
     type: 'get'
     url: "//#{location.host}/api/v1/users/#{userId}/leave")
     .done (leave) ->
       $('#leave-message').text "本日は#{leave}に退勤しました"
+    .fail (msg) ->
+      console.log $('#leave-message').text JSON.parse(msg.responseText).error
 
 attend = ->
   $.ajax(
