@@ -7,8 +7,11 @@
         <input id="user-id" type="text" class="validate enter-for-select-user" autofocus>
         <label for="user-id" class="active">User ID</label>
       </div>
-      <div class="input-field col s6">
+      <div class="input-field col s3">
         <a class="waves-effect waves-light btn admin-button" id="user-select">選択</a>
+      </div>
+      <div class="input-field col s3">
+	<a class="waves-effect waves-light btn admin-button" id="get-users-list" href="#!">一覧</a>
       </div>
     </div>
     <div class="row">
@@ -55,12 +58,21 @@
 
 
 <div id="modal" class="modal modal-fixed-footer">
-    <div class="modal-content">
-      <h4 id="modal-h4">確認</h4>
-      <p id="modal-p">本当にユーザを削除しますか？</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="waves-effect waves-green btn-flat modal-action modal-close" id="user-delete-disagree">いいえ</a>
-      <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close" id="user-delete-agree">はい</a>
-    </div>
+  <div class="modal-content">
+    <h4 id="modal-h4">確認</h4>
+    <p id="modal-p">本当にユーザを削除しますか？</p>
   </div>
+  <div class="modal-footer">
+    <a href="#!" class="waves-effect waves-green btn-flat modal-action modal-close" id="user-delete-disagree">いいえ</a>
+    <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close" id="user-delete-agree">はい</a>
+  </div>
+</div>
+
+
+<div id="modal__user-list" class="modal">
+  <div class="modal-content">
+    <h4 id="modal-h4">ユーザ一覧</h4>
+    <div class="collection" id="modal__users-list">
+    </div>
+</div>
+
