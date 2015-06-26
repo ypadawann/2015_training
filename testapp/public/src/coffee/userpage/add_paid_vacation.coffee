@@ -1,5 +1,6 @@
+userId = $('#current-user-id').text()
+
 registVacation = ->
-  userId = $('#user-id').text()
   $.ajax(
     type: 'post'
     url: "//#{location.host}/api/v1/users/#{userId}/paid-vacation"
