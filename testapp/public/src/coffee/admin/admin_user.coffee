@@ -98,16 +98,17 @@ $('#get-users-list').bind 'click', ->
     .always () ->
       $('#modal__user-list').openModal();
 
+$('#user-delete').bind 'click', ->
+  $('#modal__user-delete__user-id').text "ID: #{$('#user-id').val()}"
+  $('#modal__user-delete__user-name').text "名前: #{$('#user-name').val()}"
+  $('#modal__user-delete').openModal();
+  $('#user-delete-agree').bind 'click', ->
+    startUserDelete()
 
+
+
+  
 $ ->
-  $('#user-delete').leanModal({
-    ready: ->
-      $('#modal__user-delete__user-id').text "ID: #{$('#user-id').val()}"
-      $('#modal__user-delete__user-name').text "名前: #{$('#user-name').val()}"
-      $('#user-delete-agree').bind 'click', ->
-        startUserDelete()
-    })
-
   $('.enter-for-select-user').bind 'keydown', ->
     if event.keyCode is 13
       startUserSelect()
