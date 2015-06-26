@@ -40,6 +40,7 @@
   .attendance-record__table{
     border-collapse: collapse;
     box-sizing: border-box;
+    width: auto;
   }
 
   .attendance-record__table2{
@@ -165,12 +166,12 @@
   }
 
   .attendance-record__table__cell--attendanceLine{
-    @include attendance-record__table__cell--mixin(76px);
+    @include attendance-record__table__cell--mixin(75px);
     border-right-style: dotted;
   }
 
   .attendance-record__table__cell--leavingLine{
-    @include attendance-record__table__cell--mixin(76px);
+    @include attendance-record__table__cell--mixin(75px);
     border-left-style: none;
   }
 
@@ -221,7 +222,7 @@
   }
 
   .attendance-record__table__total--attendAndleave{
-    @include attendance-record__table__total--mixin(76px);
+    @include attendance-record__table__total--mixin(75px);
   }
 
   .attendance-record__table__total--mark{
