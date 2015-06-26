@@ -161,8 +161,7 @@ module API
           bom.setbyte(2, 0xBF)
 
           content_type 'text/csv'
-          filename = format('%d_%d%02d.csv',
-                            params[:user_id], params[:year], params[:month])
+          filename = "勤務管理表#{params[:year]}年#{params[:month]}月_#{params[:user_id]}.csv"
           header('Content-Disposition', "attachment; filename=#{filename}")
           bom + export_csv(contents, params[:year], params[:month])
         end
