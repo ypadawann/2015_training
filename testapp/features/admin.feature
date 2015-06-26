@@ -395,10 +395,10 @@
     もし "1" 秒待機
     ならば "モーダル(#modal)" が存在
     かつ "(#modal-h4)" に "確認" と表示
-    かつ "(#modal-p)" に "本当にこのアカウントを削除しますか？" と表示
-    かつ "はい(#admin-delete-agree)" が存在
+    かつ "(#modal-p)" に "本当に以下のアカウントを削除しますか？" と表示
     かつ "はい(#admin-delete-agree)" に "はい" と表示
     かつ "いいえ(#admin-delete-disagree)" が存在
+    かつ "(#modal__admin-delete__admin-id)" に "管理者ID: root" と表示
 
     もし "はい(#admin-delete-agree)" をクリック
     ならば "アラート(.alert-message)" に "アカウントを削除しました" と表示
@@ -429,10 +429,10 @@
     かつ "1" 秒待機
     ならば "モーダル(#modal)" が存在
     かつ "(#modal-h4)" に "確認" と表示
-    かつ "(#modal-p)" に "本当にこのアカウントを削除しますか？" と表示
-    かつ "はい(#admin-delete-agree)" が存在
+    かつ "(#modal-p)" に "本当に以下のアカウントを削除しますか？" と表示
     かつ "はい(#admin-delete-agree)" に "はい" と表示
     かつ "いいえ(#admin-delete-disagree)" が存在
+    かつ "(#modal__admin-delete__admin-id)" に "管理者ID: admin" と表示
 
     もし "はい(#admin-delete-agree)" をクリック
     ならば "アラート(.alert-message)" に "自身のアカウントは削除できません" と表示
