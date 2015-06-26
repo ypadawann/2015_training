@@ -107,7 +107,15 @@ module API
           end
         end
       end
- 
+
+      resource 'admin/users/all' do
+        desc 'ユーザ一覧の取得'
+        get do
+          session_check()
+          { users: Model::Users.list_all }
+        end
+      end
+        
       resource '/admin/users/:user_id' do
         params do
           requires :user_id, type: Integer, desc: '社員番号'
