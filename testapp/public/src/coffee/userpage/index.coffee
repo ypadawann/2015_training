@@ -5,7 +5,7 @@ if (document.getElementById("attend-message") isnt null)
     type: 'get'
     url: "//#{location.host}/api/v1/users/#{userId}/attend")
     .done (attendance) ->
-      $('#attend-message').text "本日は#{attendance}に出勤しました"
+      $('#attend-message').text "本日は#{attendance}に出勤しました。"
     .fail (msg) ->
       $('#attend-message').text JSON.parse(msg.responseText).error
 
@@ -13,7 +13,7 @@ if (document.getElementById("attend-message") isnt null)
     type: 'get'
     url: "//#{location.host}/api/v1/users/#{userId}/leave")
     .done (leave) ->
-      $('#leave-message').text "本日は#{leave}に退勤しました"
+      $('#leave-message').text "本日は#{leave}に退勤しました。"
     .fail (msg) ->
       $('#leave-message').text JSON.parse(msg.responseText).error
 

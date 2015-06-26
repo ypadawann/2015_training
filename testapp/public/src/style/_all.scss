@@ -5,6 +5,11 @@
   width: 140px;
 }
 
+h1.userpage__title{
+  font-size: 300%;
+  margin: 20px;
+}
+
 #user-page{
   margin: 0px;
 }
@@ -321,4 +326,8 @@
   text-align: center;
   vertical-align: middle;
   width: 54px;
+}
+
+.userpage__modify--operation{
+  padding-bottom: 30px;
 }
