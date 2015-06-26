@@ -159,6 +159,31 @@
     ならば "ユーザ名(#user-name)" に "Haruna" と表示
     かつ "部署(#select-department)" で "Navy" が選択
 
+  シナリオ: ユーザを一覧から選択
+    前提 管理者にID "admin"、パスワード "password" が存在
+    前提 ユーザにID "23"、名前 "Haruna"、部署 "Navy"、パスワード "userpassword"、入社日 "1915-04-19" が存在
+    前提 ユーザにID "5630"、名前 "Maki"、部署 "ITSecurity"、パスワード "password"、入社日 "2010-04-01" が存在
+    前提 ユーザにID "5622"、名前 "Mori"、部署 "ITSecurity"、パスワード "password"、入社日 "2014-04-01" が存在
+
+    もし "ログインページ(/admin/login)" にアクセス
+    ならば "管理者ID(#admin-id)" に "admin" を入力
+    かつ "管理者パスワード(#admin-password)" に "password" を入力
+    かつ "ログインボタン(#admin-login)" をクリック
+
+    もし "ユーザ情報管理(#admin-user)" をクリック
+    かつ "一覧(#get-users-list)" をクリック
+    ならば "モーダル(#modal__user-list)" が存在
+    かつ "1番目(#modal__user-select-target0)" に "23: Haruna" と表示
+    かつ "2番目(#modal__user-select-target1)" に "5622: Mori" と表示
+    かつ "3番目(#modal__user-select-target2)" に "5630: Maki" と表示
+
+    もし "2番目(#modal__user-select-target1)" をクリック
+    かつ "1" 秒待機
+    ならば "ユーザID(#user-id)" に "5622" と表示
+    かつ "ユーザ名(#user-name)" に "Mori" と表示
+    かつ "部署(#select-department)" で "ITSecurity" が選択
+
+
   シナリオ: ユーザを削除
     前提 管理者にID "admin"、パスワード "password" が存在
     前提 ユーザにID "23"、名前 "Haruna"、部署 "Navy"、パスワード "userpassword"、入社日 "1915-04-19" が存在
