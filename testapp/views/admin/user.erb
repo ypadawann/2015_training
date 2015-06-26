@@ -7,11 +7,9 @@
         <input id="user-id" type="text" class="validate enter-for-select-user" autofocus>
         <label for="user-id" class="active">User ID</label>
       </div>
-      <div class="input-field col s3">
+      <div class="input-field col s6">
         <a class="waves-effect waves-light btn admin-button" id="user-select">選択</a>
-      </div>
-      <div class="input-field col s3">
-	<a class="waves-effect waves-light btn admin-button" id="get-users-list" href="#!">一覧</a>
+    	<a class="waves-effect waves-light btn admin-button" id="get-users-list">一覧</a>
       </div>
     </div>
     <div class="row">
@@ -70,6 +68,19 @@
 <div id="modal__user-list" class="modal">
   <div class="modal-content">
     <h4 id="modal-h4">ユーザ一覧</h4>
+    <div class="row">
+      <div class="col s12">
+	<div class="row">
+	  <div class="input-field col s6">
+            <input id="modal__search__input" type="text" class="validate">
+            <label for="modal__search__input">IDまたは名前</label>
+	  </div>
+	  <div class="input-field col s6">
+            <a class="waves-effect waves-light btn admin-button" id="modal__search__start-button">検索</a>
+	  </div>
+	</div>
+      </div>
+    </div>
     <div class="collection" id="modal__users-list">
     </div>
 </div>
