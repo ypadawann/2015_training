@@ -201,9 +201,9 @@
     ならば "削除ボタン(#user-delete)" をクリック
 
     もし "1" 秒待機
-    もし "モーダル(#modal)" が存在
-    かつ "モーダル(#modal)" 内に "確認" という記述が存在
-    かつ "モーダル(#modal)" 内に "以下のユーザを本当に削除しますか？" という記述が存在
+    もし "モーダル(#modal__user-delete)" が存在
+    かつ "モーダル(#modal__user-delete)" 内に "確認" という記述が存在
+    かつ "モーダル(#modal__user-delete)" 内に "以下のユーザを本当に削除しますか？" という記述が存在
     かつ "(#modal__user-delete__user-id)" に "ID: 23" と表示
     かつ "(#modal__user-delete__user-name)" に "名前: Haruna" と表示
     かつ "はい(#user-delete-agree)" が存在
