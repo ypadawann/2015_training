@@ -245,7 +245,7 @@
     もし "1" 秒待機
     かつ "部署(#select-department)" で "ブラック鎮守府" を選択
     かつ "部署削除(#department-delete)" をクリック
-    ならば "モーダル(#modal)" が存在
+    ならば "モーダル(#modal__department-delete)" が存在
     かつ "メッセージ(#modal-p)" に "以下の部署を本当に削除しますか？" と表示
 
     もし "0.5" 秒待機
