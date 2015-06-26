@@ -56,6 +56,7 @@ startAdminDelete = ->
 $ ->
   $('#admin-delete').leanModal({
     ready: ->
+      $('#modal__admin-delete__admin-id').text  "管理者ID: #{$('#select-admin-id option:selected').text()}"
       $('#admin-delete-agree').bind 'click', ->
         startAdminDelete()
     })
