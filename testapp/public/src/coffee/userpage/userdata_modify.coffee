@@ -10,7 +10,7 @@ userModify = ->
   userName = $('#user-name').val()
   department = $('#department option:selected').text()
   newPassword = $('#new-password').val()
-  password = $('#password-for-modify').val()
+  password = $('#password-for-modifying').val()
   enterDate =
     year: $('#enter-year').val()
     month: $('#enter-month').val()
@@ -27,7 +27,7 @@ userModify = ->
   )
 
 userDelete = ->
-  password = $('#password-for-delete').val()
+  password = $('#password-for-deleting').val()
   $.ajax(
     type: "post"
     url: "//#{location.host}/api/v1/users/delete/#{userId}"
@@ -53,7 +53,7 @@ switch location.pathname
     userSelect()
       .done (data) ->
         $('#user-name').val data.name
-        $('#department').val(data.department)
+        $('#department').val data.department
         $('#department').material_select()
         $('#enter-year').val data.enter_date.year
         $('#enter-month').val data.enter_date.month
