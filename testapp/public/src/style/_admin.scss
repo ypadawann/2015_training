@@ -21,8 +21,15 @@
     } 
 }
 
-.admin-menu-background-color{
+.admin-menu{
   background-color: #021F4D;
+  div {
+    width: 100%;
+    height: auto;
+    float: left;
+    background-color: #021F4D;
+    margin-bottom: 1.5rem;
+  }
 }
 
 .admin-pagename{
