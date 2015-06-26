@@ -42,17 +42,14 @@
 
 <p>
   <a class="waves-effect waves-light btn admin-button" id="admin-modify" href="#">変更</a>
+  <a class="waves-effect waves-light btn admin-button right" id="admin-delete" href="#!">削除</a>
 </p>
 
-<p>
-  <a class="waves-effect waves-light btn modal-trigger admin-button" id="admin-delete" href="#modal">削除</a>
-</p>
-
-
-<div id="modal" class="modal modal-fixed-footer">
+<div id="modal__admin-delete" class="modal">
     <div class="modal-content">
       <h4 id="modal-h4">確認</h4>
-      <p id="modal-p">本当にこのアカウントを削除しますか？</p>
+      <p id="modal-p">本当に以下のアカウントを削除しますか？</p>
+      <p id="modal__admin-delete__admin-id">管理者ID:</p>
     </div>
     <div class="modal-footer">
       <a href="#!" class="waves-effect waves-green btn-flat modal-action modal-close" id="admin-delete-disagree">いいえ</a>

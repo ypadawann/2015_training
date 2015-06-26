@@ -64,7 +64,7 @@
     ならば "管理者登録ボタン(#admin-register)" が存在
 
     もし "トップページ(#to-top)" をクリック
-    ならば "管理画面トップ" と表示されている
+    ならば "ページ(body)" 内に "管理画面トップ" という記述が存在
 
 
   シナリオ: ログイン後にページ遷移(トップページから)
@@ -159,6 +159,31 @@
     ならば "ユーザ名(#user-name)" に "Haruna" と表示
     かつ "部署(#select-department)" で "Navy" が選択
 
+  シナリオ: ユーザを一覧から選択
+    前提 管理者にID "admin"、パスワード "password" が存在
+    前提 ユーザにID "23"、名前 "Haruna"、部署 "Navy"、パスワード "userpassword"、入社日 "1915-04-19" が存在
+    前提 ユーザにID "5630"、名前 "Maki"、部署 "ITSecurity"、パスワード "password"、入社日 "2010-04-01" が存在
+    前提 ユーザにID "5622"、名前 "Mori"、部署 "ITSecurity"、パスワード "password"、入社日 "2014-04-01" が存在
+
+    もし "ログインページ(/admin/login)" にアクセス
+    ならば "管理者ID(#admin-id)" に "admin" を入力
+    かつ "管理者パスワード(#admin-password)" に "password" を入力
+    かつ "ログインボタン(#admin-login)" をクリック
+
+    もし "ユーザ情報管理(#admin-user)" をクリック
+    かつ "一覧(#get-users-list)" をクリック
+    ならば "モーダル(#modal__user-list)" が存在
+    かつ "1番目(#modal__user-select-target0)" に "23: Haruna" と表示
+    かつ "2番目(#modal__user-select-target1)" に "5622: Mori" と表示
+    かつ "3番目(#modal__user-select-target2)" に "5630: Maki" と表示
+
+    もし "2番目(#modal__user-select-target1)" をクリック
+    かつ "1" 秒待機
+    ならば "ユーザID(#user-id)" に "5622" と表示
+    かつ "ユーザ名(#user-name)" に "Mori" と表示
+    かつ "部署(#select-department)" で "ITSecurity" が選択
+
+
   シナリオ: ユーザを削除
     前提 管理者にID "admin"、パスワード "password" が存在
     前提 ユーザにID "23"、名前 "Haruna"、部署 "Navy"、パスワード "userpassword"、入社日 "1915-04-19" が存在
@@ -176,9 +201,11 @@
     ならば "削除ボタン(#user-delete)" をクリック
 
     もし "1" 秒待機
-    もし "モーダル(#modal)" が存在
-    かつ "(#modal-h4)" に "確認" と表示
-    かつ "(#modal-p)" に "本当にユーザを削除しますか？" と表示
+    もし "モーダル(#modal__user-delete)" が存在
+    かつ "モーダル(#modal__user-delete)" 内に "確認" という記述が存在
+    かつ "モーダル(#modal__user-delete)" 内に "以下のユーザを本当に削除しますか？" という記述が存在
+    かつ "(#modal__user-delete__user-id)" に "ID: 23" と表示
+    かつ "(#modal__user-delete__user-name)" に "名前: Haruna" と表示
     かつ "はい(#user-delete-agree)" が存在
     かつ "はい(#user-delete-agree)" に "はい" と表示
     かつ "いいえ(#user-delete-disagree)" が存在
@@ -212,20 +239,28 @@
     もし "1" 秒待機
     かつ "部署(#select-department)" で "横須賀鎮守府" を選択
     かつ "新しい部署名(#new-department-name)" に "ブラック鎮守府" を入力
-    ならば "部署名変更(#department-rename)" をクリック
+    かつ "部署名変更(#department-rename)" をクリック
+    ならば "アラート(.alert-message)" に "横須賀鎮守府 を ブラック鎮守府 に変更しました" と表示
 
     もし "1" 秒待機
     かつ "部署(#select-department)" で "ブラック鎮守府" を選択
     かつ "部署削除(#department-delete)" をクリック
-    ならば "モーダル(#modal)" が存在
-    かつ "メッセージ(#modal-p)" に "本当に部署を削除しますか？" と表示
+    ならば "モーダル(#modal__department-delete)" が存在
+    かつ "メッセージ(#modal-p)" に "以下の部署を本当に削除しますか？" と表示
+
+    もし "0.5" 秒待機
+    ならば "(#modal__delete-department__name)" に "ブラック鎮守府" と表示
 
     もし "いいえ(#department-delete-disagree)" をクリック
     かつ "1" 秒待機
     ならば "ページ(body)" に "モーダル(#modal)" が存在しない
 
     もし "部署削除(#department-delete)" をクリック
-    かつ "はい(#department-delete-agree)" をクリック
+    かつ "0.5" 秒待機
+    ならば "(#modal__delete-department__name)" に "ブラック鎮守府" と表示
+
+    もし "はい(#department-delete-agree)" をクリック
+    かつ "0.5" 秒待機
     ならば "アラート(.alert-message)" に "ブラック鎮守府を削除しました" と表示
     かつ "部署(#select-department)" に "選択肢(ブラック鎮守府)" が存在しない
 
@@ -383,12 +418,12 @@
     かつ "削除ボタン(#admin-delete)" をクリック
 
     もし "1" 秒待機
-    ならば "モーダル(#modal)" が存在
+    ならば "モーダル(#modal__admin-delete)" が存在
     かつ "(#modal-h4)" に "確認" と表示
-    かつ "(#modal-p)" に "本当にこのアカウントを削除しますか？" と表示
-    かつ "はい(#admin-delete-agree)" が存在
+    かつ "(#modal-p)" に "本当に以下のアカウントを削除しますか？" と表示
     かつ "はい(#admin-delete-agree)" に "はい" と表示
     かつ "いいえ(#admin-delete-disagree)" が存在
+    かつ "(#modal__admin-delete__admin-id)" に "管理者ID: root" と表示
 
     もし "はい(#admin-delete-agree)" をクリック
     ならば "アラート(.alert-message)" に "アカウントを削除しました" と表示
@@ -417,12 +452,12 @@
 
     もし "削除ボタン(#admin-delete)" をクリック
     かつ "1" 秒待機
-    ならば "モーダル(#modal)" が存在
+    ならば "モーダル(#modal__admin-delete)" が存在
     かつ "(#modal-h4)" に "確認" と表示
-    かつ "(#modal-p)" に "本当にこのアカウントを削除しますか？" と表示
-    かつ "はい(#admin-delete-agree)" が存在
+    かつ "(#modal-p)" に "本当に以下のアカウントを削除しますか？" と表示
     かつ "はい(#admin-delete-agree)" に "はい" と表示
     かつ "いいえ(#admin-delete-disagree)" が存在
+    かつ "(#modal__admin-delete__admin-id)" に "管理者ID: admin" と表示
 
     もし "はい(#admin-delete-agree)" をクリック
     ならば "アラート(.alert-message)" に "自身のアカウントは削除できません" と表示

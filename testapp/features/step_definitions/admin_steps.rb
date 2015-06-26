@@ -72,6 +72,6 @@ end
 end
 
 
-ならば(/^"(.*?)" と表示されている$/) do | str |
-  expect(page).to have_content str
+ならば(/^".*?\((.*?)\)" 内に "(.*?)" という記述が存在$/) do | target, str |
+  expect(page.find(target)).to have_content str
 end

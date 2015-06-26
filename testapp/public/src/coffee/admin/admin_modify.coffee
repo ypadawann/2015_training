@@ -53,9 +53,9 @@ startAdminDelete = ->
     .fail (xhr, status, error) ->
       apiErrorToast(xhr)
 
-$ ->
-  $('#admin-delete').leanModal({
-    ready: ->
-      $('#admin-delete-agree').bind 'click', ->
-        startAdminDelete()
-    })
+
+$('#admin-delete').bind 'click', ->
+  $('#modal__admin-delete__admin-id').text  "管理者ID: #{$('#select-admin-id option:selected').text()}"
+  $('#modal__admin-delete').openModal()
+  $('#admin-delete-agree').bind 'click', ->
+    startAdminDelete()
