@@ -214,20 +214,28 @@
     もし "1" 秒待機
     かつ "部署(#select-department)" で "横須賀鎮守府" を選択
     かつ "新しい部署名(#new-department-name)" に "ブラック鎮守府" を入力
-    ならば "部署名変更(#department-rename)" をクリック
+    かつ "部署名変更(#department-rename)" をクリック
+    ならば "アラート(.alert-message)" に "横須賀鎮守府 を ブラック鎮守府 に変更しました" と表示
 
     もし "1" 秒待機
     かつ "部署(#select-department)" で "ブラック鎮守府" を選択
     かつ "部署削除(#department-delete)" をクリック
     ならば "モーダル(#modal)" が存在
-    かつ "メッセージ(#modal-p)" に "本当に部署を削除しますか？" と表示
+    かつ "メッセージ(#modal-p)" に "以下の部署を本当に削除しますか？" と表示
+
+    もし "0.5" 秒待機
+    ならば "(#modal__delete-department__name)" に "ブラック鎮守府" と表示
 
     もし "いいえ(#department-delete-disagree)" をクリック
     かつ "1" 秒待機
     ならば "ページ(body)" に "モーダル(#modal)" が存在しない
 
     もし "部署削除(#department-delete)" をクリック
-    かつ "はい(#department-delete-agree)" をクリック
+    かつ "0.5" 秒待機
+    ならば "(#modal__delete-department__name)" に "ブラック鎮守府" と表示
+
+    もし "はい(#department-delete-agree)" をクリック
+    かつ "0.5" 秒待機
     ならば "アラート(.alert-message)" に "ブラック鎮守府を削除しました" と表示
     かつ "部署(#select-department)" に "選択肢(ブラック鎮守府)" が存在しない
 
