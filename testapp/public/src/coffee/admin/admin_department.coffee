@@ -58,15 +58,13 @@ $('#department-register').bind 'click', ->
 $('#department-rename').bind 'click', ->
   startDepartmentRename()
 
+$('#department-delete').bind 'click', ->
+  $('#modal__delete-department__name').text "#{$("#select-department option:selected").text()}"
+  $('#modal__department-delete').openModal();
+  $('#department-delete-agree').bind 'click', ->
+    startDepartmentDelete()
 
 $ ->
-  $('#department-delete').leanModal({
-    ready: ->
-      $('#modal__delete-department__name').text "#{$("#select-department option:selected").text()}"
-      $('#department-delete-agree').bind 'click', ->
-        startDepartmentDelete()
-    })
-
   $('.enter-for-regist-department').bind 'keydown', ->
     if event.keyCode is 13
       startDepartmentRegister()
