@@ -24,7 +24,7 @@ end
 end
 
 もし(/^.*?\((.*?)\) 欄から (.*?) を選択した?$/) do |element_id, value|
-  page.find(:css, element_id).find(:option, value).select_option
+  page.find(:css, element_id, visible: false).find(:option, value, visible: false).select_option
 end
 
 もし(/^.*?\((.*?)\) ボタンをクリックした?$/) do |element_id|
