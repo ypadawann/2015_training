@@ -103,7 +103,7 @@ h1.userpage__title{
 .attendance-record__table{
   border-collapse: collapse;
   box-sizing: border-box;
-  width: 820px;
+  width: auto;
 }
 
 .attendance-record__table2{
@@ -111,6 +111,11 @@ h1.userpage__title{
   position: absolute;
   left: 310px;
   width: 291px;
+}
+
+.attendance-record__table--total{
+  @extend .attendance-record__table;
+  margin: 0px 0px 30px;
 }
 
 .attendance-record__table__menu{
