@@ -1,14 +1,24 @@
 .admin-button {
   @extend .deep-orange;
+  min-width:7rem;
 }
 
-.admin-top__menu-detail {
-  .row {
-    margin-bottom: 2rem;
+.admin-top__menu-detail-table{
+  tr {
+    td {
+      padding: 5px 5px;
+      p {
+        padding-left: 1rem;
+      }
+    }
   }
-  button{
-    width: 100%;
-  }
+}
+
+.admin-top__menu-detail-table__button-td {
+    width: 12rem;
+    button {
+        width: 100%;
+    } 
 }
 
 .admin-menu-background-color{
