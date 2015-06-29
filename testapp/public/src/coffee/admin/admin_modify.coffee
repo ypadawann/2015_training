@@ -25,20 +25,6 @@ adminDelete = ->
     dataType:  "json"
     context:    this
 
-$('#admin-modify').bind 'click', ->
-  if $('#admin-new-password').val() isnt $('#confirm-admin-new-password').val()
-    Materialize.toast('確認パスワードが違います', 5000, 'alert-message')
-  else
-    adminModify()
-      .done (data)   ->
-        Materialize.toast('管理者情報を変更しました', 5000, 'alert-message')
-        ($('#select-admin-id option').filter ->
-          $(this).text() is $('#login-admin-id').text()).prop 'selected', true
-        $('#admin-new-password').val ''
-        $('#confirm-admin-new-password').val ''
-        $('#admin-password').val ''
-      .fail (xhr, status, error) ->
-        apiErrorToast(xhr)
 
 startAdminDelete = ->
   console.log $('#login-admin-id').text()
@@ -56,8 +42,25 @@ startAdminDelete = ->
       apiErrorToast(xhr)
 
 
-$('#admin-delete').bind 'click', ->
-  $('#modal__admin-delete__admin-id').text  "管理者ID: #{$('#select-admin-id option:selected').text()}"
-  $('#modal__admin-delete').openModal()
-  $('#admin-delete-agree').bind 'click', ->
-    startAdminDelete()
+$ ->
+  $('#admin-modify').bind 'click', ->
+    if $('#admin-new-password').val() isnt $('#confirm-admin-new-password').val()
+      Materialize.toast('確認パスワードが違います', 5000, 'alert-message')
+    else
+      adminModify()
+        .done (data)   ->
+          Materialize.toast('管理者情報を変更しました', 5000, 'alert-message')
+          ($('#select-admin-id option').filter ->
+            $(this).text() is $('#login-admin-id').text()).prop 'selected', true
+          $('#admin-new-password').val ''
+          $('#confirm-admin-new-password').val ''
+          $('#admin-password').val ''
+        .fail (xhr, status, error) ->
+          apiErrorToast(xhr)
+
+
+  $('#admin-delete').bind 'click', ->
+    $('#modal__admin-delete__admin-id').text  "管理者ID: #{$('#select-admin-id option:selected').text()}"
+    $('#modal__admin-delete').openModal()
+    $('#admin-delete-agree').bind 'click', ->
+      startAdminDelete()
