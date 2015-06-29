@@ -4,7 +4,7 @@ module API
       def authenticate!(user_id)
         if env['rack.session'][:user_login]
         else
-          p 'error'
+          'error'
           error!('Access Denied', 403)
         end
       end
@@ -35,16 +35,16 @@ module API
             date.year - 1
           end
       end
-      
+
       def is_training?(enter)
-        p finish_date = enter >> 4
+        finish_date = enter >> 4
         if finish_date > Date.today
           return true
         else
           return false
         end
       end
-      
+
       def newly_paid_vacation(enter)
         if is_training?(enter)
           return 1
@@ -66,7 +66,7 @@ module API
           when 3
           end
       end
-      
+
       def get_given_vacation_num(year, enter)
         job_length = year - get_business_year(enter)
         if job_length < 0
@@ -86,11 +86,11 @@ module API
             16
           when 5 then
             18
-          else 
+          else
             20
           end
       end
-      
+
     end
   end
 end

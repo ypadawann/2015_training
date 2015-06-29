@@ -1,11 +1,11 @@
 <nav class="print--hidden">
-<div class="nav-wrapper">
+<div class="nav-wrapper container">
   <ul class="left hide-on-med-and-dow user-page__menu"/>
-    <li><a href=<%= app_path %>>ユーザページ</a></li>
-    <li><a href="#" id="to-read-data">出退勤状況</a></li>
-    <li><a href="#" id="to-modify">ユーザ情報変更</a></li>
-    <li><a href="#" id="to-add-paid-vacation">有給取得日登録</a></li>
-    <li><a href="#" id="logout">ログアウト</a></li>
+    <li><a class="user-page__menu__column--left" href=<%= app_path %>>ユーザページ</a></li>
+    <li><a class="user-page__menu__column" href="#" id="to-read-data">出退勤状況</a></li>
+    <li><a class="user-page__menu__column" href="#" id="to-modify">ユーザ情報変更</a></li>
+    <li><a class="user-page__menu__column" href="#" id="to-add-paid-vacation">有給取得日登録</a></li>
+    <li><a class="user-page__menu__column" href="#" id="logout">ログアウト</a></li>
   </ul>
   <div class="current-user--class" id="current-user">
     <a id="current-user-id"><%= @user_id %></a>
