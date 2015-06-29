@@ -69,7 +69,7 @@
     もし ユーザ情報変更画面(/userpage/modify) にアクセスし、
     かつ パスワード(#password-for-deleting) に 12345 を入力し、
     かつ 削除ボタン(#delete) をクリックした
-    かつ okボタン(#ok) をクリックした
+    かつ モーダルの okボタン(#ok) をクリックした
 
     ならば アラート(.alert-message) に アカウントを削除しました と表示する (非同期)
     かつ 3.0 秒待った
@@ -82,7 +82,7 @@
     もし ユーザ情報変更画面(/userpage/modify) にアクセスし、
     かつ パスワード(#password-for-deleting) に 12345 を入力し、
     かつ 削除ボタン(#delete) をクリックした
-    かつ cancelボタン(#cancel) をクリックした
+    かつ モーダルの cancelボタン(#cancel) をクリックした
 
     ならば アラート(.alert-message) に アカウント削除をキャンセルしました と表示する (非同期)
     かつ ユーザ情報変更(/userpage/modify) 画面に遷移する
@@ -94,7 +94,7 @@
     もし ユーザ情報変更画面(/userpage/modify) にアクセスし、
     かつ パスワード(#password-for-deleting) に 54321 を入力し、
     かつ 削除ボタン(#delete) をクリックした
-    かつ okボタン(#ok) をクリックした
+    かつ モーダルの okボタン(#ok) をクリックした
 
     ならば アラート(.alert-message) に 認証に失敗しました と表示する (非同期)
     かつ ユーザ情報変更(/userpage/modify) 画面に遷移する

@@ -11,8 +11,12 @@ end
   page.find(element_id).set(value)
 end
 
-もし(/^.*?\((.*?)\) をクリックした$/) do |element_id|
+もし(/^[^\s]*?\((.*?)\) をクリックした$/) do |element_id|
   page.find(element_id).click
+end
+
+もし(/^モーダルの .*?\((.*?)\) をクリックした$/) do |element_id|
+  page.find(element_id).trigger('click')
 end
 
 ならば(/^.*?\((.*?)\) にアクセスする$/) do |path|
