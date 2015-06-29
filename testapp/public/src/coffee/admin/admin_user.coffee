@@ -1,4 +1,5 @@
 _ = require 'lodash'
+_userList = new Array()
 
 userSelect = ->
   userId = $("#user-id").val()
@@ -60,55 +61,66 @@ startUserDelete = ->
     .fail (xhr,  status, error) ->
       apiErrorToast(xhr)
 
-createUsersListModal = (users) ->
+createUsersListModal = (searchWord) ->
   $('#modal__users-list').empty()
-  (_.range(0, users.length)).forEach (i) ->
-    new_node =
-      $( "<a />", { href: "#!", id: "modal__user-select-target#{i}", class: "collection-item modal-action modal-close modal__user-select-target" } );
-    new_node.text "#{users[i].user_id}: #{users[i].name}"
-    $('#modal__users-list').append(new_node)
-
-$('#user-select').bind 'click', ->
-  startUserSelect()
-
-
-$('#user-modify').bind 'click', ->
-  if $('#user-new-password').val() isnt $('#confirm-user-new-password').val()
-    Materialize.toast('確認パスワードが違います', 5000, 'alert-message')
-  else
-    userModify()
-      .done (data)   ->
-        Materialize.toast('ユーザ情報を変更しました', 5000, 'alert-message')
-        $('#user-new-password').val ''
-        $('#confirm-user-new-password').val ''
-      .fail (xhr,  status, error) ->
-        apiErrorToast(xhr)
+  (_.range(0, _userList.length)).forEach (i) ->
+    collectionItem = "#{_userList[i].user_id}: #{_userList[i].name}"
+    if collectionItem.indexOf(searchWord) isnt -1 || searchWord is undefined
+      newNode =
+        $( "<a />", { href: "#!", id: "modal__user-select-target#{i}", class: "collection-item modal-action modal-close modal__user-select-target" } )
+      newNode.text collectionItem
+      $('#modal__users-list').append(newNode)
 
 
-$('#get-users-list').bind 'click', ->
-  getUserList()
-    .done (data) ->
-      createUsersListModal(data.users)
-      $('.modal__user-select-target').bind 'click', ->
-        $('#user-id').focus()
-        $('#user-id').val $(this).text().split(": ")[0]
-        startUserSelect()        
-    .fail (xhr) ->
-      apiErrorToast(xhr)
-    .always () ->
-      $('#modal__user-list').openModal();
-
-$('#user-delete').bind 'click', ->
-  $('#modal__user-delete__user-id').text "ID: #{$('#user-id').val()}"
-  $('#modal__user-delete__user-name').text "名前: #{$('#user-name').val()}"
-  $('#modal__user-delete').openModal();
-  $('#user-delete-agree').bind 'click', ->
-    startUserDelete()
-
-
-
-  
 $ ->
   $('.enter-for-select-user').bind 'keydown', ->
     if event.keyCode is 13
       startUserSelect()
+
+  $('#user-select').bind 'click', ->
+    startUserSelect()
+
+
+  $('#user-modify').bind 'click', ->
+    if $('#user-new-password').val() isnt $('#confirm-user-new-password').val()
+      Materialize.toast('確認パスワードが違います', 5000, 'alert-message')
+    else
+      userModify()
+        .done (data)   ->
+          Materialize.toast('ユーザ情報を変更しました', 5000, 'alert-message')
+          $('#user-new-password').val ''
+          $('#confirm-user-new-password').val ''
+        .fail (xhr,  status, error) ->
+          apiErrorToast(xhr)
+
+  $('#get-users-list').bind 'click', ->
+    getUserList()
+      .done (data) ->
+        _userList = data.users
+        $('#modal__search__input').val ''
+        createUsersListModal()
+        $('.modal__user-select-target').bind 'click', ->
+          $('#user-id').focus()
+          $('#user-id').val $(this).text().split(": ")[0]
+          startUserSelect()        
+      .fail (xhr) ->
+        apiErrorToast(xhr)
+      .always () ->
+        $('#modal__user-list').openModal()
+        $('#modal__search__input').focus()
+
+  $('#user-delete').bind 'click', ->
+    $('#modal__user-delete__user-id').text "ID: #{$('#user-id').val()}"
+    $('#modal__user-delete__user-name').text "名前: #{$('#user-name').val()}"
+    $('#modal__user-delete').openModal();
+    $('#user-delete-agree').bind 'click', ->
+      startUserDelete()
+
+  $('#modal__search__start-button').bind 'click', ->
+    searchWord = $('#modal__search__input').val()
+    createUsersListModal(searchWord)
+
+  $('#modal__search__input').bind 'keydown', ->
+    if event.keyCode is 13
+      searchWord = $('#modal__search__input').val()
+      createUsersListModal(searchWord)
