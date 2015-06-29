@@ -1,11 +1,7 @@
-.user-page__menu{
-  background: #ee6e73;
-}
-
 .current-user--class{
   float: right;
-  margin: 0px 30px;
   height: 64px;
+  background: #ee6e73;
 }
 
 .index__btn{
@@ -15,9 +11,17 @@
   width: 140px;
 }
 
+
+.user-page__menu{
+  background: #ee6e73;
+  border: 1px;
+  border-color: #FEFEFE;
+}
+
 h1.userpage__title{
   font-size: 270%;
-  margin: 20px 0px;
+  color: #565656;
+  margin: 40px 0px 20px;
 }
 
 h2.userpage__subtitle{
@@ -25,18 +29,40 @@ h2.userpage__subtitle{
   margin: 50px 0px 0px;
 }
 
+h1.top-page__title{
+  font-size: 300%;
+  color: #565656;
+}
+
 #user-page{
   margin: 0px;
 }
 
 #user-page .user-page__button{
-  margin: 10px 30px;
+  margin: 10px 0px;
+  min-width: 150px;
+}
+
+.user-page__menu__column{
+  border-style: none solid none none;
+  border-color: #fefefe;
+  border-width: 1px;
+}
+
+#user-page .user-page__row{
+  margin: 30px 0px 0px;
+}
+
+.user-page__menu__column--left{
+  border-style: none solid none solid;
+  border-color: #fefefe;
+  border-width: 1px;
 }
 
 .user-page__vertical{
-  float:left;
-  vertical-align: middle;
-  margin: 20px 0px;
+  display: inline-block;
+  width: 450px;
+  margin: 23px 35px 0px;
 }
 
 .register__btn--right{
