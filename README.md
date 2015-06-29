@@ -114,7 +114,8 @@ $ RACK_ENV=test bundle exec rake db:migrate
 
 説明|Field|Type|Null|Key|Default
 --:|:--|:--|:--|:--|:--
-社員番号|id|int(11)|no|PRI, AUTOINC|NULL
+通し番号|num|int(11)|no|PRI, AUTOINC|NULL
+社員番号|id|int(11)|no||NULL
 氏名|name|varchar(50)|no||NULL
 所属部署コード|department_id|int(11)|no|FK(departments.id)|NULL
 パスワード|password|varchar(255)|no||NULL
@@ -125,7 +126,7 @@ $ RACK_ENV=test bundle exec rake db:migrate
 --:|:--|:--|:--|:--|:--
 通し番号|id|int(11)|no|PRI, AUTOINC|NULL
 日付|day|date|no||NULL
-社員番号|user_id|int(11)|no|FK(users.id)|NULL
+社員番号|user_id|int(11)|no||NULL
 入室時刻|attendance|varchar(10)|yes||NULL
 退出時刻|leaving|varchar(10)|yes||NULL
 振替休暇予定日|prearranged_holiday|varchar(15)|yes||NULL
@@ -138,5 +139,6 @@ $ RACK_ENV=test bundle exec rake db:migrate
 
 説明|Field|Type|Null|Key|Default
 --:|:--|:--|:--|:--|:--
-ユーザID|id|varchar(255)|no|PRI|NULL
+通し番号|num|int(11)|no|PRI, AUTOINC|NULL
+ユーザID|id|varchar(255)|no||NULL
 パスワード|password|varchar(255)|no||NULL

@@ -10,6 +10,5 @@ class CreateTimecards < ActiveRecord::Migration
       t.string :holiday_acquisition, limit: 15
       t.string :etc, limit: 50
     end
-    add_foreign_key(:timecards, :users, column: 'user_id')
   end
 end

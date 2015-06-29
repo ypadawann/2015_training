@@ -13,7 +13,8 @@
 
 ActiveRecord::Schema.define(version: 4) do
 
-  create_table "admins", force: :cascade do |t|
+  create_table "admins", primary_key: "num", force: :cascade do |t|
+    t.string "id",       limit: 50,  null: false
     t.string "password", limit: 255, null: false
   end
 
@@ -32,9 +33,8 @@ ActiveRecord::Schema.define(version: 4) do
     t.string  "etc",                 limit: 50
   end
 
-  add_index "timecards", ["user_id"], name: "fk_rails_72a13e4c12", using: :btree
-
-  create_table "users", force: :cascade do |t|
+  create_table "users", primary_key: "num", force: :cascade do |t|
+    t.integer "id",            limit: 4,   null: false
     t.string  "name",          limit: 50,  null: false
     t.integer "department_id", limit: 4,   null: false
     t.string  "password",      limit: 255, null: false
@@ -43,6 +43,5 @@ ActiveRecord::Schema.define(version: 4) do
 
   add_index "users", ["department_id"], name: "fk_rails_f29bf9cdf2", using: :btree
 
-  add_foreign_key "timecards", "users"
   add_foreign_key "users", "departments"
 end
