@@ -64,27 +64,28 @@ switch location.pathname
         else
           Materialize.toast('エラーが発生しました', 5000, 'alert-message')
 
-$('#ok').bind 'click', ->
-  userDelete()
-    .done (data) ->
-      Materialize.toast('アカウントを削除しました', 5000, 'alert-message')
-      setTimeout( ->
-        document.location = '/'
-      , 1500)
-    .fail (xhr, status, error) ->
-      if xhr.status is 403
-        Materialize.toast('認証に失敗しました', 5000, 'alert-message')
+$('#delete').bind 'click', ->
+  $('#ok').bind 'click', ->
+    userDelete()
+      .done (data) ->
+        Materialize.toast('アカウントを削除しました', 5000, 'alert-message')
         setTimeout( ->
-          location.reload()
-        ,1500)
-      else
-        Materialize.toast('エラーが発生しました', 5000, 'alert-message')
-        setTimeout( ->
-          location.reload()
-        ,1500 )
+          document.location = '/'
+        , 1500)
+      .fail (xhr, status, error) ->
+        if xhr.status is 403
+          Materialize.toast('認証に失敗しました', 5000, 'alert-message')
+          setTimeout( ->
+            location.reload()
+          ,1500)
+        else
+          Materialize.toast('エラーが発生しました', 5000, 'alert-message')
+          setTimeout( ->
+            location.reload()
+          ,1500 )
 
-$('#cancel').bind 'click', ->
-  Materialize.toast('アカウント削除をキャンセルしました', 1500, 'alert-message')
+  $('#cancel').bind 'click', ->
+    Materialize.toast('アカウント削除をキャンセルしました', 1500, 'alert-message')
 
 $(document).ready ->
   $('.modal-trigger').leanModal(
