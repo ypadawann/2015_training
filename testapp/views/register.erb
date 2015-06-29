@@ -1,26 +1,48 @@
-<div class="container">
-  <h1><%= "ユーザ登録" %></h1>
-  <p>ID:<input type="number" id="user_id" size="40"></p>
-  <p>名前:<input type="text" id="name" maxlength="50" size="40"></p>
-  <p>所属：
-  <select class="browser-default" id="department"><%==
-    Model::Departments.list_ids.map { |d|
-    "<option value=#{d}>#{Model::Departments.name_of(d)}</option>"
-  }.join
-  %></select>
-</p>
-<p>入社日：
-  <input type="number" id="enter_year" size="4">年
-  <input type="number" id="enter_month" size="2">月
-  <input type="number" id="enter_day" size="2">日
-</p>
-<p>pass:<input type="password" id="password" maxlength="50" size="40"></p>
-<p>
-  <input type="button" id="register" value="送信">
-</p>
-
-<% content_for :javascript do %>
+<div class="container" id="register--page">
+  <h3><%= "ユーザ登録" %></h3>
+  <div class="row">
+    <div class="input-field col s12">
+      <input type="number" id="user_id" size="40">
+      <label for="user_id">社員番号</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s12">
+      <input type="text" id="name" maxlength="50" size="40">
+      <label for="name">名前</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s12">
+      <input type="password" id="password" maxlength="50" size="40">
+      <label for="password">Password</label>
+    </div>
+  </div>
+  <div class="row">
+    <select class="browser-default" id="department">
+      <option value="" disabled selected>所属</option>
+      <%==
+        Model::Departments.list_ids.map { |d|
+          "<option value=#{d}>#{Model::Departments.name_of(d)}</option>"
+        }.join
+      %></select>
+  </div>
+  <div class="row">
+    <div class="input-field col s2">
+      <input placeholder="年" type="number" id="enter_year" size="4">
+      <label for="enter_year" class="register__label--font-size">入社日</label>
+    </div>
+    <div class="input-field col s1">
+      <input placeholder="月" type="number" id="enter_month" size="2">
+    </div>
+    <div class="input-field col s1">
+      <input placeholder="日" type="number" id="enter_day" size="2">
+    </div>
+    <div>
+      <a type="button" class="waves-light btn register__btn--right" id="register">登録</a>
+    </div>
+  </div>
+  <% content_for :javascript do %>
   <script type="text/javascript" src=<%= "#{js_path}/register.js" %>></script>
-<% end %>
-<a href=<%= app_path %> class="print--hidden">トップページ</a>
+  <% end %>
 </div>

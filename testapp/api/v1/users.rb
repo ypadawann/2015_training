@@ -79,6 +79,11 @@ module API
         params do
           optional :name, type: String, desc: 'ユーザ名'
           optional :department, type: String, desc: '部署名'
+          optional :enter_date, type: Hash, desc: '入社年月日' do
+            requires :year, type: Integer, desc: '年'
+            requires :month, type: Integer, desc: '月'
+            requires :day, type: Integer, desc: '日'
+          end
           optional :new_password, type: String, desc: '新しいパスワード'
           requires :password, type: String, desc: '現在のパスワード'
         end
@@ -87,12 +92,10 @@ module API
           authenticate!(user_id)
           verify_password!(user_id, params[:password])
 
-          Model::Users.update_name(user_id, params[:name]) \
-            if params[:name].present?
-          Model::Users.update_department(user_id, params[:department]) \
-            if params[:department].present?
-          Model::Users.update_password(user_id, params[:new_password]) \
-            if params[:new_password].present?
+          Model::Users.update(
+            user_id, params[:name], params[:department],
+            params[:enter_date], params[:new_password]
+          )
 
           Model::Users.status(user_id)
         end

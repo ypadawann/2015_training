@@ -1,21 +1,23 @@
-<div class="print--hidden attendance-record__select row">
-  <h3>出退勤状況</h3>
-  <div class="input-field col s1">
-    <input type="number" id="year" class="validate" value="<%= Time.now.year %>">
-    <label for="year">Year</label>
-  </div>
-  <div class="input-field col s1">
-    <input type="number" id="month" class="validate" value="<%= Time.now.month %>">
-    <label for="month">Month</label>
-  </div>
-  <div class="col s1">
-    <a type="button" id="date-select" class="attendance-record__btn waves-light btn">表示</a>
-  </div>
-  <div class="col s1">
-    <a type="button" id="timecard-save" class="attendance-record__btn waves-effect waves-light btn">保存</a>
-  </div>
-  <div class="col s3">
-    <a type="button" id="exportCSV" class="waves-effect waves-light btn">エクスポート</a>
+<div class="print--hidden">
+  <h1 class="userpage__title">出退勤状況</h1>
+  <div class="attendance-record__select row">
+    <div class="input-field col attendance-record__menu--year">
+      <input type="number" id="year" class="validate attendance-record__menu-year" value="<%= Time.now.year %>">
+      <label for="year">Year</label>
+    </div>
+    <div class="input-field col s1">
+      <input type="number" id="month" class="validate" value="<%= Time.now.month %>">
+      <label for="month">Month</label>
+    </div>
+    <div class="col s1">
+      <a type="button" id="date-select" class="attendance-record__btn waves-light btn">表示</a>
+    </div>
+    <div class="col s1">
+      <a type="button" id="timecard-save" class="attendance-record__btn waves-effect waves-light btn">保存</a>
+    </div>
+    <div class="col s3">
+      <a type="button" id="exportCSV" class="waves-effect waves-light btn">エクスポート</a>
+    </div>
   </div>
 </div>
 <div class="attendance-record">
@@ -71,7 +73,7 @@
   <table border="1" cellspacing="0" cellpadding="0" id="table" class="attendance-record__table">
   </table>
 
-  <table border="1" cellspacing="0" cellpadding="0" class="attendance-record__table">
+  <table border="1" cellspacing="0" cellpadding="0" class="attendance-record__table--total">
     <tr>
       <td class="attendance-record__table__total--dayAndweek">合計</td>
       <td class="attendance-record__table__total--dayAndweek"></td>

@@ -13,10 +13,16 @@ module Model
 
     class <<self
       private
+
       def to_hash(user)
-        { user_id: user.id,
+        {
+          user_id: user.id,
           name: user.name,
-          department: Model:: Departments.name_of(user.department_id) }
+          department: Model:: Departments.name_of(user.department_id),
+          enter_date: { year: user.enter.year,
+                        month: user.enter.month,
+                        day: user.enter.day }
+        }
       end
 
       public
@@ -27,7 +33,6 @@ module Model
       end
 
       def invalid?(id, name, department, password, enter)
-        error_msgs = []
         user =
           Model::User.new(
             id: id,
@@ -36,6 +41,7 @@ module Model
             password: Model::Helper.start_hash(password),
             enter: enter
           )
+        error_msgs = []
         error_msgs << 'パスワードを入力して下さい。' if password.blank?
         error_msgs << user.errors.messages.values if user.invalid?
         error_msgs
@@ -62,21 +68,12 @@ module Model
         false
       end
 
-      def update_name(id, name)
+      def update(id, name, department, enter_date, password)
         user = Model::User.find(id)
-        user.name = name
-        user.save
-      end
-
-      def update_department(id, department)
-        user = Model::User.find(id)
-        user.department_id = Model::Departments.id_of(department)
-        user.save
-      end
-
-      def update_password(id, password)
-        user = Model::User.find(id)
-        user.password = Model::Helper.start_hash(password)
+        user.name = name if name.present?
+        user.department_id = Model::Departments.id_of(department) if department.present?
+        user.enter = [enter_date.year, enter_date.month, enter_date.day].join('-') if enter_date.present?
+        user.password = Model::Helper.start_hash(password) if password.present?
         user.save
       end
 

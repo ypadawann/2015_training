@@ -13,7 +13,7 @@
 
     もし ユーザ情報変更画面(/userpage/modify) にアクセスし、
     かつ 名前(#user-name) に jack を入力し、
-    かつ パスワード(#password) に 12345 を入力し、
+    かつ パスワード(#password-for-modifying) に 12345 を入力し、
     かつ 変更ボタン(#user-modify) をクリックした (非同期)
 
     ならば アラート(.alert-message) に ユーザ情報を変更しました と表示する
@@ -27,7 +27,7 @@
 
     もし ユーザ情報変更画面(/userpage/modify) にアクセスし、
     かつ 所属(#department) 欄から JACK を選択し
-    かつ パスワード(#password) に 12345 を入力し、
+    かつ パスワード(#password-for-modifying) に 12345 を入力し、
     かつ 変更ボタン(#user-modify) をクリックした (非同期)
 
     ならば アラート(.alert-message) に ユーザ情報を変更しました と表示する
@@ -40,7 +40,7 @@
 
     もし ユーザ情報変更画面(/userpage/modify) にアクセスし、
     かつ newパスワード(#new-password) に 54321 を入力し、
-    かつ パスワード(#password) に 12345 を入力し、
+    かつ パスワード(#password-for-modifying) に 12345 を入力し、
     かつ 変更ボタン(#user-modify) をクリックした (非同期)
 
     ならば アラート(.alert-message) に ユーザ情報を変更しました と表示する
@@ -57,7 +57,7 @@
 
     もし ユーザ情報変更画面(/userpage/modify) にアクセスし、
     かつ 名前(#user-name) に jack を入力し、
-    かつ パスワード(#password) に 54321 を入力し、
+    かつ パスワード(#password-for-modifying) に 54321 を入力し、
     かつ 変更ボタン(#user-modify) をクリックした (非同期)
 
     ならば アラート(.alert-message) に 認証に失敗しました と表示する
@@ -67,9 +67,9 @@
     かつ 社員番号 1111, パスワード 12345 のユーザでログインしている
 
     もし ユーザ情報変更画面(/userpage/modify) にアクセスし、
-    かつ パスワード(#password) に 12345 を入力し、
-    かつ 削除ボタン(#delete) をクリックした (非同期)
-    かつ okボタン(#ok) をクリックした (非同期)
+    かつ パスワード(#password-for-deleting) に 12345 を入力し、
+    かつ 削除ボタン(#delete) をクリックした
+    かつ okボタン(#ok) をクリックした
 
     ならば アラート(.alert-message) に アカウントを削除しました と表示する (非同期)
     かつ 3.0 秒待った
@@ -80,9 +80,9 @@
     かつ 社員番号 1111, パスワード 12345 のユーザでログインしている
 
     もし ユーザ情報変更画面(/userpage/modify) にアクセスし、
-    かつ パスワード(#password) に 12345 を入力し、
-    かつ 削除ボタン(#delete) をクリックした (非同期)
-    かつ cancelボタン(#cancel) をクリックした (非同期)
+    かつ パスワード(#password-for-deleting) に 12345 を入力し、
+    かつ 削除ボタン(#delete) をクリックした
+    かつ cancelボタン(#cancel) をクリックした
 
     ならば アラート(.alert-message) に アカウント削除をキャンセルしました と表示する (非同期)
     かつ ユーザ情報変更(/userpage/modify) 画面に遷移する
@@ -92,7 +92,7 @@
     かつ 社員番号 1111, パスワード 12345 のユーザでログインしている
 
     もし ユーザ情報変更画面(/userpage/modify) にアクセスし、
-    かつ パスワード(#password) に 54321 を入力し、
+    かつ パスワード(#password-for-deleting) に 54321 を入力し、
     かつ 削除ボタン(#delete) をクリックした
     かつ okボタン(#ok) をクリックした
 

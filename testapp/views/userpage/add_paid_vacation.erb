@@ -1,5 +1,4 @@
-<h3><%= "有給登録" %></h3>
-<div id="user-id" style="display:none"><%= @user_id %></div>
+<h1 class="userpage__title"><%= "有給登録" %></h1>
 <p>
   日付を１行ごとに入力してください<br>
   【例】<br>
@@ -7,17 +6,17 @@
   2016-1-1<br>
 </p>
 
-<p>
-  <input type="button" id="regist-vacation" value="登録">
-</p>
+<div class="row">
+  <div class="input-field col s6">
+    <textarea id="full-vacation" class="materialize-textarea" rows="10" cols="20"></textarea>
+    <label for="full-vacation">全休</label>
+  </div>
+  <div class="input-field col s6">
+    <textarea id="half-vacation" class="materialize-textarea" rows="10" cols="20"></textarea>
+  <label for="half-vacation">半休</label>
+  </div>
+</div>
 
-<table>
-  <tr>
-    <td>全休</td>
-    <td>半休</td>
-  </tr>
-  <tr>
-    <td><textarea id="full-vacation" rows="10" cols="20"></textarea></td>
-    <td><textarea id="half-vacation" rows="10" cols="20"></textarea></td>
-  </tr>
-</table>
+<p>
+<a type="button" id="regist-vacation" class="waves-light btn">登録</a>
+</p>

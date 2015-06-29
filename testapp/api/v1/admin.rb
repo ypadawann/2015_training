@@ -146,16 +146,10 @@ module API
           session_check()
           user_id = params[:user_id]
           find_user!(user_id)
-          
-          if params[:name].present?
-            Model::Users.update_name(user_id, params[:name]) \
-          end
-          if params[:department].present?
-            Model::Users.update_department(user_id, params[:department])
-          end
-          if params[:new_password].present?
-            Model::Users.update_password(user_id, params[:new_password]) \
-          end   
+          Model::Users.update(
+            user_id, params[:name], params[:department],
+            params[:enter_date], params[:new_password]
+          )
           Model::Users.status(user_id)
         end
       end

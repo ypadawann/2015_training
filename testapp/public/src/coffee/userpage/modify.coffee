@@ -1,16 +1,20 @@
+userId = $('#current-user-id').text()
+
 userSelect = ->
-  userId = $("#user-id").text()
   $.ajax(
     type: "get"
     url: "//#{location.host}/api/v1/users/#{userId}"
   )
 
 userModify = ->
-  userId = $('#user-id').text()
   userName = $('#user-name').val()
   department = $('#department option:selected').text()
   newPassword = $('#new-password').val()
-  password = $('#password').val()
+  password = $('#password-for-modifying').val()
+  enterDate =
+    year: $('#enter-year').val()
+    month: $('#enter-month').val()
+    day: $('#enter-day').val()
   $.ajax(
     type: "put"
     url: "//#{location.host}/api/v1/users/#{userId}"
@@ -18,12 +22,12 @@ userModify = ->
       name: userName
       department: department
       new_password: newPassword
+      enter_date: enterDate
       password: password
   )
 
 userDelete = ->
-  userId = $("#user-id").text()
-  password = $('#password').val()
+  password = $('#password-for-deleting').val()
   $.ajax(
     type: "post"
     url: "//#{location.host}/api/v1/users/delete/#{userId}"
@@ -35,6 +39,9 @@ $('#user-modify').bind 'click', ->
   userModify()
     .done (data)   ->
       Materialize.toast('ユーザ情報を変更しました', 5000, 'alert-message')
+      setTimeout( ->
+        location.reload()
+      ,1500)
     .fail (xhr,  status, error) ->
       if xhr.status is 403
         Materialize.toast('認証に失敗しました', 5000, 'alert-message')
@@ -45,9 +52,12 @@ switch location.pathname
   when '/userpage/modify'
     userSelect()
       .done (data) ->
-        document.querySelector("#user-name").value = data.name
-        ($('#department option').filter ->
-          return $(this).text() is data.department).prop 'selected', true
+        $('#user-name').val data.name
+        $('#department').val data.department
+        $('#department').material_select()
+        $('#enter-year').val data.enter_date.year
+        $('#enter-month').val data.enter_date.month
+        $('#enter-day').val data.enter_date.day
       .fail (xhr,  status, error) ->
         if xhr.status is 403
           Materialize.toast('認証に失敗しました', 5000, 'alert-message')
@@ -75,12 +85,8 @@ $('#ok').bind 'click', ->
 
 $('#cancel').bind 'click', ->
   Materialize.toast('アカウント削除をキャンセルしました', 1500, 'alert-message')
-  setTimeout( ->
-    location.reload()
-  , 1500)
 
 $(document).ready ->
-  $("#department").material_select()
   $('.modal-trigger').leanModal(
       opacity: .5,
       in_duration: 300,

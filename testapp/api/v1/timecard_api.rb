@@ -20,11 +20,8 @@ module API
           user_id = params[:user_id]
           authenticate!(user_id)
           date = Date.today
-          if Model::Timecard_operation.get_attendance(date, user_id).present? === true
-            Model::Timecard_operation.get_attendance(date, user_id)
-          else
-            error!('出勤していない', 404)
-          end
+          Model::Timecard_operation.get_attendance(date, user_id).presence ||
+            error!('本日はまだ出勤していません。', 400)
         end
 
         post '/attend' do
@@ -63,11 +60,8 @@ module API
           user_id = params[:user_id]
           authenticate!(user_id)
           date = Date.today
-          if Model::Timecard_operation.get_leaving(date, user_id).present? === true
-            Model::Timecard_operation.get_leaving(date, user_id)
-          else
-            error!('退勤していない', 404)
-          end
+          Model::Timecard_operation.get_leaving(date, user_id).presence ||
+            error!('本日はまだ退勤していません。', 400)
         end
 
         post '/leave' do

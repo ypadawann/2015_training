@@ -1,18 +1,35 @@
 .admin-button {
   @extend .deep-orange;
+  min-width:7rem;
 }
 
-.admin-top__menu-detail {
-  .row {
-    margin-bottom: 2rem;
-  }
-  button{
-    width: 100%;
+.admin-top__menu-detail-table{
+  tr {
+    td {
+      padding: 5px 5px;
+      p {
+        padding-left: 1rem;
+      }
+    }
   }
 }
 
-.admin-menu-background-color{
+.admin-top__menu-detail-table__button-td {
+    width: 12rem;
+    button {
+        width: 100%;
+    } 
+}
+
+.admin-menu{
   background-color: #021F4D;
+  div {
+    width: 100%;
+    height: auto;
+    float: left;
+    background-color: #021F4D;
+    margin-bottom: 1.5rem;
+  }
 }
 
 .admin-pagename{
