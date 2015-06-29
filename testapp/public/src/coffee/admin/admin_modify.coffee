@@ -32,8 +32,8 @@ $('#admin-modify').bind 'click', ->
     adminModify()
       .done (data)   ->
         Materialize.toast('管理者情報を変更しました', 5000, 'alert-message')
-        ($('#select-department option').filter ->
-          $(this).text() is $('#login-admin-id')).prop 'selected', true
+        ($('#select-admin-id option').filter ->
+          $(this).text() is $('#login-admin-id').text()).prop 'selected', true
         $('#admin-new-password').val ''
         $('#confirm-admin-new-password').val ''
         $('#admin-password').val ''
@@ -41,12 +41,14 @@ $('#admin-modify').bind 'click', ->
         apiErrorToast(xhr)
 
 startAdminDelete = ->
+  console.log $('#login-admin-id').text()
+  console.log $('#login-admin-id').val()
   adminDelete()
     .done (data) ->
       $("#select-admin-id option:selected").remove()
       Materialize.toast('アカウントを削除しました', 50000, 'alert-message')
-      ($('#select-department option').filter ->
-        $(this).text() is $('#login-admin-id')).prop 'selected', true
+      ($('#select-admin-id option').filter ->
+        $(this).text() is $('#login-admin-id').text()).prop 'selected', true
       $('#admin-new-password').val ''
       $('#confirm-admin-new-password').val ''
       $('#admin-password').val ''
