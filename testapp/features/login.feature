@@ -10,7 +10,7 @@
     かつ pass(#password) に 12345 を入力し、
     かつ ログインボタン(#login) をクリックした
 
-    ならば ユーザ名(#user-name) が testさん である
+    ならば ユーザ名(#current-user-name) が test である
     かつ ユーザページ(/userpage) 画面に遷移する
 
   シナリオ: 存在しないユーザでのログイン処理(失敗時)
