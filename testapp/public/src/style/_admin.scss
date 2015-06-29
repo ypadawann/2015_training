@@ -23,12 +23,21 @@
 
 .admin-menu{
   background-color: #021F4D;
-  div {
-    width: 100%;
+  #admin-login-id {
+    padding-right: 1rem;
+  }
+  .admin-menu__div {
     height: auto;
-    float: left;
+    width: 100%;
     background-color: #021F4D;
-    margin-bottom: 1.5rem;
+    margin-bottom: 30px;
+    div ul li{
+      text-align: center;
+      //width:160px;
+      a {
+        width: 100%;
+      }
+    }
   }
 }
 
