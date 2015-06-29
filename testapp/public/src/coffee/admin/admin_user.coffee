@@ -1,5 +1,4 @@
 _ = require 'lodash'
-_userList = new Array()
 
 userSelect = ->
   userId = $("#user-id").val()
@@ -61,15 +60,24 @@ startUserDelete = ->
     .fail (xhr,  status, error) ->
       apiErrorToast(xhr)
 
-createUsersListModal = (searchWord) ->
+createUsersListModal = (userList) ->
   $('#modal__users-list').empty()
-  (_.range(0, _userList.length)).forEach (i) ->
-    collectionItem = "#{_userList[i].user_id}: #{_userList[i].name}"
-    if collectionItem.indexOf(searchWord) isnt -1 || searchWord is undefined
-      newNode =
-        $( "<a />", { href: "#!", id: "modal__user-select-target#{i}", class: "collection-item modal-action modal-close modal__user-select-target" } )
-      newNode.text collectionItem
-      $('#modal__users-list').append(newNode)
+  (_.range(0, userList.length)).forEach (i) ->
+    collectionItem = "#{userList[i].user_id}: #{userList[i].name}"
+    newNode =
+      $( "<a />", { href: "#!", id: "modal__user-select-target#{i}", class: "collection-item modal-action modal-close modal__user-select-target" } )
+    newNode.text collectionItem
+    $('#modal__users-list').append(newNode)
+
+startSearchUser = ->
+  searchWord = $('#modal__search__input').val()
+  userList = $('.modal__user-select-target')
+  (_.range(0, userList.length)).forEach (i) ->
+    if (userList[i].text.toLowerCase()).indexOf(searchWord.toLowerCase()) is -1
+      userList[i].style.display="none"
+    else
+      userList[i].style.display=""
+
 
 
 $ ->
@@ -96,9 +104,8 @@ $ ->
   $('#get-users-list').bind 'click', ->
     getUserList()
       .done (data) ->
-        _userList = data.users
         $('#modal__search__input').val ''
-        createUsersListModal()
+        createUsersListModal(data.users)
         $('.modal__user-select-target').bind 'click', ->
           $('#user-id').focus()
           $('#user-id').val $(this).text().split(": ")[0]
@@ -117,10 +124,8 @@ $ ->
       startUserDelete()
 
   $('#modal__search__start-button').bind 'click', ->
-    searchWord = $('#modal__search__input').val()
-    createUsersListModal(searchWord)
-
+    startSearchUser()
+        
   $('#modal__search__input').bind 'keydown', ->
     if event.keyCode is 13
-      searchWord = $('#modal__search__input').val()
-      createUsersListModal(searchWord)
+      startSearchUser()
