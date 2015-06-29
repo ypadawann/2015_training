@@ -125,7 +125,7 @@ $ RACK_ENV=test bundle exec rake db:migrate
 --:|:--|:--|:--|:--|:--
 通し番号|id|int(11)|no|PRI, AUTOINC|NULL
 日付|day|date|no||NULL
-社員番号|user_id|int(11)|no|FK(users.id)|NULL
+社員番号|user_id|int(11)|no||NULL
 入室時刻|attendance|varchar(10)|yes||NULL
 退出時刻|leaving|varchar(10)|yes||NULL
 振替休暇予定日|prearranged_holiday|varchar(15)|yes||NULL
