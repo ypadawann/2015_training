@@ -80,15 +80,15 @@
     もし "ユーザ情報管理(#top__admin-user)" をクリック
     ならば "ユーザ情報変更ボタン(#user-modify)" が存在
     
-    もし "管理者情報管理(#to-top)" をクリック
+    もし "トップページ(#to-top)" をクリック
     かつ "部署管理(#top__admin-department)" をクリック
     ならば "部署登録ボタン(#department-register)" が存在
 
-    もし "管理者情報管理(#to-top)" をクリック
+    もし "トップページ(#to-top)" をクリック
     かつ "管理者情報管理(#top__admin-admin)" をクリック
     ならば "管理者情報変更ボタン(#admin-modify)" が存在
 
-    もし "管理者情報管理(#to-top)" をクリック
+    もし "トップページ(#to-top)" をクリック
     かつ "管理者追加(#top__to-admin-register)" をクリック
     ならば "管理者登録ボタン(#admin-register)" が存在
 
