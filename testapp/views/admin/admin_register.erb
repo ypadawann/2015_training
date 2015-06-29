@@ -1,7 +1,7 @@
 <div class="admin-pagename"><%= "管理者登録" %></div>
 
 <div class="row admin-form">
-  <div class="col s12">
+  <form class="col s12">
     <div clas="row">
       <div class="input-field col s12">
 	<input id="admin-id" type="text" class="validate" autofocus>
@@ -16,13 +16,14 @@
     </div>
     <div clas="row">
       <div class="input-field col s12">
-	<input id="confirm-admin-password" type="password" class="validate enter-for-regist-admin">
+	<input id="confirm-admin-password" type="password" class="validate">
 	<label for="confirm-admin-password">Confirm Password</label>
       </div>
     </div>
-  </div>
+    <div clas="row">
+      <div class="input-field col s12">
+	<button type="submit" class="waves-effect waves-light btn admin-button" id="admin-register" href="#">登録</button>
+      </div>
+    </div>	
+  </form>
 </div>
-
-<p>
-  <a class="waves-effect waves-light btn admin-button" id="admin-register" href="#">登録</a>
-</p>

@@ -24,8 +24,5 @@ startAdminRegister = ->
 
 $ ->
   $('#admin-register').bind 'click', ->
+    event.preventDefault()
     startAdminRegister()
-
-  $('.enter-for-regist-admin').bind 'keydown', ->
-    if event.keyCode is 13
-      startAdminRegister()
