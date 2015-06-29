@@ -1,14 +1,14 @@
 <h1 class="userpage__title"><%= @title = 'ユーザページ' %></h1>
 <div id="user-page">
-  <div class="row s12">
+  <div class="row s12 user-page__row">
     <a class="col s2 waves-effect waves-light btn-large user-page__button" type="button" id="attend">出勤</a>
-    <div id="attend-message" class="user-page__vertical"></div>
+    <span id="attend-message" class="user-page__vertical"></span>
   </div>
-  <div class="row s12">
-    <a class="col s2 waves-effect waves-light btn-large user-page__button" type="button" id="leave">退勤</a>
-    <div id="leave-message" class="user-page__vertical"></div>
+  <div class="row s12 user-page__row">
+    <a class="col s2 waves-effect waves-light btn-large user-page__button user-page__col" type="button" id="leave">退勤</a>
+    <span id="leave-message" class="user-page__vertical"></span>
   </div>
-  <div class="row s12">
+  <div class="row s12 user-page__row">
     <a class="col s2 waves-effect waves-light btn-large user-page__button" type="button" id="view-paid-vacation">有給残数</a>
   </div>
 </div>
