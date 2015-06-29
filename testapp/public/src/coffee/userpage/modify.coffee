@@ -76,7 +76,7 @@ $('#ok').bind 'click', ->
         Materialize.toast('認証に失敗しました', 5000, 'alert-message')
         setTimeout( ->
           location.reload()
-        ,1500)
+        ,1500 )
       else
         Materialize.toast('エラーが発生しました', 5000, 'alert-message')
         setTimeout( ->
@@ -85,6 +85,9 @@ $('#ok').bind 'click', ->
 
 $('#cancel').bind 'click', ->
   Materialize.toast('アカウント削除をキャンセルしました', 1500, 'alert-message')
+  setTimeout( ->
+    location.reload()
+  ,1500 )
 
 $(document).ready ->
   $('.modal-trigger').leanModal(
