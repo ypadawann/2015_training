@@ -183,6 +183,42 @@
     かつ "ユーザ名(#user-name)" に "Mori" と表示
     かつ "部署(#select-department)" で "ITSecurity" が選択
 
+  シナリオ: ユーザを検索
+    前提 管理者にID "admin"、パスワード "password" が存在
+    前提 ユーザにID "23"、名前 "Haruna"、部署 "Navy"、パスワード "userpassword"、入社日 "1915-04-19" が存在
+    前提 ユーザにID "5630"、名前 "Maki"、部署 "ITSecurity"、パスワード "password"、入社日 "2010-04-01" が存在
+    前提 ユーザにID "5622"、名前 "Mori"、部署 "ITSecurity"、パスワード "password"、入社日 "2014-04-01" が存在
+
+    もし "ログインページ(/admin/login)" にアクセス
+    ならば "管理者ID(#admin-id)" に "admin" を入力
+    かつ "管理者パスワード(#admin-password)" に "password" を入力
+    かつ "ログインボタン(#admin-login)" をクリック
+
+    もし "ユーザ情報管理(#admin-user)" をクリック
+    かつ "一覧(#get-users-list)" をクリック
+    ならば "モーダル(#modal__user-list)" が存在
+    かつ "1番目(#modal__user-select-target0)" に "23: Haruna" と表示
+    かつ "2番目(#modal__user-select-target1)" に "5622: Mori" と表示
+    かつ "3番目(#modal__user-select-target2)" に "5630: Maki" と表示
+
+    もし "検索窓(#modal__search__input)" に "56" を入力
+    かつ "検索ボタン(#modal__search__start-button)" をクリック
+    ならば "モーダル(#modal__user-list)" に "1番目(#modal__user-select-target0)" が存在しない
+    かつ "2番目(#modal__user-select-target1)" に "5622: Mori" と表示
+    かつ "3番目(#modal__user-select-target2)" に "5630: Maki" と表示
+
+    もし "検索窓(#modal__search__input)" に "Haruna" を入力
+    かつ "その場で(#modal__search__input)" で "エンターキー(Enter)" をキー入力
+    ならば "1番目(#modal__user-select-target0)" に "23: Haruna" と表示
+    かつ "モーダル(#modal__user-list)" に "2番目(#modal__user-select-target1)" が存在しない
+    かつ "モーダル(#modal__user-list)" に "3番目(#modal__user-select-target2x)" が存在しない
+
+    もし "検索窓(#modal__search__input)" に "maki" を入力
+    かつ "その場で(#modal__search__input)" で "エンターキー(Enter)" をキー入力
+    ならば "モーダル(#modal__user-list)" に "1番目(#modal__user-select-target0)" が存在しない
+    かつ "モーダル(#modal__user-list)" に "2番目(#modal__user-select-target1)" が存在しない
+    かつ "3番目(#modal__user-select-target2)" に "5630: Maki" と表示
+
 
   シナリオ: ユーザを削除
     前提 管理者にID "admin"、パスワード "password" が存在
@@ -302,6 +338,7 @@
  
   シナリオ: 管理者情報管理（パスワード変更）
     前提 管理者にID "admin"、パスワード "password" が存在
+    前提 管理者にID "aaaa"、パスワード "rootroot" が存在
 
     もし "ログインページ(/admin/login)" にアクセス
     ならば "管理者ID(#admin-id)" に "admin" を入力
@@ -330,6 +367,14 @@
     かつ "変更ボタン(#admin-modify)" をクリック
     ならば "1" 秒待機
     かつ "新しいパスワード(#admin-new-password)" に "" と表示
+
+    もし "管理者ID(#select-admin-id)" で "aaaa" を選択
+    かつ "新しいパスワード(#admin-new-password)" に "password" を入力
+    かつ "確認パスワード(#confirm-admin-new-password)" に "password" を入力
+    かつ "パスワード(#admin-password)" に "rootroot" を入力
+    かつ "変更ボタン(#admin-modify)" をクリック
+    ならば "アラート(.alert-message)" に "管理者情報を変更しました" と表示
+    ならば "管理者ID(#select-admin-id)" で "admin" が選択
 
     もし "ログインページ(/admin/login)" にアクセス
     かつ "管理者ID(#admin-id)" に "admin" を入力

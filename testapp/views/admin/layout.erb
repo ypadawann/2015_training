@@ -1,7 +1,5 @@
 <div class="container">
 
-  <div style="display:none"><%= @admin_id %></div>
-
   <nav class="admin-menu">
     <div class="nav-wrapper">
       <ul class="left hide-on-med-and-dow">
@@ -11,6 +9,7 @@
 	<li><a href="#" class="to-admin-modify" id="admin-admin">管理者情報管理</a></li>
 	<li><a href="#" class="to-admin-register" id="to-admin-register">管理者追加</a></li>
 	<li><a href="#" class="admin-logout" id="admin-logout">ログアウト</a></li>
+	<li><span>ID: </span><span id="login-admin-id"><%= @admin_id %></span></li>
       </ul>
     </div>
   </nav>

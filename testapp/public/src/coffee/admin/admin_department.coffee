@@ -52,23 +52,18 @@ startDepartmentDelete = ->
     .fail (xhr,  status, error) ->
       apiErrorToast(xhr)
 
-$('#department-register').bind 'click', ->
-  startDepartmentRegister()
-
-$('#department-rename').bind 'click', ->
-  startDepartmentRename()
-
-$('#department-delete').bind 'click', ->
-  $('#modal__delete-department__name').text "#{$("#select-department option:selected").text()}"
-  $('#modal__department-delete').openModal();
-  $('#department-delete-agree').bind 'click', ->
-    startDepartmentDelete()
-
 $ ->
-  $('.enter-for-regist-department').bind 'keydown', ->
-    if event.keyCode is 13
-      startDepartmentRegister()
+  $('#department-register').bind 'click', ->
+    event.preventDefault()
+    startDepartmentRegister()
 
-  $('.enter-for-rename-department').bind 'keydown', ->
-    if event.keyCode is 13
-      startDepartmentRename()
+  $('#department-rename').bind 'click', ->
+    event.preventDefault()
+    startDepartmentRename()
+
+
+  $('#department-delete').bind 'click', ->
+    $('#modal__delete-department__name').text "#{$("#select-department option:selected").text()}"
+    $('#modal__department-delete').openModal();
+    $('#department-delete-agree').bind 'click', ->
+      startDepartmentDelete()
