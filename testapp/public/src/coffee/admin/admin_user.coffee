@@ -79,13 +79,9 @@ startSearchUser = ->
       userList[i].style.display=""
 
 
-
 $ ->
-  $('.enter-for-select-user').bind 'keydown', ->
-    if event.keyCode is 13
-      startUserSelect()
-
   $('#user-select').bind 'click', ->
+    event.preventDefault()
     startUserSelect()
 
 
@@ -124,8 +120,6 @@ $ ->
       startUserDelete()
 
   $('#modal__search__start-button').bind 'click', ->
+    event.preventDefault()
     startSearchUser()
-        
-  $('#modal__search__input').bind 'keydown', ->
-    if event.keyCode is 13
-      startSearchUser()
+
