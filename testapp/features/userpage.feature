@@ -12,8 +12,8 @@
 
     もし ユーザ(/userpage) 画面にアクセスした
 
-    ならば 社員番号(#user-id) 欄に 1000 が表示され (非同期)
-    かつ 名前(#user-name) 欄に abcさん が表示され
+    ならば 社員番号(#current-user-id) 欄に 1000 が表示され (非同期)
+    かつ 名前(#current-user-name) 欄に abc が表示され
     かつ 出勤結果(#attend-message) 欄に 本日はまだ出勤していません。 が表示され
     かつ 退勤結果(#leave-message) 欄に 本日はまだ退勤していません。 が表示され
 
