@@ -1,19 +1,21 @@
 <div class="container">
   <h3><%= @title = 'トップページ' %></h3>
-  <div class="row">
-    <div class="input-field col s12">
-      <input type="number" id="user_id" class="validate" size="40">
-      <label for="user_id">社員番号</label>
+  <form>
+    <div class="row">
+      <div class="input-field col s12">
+        <input type="number" id="user_id" class="validate" size="40">
+        <label for="user_id">社員番号</label>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="input-field col s12">
-      <input type="password" id="password" class="validate" size"40">
-      <label for="password">Password</label>
+    <div class="row">
+      <div class="input-field col s12">
+        <input type="password" id="password" class="validate" size"40">
+        <label for="password">Password</label>
+      </div>
     </div>
-  </div>
-  <div>
-    <a type="button"  id="login" class="waves-light btn index__btn">ログイン</a>
+    <div>
+      <button type="submit" class="btn waves-effect waves-light" id="login">ログイン</button>
+    </form>
   </div>
   <div>
     <a type="button" class="waves-light btn index__btn" href=<%= "#{app_path}/register" %>>ユーザ登録</a>

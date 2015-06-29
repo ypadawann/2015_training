@@ -12,16 +12,10 @@ login = ->
   )
 
 
-startLogin = ->
+$('#login').bind 'click', ->
+  event.preventDefault()
   login()
   .done (msg) ->
     document.location = '/'
   .fail (msg) ->
     Materialize.toast('社員番号又はパスワードが違います', 5000, 'alert-message')
-
-$('#login').bind 'click', ->
-  startLogin()
-
-$('#password').bind 'keydown', ->
-    if event.keyCode is 13
-      startLogin()
