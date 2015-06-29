@@ -338,6 +338,7 @@
  
   シナリオ: 管理者情報管理（パスワード変更）
     前提 管理者にID "admin"、パスワード "password" が存在
+    前提 管理者にID "aaaa"、パスワード "rootroot" が存在
 
     もし "ログインページ(/admin/login)" にアクセス
     ならば "管理者ID(#admin-id)" に "admin" を入力
@@ -366,6 +367,14 @@
     かつ "変更ボタン(#admin-modify)" をクリック
     ならば "1" 秒待機
     かつ "新しいパスワード(#admin-new-password)" に "" と表示
+
+    もし "管理者ID(#select-admin-id)" で "aaaa" を選択
+    かつ "新しいパスワード(#admin-new-password)" に "password" を入力
+    かつ "確認パスワード(#confirm-admin-new-password)" に "password" を入力
+    かつ "パスワード(#admin-password)" に "rootroot" を入力
+    かつ "変更ボタン(#admin-modify)" をクリック
+    ならば "アラート(.alert-message)" に "管理者情報を変更しました" と表示
+    ならば "管理者ID(#select-admin-id)" で "admin" が選択
 
     もし "ログインページ(/admin/login)" にアクセス
     かつ "管理者ID(#admin-id)" に "admin" を入力
