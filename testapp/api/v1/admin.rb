@@ -41,6 +41,7 @@ module API
           error_msg =
             Model::Admins.add(params[:admin_id], params[:admin_password])
           check_activerecord_validation(error_msg)
+          { admin_id: params[:admin_id] }
         end
       end
 
