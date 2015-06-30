@@ -1,18 +1,38 @@
-<div class="admin-pagename">管理者情報管理</div>
+<div class="admin-pagename">管理者ID管理</div>
+
+<div class="row">
+  <div class="col s12">
+    <div class="row">
+      <div class="col s12">
+	<span class="admin-sub-pagename">アカウントの新規登録</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12">
+	<a class="waves-effect waves-light btn admin-button" id="open-admin-register" href="#">新規登録</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="row admin-form">
   <div class="col s12">
+    <div class="row">
+      <div class="col s12">
+	<span class="admin-sub-pagename">管理者情報変更</span>
+      </div>
+    </div>
     <div clas="row">
       <div class="select-field col s12">
 	<label>管理者ID</label>
 	<select class="browser-default" id="select-admin-id">
 	  <%==
-	     n = 1
+	     n = 0
 	     Model::Admins.get_all_id.map { |admin|
 	     if admin == @admin_id
 	       "<option value=#{n += 1} selected>#{admin}</option>"
 	     else
-	       "<option value=#{n += 1}>#{admin}</option>"
+	       "<option value=#{n += 1} >#{admin}</option>"
 	     end
 	     }.join
 	     %>
@@ -46,13 +66,48 @@
 </p>
 
 <div id="modal__admin-delete" class="modal">
-    <div class="modal-content">
-      <h4 id="modal-h4">確認</h4>
-      <p id="modal-p">本当に以下のアカウントを削除しますか？</p>
-      <p id="modal__admin-delete__admin-id">管理者ID:</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="waves-effect waves-green btn-flat modal-action modal-close" id="admin-delete-disagree">いいえ</a>
-      <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close" id="admin-delete-agree">はい</a>
-    </div>
+  <div class="modal-content">
+    <h4 id="modal-h4">確認</h4>
+    <p id="modal-p">本当に以下のアカウントを削除しますか？</p>
+    <p id="modal__admin-delete__admin-id">管理者ID:</p>
   </div>
+  <div class="modal-footer">
+    <a href="#!" class="waves-effect waves-green btn-flat modal-action modal-close" id="admin-delete-disagree">いいえ</a>
+    <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close" id="admin-delete-agree">はい</a>
+  </div>
+</div>
+
+
+<div id="modal__admin-register" class="modal">
+  <div class="modal-content">
+    <div class="admin-sub-pagename">管理者ID新規登録</div>
+    <div class="row admin-form">
+      <form class="col s12">
+	<div clas="row">
+	  <div class="input-field col s12">
+	    <input id="register__admin-id" type="text" class="validate" autofocus>
+	    <label for="register__admin-id" class="active">Admin ID</label>
+	  </div>
+	</div>
+	<div clas="row">
+	  <div class="input-field col s12">
+	    <input id="register__admin-password" type="password" class="validate">
+	    <label for="register__admin-password">Password</label>
+	  </div>
+	</div>
+	<div clas="row">
+	  <div class="input-field col s12">
+	    <input id="register__confirm-admin-password" type="password" class="validate">
+	    <label for="register__confirm-admin-password">Confirm Password</label>
+	  </div>
+	</div>
+	<div clas="row">
+	  <div class="input-field col s12">
+	    <button type="submit" class="waves-effect waves-light btn admin-button" id="admin-register" href="#">登録</button>
+	  </div>
+	</div>	
+      </form>
+    </div>    
+  </div>
+</div>
+

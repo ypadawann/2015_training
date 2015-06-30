@@ -32,7 +32,7 @@ startAdminDelete = ->
   adminDelete()
     .done (data) ->
       $("#select-admin-id option:selected").remove()
-      Materialize.toast('アカウントを削除しました', 50000, 'alert-message')
+      Materialize.toast('アカウントを削除しました', 5000, 'alert-message')
       ($('#select-admin-id option').filter ->
         $(this).text() is $('#login-admin-id').text()).prop 'selected', true
       $('#admin-new-password').val ''
@@ -64,3 +64,4 @@ $ ->
     $('#modal__admin-delete').openModal()
     $('#admin-delete-agree').bind 'click', ->
       startAdminDelete()
+
