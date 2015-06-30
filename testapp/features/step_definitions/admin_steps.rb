@@ -21,6 +21,8 @@ end
 
 
 もし(/^".*?\((.*?)\)" をクリック$/) do |obj|
+  #page.save_screenshot('/path/to/file.png')
+  #page.find(obj)
   page.find(obj).click
 end
 

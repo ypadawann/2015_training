@@ -245,6 +245,7 @@
     かつ "はい(#user-delete-agree)" が存在
     かつ "はい(#user-delete-agree)" に "はい" と表示
     かつ "いいえ(#user-delete-disagree)" が存在
+    ならば "1" 秒待機
     ならば "はい(#user-delete-agree)" をクリック
 
     もし "アラート(.alert-message)" に "アカウントを削除しました" と表示
