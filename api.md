@@ -312,6 +312,7 @@ parametersを受け取り、resultsをJSONで返す。
         * admin_id: string
 	* admin_password: string
     * results
+	* admin_id: string
     * error
 
 * GET admin
