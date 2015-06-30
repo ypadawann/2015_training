@@ -133,6 +133,8 @@ $('#exportCSV').bind 'click', ->
     "//#{location.host}/api/v1/users/#{userId}/attend-leave/#{year}/#{month}/export"
 
 $ ->
-  year = $('#year').val()
-  month = $('#month').val()
-  showRecords(year, month)
+  switch location.pathname
+    when '/userpage/attendance_record'
+      year = $('#year').val()
+      month = $('#month').val()
+      showRecords(year, month)
