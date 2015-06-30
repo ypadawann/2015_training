@@ -38,7 +38,10 @@
 }
 
 .admin-pagename{
-  @extend h4;
+  font-size: 2.4rem;
   margin-bottom: 2rem;
 }
 
+.admin-sub-pagename {
+  font-size: 1.64rem;
+}
