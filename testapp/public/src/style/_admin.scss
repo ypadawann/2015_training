@@ -23,19 +23,15 @@
 
 .admin-menu{
   background-color: #021F4D;
-  #admin-login-id {
-    padding-right: 1rem;
-  }
-  .admin-menu__div {
+  .admin-menu__background {
     height: auto;
     width: 100%;
     background-color: #021F4D;
     margin-bottom: 30px;
-    div ul li{
-      text-align: center;
-      //width:160px;
-      a {
-        width: 100%;
+    ul {
+      width: 100%;
+      #login-admin-id {
+        padding-right: 1rem;
       }
     }
   }
