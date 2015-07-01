@@ -1,6 +1,11 @@
 _ = require 'lodash'
 userId = $('#current-user-id').text()
 
+moveToNextRow = ->
+  if event.keyCode == 13
+    i = $(this).index()
+    $(this).parent().next().children().eq(i).children().first().focus()
+
 makeRow = (row, rowNumber) ->
   cell1 = row.insertCell(0)
   cell2 = row.insertCell(1)
@@ -46,6 +51,11 @@ makeRow = (row, rowNumber) ->
   cell9.innerHTML = data9
   cell10.innerHTML = data10
   cell11.innerHTML = data11
+  $(cell3).bind 'keydown', moveToNextRow
+  $(cell4).bind 'keydown', moveToNextRow
+  $(cell8).bind 'keydown', moveToNextRow
+  $(cell10).bind 'keydown', moveToNextRow
+  $(cell11).bind 'keydown', moveToNextRow
 
 save = (year, month) ->
   day = new Date(year, month, 0).getDate()
