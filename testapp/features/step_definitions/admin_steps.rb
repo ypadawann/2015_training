@@ -23,7 +23,7 @@ end
 もし(/^".*?\((.*?)\)" をクリック$/) do |obj|
   #page.save_screenshot('/path/to/file.png')
   #page.find(obj)
-  page.find(obj).click
+  page.find(obj).trigger('click')
 end
 
 もし(/^".*?\((.*?)\)" で "(.*?)" を選択$/) do |select_obj, target_opt|
