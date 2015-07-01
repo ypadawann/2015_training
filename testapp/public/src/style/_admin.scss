@@ -29,18 +29,23 @@
     margin-bottom: 30px;
     ul {
       width: 100%;
-      li {
+      .admin-menu__contents li {
         width: 145px;
 	text-align: center;
 	border: solid;
 	border-width: 1px;
 	border-color: white;
       }
-      #login-admin-id {
-        padding-right: 1rem;
-      }
+    }
+    .admin-menu__admin-id {
+        margin-right: 1rem;
     }
   }
+}
+
+
+.admin-menu__login {
+  background-color: #021F4D;
 }
 
 .admin-pagename{
