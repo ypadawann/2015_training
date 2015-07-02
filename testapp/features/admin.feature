@@ -57,11 +57,11 @@
     もし "部署管理(#admin-department)" をクリック
     ならば "部署登録ボタン(#department-register)" が存在
 
-    もし "管理者情報管理(#admin-admin)" をクリック
+    もし "管理者ID管理(#admin-admin)" をクリック
     ならば "管理者情報変更ボタン(#admin-modify)" が存在
 
-    もし "管理者追加(#to-admin-register)" をクリック
-    ならば "管理者登録ボタン(#admin-register)" が存在
+    #もし "管理者追加(#to-admin-register)" をクリック
+    #ならば "管理者登録ボタン(#admin-register)" が存在
 
     もし "トップページ(#to-top)" をクリック
     ならば "ページ(body)" 内に "管理画面トップ" という記述が存在
@@ -85,12 +85,12 @@
     ならば "部署登録ボタン(#department-register)" が存在
 
     もし "トップページ(#to-top)" をクリック
-    かつ "管理者情報管理(#top__admin-admin)" をクリック
+    かつ "管理者情ID理(#top__admin-admin)" をクリック
     ならば "管理者情報変更ボタン(#admin-modify)" が存在
 
-    もし "トップページ(#to-top)" をクリック
-    かつ "管理者追加(#top__to-admin-register)" をクリック
-    ならば "管理者登録ボタン(#admin-register)" が存在
+    #もし "トップページ(#to-top)" をクリック
+    #かつ "管理者追加(#top__to-admin-register)" をクリック
+    #ならば "管理者登録ボタン(#admin-register)" が存在
 
 
 
@@ -245,6 +245,7 @@
     かつ "はい(#user-delete-agree)" が存在
     かつ "はい(#user-delete-agree)" に "はい" と表示
     かつ "いいえ(#user-delete-disagree)" が存在
+    ならば "1" 秒待機
     ならば "はい(#user-delete-agree)" をクリック
 
     もし "アラート(.alert-message)" に "アカウントを削除しました" と表示
@@ -390,25 +391,27 @@
     かつ "管理者パスワード(#admin-password)" に "password" を入力
     かつ "ログインボタン(#admin-login)" をクリック
 
-    かつ "管理者情報管理(#to-admin-register)" をクリック
-    ならば "管理者登録ボタン(#admin-register)" が存在
+    かつ "管理者ID管理(#admin-admin)" をクリック
+    かつ "管理者登録ボタン(#open-admin-register)" をクリック
+    ならば "モーダル(#modal__admin-register)" が存在
 
-    もし "管理者ID(#admin-id)" に "root" を入力
-    かつ "管理者パスワード(#admin-password)" に "rootpassword" を入力
-    かつ "確認パスワード(#confirm-admin-password)" に "wrongrootpassword" を入力
+    もし "管理者ID(#register__admin-id)" に "root" を入力
+    かつ "管理者パスワード(#register__admin-password)" に "rootpassword" を入力
+    かつ "確認パスワード(#register__confirm-admin-password)" に "wrongrootpassword" を入力
     かつ "管理者登録ボタン(#admin-register)" をクリック
     ならば "アラート(.alert-message)" に "確認パスワードが違います" と表示
 
-    もし "確認パスワード(#confirm-admin-password)" に "rootpassword" を入力
+    もし "確認パスワード(#register__confirm-admin-password)" に "rootpassword" を入力
     かつ "管理者登録ボタン(#admin-register)" をクリック
     ならば "アラート(.alert-message)" に "登録に成功しました" と表示
-    かつ "管理者ID(#admin-id)" に "" と表示
-    かつ "パスワード(#admin-password)" に "" と表示
-    かつ "確認パスワード(#confirm-admin-password)" に "" と表示
+    
+    もし "1" 秒待機
+    ならば "ページ(body)" に "モーダル(#modal__admin-register)" が存在しない
 
-    もし "管理者ID(#admin-id)" に "admin" を入力
-    かつ "管理者パスワード(#admin-password)" に "secondpassword" を入力
-    かつ "確認パスワード(#confirm-admin-password)" に "secondpassword" を入力
+    もし "新規登録(#open-admin-register)" をクリック
+    もし "管理者ID(#register__admin-id)" に "admin" を入力
+    かつ "管理者パスワード(#register__admin-password)" に "secondpassword" を入力
+    かつ "確認パスワード(#register__confirm-admin-password)" に "secondpassword" を入力
     かつ "管理者登録ボタン(#admin-register)" をクリック
     ならば "アラート(.alert-message)" に "そのIDは既に使われています。" と表示
 
@@ -426,17 +429,17 @@
     かつ "管理者パスワード(#admin-password)" に "password" を入力
     かつ "ログインボタン(#admin-login)" をクリック
 
-    かつ "管理者情報管理(#to-admin-register)" をクリック
-    ならば "管理者登録ボタン(#admin-register)" が存在
+    かつ "管理者情報管理(#admin-admin)" をクリック
+    ならば "管理者登録ボタン(#open-admin-register)" をクリック
 
-    もし "管理者ID(#admin-id)" に "root" を入力
-    かつ "管理者パスワード(#admin-password)" に "rootpassword" を入力
-    かつ "確認パスワード(#confirm-admin-password)" に "rootpassword" を入力
-    かつ "その場(#confirm-admin-password)" で "エンターキー(Enter)" をキー入力
+    もし "管理者ID(#register__admin-id)" に "root" を入力
+    かつ "管理者パスワード(#register__admin-password)" に "rootpassword" を入力
+    かつ "確認パスワード(#register__confirm-admin-password)" に "rootpassword" を入力
+    かつ "その場(#register__confirm-admin-password)" で "エンターキー(Enter)" をキー入力
     ならば "アラート(.alert-message)" に "登録に成功しました" と表示
-    かつ "管理者ID(#admin-id)" に "" と表示
-    かつ "パスワード(#admin-password)" に "" と表示
-    かつ "確認パスワード(#confirm-admin-password)" に "" と表示
+    かつ "管理者ID(#register__admin-id)" に "" と表示
+    かつ "パスワード(#register__admin-password)" に "" と表示
+    かつ "確認パスワード(#register__confirm-admin-password)" に "" と表示
 
     もし "トップページ(/admin/top)" にアクセス
     ならば "ログアウト(#admin-logout)" をクリック
@@ -514,13 +517,14 @@
     かつ "管理者ID(#admin-id)" に "admin" を入力
     かつ "管理者パスワード(#admin-password)" に "password" を入力
     かつ "ログインボタン(#admin-login)" をクリック
-    ならば "管理者追加(#to-admin-register)" が存在
+    ならば "管理者追加(#admin-admin)" が存在
 
-    もし "管理者追加(#to-admin-register)" をクリック
+    もし "管理者追加(#admin-admin)" をクリック
+    かつ "新規登録(#open-admin-register)" をクリック
     ならば "登録ボタン(#admin-register)" が存在
 
-    もし "管理者ID(#admin-id)" に "wrongadmin" を入力
-    かつ "パスワード(#admin-password)" に "pass" を入力
-    かつ "確認パスワード(#confirm-admin-password)" に "pass" を入力
+    もし "管理者ID(#register__admin-id)" に "wrongadmin" を入力
+    かつ "パスワード(#register__admin-password)" に "pass" を入力
+    かつ "確認パスワード(#register__confirm-admin-password)" に "pass" を入力
     かつ "登録ボタン(#admin-register)" をクリック
     ならば "アラート(.alert-message)" に "パスワードは8文字以上でなくてはなりません" と表示
