@@ -60,3 +60,15 @@
 .admin-sub-pagename {
   font-size: 1.64rem;
 }
+
+.admin__system-logo {
+    font-size: 1.5rem;
+    text-align: center;
+    width: 15%;
+    margin: 0 10px;
+    @media only screen and (max-width: 1107px) {
+	width: 100%;
+    }
+
+}
+
