@@ -5,8 +5,8 @@ default: &default
   password: password
 
 development:
-  <<: *default
-  database: development_db
+  adapter: sqlite3
+  database: development.db
 
 test:
   <<: *default
