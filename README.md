@@ -66,6 +66,29 @@ $ RACK_ENV=test rackup
 
 とすれば test_db を使えます。
 
+また、開発用にsqliteで動作させることもできます。
+
+```bash
+RACK_ENV=development rackup
+```
+
+これでsqliteを使って起動します。
+migrationスクリプトがsqliteに対応していないので、手動でadminなどの値を投入する必要があります。コマンドラインで以下のようにします。
+
+```bash
+irb(main):002:0> ENV['RACK_ENV'] = 'development'
+=> "development"
+(failed reverse-i-search)`require': ^C
+irb(main):003:0> require './model/helpers'
+=> true
+irb(main):004:0> require './model/admins'
+=> true
+(failed reverse-i-search)`Model': ^C
+irb(main):005:0> Model::Admins.add('admin','admin')
+=> {}
+```
+
+
 ## Database migration
 
 Migration機能でテーブル管理できるようになりました。

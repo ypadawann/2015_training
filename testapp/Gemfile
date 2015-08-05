@@ -21,3 +21,9 @@ gem 'capybara'
 gem 'cucumber'
 gem 'poltergeist'
 gem 'database_cleaner'
+
+group :development, :test do
+  gem "sqlite3"
+  gem "sinatra-reloader"
+  gem "foreman"
+end
