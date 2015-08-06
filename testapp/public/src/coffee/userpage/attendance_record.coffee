@@ -103,7 +103,7 @@ showRecords = (year, month) ->
   getRecords(year, month)
   .done (msg) ->
     $('#YearsAndMonths').text "#{year}年#{month}月"
-    setTable($('#table')[0], msg.data.length)
+    setTable(document.querySelector('#table'), msg.data.length)
     _.forEach(msg.data, (data) ->
       i = data.day
       $("#day#{i}").text                data.day
