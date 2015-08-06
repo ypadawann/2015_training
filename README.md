@@ -6,15 +6,32 @@
 
 /home/trainingams/AMS/
 
-### 起動
+### CSSやJavaScriptの生成
 
-jsファイルやcssファイルが生成されていないならgulpを実行する
+#### 準備
+
+cssやJavaScriptのコンパイルに必要なnpmパッケージがインストールされていない場合は、`public/`ディレクトリで以下のコマンドを入力します。
 
 ```bash
-$ pwd
-/home/trainingams/AMS/2015_training/testapp/public
-$ gulp
+$ npm install
 ```
+
+lodashが導入されていなければ以下のコマンドでpublicディレクトリ下にlodash.jsを作成
+
+```bash
+$ node_modules/.bin/lodash modern -o ./lodash.js
+```
+
+
+#### 生成
+
+`gulp`によるタスクが用意されていますが、Rakeからコンパイルできます。
+
+```bash
+
+$ RACK_ENV=development bundle exec rake build_assets
+```
+
 Unicornの実行
 
 ```bash
@@ -23,17 +40,6 @@ $ pwd
 $ bundle exec unicorn -c unicorn.rb -E "環境名" -D
 ```
 
-### npmパッケージの導入
-
-パッケージがインストールされていない場合はpublicディレクトリで以下のコマンド
-
-```bash
-$ npm install
-```
-lodashが導入されていなければ以下のコマンドでpublicディレクトリ下にlodash.jsを作成
-```bash
-$ node_modules/.bin/lodash modern -o ./lodash.js
-```
 
 ### 依存パッケージの導入
 
