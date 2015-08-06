@@ -1,14 +1,18 @@
 @import "./../../node_modules/normalize.css/normalize";
 @import "./../../node_modules/materialize-css/bin/materialize";
+
+@import "variables";
+
 @import "all";
+@import "attendance-page";
 @import "print";
 @import "admin";
 
-html{
+html {
   font-size: 18px;
   color: #303030;
 }
 
-body{
+body {
   background-color: #FDFDFD;
 }
