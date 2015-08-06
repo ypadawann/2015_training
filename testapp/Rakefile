@@ -1,3 +1,10 @@
+require 'rake'
+
 require 'sinatra/activerecord'
 require 'sinatra/activerecord/rake'
 require './model/_entity/database_information'
+
+
+task :build_assets do
+  sh 'cd ./public/ && gulp build'
+end
