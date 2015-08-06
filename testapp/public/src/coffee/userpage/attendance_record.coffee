@@ -87,12 +87,17 @@ getRecords = (year, month) ->
     dataType: 'json'
   )
 
+
+deleteAttendanceRows = () ->
+  table = document.querySelector('#table')
+  _.range(1, table.rows.length).map (i) ->
+    table.deleteRow(-1)
+
+
 setTable = (table, data_length) ->
-  _.range(table.rows.length, data_length, 1).map (i) ->
+  _.range(0, data_length).map (i) ->
     row = table.insertRow(-1)
     makeRow(row, i + 1)
-  _.range(table.rows.length, data_length, -1).map (i) ->
-    table.deleteRow(-1)
 
 showRecords = (year, month) ->
   getRecords(year, month)
