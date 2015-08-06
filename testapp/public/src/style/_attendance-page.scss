@@ -1,6 +1,42 @@
+table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  box-sizing: border-box;
+}
+tr {
+  box-sizing: border-box;
+}
+td {
+  box-sizing: border-box;
+}
+th {
+  box-sizing: border-box;
+}
+
+$base-table-border: solid 1px #000000;
+$width-of-table: 820px;
+// TODO: table-cellはborder-boxでもborderを含めてくれない?
+$cell-width-day-and-week: 29px;
+$cell-width-attendance-and-leaving: 77px;
+$cell-width-boss_s-mark: 66px;
+$cell-width-midnight-and-holiday-and-prearannged: 80px;
+$column-width-bases: 60px;
+
 
 .attendance-record {
-  top: 0px;
+  @mixin table__menu-base-styles {
+    padding: 0px;
+    margin: 0px;
+    font-size: 12px;
+    border: $base-table-border;
+    text-align: center;
+    vertical-align: middle;
+    box-sizing: border-box;
+  }
+
+
+  top: 0;
+  left: 0;
   position: relative;
   width: 820px;
 
@@ -41,47 +77,111 @@
 
   &__profession {
     position: absolute;
-    top: 30px;
-    left: 640px;
+    top: 0px;
+    width: 208px;
+    left: 820px - 208px;
     border-style: solid;
     border-width: 1px;
-    padding: 13px 43px 13px 43px;
+    padding: 20px 55px 20px 55px;
     margin: 0px;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 24px;
+  }
+
+  @mixin base-table__column-styles ($width: 60px){
+    font-size: 9px;
+    padding: 0px;
+    margin: 0px;
+    border: $base-table-border;
+    border-bottom: none;
+    border-radius: 0px;
+    text-align: center;
+    vertical-align: middle;
+    width: $width;
+    height: 60px;
+    box-sizing: border-box;
+  }
+
+  &__description-header-table {
+    width: 216px;
+    &__menu {
+      @include table__menu-base-styles();
+      height: 28px;
+      width: 79px * 2;
+      border-bottom: none;
+      &__insert {
+        border: none;
+        margin: 0px;
+        padding: 0px;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 11px;
+        width: 100%;
+      }
+      &--title {
+        @include table__menu-base-styles();
+        border-bottom: none;
+        height: 28px;
+        width: $cell-width-day-and-week * 2;
+      }
+    }
+
+    &__column {
+      @include base-table__column-styles;
+      &--dayAndweek {
+        @include base-table__column-styles($cell-width-day-and-week - 2);
+        padding-top: 4px;
+        vertical-align: top;
+      }
+
+      &--attendance {
+        @include base-table__column-styles($cell-width-attendance-and-leaving - 2);
+        border-right-style: dotted;
+      }
+
+      &--leaving {
+        @include base-table__column-styles($cell-width-attendance-and-leaving - 2);
+        border-left-style: none;
+      }
+
+      &--mark {
+        @include base-table__column-styles($cell-width-boss_s-mark - 2);
+        font-size: 12px;
+        font-weight: bold;
+      }
+
+      &--midnightAndholidayAndprearranged {
+        @include base-table__column-styles($cell-width-midnight-and-holiday-and-prearannged - 2);
+      }
+
+      &--etc {
+        @include base-table__column-styles(160px);
+      }
+    }
+
+
   }
 
   &__table {
-    border-collapse: collapse;
-    box-sizing: border-box;
-    width: auto;
+    width: $width-of-table;
 
     &__menu {
-      padding: 0px;
-      margin: 0px;
-      font-size: 9px;
-      border-style: solid;
-      border-width: 1px;
-      border-color: #000000;
-      color: #000000;
-      text-align: center;
-      vertical-align: middle;
+      @include table__menu-base-styles();
       height: 28px;
       width: 150px;
-      box-sizing: border-box;
-
-      &--title {
-        padding: 0px;
+      &__insert {
+        border: none;
         margin: 0px;
-        font-size: 9px;
-        border-style: solid;
-        border-width: 1px;
-        border-color: #000000;
-        color: #000000;
+        padding: 0px;
         text-align: center;
         vertical-align: middle;
+        font-size: 11px;
+        width: 100%;
+      }
+
+      &--title {
+        @include table__menu-base-styles();
         height: 28px;
-        box-sizing: border-box;
         width: 54px;
       }
     }
@@ -92,132 +192,111 @@
     }
 
     &__column {
-      font-size: 6px;
-      padding: 0px;
-      margin: 0px;
-      border-style: solid;
-      border-width: 1px;
-      border-color: #000000;
-      border-bottom: none;
-      border-radius: 0px;
-      text-align: center;
-      vertical-align: middle;
-      width: 60px;
-      height: 50px;
-      box-sizing: border-box;
-
+      @include base-table__column-styles;
       &--dayAndweek {
-        @extend .attendance-record__table__column;
+        @include base-table__column-styles($cell-width-day-and-week);
         padding-top: 4px;
         vertical-align: top;
-        width: 27px;
       }
 
       &--attendance {
-        @extend .attendance-record__table__column;
-        width: 75px;
+        @include base-table__column-styles($cell-width-attendance-and-leaving - 2);
         border-right-style: dotted;
       }
 
       &--leaving {
-        @extend .attendance-record__table__column;
-        width: 75px;
+        @include base-table__column-styles($cell-width-attendance-and-leaving - 2);
         border-left-style: none;
       }
 
       &--mark {
-        @extend .attendance-record__table__column;
-        width: 64px;
-        font-size: 11px;
+        @include base-table__column-styles($cell-width-boss_s-mark - 2);
+        font-size: 12px;
         font-weight: bold;
       }
 
       &--midnightAndholidayAndprearranged {
-        @extend .attendance-record__table__column;
-        width: 77px;
+        @include base-table__column-styles($cell-width-midnight-and-holiday-and-prearannged - 2);
       }
 
       &--etc {
-        @extend .attendance-record__table__column;
-        width: 200px;
+        @include base-table__column-styles(160px);
       }
-
     }
 
 
-    &__cell {
+    @mixin base-table__cell-styles() {
       padding: 0px;
       margin: 0px;
-      border-style: solid;
-      border-width: 1px;
-      border-color: #000000;
-      font-size: 6px;
-      height: 21px;
-      width: 60px;
+      border: $base-table-border;
+      font-size: 9px;
+      height: 27px;
       box-sizing: border-box;
       overflow: hidden;
+    }
+    &__cell {
+      @include base-table__cell-styles();
+      width: 60px;
 
       &--dayAndweek {
-        @extend .attendance-record__table__cell;
-        width: 27px;
+        @include base-table__cell-styles();
+        width: $cell-width-day-and-week - 2;
       }
 
       &--attendanceLine {
-        @extend .attendance-record__table__cell;
+        @include base-table__cell-styles();
         border-right-style: dotted;
-        width: 75px;
+        width: $cell-width-attendance-and-leaving - 2;
       }
 
       &--leavingLine {
-        @extend .attendance-record__table__cell;
+        @include base-table__cell-styles();
         border-left-style: none;
-        width: 75px;
+        width: $cell-width-attendance-and-leaving - 2;
       }
 
       &--mark {
-        @extend .attendance-record__table__cell;
-        width: 64px;
+        @include base-table__cell-styles();
+        width: $cell-width-boss_s-mark - 2;
       }
 
       &--midnightAndholidayAndprearranged {
-        @extend .attendance-record__table__cell;
-        width: 77px;
+        @include base-table__cell-styles();
+        width: $cell-width-midnight-and-holiday-and-prearannged - 2;
       }
 
       &--etc {
-        @extend .attendance-record__table__cell;
-        width: 200px;
+        @include base-table__cell-styles();
+        width: 160px;
       }
     }
 
     #table &__insert {
       @include attendance-record__input;
+      border: none;
       background: none;
       text-align: center;
       vertical-align: middle;
-      font-size: 6px;
+      font-size: 9px;
       color:#000000;
+      width: 100%;
     }
 
     &__total {
-      @extend .attendance-record__table;
-      margin: 0px 0px 30px;
       padding: 0px;
       margin: 0px;
       text-align: center;
       vertical-align: middle;
-      border-style: solid;
-      border-width: 1px;
-      border-color: #000000;
+      border: $base-table-border;
       border-top-style: none;
-      font-size: 6px;
-      height: 21px;
+      font-size: 9px;
+      height: 27px;
       width: 60px;
       box-sizing: border-box;
 
       &--dayAndweek {
         @extend .attendance-record__table__total;
-        width: 27px;
+        width: $cell-width-day-and-week - 2;
       }
 
       &--attendAndleave {
@@ -227,17 +306,17 @@
 
       &--mark {
         @extend .attendance-record__table__total;
-        width: 64px;
+        width: $cell-width-boss_s-mark - 2;
       }
 
       &--midnightAndholidayAndprearranged {
         @extend .attendance-record__table__total;
-        width: 77px;
+        width: $cell-width-midnight-and-holiday-and-prearannged - 2;
       }
 
       &--etc {
         @extend .attendance-record__table__total;
-        width: 200px;
+        width: 160px;
       }
     }
 
@@ -247,17 +326,13 @@
       margin: 0px;
       text-align: center;
       vertical-align: middle;
-      border-style: solid;
-      border-width: 1px;
-      border-color: #000000;
-      font-size: 6px;
-      height: 28px;
+      border: $base-table-border;
+      font-size: 9px;
+      height: 31px;
       box-sizing: border-box;
 
       &--top {
         @extend .attendance-record__table__finish-vacation;
-        text-align: center;
-        vertical-align: middle;
         width: 54px;
       }
     }
@@ -274,31 +349,34 @@
   }
 
   &__table2 {
-    @extend .attendance-record__table;
     position: absolute;
-    left: 310px;
-    width: 291px;
+    left: $cell-width-day-and-week * 2 + $cell-width-attendance-and-leaving * 2 + $cell-width-boss_s-mark + 6;  // FIXME: なぜ6なのかわからん
+    width: $cell-width-midnight-and-holiday-and-prearannged * 3 + $column-width-bases + 3;
+    box-sizing: border-box;
+
     &--request {
       &__menu {
-        @extend .attendance-record__table__menu;
-        width: 60px;
+        @include table__menu-base-styles();
+        width: $column-width-bases;
+        height: 28px;
       }
       &__insert {
-        @extend .attendance-record__table__menu;
-        width: 60px;
-        height: 56px;
+        @include table__menu-base-styles();
+        width: $column-width-bases;
+        height: 70px;
       }
     }
     &--approval {
       &__menu {
-        @extend .attendance-record__table__menu;
+        @include table__menu-base-styles();
         width: 231px;
+        height: 28px;
       }
 
       &__insert {
-        @extend .attendance-record__table__menu;
+        @include table__menu-base-styles();
         width: 77px;
-        height: 56px;
+        height: 70px;
       }
     }
   }

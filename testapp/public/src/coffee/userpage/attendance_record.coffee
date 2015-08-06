@@ -87,18 +87,23 @@ getRecords = (year, month) ->
     dataType: 'json'
   )
 
+
+deleteAttendanceRows = () ->
+  table = document.querySelector('#table')
+  _.range(1, table.rows.length).map (i) ->
+    table.deleteRow(-1)
+
+
 setTable = (table, data_length) ->
-  _.range(table.rows.length, data_length, 1).map (i) ->
+  _.range(0, data_length).map (i) ->
     row = table.insertRow(-1)
     makeRow(row, i + 1)
-  _.range(table.rows.length, data_length, -1).map (i) ->
-    table.deleteRow(-1)
 
 showRecords = (year, month) ->
   getRecords(year, month)
   .done (msg) ->
     $('#YearsAndMonths').text "#{year}年#{month}月"
-    setTable($('#table')[0], msg.data.length)
+    setTable(document.querySelector('#table'), msg.data.length)
     _.forEach(msg.data, (data) ->
       i = data.day
       $("#day#{i}").text                data.day
@@ -134,6 +139,7 @@ $('#timecard-save').bind 'click', ->
 $('#date-select').bind 'click', ->
   year = $('#year').val()
   month = $('#month').val()
+  deleteAttendanceRows()
   showRecords(year, month)
 
 $('#exportCSV').bind 'click', ->
