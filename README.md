@@ -1,6 +1,6 @@
 # 2015_training
 
-## Usage
+## Deployment
 
 ### ファイルの保存場所
 
@@ -23,7 +23,7 @@ $ pwd
 $ bundle exec unicorn -c unicorn.rb -E "環境名" -D
 ```
 
-###npmパッケージの導入
+### npmパッケージの導入
 
 パッケージがインストールされていない場合はpublicディレクトリで以下のコマンド
 
@@ -47,8 +47,10 @@ bundleコマンドで依存パッケージを導入することができます�
 
 ```bash
 $ cd testapp
-$ bundle install --path vendor/bundle
+## テスト, 開発時用のgemを無視する
+$ bundle install --path vendor/bundle --without test development
 ```
+
 
 ### Database
 
@@ -65,28 +67,6 @@ $ RACK_ENV=test rackup
 ```
 
 とすれば test_db を使えます。
-
-また、開発用にsqliteで動作させることもできます。
-
-```bash
-RACK_ENV=development rackup
-```
-
-これでsqliteを使って起動します。
-migrationスクリプトがsqliteに対応していないので、手動でadminなどの値を投入する必要があります。コマンドラインで以下のようにします。
-
-```bash
-irb(main):002:0> ENV['RACK_ENV'] = 'development'
-=> "development"
-(failed reverse-i-search)`require': ^C
-irb(main):003:0> require './model/helpers'
-=> true
-irb(main):004:0> require './model/admins'
-=> true
-(failed reverse-i-search)`Model': ^C
-irb(main):005:0> Model::Admins.add('admin','admin')
-=> {}
-```
 
 
 ## Database migration
@@ -121,6 +101,40 @@ mysql> quit
 $ cd testapp
 $ RACK_ENV=test bundle exec rake db:migrate
 ```
+
+
+## Development
+
+開発時は、localhostで起動して動作の確認やテストを走らせることができます。
+
+```bash
+$ cd testapp
+$ bundle install --path vendor/bundle --without production
+```
+
+assetファイルの準備は本番と同じです。
+
+```bash
+RACK_ENV=development rackup
+```
+
+これでsqliteを使ってlocalhostで起動します。
+migrationスクリプトがsqliteに対応していないので、手動でadminなどの値を投入する必要があります。コマンドラインで以下のようにします。
+
+```bash
+irb(main):002:0> ENV['RACK_ENV'] = 'development'
+=> "development"
+(failed reverse-i-search)`require': ^C
+irb(main):003:0> require './model/helpers'
+=> true
+irb(main):004:0> require './model/admins'
+=> true
+(failed reverse-i-search)`Model': ^C
+irb(main):005:0> Model::Admins.add('admin','admin')
+=> {}
+```
+
+
 
 ## Database definitions
 

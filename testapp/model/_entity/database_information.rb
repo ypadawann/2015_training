@@ -1,13 +1,15 @@
+_RACK_ENV = ENV['RACK_ENV'] || 'test'
 
 require 'active_record'
-require 'mysql2'
+if _RACK_ENV == 'production'
+  require 'mysql2'
+end
 require 'yaml'
 
-db_env = ENV['RACK_ENV'] || 'test'
 
 config = YAML.load_file('./config/database.yml')
 
-ActiveRecord::Base.establish_connection(config[db_env])
+ActiveRecord::Base.establish_connection(config[_RACK_ENV])
 
 module Model
   class User < ActiveRecord::Base
