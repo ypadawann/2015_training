@@ -139,6 +139,7 @@ $('#timecard-save').bind 'click', ->
 $('#date-select').bind 'click', ->
   year = $('#year').val()
   month = $('#month').val()
+  deleteAttendanceRows()
   showRecords(year, month)
 
 $('#exportCSV').bind 'click', ->
