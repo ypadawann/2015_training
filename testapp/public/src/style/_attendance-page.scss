@@ -71,14 +71,24 @@
       box-sizing: border-box;
 
       &--title {
-        @extend &;
+        padding: 0px;
+        margin: 0px;
+        font-size: 9px;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #000000;
+        color: #000000;
+        text-align: center;
+        vertical-align: middle;
+        height: 28px;
+        box-sizing: border-box;
         width: 54px;
       }
     }
 
 
     &__row--holiday {
-      background-color: #D9D9D9;
+      background-color: #D9D9D9 !important;
     }
 
     &__column {
