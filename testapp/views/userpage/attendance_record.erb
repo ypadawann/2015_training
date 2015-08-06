@@ -1,97 +1,102 @@
-<div class="print--hidden">
-  <h1 class="userpage__title"><%= @title = '出退勤状況' %></h1>
-  <div class="attendance-record__select row">
-    <div class="input-field col attendance-record__menu--year">
-      <input type="number" id="year" class="validate attendance-record__menu-year" value="<%= Time.now.year %>">
-      <label for="year">Year</label>
-    </div>
-    <div class="input-field col s1">
-      <input type="number" id="month" class="validate" value="<%= Time.now.month %>">
-      <label for="month">Month</label>
-    </div>
-    <div class="col s1">
-      <a type="button" id="date-select" class="attendance-record__btn waves-light btn">表示</a>
-    </div>
-    <div class="col s1">
-      <a type="button" id="timecard-save" class="attendance-record__btn waves-effect waves-light btn">保存</a>
-    </div>
-    <div class="col s3">
-      <a type="button" id="exportCSV" class="waves-effect waves-light btn">エクスポート</a>
-    </div>
-  </div>
-</div>
 <div class="attendance-record">
-  <div class="attendance-record__title">
-    勤務管理表
-  </div>
-  <p class="attendance-record__profession">専門職用</p>
-  <table border="1" cellspacing="0" cellpadding="0" class="attendance-record__table2">
-    <tr>
-      <td class="attendance-record__table2--approval__menu" colspan="3">承認</td>
-      <td class="attendance-record__table2--request__menu">申請</td>
-    </tr>
-    <tr>
-      <td class="attendance-record__table2--approval__insert"></td>
-      <td class="attendance-record__table2--approval__insert"></td>
-      <td class="attendance-record__table2--approval__insert"></td>
-      <td class="attendance-record__table2--request__insert"></td>
-    </tr>
-  </table>
+  <header class="attendance-record__header print--hidden">
+    <h1 class="userpage__title"><%= @title = '出退勤状況' %></h1>
+    <div class="attendance-record__select row">
+      <div class="input-field col attendance-record__menu--year">
+        <input
+          type="number" id="year"
+          class="validate attendance-record__menu-year" value="<%= Time.now.year %>">
+        <label for="year">Year</label>
+      </div>
+      <div class="input-field col s1">
+        <input type="number" id="month" class="validate" value="<%= Time.now.month %>">
+        <label for="month">Month</label>
+      </div>
+      <div class="col s1">
+        <a type="button" id="date-select" class="attendance-record__btn waves-light btn">表示</a>
+      </div>
+      <div class="col s1">
+        <a type="button" id="timecard-save" class="attendance-record__btn waves-effect waves-light btn">保存</a>
+      </div>
+      <div class="col s3">
+        <a type="button" id="exportCSV" class="waves-effect waves-light btn">エクスポート</a>
+      </div>
+    </div>
+  </header>
 
-  <table border="0" cellspacing="0" cellpadding="0" class="attendance-record__table">
-    <tr>
-      <td class="attendance-record__table__menu--title" colspan="2">年月</td>
-      <td class="attendance-record__table__menu" colspan="2"><div id="YearsAndMonths" class="attendance-record__table__menu__insert"/></td>
-    </tr>
-    <tr>
-      <td class="attendance-record__table__menu--title" colspan="2">所属</td>
-      <td class="attendance-record__table__menu" colspan="2"><div id="departments" class="attendance-record__table__menu__insert"><%= @department %></div></td>
-    </tr>
-    <tr>
-      <td class="attendance-record__table__menu--title" colspan="2">No.</td>
-      <td class="attendance-record__table__menu" colspan="2"><div id="user-id"><%= @user_id %></div></td>
-    </tr>
-    <tr>
-      <td class="attendance-record__table__menu--title" colspan="2">氏名</td>
-      <td class="attendance-record__table__menu" colspan="2"><div id="name" class="attendance-record__table__menu__insert"><%= @name %></div></td>
-    </tr>
-    <tr bgcolor="#BFBFBF">
-      <td class="attendance-record__table__column--dayAndweek">日付</td>
-      <td class="attendance-record__table__column--dayAndweek">曜日</td>
-      <td title="入室時刻を入力。例：9:00"class="attendance-record__table__column--attendance">入室時刻</td>
-      <td title="退出時刻を入力。例：17:30 例：深夜1:00→25:00" class="attendance-record__table__column--leaving">退出時刻</td>
-      <td title="超過勤務を行うには上司の指示・承認が必要です。" class="attendance-record__table__column--mark">上司<br>承認印</td>
-      <td title="入室時刻と退出時刻を参照し、自動で入力されます。" class="attendance-record__table__column--midnightAndholidayAndprearranged">深夜勤務<br>22時-翌5時</td>
-      <td title="自動で入力されます。" class="attendance-record__table__column--midnightAndholidayAndprearranged">休日<br>勤務時間</td>
-      <td title="振替休暇の取得予定日付(4週間以内)を入力" class="attendance-record__table__column--midnightAndholidayAndprearranged">振替休暇<br>予定日</td>
-      <td title="有給を取得した場合、全休:1 半休0.5 と入力" class="attendance-record__table__column">有給<br>休暇</td>
-      <td title="振替休暇取得日を入力" class="attendance-record__table__column">振替休暇<br>取得日</td>
-      <td title="自由記入欄" class="attendance-record__table__column--etc">時間外業務は必ず上司による指示を受けてください。</td>
-    </tr>
-  </table>
+  <section class="printable__body">
+    <div class="attendance-record__title">
+      勤務管理表
+    </div>
+    <p class="attendance-record__profession">専門職用</p>
+    <table border="1" cellspacing="0" cellpadding="0" class="attendance-record__table2">
+      <tr>
+        <td class="attendance-record__table2--approval__menu" colspan="3">承認</td>
+        <td class="attendance-record__table2--request__menu">申請</td>
+      </tr>
+      <tr>
+        <td class="attendance-record__table2--approval__insert"></td>
+        <td class="attendance-record__table2--approval__insert"></td>
+        <td class="attendance-record__table2--approval__insert"></td>
+        <td class="attendance-record__table2--request__insert"></td>
+      </tr>
+    </table>
 
-  <table border="1" cellspacing="0" cellpadding="0" id="table" class="attendance-record__table">
-  </table>
+    <table border="0" cellspacing="0" cellpadding="0" class="attendance-record__table">
+      <tr>
+        <td class="attendance-record__table__menu--title" colspan="2">年月</td>
+        <td class="attendance-record__table__menu" colspan="2"><div id="YearsAndMonths" class="attendance-record__table__menu__insert"/></td>
+      </tr>
+      <tr>
+        <td class="attendance-record__table__menu--title" colspan="2">所属</td>
+        <td class="attendance-record__table__menu" colspan="2"><div id="departments" class="attendance-record__table__menu__insert"><%= @department %></div></td>
+      </tr>
+      <tr>
+        <td class="attendance-record__table__menu--title" colspan="2">No.</td>
+        <td class="attendance-record__table__menu" colspan="2"><div id="user-id"><%= @user_id %></div></td>
+      </tr>
+      <tr>
+        <td class="attendance-record__table__menu--title" colspan="2">氏名</td>
+        <td class="attendance-record__table__menu" colspan="2"><div id="name" class="attendance-record__table__menu__insert"><%= @name %></div></td>
+      </tr>
+      <tr bgcolor="#BFBFBF">
+        <td class="attendance-record__table__column--dayAndweek">日付</td>
+        <td class="attendance-record__table__column--dayAndweek">曜日</td>
+        <td title="入室時刻を入力。例：9:00"class="attendance-record__table__column--attendance">入室時刻</td>
+        <td title="退出時刻を入力。例：17:30 例：深夜1:00→25:00" class="attendance-record__table__column--leaving">退出時刻</td>
+        <td title="超過勤務を行うには上司の指示・承認が必要です。" class="attendance-record__table__column--mark">上司<br>承認印</td>
+        <td title="入室時刻と退出時刻を参照し、自動で入力されます。" class="attendance-record__table__column--midnightAndholidayAndprearranged">深夜勤務<br>22時-翌5時</td>
+        <td title="自動で入力されます。" class="attendance-record__table__column--midnightAndholidayAndprearranged">休日<br>勤務時間</td>
+        <td title="振替休暇の取得予定日付(4週間以内)を入力" class="attendance-record__table__column--midnightAndholidayAndprearranged">振替休暇<br>予定日</td>
+        <td title="有給を取得した場合、全休:1 半休0.5 と入力" class="attendance-record__table__column">有給<br>休暇</td>
+        <td title="振替休暇取得日を入力" class="attendance-record__table__column">振替休暇<br>取得日</td>
+        <td title="自由記入欄" class="attendance-record__table__column--etc">時間外業務は必ず上司による指示を受けてください。</td>
+      </tr>
+    </table>
 
-  <table border="1" cellspacing="0" cellpadding="0" class="attendance-record__table--total">
-    <tr>
-      <td class="attendance-record__table__total--dayAndweek">合計</td>
-      <td class="attendance-record__table__total--dayAndweek"></td>
-      <td class="attendance-record__table__total--attendAndleave"></td>
-      <td class="attendance-record__table__total--attendAndleave"></td>
-      <td class="attendance-record__table__total--mark"></td>
-      <td class="attendance-record__table__total--midnightAndholidayAndprearranged"><span id="total-midnight-work"></span></td>
-      <td class="attendance-record__table__total--midnightAndholidayAndprearranged"><span id="total-holiday-shift"></span></td>
-      <td class="attendance-record__table__total--midnightAndholidayAndprearranged"></td>
-      <td class="attendance-record__table__total"></td>
-      <td class="attendance-record__table__total"></td>
-      <td class="attendance-record__table__total--etc"></td>
-    </tr>
-    <tr>
-      <td class="attendance-record__table__finish-vacation--top" colspan="2">当月消化<br>有休日数</td>
-      <td class="attendance-record__table__finish-vacation"><span id="total-paid-vacation"></span></td>
-      <td class="attendance-record__table__finish-vacation" colspan="2"></td>
-      <td class="attendance-record__table__finish-vacation"></td>
-    </tr>
-  </table>
+    <table border="1" cellspacing="0" cellpadding="0" id="table" class="attendance-record__table">
+    </table>
+
+    <table border="1" cellspacing="0" cellpadding="0" class="attendance-record__table--total">
+      <tr>
+        <td class="attendance-record__table__total--dayAndweek">合計</td>
+        <td class="attendance-record__table__total--dayAndweek"></td>
+        <td class="attendance-record__table__total--attendAndleave"></td>
+        <td class="attendance-record__table__total--attendAndleave"></td>
+        <td class="attendance-record__table__total--mark"></td>
+        <td class="attendance-record__table__total--midnightAndholidayAndprearranged"><span id="total-midnight-work"></span></td>
+        <td class="attendance-record__table__total--midnightAndholidayAndprearranged"><span id="total-holiday-shift"></span></td>
+        <td class="attendance-record__table__total--midnightAndholidayAndprearranged"></td>
+        <td class="attendance-record__table__total"></td>
+        <td class="attendance-record__table__total"></td>
+        <td class="attendance-record__table__total--etc"></td>
+      </tr>
+      <tr>
+        <td class="attendance-record__table__finish-vacation--top" colspan="2">当月消化<br>有休日数</td>
+        <td class="attendance-record__table__finish-vacation"><span id="total-paid-vacation"></span></td>
+        <td class="attendance-record__table__finish-vacation" colspan="2"></td>
+        <td class="attendance-record__table__finish-vacation"></td>
+      </tr>
+    </table>
+  </section>
 </div>
