@@ -1,6 +1,12 @@
-@media print{
-  body{
+@media print {
+  body {
     font-family: "MS ゴシック","Hiragino Kaku Gothic ProN",sans-serif;
+  }
+
+  // NOTE: materializeが自動で入れるmarginをoverride
+  .container {
+    padding: 0;
+    margin: 0;
   }
 
   .printable__body {
@@ -9,7 +15,7 @@
     width: 100%;
   }
 
-  .print--hidden{
+  .print--hidden {
     display: none;
   }
 }
