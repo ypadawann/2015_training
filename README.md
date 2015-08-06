@@ -32,14 +32,6 @@ $ node_modules/.bin/lodash modern -o ./lodash.js
 $ RACK_ENV=development bundle exec rake build_assets
 ```
 
-Unicornの実行
-
-```bash
-$ pwd
-/home/trainingams/AMS/2015_training/testapp
-$ bundle exec unicorn -c unicorn.rb -E "環境名" -D
-```
-
 
 ### 依存パッケージの導入
 
@@ -106,6 +98,16 @@ mysql> quit
 ```bash
 $ cd testapp
 $ RACK_ENV=test bundle exec rake db:migrate
+```
+
+## Application-Serverの起動
+
+unicornを使います。
+
+```bash
+$ pwd
+/home/trainingams/AMS/2015_training/testapp
+$ bundle exec unicorn -c unicorn.rb -E "環境名" -D
 ```
 
 
