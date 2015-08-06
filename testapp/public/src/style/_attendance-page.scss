@@ -4,11 +4,11 @@
   position: relative;
   width: 820px;
 
-  &__menu--year{
+  &__menu--year {
     width: 100px;
   }
 
-  @mixin attendance-record__input{
+  @mixin attendance-record__input {
     background-color: #FDFDFD;
     border: none;
     border-bottom: none;
@@ -56,7 +56,7 @@
     box-sizing: border-box;
     width: auto;
 
-    &__menu{
+    &__menu {
       padding: 0px;
       margin: 0px;
       font-size: 9px;
@@ -96,33 +96,33 @@
       height: 50px;
       box-sizing: border-box;
 
-      &--dayAndweek{
+      &--dayAndweek {
         @extend .attendance-record__table__column;
         padding-top: 4px;
         vertical-align: top;
         width: 27px;
       }
 
-      &--attendance{
+      &--attendance {
         @extend .attendance-record__table__column;
         width: 75px;
         border-right-style: dotted;
       }
 
-      &--leaving{
+      &--leaving {
         @extend .attendance-record__table__column;
         width: 75px;
         border-left-style: none;
       }
 
-      &--mark{
+      &--mark {
         @extend .attendance-record__table__column;
         width: 64px;
         font-size: 11px;
         font-weight: bold;
       }
 
-      &--midnightAndholidayAndprearranged{
+      &--midnightAndholidayAndprearranged {
         @extend .attendance-record__table__column;
         width: 77px;
       }
@@ -135,7 +135,7 @@
     }
 
 
-    &__cell{
+    &__cell {
       padding: 0px;
       margin: 0px;
       border-style: solid;
@@ -147,34 +147,34 @@
       box-sizing: border-box;
       overflow: hidden;
 
-      &--dayAndweek{
+      &--dayAndweek {
         @extend .attendance-record__table__cell;
         width: 27px;
       }
 
-      &--attendanceLine{
+      &--attendanceLine {
         @extend .attendance-record__table__cell;
         border-right-style: dotted;
         width: 75px;
       }
 
-      &--leavingLine{
+      &--leavingLine {
         @extend .attendance-record__table__cell;
         border-left-style: none;
         width: 75px;
       }
 
-      &--mark{
+      &--mark {
         @extend .attendance-record__table__cell;
         width: 64px;
       }
 
-      &--midnightAndholidayAndprearranged{
+      &--midnightAndholidayAndprearranged {
         @extend .attendance-record__table__cell;
         width: 77px;
       }
 
-      &--etc{
+      &--etc {
         @extend .attendance-record__table__cell;
         width: 200px;
       }
@@ -189,7 +189,7 @@
       color:#000000;
     }
 
-    &__total{
+    &__total {
       @extend .attendance-record__table;
       margin: 0px 0px 30px;
       padding: 0px;
@@ -205,27 +205,27 @@
       width: 60px;
       box-sizing: border-box;
 
-      &--dayAndweek{
+      &--dayAndweek {
         @extend .attendance-record__table__total;
         width: 27px;
       }
 
-      &--attendAndleave{
+      &--attendAndleave {
         @extend .attendance-record__table__total;
         width: 75px;
       }
 
-      &--mark{
+      &--mark {
         @extend .attendance-record__table__total;
         width: 64px;
       }
 
-      &--midnightAndholidayAndprearranged{
+      &--midnightAndholidayAndprearranged {
         @extend .attendance-record__table__total;
         width: 77px;
       }
 
-      &--etc{
+      &--etc {
         @extend .attendance-record__table__total;
         width: 200px;
       }
@@ -263,12 +263,12 @@
     }
   }
 
-  &__table2{
+  &__table2 {
     @extend .attendance-record__table;
     position: absolute;
     left: 310px;
     width: 291px;
-    &--request{
+    &--request {
       &__menu {
         @extend .attendance-record__table__menu;
         width: 60px;
