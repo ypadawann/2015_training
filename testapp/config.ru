@@ -6,8 +6,10 @@ require './api/base.rb'
 
 require 'rack/protection'
 
-map '/test' do
-    run Test
+unless ENV['RACK_ENV'] == 'production'
+  map '/test' do
+      run Test
+  end
 end
 
 map '/admin' do
