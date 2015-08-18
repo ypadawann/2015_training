@@ -116,7 +116,7 @@ showRecords = (year, month) ->
       $("#paid-vacation#{i}").val       data.paid_vacation
       $("#holiday-acquisition#{i}").val data.holiday_acquisition
       $("#etc#{i}").val                 data.etc
-      row = $("#table tr:nth-child(#{i})")
+      row = $("#table tr:nth-child(#{i+1})")
       if data.isholiday
         row.addClass 'attendance-record__table__row--holiday'
       else if row.hasClass 'attendance-record__table__row--holiday'
