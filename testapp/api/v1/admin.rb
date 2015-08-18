@@ -113,7 +113,9 @@ module API
         desc 'ユーザ一覧の取得'
         get do
           session_check()
-          { users: Model::Users.list_all }
+          user_list = Model::Users.list_all
+          user_list.sort!{ |a,b| a[:user_id] <=>b [:user_id] }
+          { users: user_list }
         end
       end
         
