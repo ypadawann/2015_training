@@ -131,6 +131,7 @@ $('#timecard-save').bind 'click', ->
   month = $('#month').val()
   save(year, month)
   .done (msg) ->
+    deleteAttendanceRows()
     showRecords(year, month)
     Materialize.toast('保存しました。', 5000)
   .fail (xhr, status, error) ->
