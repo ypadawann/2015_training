@@ -110,7 +110,8 @@ showRecords = (year, month) ->
       $("#weekday#{i}").text            data.weekday
       $("#attendance#{i}").val          data.attendance
       $("#leaving#{i}").val             data.leaving
-      $("#midnight-work#{i}").text      data.midnight_work
+      if data.midnight_work?
+        $("#midnight-work#{i}").text      data.midnight_work.toFixed(2)
       $("#holiday-shift#{i}").text      data.holiday_shift
       $("#prearranged-holiday#{i}").val data.prearranged_holiday
       $("#paid-vacation#{i}").val       data.paid_vacation

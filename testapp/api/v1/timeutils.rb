@@ -86,7 +86,7 @@ module API
         hours_after_midnight = hour_to - MIDNIGHT_END
         hours -= hours_after_midnight if hours_after_midnight > 0
 
-        hours > 0 ? hours : nil
+        hours > 0 ? hours : 0
       end
 
       def holiday_shift(isholiday, hour_from, hour_to)
