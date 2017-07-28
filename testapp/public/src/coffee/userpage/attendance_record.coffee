@@ -125,6 +125,8 @@ showRecords = (year, month) ->
     $("#total-midnight-work").text msg.total.midnight_work
     $("#total-holiday-shift").text msg.total.holiday_shift
     $("#total-paid-vacation").text msg.total.paid_vacation
+    $("#total-days-worked").text (msg.total.days_worked + '日')
+    $("#total-hours-worked").text msg.total.hours_worked
 
 $('#timecard-save').bind 'click', ->
   year = $('#year').val()

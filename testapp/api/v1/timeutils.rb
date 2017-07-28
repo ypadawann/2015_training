@@ -31,7 +31,10 @@ module API
       def calculate_totals(data)
         { midnight_work: attr_total(data, :midnight_work),
           holiday_shift: attr_total(data, :holiday_shift),
-          paid_vacation: attr_total(data, :paid_vacation) }
+          paid_vacation: attr_total(data, :paid_vacation),
+          hours_worked: attr_total(data, :hours_worked),
+          days_worked: data.count{|d| d[:hours_worked] && d[:hours_worked] > 0.0 }
+        }
       end
 
       private
@@ -45,13 +48,17 @@ module API
       def calculate_extra_hours(timecard)
         if timecard[:attendance].blank? || timecard[:leaving].blank?
           { midnight_work: nil,
-            holiday_shift: nil }
+            holiday_shift: nil,
+            hours_worked: nil
+          }
         else
           hour_from = convert_to_hours(timecard[:attendance])
           hour_to   = convert_to_hours(timecard[:leaving])
           { midnight_work: midnight_work(hour_from, hour_to),
             holiday_shift:
-              holiday_shift(timecard[:isholiday], hour_from, hour_to) }
+              holiday_shift(timecard[:isholiday], hour_from, hour_to),
+            hours_worked: hour_to - hour_from
+          }
         end
       end
 
