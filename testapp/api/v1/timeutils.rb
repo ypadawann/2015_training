@@ -2,12 +2,6 @@
 
 require 'holiday_jp'
 
-class Float
-  def rounddown_point5
-    (self * 2.0).floor / 2.0
-  end
-end
-
 module API
   module V1
     module TimeUtils
@@ -66,8 +60,8 @@ module API
 
       def attr_total(data, attr)
         data.inject(0.to_f) { |total, d|
-          total + (d[attr].presence || 0)
-        }.rounddown_point5
+          total + (d[attr].presence || 0.0)
+        }
       end
 
       def isweekend(wday)
@@ -76,7 +70,7 @@ module API
 
       def convert_to_hours(time)
         hour, minute = time.split(TIME_DELIMITER)
-        hour.to_i + (minute.to_i / 15) * 0.25
+        hour.to_f + (minute.to_f / 60.0)
       end
 
       def midnight_work(hour_from, hour_to)
@@ -88,7 +82,7 @@ module API
         hours_after_midnight = hour_to - MIDNIGHT_END
         hours -= hours_after_midnight if hours_after_midnight > 0
 
-        hours > 0 ? hours : 0
+        hours > 0 ? hours : 0.0
       end
 
       def holiday_shift(isholiday, hour_from, hour_to)
