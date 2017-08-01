@@ -13,6 +13,7 @@ module API
     module TimeUtils
       MIDNIGHT_START = 22.0
       MIDNIGHT_END   = 24.0 + 5.0
+      BREAKTIME = 1.0
       TIME_DELIMITER = ':'
       WEEKDAY_NAMES = %w(日 月 火 水 木 金 土)
 
@@ -54,10 +55,11 @@ module API
         else
           hour_from = convert_to_hours(timecard[:attendance])
           hour_to   = convert_to_hours(timecard[:leaving])
+          diff = hour_to - hour_from
           { midnight_work: midnight_work(hour_from, hour_to),
             holiday_shift:
               holiday_shift(timecard[:isholiday], hour_from, hour_to),
-            hours_worked: hour_to - hour_from
+            hours_worked: diff >= 6.0 ? (diff - BREAKTIME) : diff
           }
         end
       end
@@ -90,7 +92,12 @@ module API
       end
 
       def holiday_shift(isholiday, hour_from, hour_to)
-        isholiday ? (hour_to - hour_from) : nil
+        if isholiday
+          diff = hour_to - hour_from
+          diff >= 6.0 ? (diff - BREAKTIME) : diff
+        else
+          nil
+        end
       end
     end
   end
