@@ -2,17 +2,12 @@
 
 require 'holiday_jp'
 
-class Float
-  def rounddown_point5
-    (self * 2.0).floor / 2.0
-  end
-end
-
 module API
   module V1
     module TimeUtils
       MIDNIGHT_START = 22.0
       MIDNIGHT_END   = 24.0 + 5.0
+      BREAKTIME = 1.0
       TIME_DELIMITER = ':'
       WEEKDAY_NAMES = %w(日 月 火 水 木 金 土)
 
@@ -31,7 +26,10 @@ module API
       def calculate_totals(data)
         { midnight_work: attr_total(data, :midnight_work),
           holiday_shift: attr_total(data, :holiday_shift),
-          paid_vacation: attr_total(data, :paid_vacation) }
+          paid_vacation: attr_total(data, :paid_vacation),
+          hours_worked: attr_total(data, :hours_worked),
+          days_worked: data.count{|d| d[:hours_worked] && d[:hours_worked] > 0.0 }
+        }
       end
 
       private
@@ -45,20 +43,25 @@ module API
       def calculate_extra_hours(timecard)
         if timecard[:attendance].blank? || timecard[:leaving].blank?
           { midnight_work: nil,
-            holiday_shift: nil }
+            holiday_shift: nil,
+            hours_worked: nil
+          }
         else
           hour_from = convert_to_hours(timecard[:attendance])
           hour_to   = convert_to_hours(timecard[:leaving])
+          diff = hour_to - hour_from
           { midnight_work: midnight_work(hour_from, hour_to),
             holiday_shift:
-              holiday_shift(timecard[:isholiday], hour_from, hour_to) }
+              holiday_shift(timecard[:isholiday], hour_from, hour_to),
+            hours_worked: diff >= 6.0 ? (diff - BREAKTIME) : diff
+          }
         end
       end
 
       def attr_total(data, attr)
         data.inject(0.to_f) { |total, d|
-          total + (d[attr].presence || 0)
-        }.rounddown_point5
+          total + (d[attr].presence || 0.0)
+        }
       end
 
       def isweekend(wday)
@@ -67,7 +70,7 @@ module API
 
       def convert_to_hours(time)
         hour, minute = time.split(TIME_DELIMITER)
-        hour.to_i + (minute.to_i / 15) * 0.25
+        hour.to_f + (minute.to_f / 60.0)
       end
 
       def midnight_work(hour_from, hour_to)
@@ -79,11 +82,16 @@ module API
         hours_after_midnight = hour_to - MIDNIGHT_END
         hours -= hours_after_midnight if hours_after_midnight > 0
 
-        hours > 0 ? hours : nil
+        hours > 0 ? hours : 0.0
       end
 
       def holiday_shift(isholiday, hour_from, hour_to)
-        isholiday ? (hour_to - hour_from) : nil
+        if isholiday
+          diff = hour_to - hour_from
+          diff >= 6.0 ? (diff - BREAKTIME) : diff
+        else
+          nil
+        end
       end
     end
   end

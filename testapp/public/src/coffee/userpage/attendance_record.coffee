@@ -110,8 +110,10 @@ showRecords = (year, month) ->
       $("#weekday#{i}").text            data.weekday
       $("#attendance#{i}").val          data.attendance
       $("#leaving#{i}").val             data.leaving
-      $("#midnight-work#{i}").text      data.midnight_work
-      $("#holiday-shift#{i}").text      data.holiday_shift
+      if data.midnight_work?
+        $("#midnight-work#{i}").text      data.midnight_work.toFixed(2)
+      if data.holiday_shift?
+        $("#holiday-shift#{i}").text      data.holiday_shift.toFixed(2)
       $("#prearranged-holiday#{i}").val data.prearranged_holiday
       $("#paid-vacation#{i}").val       data.paid_vacation
       $("#holiday-acquisition#{i}").val data.holiday_acquisition
@@ -122,9 +124,11 @@ showRecords = (year, month) ->
       else if row.hasClass 'attendance-record__table__row--holiday'
         row.removeClass 'attendance-record__table__row--holiday'
     )
-    $("#total-midnight-work").text msg.total.midnight_work
-    $("#total-holiday-shift").text msg.total.holiday_shift
+    $("#total-midnight-work").text msg.total.midnight_work.toFixed(2)
+    $("#total-holiday-shift").text msg.total.holiday_shift.toFixed(2)
     $("#total-paid-vacation").text msg.total.paid_vacation
+    $("#total-days-worked").text (msg.total.days_worked + '日')
+    $("#total-hours-worked").text msg.total.hours_worked.toFixed(1)
 
 $('#timecard-save').bind 'click', ->
   year = $('#year').val()
